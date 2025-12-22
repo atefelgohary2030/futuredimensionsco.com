@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,93 +7,151 @@
   <meta name="description" content="Future Dimensions - Actuarial Valuation (EOSB) and IFRS 9 Expected Credit Loss (ECL) consulting." />
   <style>
     :root{
-      --bg:#0b1220;
-      --card:#0f1a33;
-      --muted:#9fb0d0;
-      --text:#eaf0ff;
-      --line:rgba(255,255,255,.12);
-      --accent:#7c5cff;
-      --accent2:#18c29c;
-      --shadow:0 18px 50px rgba(0,0,0,.35);
-      --radius:18px;
-      --max:1100px;
+      --bg1:#070b14; --bg2:#0b1220;
+      --card: rgba(15,26,51,.65);
+      --text:#eaf0ff; --muted:#9fb0d0;
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --accent:#7c5cff; --accent2:#18c29c;
+      --radius:18px; --max:1100px;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; background:linear-gradient(180deg,#070b14 0%, #0b1220 40%, #070b14 100%); color:var(--text)}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Kufi Arabic","Noto Sans Arabic",sans-serif;
+      background: linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 40%, var(--bg1) 100%);
+      color: var(--text);
+    }
     a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
-    .topbar{position:sticky; top:0; z-index:20; backdrop-filter: blur(10px); background:rgba(7,11,20,.7); border-bottom:1px solid var(--line)}
-    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:14px}
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(7,11,20,.7);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0; gap:14px; flex-wrap:wrap;
+    }
     .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
-    .logo{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2)); box-shadow: var(--shadow)}
-    .menu{display:flex; gap:16px; font-weight:600; color:var(--muted); flex-wrap:wrap}
+    .logo{
+      width:34px;height:34px;border-radius:12px;
+      background: linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow: var(--shadow);
+      flex:0 0 auto;
+    }
+    .brand small{display:block; color:var(--muted); font-weight:650; font-size:12px}
+    .menu{display:flex; gap:16px; font-weight:650; color:var(--muted); flex-wrap:wrap}
     .menu a{opacity:.9; text-decoration:none}
     .menu a:hover{opacity:1; color:var(--text)}
-    .cta{display:flex; gap:10px; flex-wrap:wrap}
-    .btn{display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:14px; border:1px solid var(--line); text-decoration:none; font-weight:700}
-    .btn.primary{background:linear-gradient(135deg,var(--accent),#4f8cff); border:none}
-    .btn.ghost:hover{border-color:rgba(255,255,255,.22)}
+    .cta{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px; border-radius:14px;
+      border:1px solid var(--line);
+      text-decoration:none; font-weight:750;
+      cursor:pointer; user-select:none;
+      background: transparent;
+      color: var(--text);
+    }
+    .btn.primary{background: linear-gradient(135deg,var(--accent),#4f8cff); border:none}
+    .btn.ghost:hover{border-color: rgba(255,255,255,.22)}
+    .lang{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px 12px;
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      font-weight:750;
+    }
+
     .hero{padding:54px 0 26px}
     .hero-grid{display:grid; grid-template-columns: 1.15fr .85fr; gap:18px; align-items:stretch}
-    .hero h1{font-size:44px; line-height:1.1; margin:0 0 10px}
-    .hero p{margin:0 0 18px; color:var(--muted); font-size:16px}
-    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px}
-    .pill{padding:8px 10px; border-radius:999px; border:1px solid var(--line); color:var(--muted); font-weight:650; font-size:13px}
-    .card{background:rgba(15,26,51,.65); border:1px solid var(--line); border-radius:var(--radius); box-shadow: var(--shadow)}
+    .card{background: var(--card); border:1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow)}
     .hero-card{padding:18px}
+    h1{font-size:44px; line-height:1.1; margin:0 0 10px}
+    p{margin:0 0 18px; color: var(--muted); font-size:16px}
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px}
+    .pill{
+      padding:8px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      color: var(--muted); font-weight:650; font-size:13px;
+    }
+
+    .tag{display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-weight:750; font-size:12px}
+    .dot{width:10px; height:10px; border-radius:4px; background: linear-gradient(135deg,var(--accent),var(--accent2))}
     .kpi{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px}
-    .kpi .box{padding:14px; border-radius:16px; border:1px solid var(--line); background:rgba(255,255,255,.03)}
-    .kpi .num{font-size:20px; font-weight:800}
+    .kpi .box{padding:14px; border-radius:16px; border:1px solid var(--line); background: rgba(255,255,255,.03)}
+    .kpi .num{font-size:20px; font-weight:850}
     .kpi .lbl{color:var(--muted); font-weight:650; font-size:13px; margin-top:4px}
+
     section{padding:34px 0}
-    .sec-title{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom:14px}
+    .sec-title{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom:14px; flex-wrap:wrap}
     h2{margin:0; font-size:24px}
     .hint{color:var(--muted); font-weight:650; font-size:13px}
-    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .grid3{display:grid; grid-template-columns: repeat(3,1fr); gap:14px}
     .service{padding:16px}
     .service h3{margin:2px 0 8px; font-size:17px}
     .service p{margin:0; color:var(--muted)}
-    .tag{display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-weight:700; font-size:12px}
-    .dot{width:10px; height:10px; border-radius:4px; background:linear-gradient(135deg,var(--accent),var(--accent2))}
     .list{padding:16px}
     ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
     li{margin:6px 0}
+
     .contact{display:grid; grid-template-columns:1.1fr .9fr; gap:14px}
-    .contact .box{padding:16px}
-    .field{margin-top:10px; padding:12px 12px; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--muted)}
+    .box{padding:16px}
+    .field{
+      margin-top:10px; padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      word-break: break-word;
+    }
     footer{padding:18px 0 34px; border-top:1px solid var(--line); color:var(--muted)}
     .small{font-size:13px}
-    .right{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .right{display:flex; gap:10px; flex-wrap:wrap}
+
+    /* RTL tweaks */
+    [dir="rtl"] ul{padding-left:0; padding-right:18px}
+    [dir="rtl"] .brand{letter-spacing:0}
+    [dir="rtl"] .menu{gap:14px}
+    [dir="rtl"] .right{justify-content:flex-start}
 
     @media (max-width: 920px){
       .hero-grid{grid-template-columns:1fr}
       .grid3{grid-template-columns:1fr}
       .contact{grid-template-columns:1fr}
-      .hero h1{font-size:36px}
+      h1{font-size:36px}
     }
   </style>
 </head>
-<body>
 
+<body>
   <div class="topbar">
     <div class="wrap nav">
       <div class="brand">
         <div class="logo"></div>
         <div>
-          Future Dimensions<br><span style="color:var(--muted); font-weight:650; font-size:12px;">Advisory & Financial Consulting</span>
+          <span id="brandName">Future Dimensions</span>
+          <small id="brandSub">Advisory & Financial Consulting</small>
         </div>
       </div>
 
       <div class="menu">
-        <a href="#services">Services</a>
-        <a href="#why">Why Us</a>
-        <a href="#contact">Contact</a>
+        <a href="#services" id="navServices">Services</a>
+        <a href="#why" id="navWhy">Why Us</a>
+        <a href="#contact" id="navContact">Contact</a>
       </div>
 
       <div class="cta">
-        <a class="btn ghost" href="mailto:info@futuredimensionsco.com">Email</a>
-        <!-- غيّر رقم الواتساب هنا إن تحب -->
-        <a class="btn primary" href="https://wa.me/966500000000" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn ghost" id="btnEmail" href="mailto:info@futuredimensionsco.com">Email</a>
+        <!-- غيّر رقم الواتساب هنا -->
+        <a class="btn primary" id="btnWhats" href="https://wa.me/966500000000" target="_blank" rel="noopener">WhatsApp</a>
+
+        <button class="lang" id="langToggle" type="button" aria-label="Toggle language">
+          العربية
+        </button>
       </div>
     </div>
   </div>
@@ -101,48 +159,50 @@
   <header class="hero">
     <div class="wrap hero-grid">
       <div class="card hero-card">
-        <h1>Actuarial Valuation & IFRS 9 ECL — audit-ready deliverables.</h1>
-        <p>
+        <h1 id="heroTitle">Actuarial Valuation & IFRS 9 ECL — audit-ready deliverables.</h1>
+        <p id="heroDesc">
           We support organizations with End of Service Benefits (EOSB) actuarial valuation and IFRS 9 Expected Credit Loss (ECL) computation,
           with clear assumptions, transparent methodology, and practical recommendations.
         </p>
 
         <div class="cta">
-          <a class="btn primary" href="#contact">Request a Proposal</a>
-          <a class="btn ghost" href="#services">View Services</a>
+          <a class="btn primary" href="#contact" id="btnProposal">Request a Proposal</a>
+          <a class="btn ghost" href="#services" id="btnViewServices">View Services</a>
         </div>
 
         <div class="pillrow">
-          <span class="pill">EOSB Actuarial Valuation</span>
-          <span class="pill">IFRS 9 ECL</span>
-          <span class="pill">Reporting Support</span>
+          <span class="pill" id="pill1">EOSB Actuarial Valuation</span>
+          <span class="pill" id="pill2">IFRS 9 ECL</span>
+          <span class="pill" id="pill3">Reporting Support</span>
         </div>
       </div>
 
       <div class="card hero-card">
-        <div class="tag"><span class="dot"></span> Quick Overview</div>
+        <div class="tag"><span class="dot"></span> <span id="overviewTag">Quick Overview</span></div>
+
         <div class="kpi">
           <div class="box">
-            <div class="num">IFRS</div>
-            <div class="lbl">Standards-aligned</div>
+            <div class="num" id="kpi1n">IFRS</div>
+            <div class="lbl" id="kpi1l">Standards-aligned</div>
           </div>
           <div class="box">
-            <div class="num">Audit</div>
-            <div class="lbl">Documentation ready</div>
+            <div class="num" id="kpi2n">Audit</div>
+            <div class="lbl" id="kpi2l">Documentation ready</div>
           </div>
           <div class="box">
-            <div class="num">Fast</div>
-            <div class="lbl">Efficient delivery</div>
+            <div class="num" id="kpi3n">Fast</div>
+            <div class="lbl" id="kpi3l">Efficient delivery</div>
           </div>
           <div class="box">
-            <div class="num">Clear</div>
-            <div class="lbl">Transparent models</div>
+            <div class="num" id="kpi4n">Clear</div>
+            <div class="lbl" id="kpi4l">Transparent models</div>
           </div>
         </div>
 
         <div class="field">
-          Email: <a href="mailto:info@futuredimensionsco.com">info@futuredimensionsco.com</a><br>
-          Website: www.futuredimensionsco.com
+          <span id="lblEmail">Email:</span>
+          <a href="mailto:info@futuredimensionsco.com">info@futuredimensionsco.com</a><br>
+          <span id="lblWebsite">Website:</span> www.futuredimensionsco.com
         </div>
       </div>
     </div>
@@ -151,97 +211,11 @@
   <section id="services">
     <div class="wrap">
       <div class="sec-title">
-        <h2>Services</h2>
-        <div class="hint">Professional scope tailored to your reporting needs.</div>
+        <h2 id="servicesTitle">Services</h2>
+        <div class="hint" id="servicesHint">Professional scope tailored to your reporting needs.</div>
       </div>
 
       <div class="grid3">
         <div class="card service">
-          <div class="tag"><span class="dot"></span> Actuarial</div>
-          <h3>EOSB Actuarial Valuation</h3>
-          <p>End of Service Benefits valuation with assumptions, sensitivity, and audit-ready reports.</p>
-        </div>
-
-        <div class="card service">
-          <div class="tag"><span class="dot"></span> IFRS 9</div>
-          <h3>ECL Computation</h3>
-          <p>Expected Credit Loss staging, PD/LGD/EAD approach support, documentation and reporting pack.</p>
-        </div>
-
-        <div class="card service">
-          <div class="tag"><span class="dot"></span> Advisory</div>
-          <h3>Reporting Support</h3>
-          <p>Practical recommendations, governance support, and clear outputs for management and auditors.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="why">
-    <div class="wrap">
-      <div class="sec-title">
-        <h2>Why Future Dimensions</h2>
-        <div class="hint">A focused approach with quality assurance.</div>
-      </div>
-
-      <div class="card list">
-        <ul>
-          <li>Professional, compliant, and audit-ready deliverables</li>
-          <li>Clear methodology and practical recommendations</li>
-          <li>Fast turnaround with quality assurance</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="wrap">
-      <div class="sec-title">
-        <h2>Contact</h2>
-        <div class="hint">Tell us what you need — we’ll respond quickly.</div>
-      </div>
-
-      <div class="contact">
-        <div class="card box">
-          <h3 style="margin:0 0 10px;">Get in touch</h3>
-          <p style="margin:0;color:var(--muted);">
-            For proposals and inquiries, email us and we’ll share a clear scope, timeline, and deliverables.
-          </p>
-
-          <div class="field">Email: <a href="mailto:info@futuredimensionsco.com">info@futuredimensionsco.com</a></div>
-          <div class="field">Website: www.futuredimensionsco.com</div>
-
-          <div class="cta" style="margin-top:12px;">
-            <a class="btn primary" href="mailto:info@futuredimensionsco.com?subject=Proposal%20Request%20-%20Future%20Dimensions">Email Proposal Request</a>
-            <a class="btn ghost" href="https://wa.me/966500000000" target="_blank" rel="noopener">WhatsApp</a>
-          </div>
-        </div>
-
-        <div class="card box">
-          <h3 style="margin:0 0 10px;">Quick details</h3>
-          <div class="field"><b style="color:var(--text)">Primary services:</b><br> EOSB Valuation, IFRS 9 ECL</div>
-          <div class="field"><b style="color:var(--text)">Deliverables:</b><br> Report + assumptions + audit pack</div>
-          <div class="field"><b style="color:var(--text)">Response time:</b><br> Within 24–48 hours</div>
-          <div class="field"><b style="color:var(--text)">Location:</b><br> Saudi Arabia</div>
-          <div class="field"><b style="color:var(--text)">Company:</b><br> Future Dimensions</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
-      <div class="small">© <span id="y"></span> Future Dimensions. All rights reserved.</div>
-      <div class="right small">
-        <span>info@futuredimensionsco.com</span>
-        <span>•</span>
-        <span>www.futuredimensionsco.com</span>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+          <div class="tag"><span class="dot"></span> <span id="srvTag1">Actuarial</span></div>
+          <h3 id="srv1t">EOSB Actuarial
