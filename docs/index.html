@@ -5,118 +5,219 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Future Dimensions</title>
   <meta name="description" content="Future Dimensions - Actuarial Valuation (EOSB) and IFRS 9 Expected Credit Loss (ECL) consulting." />
+
   <style>
     :root{
-      --bg1:#070b14; --bg2:#0b1220;
-      --card: rgba(15,26,51,.65);
-      --text:#eaf0ff; --muted:#9fb0d0;
-      --line: rgba(255,255,255,.12);
-      --shadow: 0 18px 50px rgba(0,0,0,.35);
-      --accent:#7c5cff; --accent2:#18c29c;
-      --radius:18px; --max:1100px;
+      /* Premium palette */
+      --gold:#d4af37;
+      --gold-soft:#e7cc78;
+      --navy:#0b1c2d;
+      --navy-2:#102a44;
+      --black:#050505;
+
+      /* Surfaces */
+      --bg: linear-gradient(180deg, var(--black) 0%, var(--navy) 45%, var(--black) 100%);
+      --card: rgba(16, 26, 45, 0.78);
+      --card-2: rgba(5, 5, 5, 0.55);
+
+      /* Text */
+      --text:#f5f5f5;
+      --muted:#c9c9c9;
+
+      /* UI */
+      --line: rgba(212,175,55,.30);
+      --line-2: rgba(255,255,255,.10);
+      --shadow: 0 22px 70px rgba(0,0,0,.60);
+      --radius: 18px;
+      --max: 1120px;
+
+      /* Accent */
+      --accent: var(--gold);
     }
+
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Kufi Arabic","Noto Sans Arabic",sans-serif;
-      background: linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 40%, var(--bg1) 100%);
+      background: var(--bg);
       color: var(--text);
     }
     a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    /* Top bar */
     .topbar{
       position:sticky; top:0; z-index:20;
       backdrop-filter: blur(10px);
-      background: rgba(7,11,20,.7);
-      border-bottom: 1px solid var(--line);
+      background: rgba(5,5,5,.65);
+      border-bottom: 1px solid var(--line-2);
     }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
       padding:14px 0; gap:14px; flex-wrap:wrap;
     }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:900}
     .logo{
-      width:34px;height:34px;border-radius:12px;
-      background: linear-gradient(135deg,var(--accent),var(--accent2));
+      width:38px; height:38px; border-radius:14px;
+      background: linear-gradient(135deg, var(--gold), var(--navy-2));
       box-shadow: var(--shadow);
+      border: 1px solid rgba(212,175,55,.45);
       flex:0 0 auto;
     }
-    .brand small{display:block; color:var(--muted); font-weight:650; font-size:12px}
-    .menu{display:flex; gap:16px; font-weight:650; color:var(--muted); flex-wrap:wrap}
-    .menu a{opacity:.9; text-decoration:none}
-    .menu a:hover{opacity:1; color:var(--text)}
+    .brand small{
+      display:block; color:var(--muted);
+      font-weight:650; font-size:12px; margin-top:3px;
+    }
+
+    .menu{display:flex; gap:16px; flex-wrap:wrap; align-items:center}
+    .menu a{
+      text-decoration:none;
+      color: rgba(245,245,245,.85);
+      font-weight:750;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    .menu a:hover{
+      background: rgba(212,175,55,.10);
+      border: 1px solid rgba(212,175,55,.22);
+      padding:7px 9px; /* compensate border */
+    }
+
     .cta{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 14px; border-radius:14px;
-      border:1px solid var(--line);
-      text-decoration:none; font-weight:750;
-      cursor:pointer; user-select:none;
-      background: transparent;
-      color: var(--text);
-    }
-    .btn.primary{background: linear-gradient(135deg,var(--accent),#4f8cff); border:none}
-    .btn.ghost:hover{border-color: rgba(255,255,255,.22)}
-    .lang{
-      border:1px solid var(--line);
+      padding:10px 14px;
       border-radius:14px;
-      padding:10px 12px;
-      background: rgba(255,255,255,.03);
+      border:1px solid rgba(212,175,55,.22);
+      background: rgba(5,5,5,.35);
       color: var(--text);
-      font-weight:750;
+      text-decoration:none;
+      font-weight:850;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{
+      border-color: rgba(212,175,55,.38);
+      background: rgba(212,175,55,.07);
+    }
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+      color:#0b0b0b;
+      box-shadow: 0 18px 45px rgba(212,175,55,.12);
+    }
+    .btn.primary:hover{
+      filter: brightness(1.02);
     }
 
-    .hero{padding:54px 0 26px}
-    .hero-grid{display:grid; grid-template-columns: 1.15fr .85fr; gap:18px; align-items:stretch}
-    .card{background: var(--card); border:1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow)}
-    .hero-card{padding:18px}
-    h1{font-size:44px; line-height:1.1; margin:0 0 10px}
-    p{margin:0 0 18px; color: var(--muted); font-size:16px}
+    .langToggle{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(16,26,45,.35);
+    }
+
+    /* Sections */
+    .hero{padding:56px 0 22px}
+    .hero-grid{
+      display:grid; grid-template-columns:1.2fr .8fr;
+      gap:16px; align-items:stretch;
+    }
+    .card{
+      background: var(--card);
+      border:1px solid rgba(212,175,55,.20);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .card.pad{padding:18px}
+    .card.pad2{padding:16px; background: linear-gradient(180deg, rgba(16,26,45,.78), rgba(5,5,5,.55));}
+
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(212,175,55,.22);
+      background: rgba(5,5,5,.28);
+      color: rgba(245,245,245,.90);
+      font-weight:850;
+      font-size:12px;
+      letter-spacing:.2px;
+    }
+    .dot{width:10px;height:10px;border-radius:4px;background: linear-gradient(135deg, var(--gold), var(--navy-2))}
+
+    h1{margin:12px 0 10px; font-size:44px; line-height:1.1}
+    p{margin:0 0 16px; color:var(--muted); font-size:16px}
+
     .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:8px}
     .pill{
-      padding:8px 10px; border-radius:999px;
-      border:1px solid var(--line);
-      color: var(--muted); font-weight:650; font-size:13px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(5,5,5,.18);
+      color: rgba(245,245,245,.82);
+      font-weight:750;
+      font-size:13px;
     }
 
-    .tag{display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-weight:750; font-size:12px}
-    .dot{width:10px; height:10px; border-radius:4px; background: linear-gradient(135deg,var(--accent),var(--accent2))}
-    .kpi{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px}
-    .kpi .box{padding:14px; border-radius:16px; border:1px solid var(--line); background: rgba(255,255,255,.03)}
-    .kpi .num{font-size:20px; font-weight:850}
-    .kpi .lbl{color:var(--muted); font-weight:650; font-size:13px; margin-top:4px}
+    .kpi{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px}
+    .kpi .box{
+      padding:14px; border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(5,5,5,.20);
+    }
+    .kpi .num{font-size:18px; font-weight:950; color: var(--gold)}
+    .kpi .lbl{margin-top:4px; font-size:13px; color: rgba(245,245,245,.78); font-weight:700}
 
-    section{padding:34px 0}
-    .sec-title{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom:14px; flex-wrap:wrap}
-    h2{margin:0; font-size:24px}
-    .hint{color:var(--muted); font-weight:650; font-size:13px}
-    .grid3{display:grid; grid-template-columns: repeat(3,1fr); gap:14px}
-    .service{padding:16px}
-    .service h3{margin:2px 0 8px; font-size:17px}
-    .service p{margin:0; color:var(--muted)}
-    .list{padding:16px}
-    ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
-    li{margin:6px 0}
-
-    .contact{display:grid; grid-template-columns:1.1fr .9fr; gap:14px}
-    .box{padding:16px}
     .field{
-      margin-top:10px; padding:12px 12px;
+      margin-top:10px;
+      padding:12px 12px;
       border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(5,5,5,.22);
+      color: rgba(245,245,245,.80);
       word-break: break-word;
     }
-    footer{padding:18px 0 34px; border-top:1px solid var(--line); color:var(--muted)}
+
+    section{padding:34px 0}
+    .sec-title{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:12px; margin-bottom:14px; flex-wrap:wrap;
+    }
+    h2{margin:0; font-size:24px}
+    .hint{color: rgba(245,245,245,.70); font-weight:700; font-size:13px}
+
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .service{padding:16px; background: rgba(16,26,45,.65)}
+    .service h3{margin:8px 0 8px; font-size:17px}
+    .service p{margin:0; color: rgba(245,245,245,.76)}
+
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:850; font-size:12px;
+      color: rgba(245,245,245,.88);
+    }
+
+    .list{padding:16px}
+    ul{margin:10px 0 0; padding-left:18px; color: rgba(245,245,245,.78)}
+    li{margin:7px 0}
+
+    .contact{display:grid; grid-template-columns:1.1fr .9fr; gap:14px}
+    footer{
+      padding:18px 0 34px;
+      border-top:1px solid rgba(255,255,255,.10);
+      color: rgba(245,245,245,.70);
+      background: rgba(5,5,5,.35);
+    }
+    .footerRow{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; flex-wrap:wrap;
+    }
     .small{font-size:13px}
-    .right{display:flex; gap:10px; flex-wrap:wrap}
 
     /* RTL tweaks */
     [dir="rtl"] ul{padding-left:0; padding-right:18px}
-    [dir="rtl"] .brand{letter-spacing:0}
-    [dir="rtl"] .menu{gap:14px}
-    [dir="rtl"] .right{justify-content:flex-start}
+    [dir="rtl"] .menu a{font-weight:800}
+    [dir="rtl"] h1{letter-spacing:0}
 
     @media (max-width: 920px){
       .hero-grid{grid-template-columns:1fr}
@@ -128,6 +229,7 @@
 </head>
 
 <body>
+
   <div class="topbar">
     <div class="wrap nav">
       <div class="brand">
@@ -145,29 +247,29 @@
       </div>
 
       <div class="cta">
-        <a class="btn ghost" id="btnEmail" href="mailto:info@futuredimensionsco.com">Email</a>
+        <a class="btn" id="btnEmail" href="mailto:info@futuredimensionsco.com">Email</a>
+
         <!-- غيّر رقم الواتساب هنا -->
         <a class="btn primary" id="btnWhats" href="https://wa.me/966500000000" target="_blank" rel="noopener">WhatsApp</a>
 
-        <button class="lang" id="langToggle" type="button" aria-label="Toggle language">
-          العربية
-        </button>
+        <button class="btn langToggle" id="langToggle" type="button">العربية</button>
       </div>
     </div>
   </div>
 
   <header class="hero">
     <div class="wrap hero-grid">
-      <div class="card hero-card">
+      <div class="card pad">
+        <div class="eyebrow"><span class="dot"></span> <span id="eyebrow">Trusted Financial Consulting</span></div>
         <h1 id="heroTitle">Actuarial Valuation & IFRS 9 ECL — audit-ready deliverables.</h1>
         <p id="heroDesc">
           We support organizations with End of Service Benefits (EOSB) actuarial valuation and IFRS 9 Expected Credit Loss (ECL) computation,
           with clear assumptions, transparent methodology, and practical recommendations.
         </p>
 
-        <div class="cta">
+        <div class="cta" style="margin-top:8px;">
           <a class="btn primary" href="#contact" id="btnProposal">Request a Proposal</a>
-          <a class="btn ghost" href="#services" id="btnViewServices">View Services</a>
+          <a class="btn" href="#services" id="btnViewServices">View Services</a>
         </div>
 
         <div class="pillrow">
@@ -177,7 +279,7 @@
         </div>
       </div>
 
-      <div class="card hero-card">
+      <div class="card pad2">
         <div class="tag"><span class="dot"></span> <span id="overviewTag">Quick Overview</span></div>
 
         <div class="kpi">
@@ -218,4 +320,344 @@
       <div class="grid3">
         <div class="card service">
           <div class="tag"><span class="dot"></span> <span id="srvTag1">Actuarial</span></div>
-          <h3 id="srv1t">EOSB Actuarial
+          <h3 id="srv1t">EOSB Actuarial Valuation</h3>
+          <p id="srv1d">End of Service Benefits valuation with assumptions, sensitivity analysis, and audit-ready reports.</p>
+        </div>
+
+        <div class="card service">
+          <div class="tag"><span class="dot"></span> <span id="srvTag2">IFRS 9</span></div>
+          <h3 id="srv2t">Expected Credit Loss (ECL)</h3>
+          <p id="srv2d">Support for staging, assumptions, and documentation with a clear reporting pack for auditors and management.</p>
+        </div>
+
+        <div class="card service">
+          <div class="tag"><span class="dot"></span> <span id="srvTag3">Advisory</span></div>
+          <h3 id="srv3t">Reporting & Documentation</h3>
+          <p id="srv3d">Practical recommendations, governance support, and transparent outputs that match your timelines.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap">
+      <div class="sec-title">
+        <h2 id="whyTitle">Why Future Dimensions</h2>
+        <div class="hint" id="whyHint">Premium quality with a clear, reliable process.</div>
+      </div>
+
+      <div class="card list">
+        <ul>
+          <li id="why1">Professional, compliant, and audit-ready deliverables</li>
+          <li id="why2">Clear methodology and practical recommendations</li>
+          <li id="why3">Fast turnaround with quality assurance</li>
+          <li id="why4">Confidential handling of your data and assumptions</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-title">
+        <h2 id="contactTitle">Contact</h2>
+        <div class="hint" id="contactHint">Tell us your needs — we respond quickly.</div>
+      </div>
+
+      <div class="contact">
+        <div class="card box">
+          <h3 id="getInTouchTitle" style="margin:0 0 10px;">Get in touch</h3>
+          <p id="getInTouchDesc" style="margin:0;color:rgba(245,245,245,.78);">
+            For proposals and inquiries, email us and we’ll share a clear scope, timeline, and expected deliverables.
+          </p>
+
+          <div class="field">
+            <span id="contactEmailLabel">Email:</span>
+            <a href="mailto:info@futuredimensionsco.com">info@futuredimensionsco.com</a>
+          </div>
+
+          <div class="field">
+            <span id="contactWebLabel">Website:</span> www.futuredimensionsco.com
+          </div>
+
+          <div class="cta" style="margin-top:12px;">
+            <a class="btn primary" id="btnEmail2"
+               href="mailto:info@futuredimensionsco.com?subject=Proposal%20Request%20-%20Future%20Dimensions">
+              Email Proposal Request
+            </a>
+            <a class="btn" id="btnWhats2" href="https://wa.me/966500000000" target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="card box">
+          <h3 id="quickDetails" style="margin:0 0 10px;">Quick details</h3>
+          <div class="field"><b id="qd1t" style="color:var(--gold)">Primary services:</b><br><span id="qd1v">EOSB Valuation, IFRS 9 ECL</span></div>
+          <div class="field"><b id="qd2t" style="color:var(--gold)">Deliverables:</b><br><span id="qd2v">Report + assumptions + audit pack</span></div>
+          <div class="field"><b id="qd3t" style="color:var(--gold)">Response time:</b><br><span id="qd3v">Within 24–48 hours</span></div>
+          <div class="field"><b id="qd4t" style="color:var(--gold)">Location:</b><br><span id="qd4v">Saudi Arabia</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap footerRow">
+      <div class="small">© <span id="y"></span> <span id="footerName">Future Dimensions</span>. <span id="footerRights">All rights reserved.</span></div>
+      <div class="small" id="footerContact">info@futuredimensionsco.com • www.futuredimensionsco.com</div>
+    </div>
+  </footer>
+
+  <script>
+    // ====== Language data ======
+    const T = {
+      en: {
+        langBtn: "العربية",
+        dir: "ltr", lang: "en",
+
+        brandName: "Future Dimensions",
+        brandSub: "Advisory & Financial Consulting",
+
+        navServices: "Services",
+        navWhy: "Why Us",
+        navContact: "Contact",
+
+        btnEmail: "Email",
+        btnWhats: "WhatsApp",
+
+        eyebrow: "Trusted Financial Consulting",
+        heroTitle: "Actuarial Valuation & IFRS 9 ECL — audit-ready deliverables.",
+        heroDesc:
+          "We support organizations with End of Service Benefits (EOSB) actuarial valuation and IFRS 9 Expected Credit Loss (ECL) computation, with clear assumptions, transparent methodology, and practical recommendations.",
+        btnProposal: "Request a Proposal",
+        btnViewServices: "View Services",
+        pill1: "EOSB Actuarial Valuation",
+        pill2: "IFRS 9 ECL",
+        pill3: "Reporting Support",
+
+        overviewTag: "Quick Overview",
+        lblEmail: "Email:",
+        lblWebsite: "Website:",
+
+        kpi1n: "IFRS", kpi1l: "Standards-aligned",
+        kpi2n: "Audit", kpi2l: "Documentation ready",
+        kpi3n: "Fast", kpi3l: "Efficient delivery",
+        kpi4n: "Clear", kpi4l: "Transparent models",
+
+        servicesTitle: "Services",
+        servicesHint: "Professional scope tailored to your reporting needs.",
+        srvTag1: "Actuarial",
+        srv1t: "EOSB Actuarial Valuation",
+        srv1d: "End of Service Benefits valuation with assumptions, sensitivity analysis, and audit-ready reports.",
+        srvTag2: "IFRS 9",
+        srv2t: "Expected Credit Loss (ECL)",
+        srv2d: "Support for staging, assumptions, and documentation with a clear reporting pack for auditors and management.",
+        srvTag3: "Advisory",
+        srv3t: "Reporting & Documentation",
+        srv3d: "Practical recommendations, governance support, and transparent outputs that match your timelines.",
+
+        whyTitle: "Why Future Dimensions",
+        whyHint: "Premium quality with a clear, reliable process.",
+        why1: "Professional, compliant, and audit-ready deliverables",
+        why2: "Clear methodology and practical recommendations",
+        why3: "Fast turnaround with quality assurance",
+        why4: "Confidential handling of your data and assumptions",
+
+        contactTitle: "Contact",
+        contactHint: "Tell us your needs — we respond quickly.",
+        getInTouchTitle: "Get in touch",
+        getInTouchDesc: "For proposals and inquiries, email us and we’ll share a clear scope, timeline, and expected deliverables.",
+        contactEmailLabel: "Email:",
+        contactWebLabel: "Website:",
+        btnEmail2: "Email Proposal Request",
+        btnWhats2: "WhatsApp",
+
+        quickDetails: "Quick details",
+        qd1t: "Primary services:",
+        qd1v: "EOSB Valuation, IFRS 9 ECL",
+        qd2t: "Deliverables:",
+        qd2v: "Report + assumptions + audit pack",
+        qd3t: "Response time:",
+        qd3v: "Within 24–48 hours",
+        qd4t: "Location:",
+        qd4v: "Saudi Arabia",
+
+        footerName: "Future Dimensions",
+        footerRights: "All rights reserved.",
+        footerContact: "info@futuredimensionsco.com • www.futuredimensionsco.com",
+      },
+
+      ar: {
+        langBtn: "English",
+        dir: "rtl", lang: "ar",
+
+        brandName: "Future Dimensions",
+        brandSub: "استشارات مالية ومهنية",
+
+        navServices: "الخدمات",
+        navWhy: "لماذا نحن",
+        navContact: "تواصل معنا",
+
+        btnEmail: "إيميل",
+        btnWhats: "واتساب",
+
+        eyebrow: "استشارات مالية موثوقة",
+        heroTitle: "التقييم الاكتواري واحتساب خسائر الائتمان المتوقعة IFRS 9 — مخرجات جاهزة للمراجعة.",
+        heroDesc:
+          "نساعد الجهات في التقييم الاكتواري لمنافع نهاية الخدمة (EOSB) واحتساب خسائر الائتمان المتوقعة (ECL) وفق IFRS 9، مع افتراضات واضحة ومنهجية شفافة وتوصيات عملية.",
+        btnProposal: "اطلب عرض سعر",
+        btnViewServices: "عرض الخدمات",
+        pill1: "التقييم الاكتواري (EOSB)",
+        pill2: "IFRS 9 – ECL",
+        pill3: "الدعم والتقارير",
+
+        overviewTag: "ملخص سريع",
+        lblEmail: "البريد:",
+        lblWebsite: "الموقع:",
+
+        kpi1n: "IFRS", kpi1l: "متوافق مع المعايير",
+        kpi2n: "Audit", kpi2l: "توثيق جاهز للمراجعة",
+        kpi3n: "سريع", kpi3l: "تنفيذ بكفاءة",
+        kpi4n: "واضح", kpi4l: "نماذج شفافة",
+
+        servicesTitle: "الخدمات",
+        servicesHint: "نطاق عمل مهني يناسب احتياجك للتقارير.",
+        srvTag1: "اكتواري",
+        srv1t: "تقييم اكتواري لمنافع نهاية الخدمة (EOSB)",
+        srv1d: "تقييم شامل مع الافتراضات وتحليل الحساسية وتقرير جاهز للمراجعة.",
+        srvTag2: "IFRS 9",
+        srv2t: "احتساب خسائر الائتمان المتوقعة (ECL)",
+        srv2d: "دعم المرحلية والافتراضات والتوثيق مع حزمة تقارير للإدارة والمراجع.",
+        srvTag3: "استشارات",
+        srv3t: "الدعم التقارير والتوثيق",
+        srv3d: "توصيات عملية وحوكمة ومخرجات واضحة وفق الجداول الزمنية.",
+
+        whyTitle: "لماذا Future Dimensions",
+        whyHint: "جودة عالية مع عملية واضحة وموثوقة.",
+        why1: "مخرجات احترافية ومتوافقة وجاهزة للمراجعة",
+        why2: "منهجية واضحة وتوصيات عملية",
+        why3: "سرعة تنفيذ مع ضمان جودة",
+        why4: "سرية تامة للبيانات والافتراضات",
+
+        contactTitle: "تواصل معنا",
+        contactHint: "اخبرنا باحتياجك وسنرد بسرعة.",
+        getInTouchTitle: "تواصل مباشر",
+        getInTouchDesc: "للطلبات وعروض الأسعار، راسلنا وسنرسل نطاق العمل والجدول الزمني والمخرجات المتوقعة.",
+        contactEmailLabel: "البريد:",
+        contactWebLabel: "الموقع:",
+        btnEmail2: "أرسل طلب عرض سعر",
+        btnWhats2: "واتساب",
+
+        quickDetails: "تفاصيل سريعة",
+        qd1t: "الخدمات الأساسية:",
+        qd1v: "EOSB، وIFRS 9 ECL",
+        qd2t: "المخرجات:",
+        qd2v: "تقرير + افتراضات + حزمة للمراجعة",
+        qd3t: "زمن الرد:",
+        qd3v: "خلال 24–48 ساعة",
+        qd4t: "الموقع:",
+        qd4v: "المملكة العربية السعودية",
+
+        footerName: "Future Dimensions",
+        footerRights: "جميع الحقوق محفوظة.",
+        footerContact: "info@futuredimensionsco.com • www.futuredimensionsco.com",
+      }
+    };
+
+    function setText(id, value){
+      const el = document.getElementById(id);
+      if(el) el.textContent = value;
+    }
+
+    function applyLang(langKey){
+      const t = T[langKey];
+      document.documentElement.lang = t.lang;
+      document.documentElement.dir = t.dir;
+
+      setText("langToggle", t.langBtn);
+
+      setText("brandName", t.brandName);
+      setText("brandSub", t.brandSub);
+
+      setText("navServices", t.navServices);
+      setText("navWhy", t.navWhy);
+      setText("navContact", t.navContact);
+
+      setText("btnEmail", t.btnEmail);
+      setText("btnWhats", t.btnWhats);
+
+      setText("eyebrow", t.eyebrow);
+      setText("heroTitle", t.heroTitle);
+      setText("heroDesc", t.heroDesc);
+      setText("btnProposal", t.btnProposal);
+      setText("btnViewServices", t.btnViewServices);
+      setText("pill1", t.pill1);
+      setText("pill2", t.pill2);
+      setText("pill3", t.pill3);
+
+      setText("overviewTag", t.overviewTag);
+      setText("lblEmail", t.lblEmail);
+      setText("lblWebsite", t.lblWebsite);
+
+      setText("kpi1n", t.kpi1n); setText("kpi1l", t.kpi1l);
+      setText("kpi2n", t.kpi2n); setText("kpi2l", t.kpi2l);
+      setText("kpi3n", t.kpi3n); setText("kpi3l", t.kpi3l);
+      setText("kpi4n", t.kpi4n); setText("kpi4l", t.kpi4l);
+
+      setText("servicesTitle", t.servicesTitle);
+      setText("servicesHint", t.servicesHint);
+
+      setText("srvTag1", t.srvTag1);
+      setText("srv1t", t.srv1t);
+      setText("srv1d", t.srv1d);
+
+      setText("srvTag2", t.srvTag2);
+      setText("srv2t", t.srv2t);
+      setText("srv2d", t.srv2d);
+
+      setText("srvTag3", t.srvTag3);
+      setText("srv3t", t.srv3t);
+      setText("srv3d", t.srv3d);
+
+      setText("whyTitle", t.whyTitle);
+      setText("whyHint", t.whyHint);
+      setText("why1", t.why1);
+      setText("why2", t.why2);
+      setText("why3", t.why3);
+      setText("why4", t.why4);
+
+      setText("contactTitle", t.contactTitle);
+      setText("contactHint", t.contactHint);
+      setText("getInTouchTitle", t.getInTouchTitle);
+      setText("getInTouchDesc", t.getInTouchDesc);
+      setText("contactEmailLabel", t.contactEmailLabel);
+      setText("contactWebLabel", t.contactWebLabel);
+      setText("btnEmail2", t.btnEmail2);
+      setText("btnWhats2", t.btnWhats2);
+
+      setText("quickDetails", t.quickDetails);
+      setText("qd1t", t.qd1t); setText("qd1v", t.qd1v);
+      setText("qd2t", t.qd2t); setText("qd2v", t.qd2v);
+      setText("qd3t", t.qd3t); setText("qd3v", t.qd3v);
+      setText("qd4t", t.qd4t); setText("qd4v", t.qd4v);
+
+      setText("footerName", t.footerName);
+      setText("footerRights", t.footerRights);
+      setText("footerContact", t.footerContact);
+
+      localStorage.setItem("fd_lang", langKey);
+    }
+
+    // Init
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    const saved = localStorage.getItem("fd_lang");
+    const initial = saved || "en";
+    applyLang(initial);
+
+    document.getElementById("langToggle").addEventListener("click", () => {
+      const current = (localStorage.getItem("fd_lang") || "en");
+      applyLang(current === "en" ? "ar" : "en");
+    });
+  </script>
+</body>
+</html>
