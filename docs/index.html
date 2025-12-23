@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ✅ Google Search Console Verification -->
+  <meta name="google-site-verification" content="apPz_urNfcx8kFW" />
+
+  <!-- ✅ SEO -->
+  <title>Future Dimensions | Financial, Operational & Growth Consulting</title>
+  <meta name="description" content="Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational Excellence, and Growth Strategy solutions with measurable impact." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.futuredimensionsco.com/" />
+  <link rel="alternate" href="https://www.futuredimensionsco.com/" hreflang="en" />
+  <link rel="alternate" href="https://www.futuredimensionsco.com/" hreflang="ar" />
+  <link rel="alternate" href="https://www.futuredimensionsco.com/" hreflang="x-default" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Future Dimensions" />
+  <meta property="og:title" content="Future Dimensions | Consulting & Business Solutions" />
+  <meta property="og:description" content="Financial • Administrative & Operational • Growth Strategy" />
+  <meta property="og:url" content="https://www.futuredimensionsco.com/" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Future Dimensions | Consulting & Business Solutions" />
+  <meta name="twitter:description" content="Integrated consulting firm delivering measurable impact." />
+
+  <!-- ✅ Favicon (no external file) -->
+  <link rel="icon" type="image/svg+xml"
+        href='data:image/svg+xml;utf8,
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="%23F1D77A"/>
+              <stop offset="0.5" stop-color="%23D4AF37"/>
+              <stop offset="1" stop-color="%23B8962E"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="14" fill="%230b1322"/>
+          <path d="M18 20h16c7 0 12 4 12 10s-5 10-12 10H28v8h-10V20zm10 8v8h6c3 0 5-1 5-4s-2-4-5-4h-6z"
+                fill="url(%23g)"/>
+        </svg>' />
+
+  <link rel="preload" href="logo.png" as="image" />
+
+  <!-- ✅ Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Future Dimensions for Consulting & Business Solutions",
+    "alternateName": "Future Dimensions",
+    "url": "https://www.futuredimensionsco.com/",
+    "logo": "https://www.futuredimensionsco.com/logo.png",
+    "email": "info@futuredimensionsco.com",
+    "telephone": "+20 100 193 8264",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Building No. 6, Mostafa Anani St., Heliopolis",
+      "addressLocality": "Cairo",
+      "addressCountry": "EG"
+    }
+  }
+  </script>
+
+  <style>
+    :root{
+      --navy:#0b1322;
+      --navy2:#0f1b2d;
+
+      --gold:#D4AF37;
+      --gold2:#B8962E;
+      --gold3:#F1D77A;
+
+      --teal:#2EC4B6;
+      --champ:#F5F1E6;
+
+      --onDark:#F6F7FB;
+      --ink:#0b1322;
+
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1140px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Kufi Arabic","Noto Sans Arabic", sans-serif;
+      color: var(--onDark);
+      background:
+        radial-gradient(1100px 700px at 12% 0%, rgba(46,196,182,.18) 0%, rgba(46,196,182,0) 58%),
+        radial-gradient(900px 600px at 88% 12%, rgba(212,175,55,.14) 0%, rgba(212,175,55,0) 60%),
+        radial-gradient(800px 520px at 50% 105%, rgba(245,241,230,.09) 0%, rgba(245,241,230,0) 55%),
+        linear-gradient(180deg, #070b14 0%, var(--navy) 40%, var(--navy2) 100%);
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+    .wrap{max-width:var(--max);margin:auto;padding:0 18px}
+
+    /* ===== Header ===== */
+    header{
+      position:sticky;top:0;z-index:100;
+      background:rgba(11,19,34,.82);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(212,175,55,.22);
+      transition:.25s ease;
+    }
+    header.scrolled{
+      background:rgba(11,19,34,.92);
+      border-bottom-color: rgba(212,175,55,.34);
+      box-shadow:0 10px 30px rgba(0,0,0,.28);
+    }
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:14px 0;gap:14px;flex-wrap:wrap
+    }
+
+    /* ✅ keep logo on LEFT of brand name even in RTL */
+    .brand{
+      display:flex;align-items:center;gap:14px;
+      min-width:260px;
+      direction:ltr;
+    }
+    [dir="rtl"] .brandText{direction:rtl;text-align:right;}
+    .logo{
+      width:52px;height:52px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(0,0,0,.92), rgba(0,0,0,.62));
+      border:1px solid rgba(212,175,55,.55);
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    .logo img{width:48px;height:48px;object-fit:contain}
+    .brandText b{display:block;font-weight:1000;letter-spacing:.5px;color:rgba(255,255,255,.92)}
+    .brandText small{font-weight:800;color:rgba(255,255,255,.68)}
+
+    /* Desktop Menu */
+    .menu{
+      display:flex;gap:10px;font-weight:950;flex-wrap:wrap;
+      color:rgba(255,255,255,.84);align-items:center
+    }
+    .menu a, .menu button{
+      padding:8px 10px;border-radius:10px;
+      background:transparent;border:0;color:inherit;
+      font:inherit;cursor:pointer;
+      display:inline-flex;align-items:center;gap:8px;
+    }
+    .menu a:hover, .menu button:hover{background:rgba(46,196,182,.10)}
+    .menu a.active{background:rgba(212,175,55,.14);border:1px solid rgba(212,175,55,.22)}
+
+    .navRight{display:flex;gap:10px;align-items:center}
+
+    .btn{
+      padding:10px 16px;border-radius:14px;
+      font-weight:950;border:none;cursor:pointer
+    }
+    .btn.gold{
+      background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2));
+      color:var(--ink);
+      box-shadow:var(--shadow)
+    }
+    .btn.gold:hover{filter:brightness(1.03)}
+    .btn.lang{
+      background:transparent;
+      border:1px solid rgba(255,255,255,.20);
+      color:rgba(255,255,255,.86);
+      box-shadow:none;
+    }
+    .btn.lang:hover{background:rgba(255,255,255,.08)}
+
+    /* Dropdown */
+    .dropdown{position:relative}
+    .dropMenu{
+      position:absolute;top:44px;left:0;
+      min-width:360px;
+      background:rgba(11,19,34,.96);
+      border:1px solid rgba(212,175,55,.25);
+      box-shadow:0 18px 45px rgba(0,0,0,.45);
+      border-radius:14px;
+      padding:8px;
+      display:none;
+      z-index:200;
+    }
+    .dropdown.open .dropMenu{display:block}
+    .dropMenu a{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:10px 10px;border-radius:12px;
+      color:rgba(255,255,255,.88);
+      font-weight:900;
+    }
+    .dropMenu a:hover{background:rgba(212,175,55,.14)}
+    .chip{
+      font-size:12px;font-weight:950;
+      padding:4px 8px;border-radius:999px;
+      border:1px solid rgba(46,196,182,.35);
+      color:rgba(255,255,255,.80);
+      background:rgba(46,196,182,.10);
+      white-space:nowrap;
+    }
+    [dir="rtl"] .dropMenu{left:auto;right:0}
+
+    /* Mobile Menu Button */
+    .burger{
+      display:none;
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.92);
+      cursor:pointer;
+      align-items:center;justify-content:center;
+      font-size:18px;font-weight:1000;
+    }
+    .burger:hover{background:rgba(255,255,255,.10)}
+
+    /* Mobile Panel */
+    .mobilePanel{
+      display:none;
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.55);
+      z-index:999;
+    }
+    .mobilePanel.open{display:block}
+    .mobileSheet{
+      position:absolute;
+      top:12px; left:12px; right:12px;
+      border-radius:22px;
+      background:rgba(11,19,34,.96);
+      border:1px solid rgba(212,175,55,.25);
+      box-shadow:0 20px 60px rgba(0,0,0,.55);
+      padding:14px;
+      backdrop-filter: blur(10px);
+    }
+    .mobileTop{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:4px 4px 10px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      margin-bottom:10px;
+    }
+    .mclose{
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.92);
+      cursor:pointer;
+      font-weight:1000;
+    }
+    .mclose:hover{background:rgba(255,255,255,.10)}
+    .mnav{
+      display:grid;
+      gap:8px;
+      padding:10px 0 0;
+    }
+    .mnav a, .mnav button{
+      width:100%;
+      text-align:left;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.90);
+      font-weight:950;
+      cursor:pointer;
+      font:inherit;
+    }
+    [dir="rtl"] .mnav a, [dir="rtl"] .mnav button{ text-align:right; }
+    .mnav a:hover, .mnav button:hover{background:rgba(255,255,255,.10)}
+    .mSub{
+      display:none;
+      padding:0 0 0;
+      margin-top:6px;
+      gap:8px;
+    }
+    .mSub.open{display:grid}
+    .mSub a{
+      background:rgba(212,175,55,.10);
+      border:1px solid rgba(212,175,55,.22);
+    }
+
+    /* ===== Hero ===== */
+    .hero{padding:64px 0 26px}
+    .heroGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+
+    .heroCard{
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(900px 480px at 10% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
+      border: 1px solid rgba(0,0,0,.14);
+      color: var(--ink);
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+    }
+    .wm{
+      position:absolute;
+      right:-28px; bottom:-42px;
+      width:240px; height:240px;
+      opacity:.08;
+      transform:rotate(-10deg);
+      pointer-events:none;
+    }
+    [dir="rtl"] .wm{right:auto;left:-28px;transform:rotate(10deg);}
+
+    .heroTitle{margin:0 0 10px;font-size:44px;line-height:1.08;font-weight:1000;color:var(--ink)}
+    .heroText{margin:0 0 18px;font-size:16px;color:rgba(11,19,34,.86);font-weight:850;position:relative;z-index:2}
+
+    .heroBadges{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px;position:relative;z-index:2}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border-radius:999px;
+      background:rgba(11,19,34,.08);
+      border:1px solid rgba(11,19,34,.14);
+      font-weight:950;
+      color: rgba(11,19,34,.88);
+      font-size:13px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--teal), rgba(46,196,182,.65));
+      border:1px solid rgba(11,19,34,.22);
+    }
+
+    .ctaRowHero{
+      display:flex; gap:10px; flex-wrap:wrap;
+      position:relative; z-index:2;
+    }
+
+    .ctaBtn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 20px;
+      border-radius:16px;
+      background:linear-gradient(135deg, rgba(11,19,34,.95), rgba(19,38,66,.95));
+      color:var(--onDark);
+      font-weight:1000;
+      border:1px solid rgba(11,19,34,.18);
+      box-shadow: 0 14px 35px rgba(0,0,0,.26);
+    }
+    .ctaBtn:hover{filter:brightness(1.05)}
+    .ctaBtn .spark{
+      width:10px;height:10px;border-radius:999px;
+      background:linear-gradient(135deg,var(--gold3),var(--gold));
+      box-shadow:0 0 0 6px rgba(212,175,55,.18);
+    }
+
+    .ghostBtn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 18px;
+      border-radius:16px;
+      background:rgba(11,19,34,.08);
+      border:1px solid rgba(11,19,34,.16);
+      color:rgba(11,19,34,.92);
+      font-weight:1000;
+    }
+    .ghostBtn:hover{background:rgba(11,19,34,.12)}
+    .ghostBtn .spark{
+      width:10px;height:10px;border-radius:999px;
+      background:linear-gradient(135deg,var(--teal), rgba(46,196,182,.65));
+      box-shadow:0 0 0 6px rgba(46,196,182,.14);
+    }
+
+    .sideCard{
+      border-radius: var(--radius);
+      border: 1px solid rgba(46,196,182,.22);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(700px 420px at 12% 0%, rgba(46,196,182,.20), rgba(46,196,182,0) 60%),
+        linear-gradient(135deg, #05070D 0%, #0B1322 60%, var(--navy2) 120%);
+      color: var(--onDark);
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .sideCard:before{
+      content:"";
+      position:absolute;inset:0;
+      background: radial-gradient(600px 300px at 20% 0%, rgba(212,175,55,.14), rgba(0,0,0,0) 60%);
+      pointer-events:none;
+    }
+    .sideCard h3{margin:0 0 10px;font-size:18px;position:relative;z-index:1}
+    .sideCard ul{margin:0;padding-left:18px;color:rgba(255,255,255,.82);font-weight:850;position:relative;z-index:1}
+    [dir="rtl"] .sideCard ul{padding-right:18px;padding-left:0}
+    .sideCard li{margin:8px 0}
+    .sideCard .mini{
+      margin-top:14px;
+      border-top:1px solid rgba(255,255,255,.12);
+      padding-top:12px;
+      color: rgba(255,255,255,.85);
+      font-weight:900;
+      font-size:13px;
+      position:relative;z-index:1
+    }
+
+    /* ===== Sections ===== */
+    section{padding:48px 0}
+    .sectionTitle{
+      display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+      margin-bottom:14px;
+    }
+    .sectionTitle h2{margin:0;font-size:26px;letter-spacing:.2px;color: rgba(255,255,255,.92);}
+    .sectionTitle p{margin:0;color:rgba(255,255,255,.68);font-weight:850;font-size:14px;}
+
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+
+    .card{
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
+      border:1px solid rgba(0,0,0,.12);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      color: var(--ink);
+    }
+    .card h3{margin:0 0 10px;font-size:18px;color:rgba(11,19,34,.96);font-weight:1000;letter-spacing:.3px}
+    .card p{margin:0;color:rgba(11,19,34,.86);font-weight:850}
+    .card ul{margin:12px 0 0;padding-left:18px;color:rgba(11,19,34,.88);font-weight:900}
+    [dir="rtl"] .card ul{padding-right:18px;padding-left:0}
+    .card li{margin:7px 0}
+
+    .serviceActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .slink{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 12px;border-radius:14px;
+      background:rgba(11,19,34,.08);
+      border:1px solid rgba(11,19,34,.14);
+      color:rgba(11,19,34,.92);
+      font-weight:950;
+    }
+    .slink:hover{background:rgba(11,19,34,.12)}
+    .slink .ic{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--teal),rgba(46,196,182,.65))}
+    .slink.primary{
+      background:linear-gradient(135deg, rgba(11,19,34,.95), rgba(19,38,66,.95));
+      color:var(--onDark);
+      border:1px solid rgba(11,19,34,.18);
+      box-shadow:0 14px 35px rgba(0,0,0,.22);
+    }
+    .slink.primary:hover{filter:brightness(1.06)}
+    .slink.primary .ic{background:linear-gradient(135deg,var(--gold3),var(--gold)); box-shadow:0 0 0 6px rgba(212,175,55,.18);}
+
+    .darkBand{
+      margin:22px 0 0;
+      border-radius: 22px;
+      padding:18px;
+      background:
+        radial-gradient(700px 320px at 12% 0%, rgba(245,241,230,.10), rgba(245,241,230,0) 60%),
+        linear-gradient(135deg, #05070D 0%, #0B1322 60%, var(--navy2) 120%);
+      border:1px solid rgba(212,175,55,.22);
+      box-shadow: var(--shadow);
+      color: var(--onDark);
+    }
+    .darkBand p{margin:0;color:rgba(255,255,255,.84);font-weight:850}
+
+    /* Contact */
+    .contactBox{display:grid;grid-template-columns:1.05fr .95fr;gap:14px;align-items:stretch}
+    .contactCard{
+      border-radius: var(--radius);box-shadow: var(--shadow);overflow:hidden;border:1px solid rgba(0,0,0,.12);
+      background:
+        radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
+      color: var(--ink);
+    }
+    .contactInner{padding:18px}
+
+    /* Footer */
+    footer{
+      background:linear-gradient(135deg, #05070D 0%, #0B1322 60%, var(--navy2) 120%);
+      color:#ddd;
+      padding:26px 0;
+      border-top:1px solid rgba(212,175,55,.22);
+    }
+    .footerGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:start;
+    }
+    .footerBrand{display:flex;align-items:center;gap:12px}
+    .footerBrand img{
+      width:44px;height:44px;border-radius:12px;
+      border:1px solid rgba(212,175,55,.45);
+      background:#000;
+      object-fit:contain;
+    }
+    .footerBrand div b{display:block}
+    .footerBrand div small{display:block;color:rgba(255,255,255,.68);font-weight:800}
+
+    .footerLinks{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    [dir="rtl"] .footerLinks{justify-content:flex-start}
+    .footerLinks a{
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.88);
+      font-weight:900;
+      font-size:13px;
+    }
+    .footerLinks a:hover{background:rgba(255,255,255,.10)}
+
+    .copy{
+      color:rgba(255,255,255,.65);
+      font-weight:800;
+      font-size:13px;
+      margin-top:10px;
+    }
+
+    a:focus-visible, button:focus-visible{
+      outline: 3px solid rgba(46,196,182,.70);
+      outline-offset: 3px;
+      border-radius: 14px;
+    }
+
+    @media(max-width:980px){
+      .heroGrid,.grid2,.contactBox{grid-template-columns:1fr}
+      .grid3{grid-template-columns:1fr}
+      .heroTitle{font-size:34px}
+      .brand{min-width:auto}
+      .dropMenu{min-width:280px}
+      .footerGrid{grid-template-columns:1fr}
+      .footerLinks{justify-content:flex-start}
+
+      /* Hide desktop menu on mobile, show burger */
+      .menu{display:none}
+      .burger{display:inline-flex}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="logo">
+        <img src="logo.png" alt="Future Dimensions Logo" />
+      </div>
+      <div class="brandText">
+        <b id="brandName">FUTURE DIMENSIONS</b>
+        <small id="brandSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
+      </div>
+    </div>
+
+    <!-- Desktop Menu -->
+    <nav class="menu" aria-label="Main navigation">
+      <a href="#home" id="navHome" class="active">Home</a>
+      <a href="#about" id="navAbout">About</a>
+
+      <!-- ✅ Services Dropdown -> Internal pages -->
+      <div class="dropdown" id="servicesDropdown">
+        <button type="button" id="navServicesBtn" aria-haspopup="true" aria-expanded="false">Services ▾</button>
+        <div class="dropMenu" role="menu" aria-label="Services menu">
+          <a href="financial.html" id="ddFinancial">Financial Dimension <span class="chip" id="chip1">Page</span></a>
+          <a href="administrative.html" id="ddAdminOps">Administrative & Operational <span class="chip" id="chip2">Page</span></a>
+          <a href="growth.html" id="ddGrowth">Growth Strategy <span class="chip" id="chip3">Page</span></a>
+        </div>
+      </div>
+
+      <!-- ✅ Additional pages (icons only) -->
+      <a href="team.html" id="navTeam" title="Team">👥</a>
+      <a href="careers.html" id="navCareers" title="Careers">💼</a>
+
+      <a href="#approach" id="navApproach">Approach</a>
+      <a href="#contact" id="navContact">Contact</a>
+    </nav>
+
+    <div class="navRight">
+      <button class="burger" id="burgerBtn" aria-label="Open menu">☰</button>
+      <button class="btn lang" id="langToggle">العربية</button>
+      <a href="#contact" class="btn gold" id="navCta">Get a Proposal</a>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobilePanel" id="mobilePanel" aria-hidden="true">
+  <div class="mobileSheet">
+    <div class="mobileTop">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="logo" style="width:44px;height:44px;border-radius:14px">
+          <img src="logo.png" alt="Logo" />
+        </div>
+        <div style="line-height:1.1">
+          <div style="font-weight:1000;color:rgba(255,255,255,.92)" id="mBrand">FUTURE DIMENSIONS</div>
+          <div style="font-weight:800;color:rgba(255,255,255,.68);font-size:12px" id="mSub">CONSULTING</div>
+        </div>
+      </div>
+      <button class="mclose" id="mCloseBtn" aria-label="Close menu">✕</button>
+    </div>
+
+    <div class="mnav">
+      <a href="#home" id="mHome">Home</a>
+      <a href="#about" id="mAbout">About</a>
+
+      <button type="button" id="mServicesBtn">
+        <span id="mServicesTxt">Services</span>
+        <span>▾</span>
+      </button>
+      <div class="mSub" id="mServicesSub">
+        <a href="financial.html" id="mFin">Financial Dimension</a>
+        <a href="administrative.html" id="mAdm">Administrative & Operational</a>
+        <a href="growth.html" id="mGr">Growth Strategy</a>
+      </div>
+
+      <a href="team.html" id="mTeam">Team</a>
+      <a href="careers.html" id="mCareers">Careers</a>
+
+      <a href="#approach" id="mApproach">Approach</a>
+      <a href="#contact" id="mContact">Contact</a>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+      <button class="btn lang" id="mLangToggle" style="padding:10px 14px">العربية</button>
+      <a class="btn gold" href="#contact" id="mCta" style="padding:10px 14px;display:inline-flex;align-items:center">Get a Proposal</a>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="wrap heroGrid">
+      <div class="heroCard">
+        <img class="wm" src="logo.png" alt="" />
+        <div class="heroBadges">
+          <span class="badge"><span class="dot"></span><span id="b1">Financial Diagnostics</span></span>
+          <span class="badge"><span class="dot"></span><span id="b2">Governance & Compliance</span></span>
+          <span class="badge"><span class="dot"></span><span id="b3">Growth & Transformation</span></span>
+        </div>
+
+        <h1 class="heroTitle" id="heroTitle">Enter with Challenges – Exit with New Dimensions</h1>
+        <p class="heroText" id="heroText">
+          Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational,
+          and Growth Strategy solutions with measurable impact — locally and globally.
+        </p>
+
+        <div class="ctaRowHero">
+          <a class="ctaBtn" href="#contact" id="heroBtn">
+            <span class="spark"></span>
+            <span id="heroBtnText">Start Your Transformation</span>
+          </a>
+
+          <a class="ghostBtn" href="#services" id="heroServicesBtn">
+            <span class="spark"></span>
+            <span id="heroServicesText">Explore Services</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="sideCard">
+        <h3 id="whyTitle">Why Future Dimensions?</h3>
+        <ul id="whyList"></ul>
+        <div class="mini" id="miniNote">Premium look • Strong identity • Clear value</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <h2 id="aboutTitle">About Us</h2>
+        <p id="aboutHint">Identity-driven. Execution-focused.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3 id="aboutH3_1">Who we are</h3>
+          <p id="aboutP1">
+            Future Dimensions is a consulting partner that blends financial expertise, operational excellence,
+            and growth strategy to build resilient organizations and sustainable results.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 id="aboutH3_2">What we deliver</h3>
+          <ul id="aboutList"></ul>
+        </div>
+      </div>
+
+      <div class="darkBand">
+        <p id="taglineLine">We don’t just advise — we build dimensions that last.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <h2 id="servicesTitle">Our Services</h2>
+        <p id="servicesHint">Explore full details inside each service page.</p>
+      </div>
+
+      <div class="grid3">
+        <!-- Financial -->
+        <div class="card">
+          <h3 id="finTitle">Financial Dimension</h3>
+          <p id="finDesc">Financial diagnostics, profitability improvement, and IFRS-focused advisory.</p>
+
+          <div class="serviceActions">
+            <a class="slink primary" href="financial.html" id="finPageBtn">
+              <span class="ic"></span><span id="finPageBtnText">Open Service Page</span>
+            </a>
+          </div>
+
+          <ul id="finBullets"></ul>
+        </div>
+
+        <!-- Admin & Ops -->
+        <div class="card">
+          <h3 id="admTitle">Administrative & Operational Dimension</h3>
+          <p id="admDesc">Operational excellence, governance frameworks, and compliance structures.</p>
+
+          <div class="serviceActions">
+            <a class="slink primary" href="administrative.html" id="admPageBtn">
+              <span class="ic"></span><span id="admPageBtnText">Open Service Page</span>
+            </a>
+          </div>
+
+          <ul id="admBullets"></ul>
+        </div>
+
+        <!-- Growth -->
+        <div class="card">
+          <h3 id="grTitle">Growth Strategy Dimension</h3>
+          <p id="grDesc">Expansion planning and digital transformation roadmaps.</p>
+
+          <div class="serviceActions">
+            <a class="slink primary" href="growth.html" id="grPageBtn">
+              <span class="ic"></span><span id="grPageBtnText">Open Service Page</span>
+            </a>
+          </div>
+
+          <ul id="grBullets"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <h2 id="approachTitle">Our Methodology</h2>
+        <p id="approachHint">From challenge → to dimensions.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3 id="m1">How we work</h3>
+          <ul id="mList"></ul>
+        </div>
+
+        <div class="card">
+          <h3 id="m2">What you get</h3>
+          <p id="mText">
+            Clear documentation, stakeholder-ready outputs, and measurable improvement —
+            aligned with international standards and built for execution.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <h2 id="contactTitle">Contact</h2>
+        <p id="contactHint">Let’s build your next dimension.</p>
+      </div>
+
+      <div class="contactBox">
+        <div class="contactCard">
+          <div class="contactInner">
+            <h3 id="contactH3">Get in touch</h3>
+            <p style="margin:0;color:rgba(11,19,34,.88);font-weight:850" id="contactP">
+              Email us to request a proposal or schedule an exploratory meeting.
+            </p>
+
+            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+              <a class="slink primary" href="mailto:info@futuredimensionsco.com" id="emailBtn">
+                <span class="ic"></span><span id="emailBtnText">Request a Proposal</span>
+              </a>
+              <a class="slink" href="tel:+201001938264">
+                <span class="ic"></span><span id="callBtnText">Call</span>
+              </a>
+            </div>
+
+            <div style="margin-top:14px;color:rgba(11,19,34,.90);font-weight:900" id="addr">
+              Building No. 6, Mostafa Anani St., Heliopolis, Cairo, Egypt
+            </div>
+          </div>
+        </div>
+
+        <div class="sideCard">
+          <h3 id="ctaTitle">Take the First Step Today</h3>
+          <p id="ctaText" style="margin:0;color:rgba(255,255,255,.82);font-weight:850;">
+            Book your complimentary exploratory session and start your transformation journey.
+          </p>
+          <div class="mini" id="ctaMini">Quick response • Professional delivery • Audit-ready outputs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footerGrid">
+      <div>
+        <div class="footerBrand">
+          <img src="logo.png" alt="Future Dimensions Logo" />
+          <div>
+            <b id="footName">FUTURE DIMENSIONS</b>
+            <small id="footSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
+          </div>
+        </div>
+        <div class="copy" id="copyText">© Future Dimensions — All rights reserved.</div>
+      </div>
+
+      <div>
+        <div class="footerLinks" aria-label="Quick links">
+          <a href="#home" id="fHome">Home</a>
+          <a href="#about" id="fAbout">About</a>
+          <a href="#services" id="fServices">Services</a>
+          <a href="team.html" id="fTeam">Team</a>
+          <a href="careers.html" id="fCareers">Careers</a>
+          <a href="#contact" id="fContact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll effect
+  window.addEventListener("scroll",()=>{
+    document.querySelector("header").classList.toggle("scrolled", window.scrollY > 10);
+  });
+
+  // Desktop Dropdown open/close
+  const dd = document.getElementById("servicesDropdown");
+  const ddBtn = document.getElementById("navServicesBtn");
+  ddBtn.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    dd.classList.toggle("open");
+    ddBtn.setAttribute("aria-expanded", dd.classList.contains("open") ? "true" : "false");
+  });
+  document.addEventListener("click",()=> {
+    dd.classList.remove("open");
+    ddBtn.setAttribute("aria-expanded","false");
+  });
+
+  // Mobile menu open/close
+  const mobilePanel = document.getElementById("mobilePanel");
+  const burgerBtn = document.getElementById("burgerBtn");
+  const mCloseBtn = document.getElementById("mCloseBtn");
+  function openMobile(){
+    mobilePanel.classList.add("open");
+    mobilePanel.setAttribute("aria-hidden","false");
+  }
+  function closeMobile(){
+    mobilePanel.classList.remove("open");
+    mobilePanel.setAttribute("aria-hidden","true");
+  }
+  burgerBtn.addEventListener("click",(e)=>{e.stopPropagation(); openMobile();});
+  mCloseBtn.addEventListener("click",closeMobile);
+  mobilePanel.addEventListener("click",(e)=>{ if(e.target === mobilePanel) closeMobile(); });
+
+  // Mobile services expand
+  const mServicesBtn = document.getElementById("mServicesBtn");
+  const mServicesSub = document.getElementById("mServicesSub");
+  mServicesBtn.addEventListener("click",()=> mServicesSub.classList.toggle("open"));
+
+  // Close mobile when clicking internal anchors
+  document.querySelectorAll('.mnav a[href^="#"]').forEach(a=>{
+    a.addEventListener("click", ()=> closeMobile());
+  });
+
+  // ===== SEO per language =====
+  const seo = {
+    en:{
+      title:"Future Dimensions | Financial, Operational & Growth Consulting",
+      desc:"Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational Excellence, and Growth Strategy solutions with measurable impact."
+    },
+    ar:{
+      title:"Future Dimensions | استشارات مالية وإدارية واستراتيجيات نمو",
+      desc:"تقدم Future Dimensions خدمات استشارية متكاملة تشمل البعد المالي والبعد الإداري والتشغيلي واستراتيجيات النمو والتحول، بمخرجات احترافية قابلة للتنفيذ ونتائج قابلة للقياس."
+    }
+  };
+  function setMeta(name, content){
+    let el=document.querySelector(`meta[name="${name}"]`);
+    if(!el){ el=document.createElement("meta"); el.setAttribute("name",name); document.head.appendChild(el); }
+    el.setAttribute("content",content);
+  }
+  function setOg(prop, content){
+    let el=document.querySelector(`meta[property="${prop}"]`);
+    if(!el){ el=document.createElement("meta"); el.setAttribute("property",prop); document.head.appendChild(el); }
+    el.setAttribute("content",content);
+  }
+  function updateSEO(lang){
+    document.title = seo[lang].title;
+    setMeta("description", seo[lang].desc);
+    setOg("og:title", seo[lang].title);
+    setOg("og:description", seo[lang].desc);
+    setMeta("twitter:title", seo[lang].title);
+    setMeta("twitter:description", seo[lang].desc);
+  }
+
+  // ===== Service bullets (EN + AR) =====
+  const bullets = {
+    en:{
+      fin:[
+        "Comprehensive Financial Diagnostics & Performance Analysis",
+        "Profitability Improvement & Cost Optimization",
+        "ROI Enhancement & Shareholder Value Maximization",
+        "Strategic Financial Planning & Budgeting",
+        "Financial Restructuring & Optimization",
+        "Internal Audit & Risk Assessment",
+        "End of Service Benefits Actuarial Valuation (IAS 19)",
+        "Expected Credit Loss Consultation (IFRS 9)",
+        "Financial Policies & Procedures Development"
+      ],
+      adm:[
+        "Business Strategy Development & Execution",
+        "Strategic Planning & Organizational Development",
+        "Process Improvement & Operational Efficiency",
+        "Corporate Restructuring & Organizational Optimization",
+        "Administrative Systems & Procedures Development",
+        "Quality & Risk Management Systems",
+        "Effective Governance Structures & Frameworks",
+        "Compliance with International Standards (ISO & Beyond)"
+      ],
+      gr:[
+        "Expansion Planning & Market Entry Strategies",
+        "New Growth Opportunities Identification & Validation",
+        "Digital Transformation Strategies & Implementation Roadmaps",
+        "Technology Systems Assessment & Optimization",
+        "Technology Project Management & Execution"
+      ]
+    },
+    ar:{
+      fin:[
+        "تشخيص مالي شامل وتحليل الأداء",
+        "تحسين الربحية وترشيد التكاليف",
+        "تعظيم العائد على الاستثمار وتعزيز قيمة المساهمين",
+        "التخطيط المالي الاستراتيجي وإعداد الموازنات",
+        "إعادة هيكلة مالية وتحسين الكفاءة",
+        "المراجعة الداخلية وتقييم المخاطر",
+        "تقييم مكافآت نهاية الخدمة اكتواريًا (IAS 19)",
+        "استشارات الخسائر الائتمانية المتوقعة (IFRS 9)",
+        "تطوير السياسات والإجراءات المالية"
+      ],
+      adm:[
+        "تطوير وتنفيذ الاستراتيجية المؤسسية",
+        "التخطيط الاستراتيجي والتطوير التنظيمي",
+        "تحسين العمليات ورفع الكفاءة التشغيلية",
+        "إعادة الهيكلة المؤسسية وتحسين التنظيم",
+        "تطوير النظم والإجراءات الإدارية",
+        "نظم الجودة وإدارة المخاطر",
+        "بناء أطر الحوكمة والهياكل الفعالة",
+        "الامتثال للمعايير الدولية (ISO وما بعدها)"
+      ],
+      gr:[
+        "التوسع والدخول إلى أسواق جديدة",
+        "تحديد فرص نمو جديدة والتحقق من جدواها",
+        "استراتيجيات التحول الرقمي وخارطة تنفيذ",
+        "تقييم الأنظمة التقنية وتحسينها",
+        "إدارة وتنفيذ المشاريع التقنية"
+      ]
+    }
+  };
+
+  function renderList(ulId, items){
+    const ul=document.getElementById(ulId);
+    if(!ul) return;
+    ul.innerHTML="";
+    items.forEach(t=>{
+      const li=document.createElement("li");
+      li.textContent=t;
+      ul.appendChild(li);
+    });
+  }
+
+  // ===== i18n text =====
+  const i18n = {
+    en:{
+      dir:"ltr", lang:"en", toggle:"العربية",
+
+      navHome:"Home",
+      navAbout:"About",
+      navServicesBtn:"Services ▾",
+      chip:"Page",
+      navApproach:"Approach",
+      navContact:"Contact",
+      navCta:"Get a Proposal",
+
+      // Mobile
+      mBrand:"FUTURE DIMENSIONS",
+      mSub:"CONSULTING",
+      mHome:"Home",
+      mAbout:"About",
+      mServicesTxt:"Services",
+      mFin:"Financial Dimension",
+      mAdm:"Administrative & Operational",
+      mGr:"Growth Strategy",
+      mTeam:"Team",
+      mCareers:"Careers",
+      mApproach:"Approach",
+      mContact:"Contact",
+      mLangToggle:"العربية",
+      mCta:"Get a Proposal",
+
+      ddFinancial:"Financial Dimension",
+      ddAdminOps:"Administrative & Operational",
+      ddGrowth:"Growth Strategy",
+
+      heroTitle:"Enter with Challenges – Exit with New Dimensions",
+      heroText:"Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational, and Growth Strategy solutions with measurable impact — locally and globally.",
+      heroBtnText:"Start Your Transformation",
+      heroServicesText:"Explore Services",
+
+      whyTitle:"Why Future Dimensions?",
+      whyList:[
+        "Transformation, not temporary fixes",
+        "Audit-ready deliverables & documentation",
+        "Clear methodology and practical execution",
+        "High standards — fast turnaround"
+      ],
+      miniNote:"Premium look • Strong identity • Clear value",
+
+      aboutTitle:"About Us",
+      aboutHint:"Identity-driven. Execution-focused.",
+      aboutH3_1:"Who we are",
+      aboutP1:"Future Dimensions is a consulting partner that blends financial expertise, operational excellence, and growth strategy to build resilient organizations and sustainable results.",
+      aboutH3_2:"What we deliver",
+      aboutList:[
+        "Structured diagnosis & performance assessment",
+        "Roadmaps that are practical and implementable",
+        "Governance, documentation, and stakeholder-ready reporting"
+      ],
+      taglineLine:"We don’t just advise — we build dimensions that last.",
+
+      servicesTitle:"Our Services",
+      servicesHint:"Explore full details inside each service page.",
+      finTitle:"Financial Dimension",
+      finDesc:"Financial diagnostics, profitability improvement, and IFRS-focused advisory.",
+      finPageBtnText:"Open Service Page",
+      admTitle:"Administrative & Operational Dimension",
+      admDesc:"Operational excellence, governance frameworks, and compliance structures.",
+      admPageBtnText:"Open Service Page",
+      grTitle:"Growth Strategy Dimension",
+      grDesc:"Expansion planning and digital transformation roadmaps.",
+      grPageBtnText:"Open Service Page",
+
+      approachTitle:"Our Methodology",
+      approachHint:"From challenge → to dimensions.",
+      m1:"How we work",
+      mList:["Challenge Diagnosis","Dimension Design","Guided Execution","Transformation Confirmation (KPIs)"],
+      m2:"What you get",
+      mText:"Clear documentation, stakeholder-ready outputs, and measurable improvement — aligned with international standards and built for execution.",
+
+      contactTitle:"Contact",
+      contactHint:"Let’s build your next dimension.",
+      contactH3:"Get in touch",
+      contactP:"Email us to request a proposal or schedule an exploratory meeting.",
+      emailBtnText:"Request a Proposal",
+      callBtnText:"Call",
+      addr:"Building No. 6, Mostafa Anani St., Heliopolis, Cairo, Egypt",
+
+      ctaTitle:"Take the First Step Today",
+      ctaText:"Book your complimentary exploratory session and start your transformation journey.",
+      ctaMini:"Quick response • Professional delivery • Audit-ready outputs",
+
+      footName:"FUTURE DIMENSIONS",
+      footSub:"FOR CONSULTING & BUSINESS SOLUTIONS",
+      copyText:"© Future Dimensions — All rights reserved.",
+      fHome:"Home", fAbout:"About", fServices:"Services", fTeam:"Team", fCareers:"Careers", fContact:"Contact"
+    },
+
+    ar:{
+      dir:"rtl", lang:"ar", toggle:"English",
+
+      navHome:"الرئيسية",
+      navAbout:"من نحن",
+      navServicesBtn:"الخدمات ▾",
+      chip:"صفحة",
+      navApproach:"منهجيتنا",
+      navContact:"تواصل معنا",
+      navCta:"اطلب عرضًا",
+
+      // Mobile
+      mBrand:"Future Dimensions",
+      mSub:"CONSULTING",
+      mHome:"الرئيسية",
+      mAbout:"من نحن",
+      mServicesTxt:"الخدمات",
+      mFin:"البعد المالي",
+      mAdm:"البعد الإداري والتشغيلي",
+      mGr:"بعد استراتيجية النمو",
+      mTeam:"فريق العمل",
+      mCareers:"التوظيف",
+      mApproach:"منهجيتنا",
+      mContact:"تواصل معنا",
+      mLangToggle:"English",
+      mCta:"اطلب عرضًا",
+
+      ddFinancial:"البعد المالي",
+      ddAdminOps:"البعد الإداري والتشغيلي",
+      ddGrowth:"بعد استراتيجية النمو",
+
+      heroTitle:"ادخل بالتحديات – واخرج بأبعاد جديدة",
+      heroText:"Future Dimensions شركة استشارات متكاملة تقدم حلولًا في البعد المالي والبعد الإداري والتشغيلي واستراتيجيات النمو بنتائج قابلة للقياس — محليًا وعالميًا.",
+      heroBtnText:"ابدأ رحلة التحول",
+      heroServicesText:"استكشف الخدمات",
+
+      whyTitle:"لماذا Future Dimensions؟",
+      whyList:[
+        "تحول حقيقي وليس حلولًا مؤقتة",
+        "مخرجات موثقة وجاهزة للمراجعة",
+        "منهجية واضحة وتنفيذ عملي",
+        "معايير عالية مع سرعة إنجاز"
+      ],
+      miniNote:"مظهر فاخر • هوية قوية • قيمة واضحة",
+
+      aboutTitle:"من نحن",
+      aboutHint:"هوية قوية. تنفيذ فعّال.",
+      aboutH3_1:"تعريف بالشركة",
+      aboutP1:"Future Dimensions شريك استشاري يجمع بين الخبرة المالية والتميز التشغيلي واستراتيجيات النمو لبناء مؤسسات أكثر مرونة ونتائج مستدامة.",
+      aboutH3_2:"ماذا نقدّم؟",
+      aboutList:[
+        "تشخيص منظم وتقييم أداء",
+        "خارطة طريق عملية قابلة للتنفيذ",
+        "حوكمة وتوثيق وتقارير جاهزة لأصحاب المصلحة"
+      ],
+      taglineLine:"نحن لا نقدم رأيًا فقط — نحن نبني أبعادًا تدوم.",
+
+      servicesTitle:"خدماتنا",
+      servicesHint:"اطّلع على التفاصيل الكاملة داخل صفحات الخدمات.",
+      finTitle:"البعد المالي",
+      finDesc:"تشخيص مالي شامل، تحسين ربحية، واستشارات متوافقة مع المعايير الدولية.",
+      finPageBtnText:"افتح صفحة الخدمة",
+      admTitle:"البعد الإداري والتشغيلي",
+      admDesc:"رفع الكفاءة التشغيلية وبناء الحوكمة وأطر الامتثال.",
+      admPageBtnText:"افتح صفحة الخدمة",
+      grTitle:"بعد استراتيجية النمو",
+      grDesc:"خطط توسع وخارطة تحول رقمي لتعزيز التنافسية.",
+      grPageBtnText:"افتح صفحة الخدمة",
+
+      approachTitle:"منهجية العمل",
+      approachHint:"من التحدي → إلى أبعاد.",
+      m1:"كيف نعمل",
+      mList:["تشخيص التحديات","تصميم الأبعاد","تنفيذ موجّه","تأكيد التحول عبر مؤشرات (KPIs)"],
+      m2:"ماذا ستحصل عليه",
+      mText:"توثيق واضح، مخرجات جاهزة لأصحاب المصلحة، وتحسن قابل للقياس — متوافق مع المعايير الدولية ومبني للتنفيذ.",
+
+      contactTitle:"تواصل معنا",
+      contactHint:"لنصنع بُعدك القادم.",
+      contactH3:"بيانات التواصل",
+      contactP:"راسلنا لطلب عرض أو لتحديد اجتماع استكشافي.",
+      emailBtnText:"اطلب عرضًا",
+      callBtnText:"اتصال",
+      addr:"مبنى رقم 6، شارع مصطفى عناني، مصر الجديدة، القاهرة، مصر",
+
+      ctaTitle:"اتخذ الخطوة الأولى اليوم",
+      ctaText:"احجز جلسة استكشاف وابدأ رحلة التحول المؤسسي.",
+      ctaMini:"استجابة سريعة • تسليم احترافي • مخرجات جاهزة للمراجعة",
+
+      footName:"Future Dimensions",
+      footSub:"للاستشارات وحلول الأعمال",
+      copyText:"© Future Dimensions — جميع الحقوق محفوظة.",
+      fHome:"الرئيسية", fAbout:"من نحن", fServices:"الخدمات", fTeam:"فريق العمل", fCareers:"التوظيف", fContact:"تواصل معنا"
+    }
+  };
+
+  // ===== helpers =====
+  function setText(id, v){ const el=document.getElementById(id); if(el) el.textContent=v; }
+  function setList(id, items){
+    const ul=document.getElementById(id); if(!ul) return;
+    ul.innerHTML="";
+    items.forEach(x=>{ const li=document.createElement("li"); li.textContent=x; ul.appendChild(li); });
+  }
+
+  // ===== language persistence =====
+  let current = localStorage.getItem("fd_lang") || "en";
+
+  function applyLang(lang){
+    const c = i18n[lang];
+
+    document.documentElement.dir = c.dir;
+    document.documentElement.lang = c.lang;
+
+    setText("langToggle", c.toggle);
+    setText("mLangToggle", c.mLangToggle);
+
+    setText("navHome", c.navHome);
+    setText("navAbout", c.navAbout);
+    setText("navServicesBtn", c.navServicesBtn);
+    setText("navApproach", c.navApproach);
+    setText("navContact", c.navContact);
+    setText("navCta", c.navCta);
+
+    setText("mBrand", c.mBrand);
+    setText("mSub", c.mSub);
+    setText("mHome", c.mHome);
+    setText("mAbout", c.mAbout);
+    setText("mServicesTxt", c.mServicesTxt);
+    setText("mFin", c.mFin);
+    setText("mAdm", c.mAdm);
+    setText("mGr", c.mGr);
+    setText("mTeam", c.mTeam);
+    setText("mCareers", c.mCareers);
+    setText("mApproach", c.mApproach);
+    setText("mContact", c.mContact);
+    setText("mCta", c.mCta);
+
+    setText("ddFinancial", c.ddFinancial); setText("chip1", c.chip);
+    setText("ddAdminOps", c.ddAdminOps); setText("chip2", c.chip);
+    setText("ddGrowth", c.ddGrowth); setText("chip3", c.chip);
+
+    setText("heroTitle", c.heroTitle);
+    setText("heroText", c.heroText);
+    setText("heroBtnText", c.heroBtnText);
+    setText("heroServicesText", c.heroServicesText);
+
+    setText("whyTitle", c.whyTitle);
+    setList("whyList", c.whyList);
+    setText("miniNote", c.miniNote);
+
+    setText("aboutTitle", c.aboutTitle);
+    setText("aboutHint", c.aboutHint);
+    setText("aboutH3_1", c.aboutH3_1);
+    setText("aboutP1", c.aboutP1);
+    setText("aboutH3_2", c.aboutH3_2);
+    setList("aboutList", c.aboutList);
+    setText("taglineLine", c.taglineLine);
+
+    setText("servicesTitle", c.servicesTitle);
+    setText("servicesHint", c.servicesHint);
+
+    setText("finTitle", c.finTitle);
+    setText("finDesc", c.finDesc);
+    setText("finPageBtnText", c.finPageBtnText);
+
+    setText("admTitle", c.admTitle);
+    setText("admDesc", c.admDesc);
+    setText("admPageBtnText", c.admPageBtnText);
+
+    setText("grTitle", c.grTitle);
+    setText("grDesc", c.grDesc);
+    setText("grPageBtnText", c.grPageBtnText);
+
+    setText("approachTitle", c.approachTitle);
+    setText("approachHint", c.approachHint);
+    setText("m1", c.m1);
+    setList("mList", c.mList);
+    setText("m2", c.m2);
+    setText("mText", c.mText);
+
+    setText("contactTitle", c.contactTitle);
+    setText("contactHint", c.contactHint);
+    setText("contactH3", c.contactH3);
+    setText("contactP", c.contactP);
+    setText("emailBtnText", c.emailBtnText);
+    setText("callBtnText", c.callBtnText);
+    setText("addr", c.addr);
+
+    setText("ctaTitle", c.ctaTitle);
+    setText("ctaText", c.ctaText);
+    setText("ctaMini", c.ctaMini);
+
+    setText("footName", c.footName);
+    setText("footSub", c.footSub);
+    setText("copyText", c.copyText);
+
+    setText("fHome", c.fHome);
+    setText("fAbout", c.fAbout);
+    setText("fServices", c.fServices);
+    setText("fTeam", c.fTeam);
+    setText("fCareers", c.fCareers);
+    setText("fContact", c.fContact);
+
+    // bullets lists
+    renderList("finBullets", bullets[lang].fin);
+    renderList("admBullets", bullets[lang].adm);
+    renderList("grBullets", bullets[lang].gr);
+
+    // SEO
+    updateSEO(lang);
+
+    // Tooltips
+    document.getElementById("navTeam").title = (lang==="ar") ? "فريق العمل" : "Team";
+    document.getElementById("navCareers").title = (lang==="ar") ? "التوظيف" : "Careers";
+  }
+
+  function updateSEO(lang){
+    document.title = seo[lang].title;
+    setMeta("description", seo[lang].desc);
+    setOg("og:title", seo[lang].title);
+    setOg("og:description", seo[lang].desc);
+    setMeta("twitter:title", seo[lang].title);
+    setMeta("twitter:description", seo[lang].desc);
+  }
+  function setMeta(name, content){
+    let el=document.querySelector(`meta[name="${name}"]`);
+    if(!el){ el=document.createElement("meta"); el.setAttribute("name",name); document.head.appendChild(el); }
+    el.setAttribute("content",content);
+  }
+  function setOg(prop, content){
+    let el=document.querySelector(`meta[property="${prop}"]`);
+    if(!el){ el=document.createElement("meta"); el.setAttribute("property",prop); document.head.appendChild(el); }
+    el.setAttribute("content",content);
+  }
+
+  // Language toggle buttons (desktop + mobile)
+  function toggleLang(){
+    current = (current === "en") ? "ar" : "en";
+    localStorage.setItem("fd_lang", current);
+    applyLang(current);
+  }
+  document.getElementById("langToggle").addEventListener("click", toggleLang);
+  document.getElementById("mLangToggle").addEventListener("click", toggleLang);
+
+  // Initialize language
+  applyLang(current);
+
+  // Close mobile on hash navigation
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener("click", ()=>{
+      dd.classList.remove("open");
+      ddBtn.setAttribute("aria-expanded","false");
+    });
+  });
+
+  // Close mobile panel on ESC
+  document.addEventListener("keydown",(e)=>{
+    if(e.key === "Escape") closeMobile();
+  });
+</script>
+</body>
+</html>
