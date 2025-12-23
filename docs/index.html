@@ -4,31 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ✅ Google Search Console Verification -->
+  <!-- ✅ Google Search Console Verification (keep as-is if already verified) -->
   <meta name="google-site-verification" content="apPz_urNfcx8kFW" />
 
-  <!-- ✅ SEO -->
+  <!-- ✅ SEO (3 options) -->
+  <script>
+    // ✅ SEO_MODE:
+    // 1 = Minimal (Fast + Clean)
+    // 2 = Standard (Balanced - recommended)
+    // 3 = Strong (More keywords + broader coverage)
+    const SEO_MODE = 2;
+  </script>
+
   <title>Future Dimensions | Financial, Operational & Growth Consulting</title>
   <meta name="description" content="Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational Excellence, and Growth Strategy solutions with measurable impact." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.futuredimensionsco.com/" />
-  <link rel="alternate" href="https://www.futuredimensionsco.com/" hreflang="en" />
-  <link rel="alternate" href="https://www.futuredimensionsco.com/" hreflang="ar" />
-  <link rel="alternate" href="https://www.futuredimensionsco.com/" hreflang="x-default" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Future Dimensions" />
   <meta property="og:title" content="Future Dimensions | Consulting & Business Solutions" />
   <meta property="og:description" content="Financial • Administrative & Operational • Growth Strategy" />
   <meta property="og:url" content="https://www.futuredimensionsco.com/" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Future Dimensions | Consulting & Business Solutions" />
   <meta name="twitter:description" content="Integrated consulting firm delivering measurable impact." />
 
-  <!-- ✅ Favicon (no external file) -->
+  <!-- ✅ Favicon -->
   <link rel="icon" type="image/svg+xml"
         href='data:image/svg+xml;utf8,
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
@@ -75,7 +78,7 @@
       --gold2:#B8962E;
       --gold3:#F1D77A;
 
-      --teal:#2EC4B6;
+      --teal:#2EC4B6;         /* ✅ اللون الثالث (فاخر + مناسب للذهبي والكحلي) */
       --champ:#F5F1E6;
 
       --onDark:#F6F7FB;
@@ -273,7 +276,6 @@
     .mnav a:hover, .mnav button:hover{background:rgba(255,255,255,.10)}
     .mSub{
       display:none;
-      padding:0 0 0;
       margin-top:6px;
       gap:8px;
     }
@@ -405,6 +407,7 @@
       margin-bottom:14px;
     }
     .sectionTitle h2{margin:0;font-size:26px;letter-spacing:.2px;color: rgba(255,255,255,.92);}
+
     .sectionTitle p{margin:0;color:rgba(255,255,255,.68);font-weight:850;font-size:14px;}
 
     .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -524,6 +527,38 @@
       border-radius: 14px;
     }
 
+    /* ✅ "صفحات داخلية" داخل نفس index */
+    .pageSection{
+      scroll-margin-top:110px;
+    }
+
+    .pageHeader{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      margin-bottom:14px;
+    }
+    .pageHeader h2{
+      margin:0;font-size:28px;color:rgba(255,255,255,.92);
+      letter-spacing:.2px;
+    }
+    .pageHeader span{
+      font-size:12px;font-weight:950;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid rgba(212,175,55,.30);
+      background:rgba(212,175,55,.10);
+      color:rgba(255,255,255,.86);
+      white-space:nowrap;
+    }
+
+    .pillRow{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 0}
+    .pill{
+      padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(46,196,182,.28);
+      background:rgba(46,196,182,.10);
+      color:rgba(255,255,255,.86);
+      font-weight:900;
+      font-size:13px;
+    }
+
     @media(max-width:980px){
       .heroGrid,.grid2,.contactBox{grid-template-columns:1fr}
       .grid3{grid-template-columns:1fr}
@@ -533,7 +568,6 @@
       .footerGrid{grid-template-columns:1fr}
       .footerLinks{justify-content:flex-start}
 
-      /* Hide desktop menu on mobile, show burger */
       .menu{display:none}
       .burger{display:inline-flex}
     }
@@ -558,19 +592,20 @@
       <a href="#home" id="navHome" class="active">Home</a>
       <a href="#about" id="navAbout">About</a>
 
-      <!-- ✅ Services Dropdown -> Internal pages -->
+      <!-- ✅ Services Dropdown -> Sections inside same index -->
       <div class="dropdown" id="servicesDropdown">
         <button type="button" id="navServicesBtn" aria-haspopup="true" aria-expanded="false">Services ▾</button>
         <div class="dropMenu" role="menu" aria-label="Services menu">
-          <a href="financial.html" id="ddFinancial">Financial Dimension <span class="chip" id="chip1">Page</span></a>
-          <a href="administrative.html" id="ddAdminOps">Administrative & Operational <span class="chip" id="chip2">Page</span></a>
-          <a href="growth.html" id="ddGrowth">Growth Strategy <span class="chip" id="chip3">Page</span></a>
+          <a href="#financial" id="ddFinancial">Financial Dimension <span class="chip" id="chip1">Section</span></a>
+          <a href="#administrative" id="ddAdminOps">Administrative & Operational <span class="chip" id="chip2">Section</span></a>
+          <a href="#growth" id="ddGrowth">Growth Strategy <span class="chip" id="chip3">Section</span></a>
+          <a href="#services" id="ddBackServices">Overview <span class="chip" id="chip4">Cards</span></a>
         </div>
       </div>
 
-      <!-- ✅ Additional pages (icons only) -->
-      <a href="team.html" id="navTeam" title="Team">👥</a>
-      <a href="careers.html" id="navCareers" title="Careers">💼</a>
+      <!-- ✅ Additional pages titles in header (icons optional) -->
+      <a href="#team" id="navTeam" title="Team">👥</a>
+      <a href="#careers" id="navCareers" title="Careers">💼</a>
 
       <a href="#approach" id="navApproach">Approach</a>
       <a href="#contact" id="navContact">Contact</a>
@@ -609,13 +644,14 @@
         <span>▾</span>
       </button>
       <div class="mSub" id="mServicesSub">
-        <a href="financial.html" id="mFin">Financial Dimension</a>
-        <a href="administrative.html" id="mAdm">Administrative & Operational</a>
-        <a href="growth.html" id="mGr">Growth Strategy</a>
+        <a href="#financial" id="mFin">Financial Dimension</a>
+        <a href="#administrative" id="mAdm">Administrative & Operational</a>
+        <a href="#growth" id="mGr">Growth Strategy</a>
+        <a href="#services" id="mSrv">Services Overview</a>
       </div>
 
-      <a href="team.html" id="mTeam">Team</a>
-      <a href="careers.html" id="mCareers">Careers</a>
+      <a href="#team" id="mTeam">Team</a>
+      <a href="#careers" id="mCareers">Careers</a>
 
       <a href="#approach" id="mApproach">Approach</a>
       <a href="#contact" id="mContact">Contact</a>
@@ -682,6 +718,13 @@
             Future Dimensions is a consulting partner that blends financial expertise, operational excellence,
             and growth strategy to build resilient organizations and sustainable results.
           </p>
+
+          <div class="pillRow">
+            <span class="pill" id="p1">Financial</span>
+            <span class="pill" id="p2">Operational</span>
+            <span class="pill" id="p3">Growth</span>
+            <span class="pill" id="p4">Governance</span>
+          </div>
         </div>
 
         <div class="card">
@@ -696,55 +739,181 @@
     </div>
   </section>
 
-  <!-- SERVICES -->
+  <!-- SERVICES (overview cards) -->
   <section id="services">
     <div class="wrap">
       <div class="sectionTitle">
         <h2 id="servicesTitle">Our Services</h2>
-        <p id="servicesHint">Explore full details inside each service page.</p>
+        <p id="servicesHint">Explore full details inside each service section below.</p>
       </div>
 
       <div class="grid3">
-        <!-- Financial -->
         <div class="card">
           <h3 id="finTitle">Financial Dimension</h3>
           <p id="finDesc">Financial diagnostics, profitability improvement, and IFRS-focused advisory.</p>
-
           <div class="serviceActions">
-            <a class="slink primary" href="financial.html" id="finPageBtn">
-              <span class="ic"></span><span id="finPageBtnText">Open Service Page</span>
+            <a class="slink primary" href="#financial" id="finPageBtn">
+              <span class="ic"></span><span id="finPageBtnText">Open Service</span>
             </a>
           </div>
-
           <ul id="finBullets"></ul>
         </div>
 
-        <!-- Admin & Ops -->
         <div class="card">
           <h3 id="admTitle">Administrative & Operational Dimension</h3>
           <p id="admDesc">Operational excellence, governance frameworks, and compliance structures.</p>
-
           <div class="serviceActions">
-            <a class="slink primary" href="administrative.html" id="admPageBtn">
-              <span class="ic"></span><span id="admPageBtnText">Open Service Page</span>
+            <a class="slink primary" href="#administrative" id="admPageBtn">
+              <span class="ic"></span><span id="admPageBtnText">Open Service</span>
             </a>
           </div>
-
           <ul id="admBullets"></ul>
         </div>
 
-        <!-- Growth -->
         <div class="card">
           <h3 id="grTitle">Growth Strategy Dimension</h3>
           <p id="grDesc">Expansion planning and digital transformation roadmaps.</p>
-
           <div class="serviceActions">
-            <a class="slink primary" href="growth.html" id="grPageBtn">
-              <span class="ic"></span><span id="grPageBtnText">Open Service Page</span>
+            <a class="slink primary" href="#growth" id="grPageBtn">
+              <span class="ic"></span><span id="grPageBtnText">Open Service</span>
             </a>
           </div>
-
           <ul id="grBullets"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Internal "Pages" as Sections (Financial / Admin / Growth) -->
+  <section id="financial" class="pageSection">
+    <div class="wrap">
+      <div class="pageHeader">
+        <h2 id="finPageTitle">Financial Dimension</h2>
+        <span id="finPageTag">Internal Page</span>
+      </div>
+
+      <div class="grid2">
+        <div class="sideCard">
+          <h3 id="finPageH3">What we solve</h3>
+          <ul id="finSolve"></ul>
+          <div class="mini" id="finMini">IFRS-ready • KPI-driven • Decision support</div>
+        </div>
+
+        <div class="card">
+          <h3 id="finPageH32">Key Services</h3>
+          <ul id="finPageList"></ul>
+          <div class="serviceActions">
+            <a class="slink primary" href="#contact"><span class="ic"></span><span id="finCTA">Request Financial Proposal</span></a>
+            <a class="slink" href="#services"><span class="ic"></span><span id="backSrv1">Back to Services</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="administrative" class="pageSection">
+    <div class="wrap">
+      <div class="pageHeader">
+        <h2 id="admPageTitle">Administrative & Operational Dimension</h2>
+        <span id="admPageTag">Internal Page</span>
+      </div>
+
+      <div class="grid2">
+        <div class="sideCard">
+          <h3 id="admPageH3">What we improve</h3>
+          <ul id="admImprove"></ul>
+          <div class="mini" id="admMini">Governance • ISO-ready • Process excellence</div>
+        </div>
+
+        <div class="card">
+          <h3 id="admPageH32">Key Services</h3>
+          <ul id="admPageList"></ul>
+          <div class="serviceActions">
+            <a class="slink primary" href="#contact"><span class="ic"></span><span id="admCTA">Request Operational Proposal</span></a>
+            <a class="slink" href="#services"><span class="ic"></span><span id="backSrv2">Back to Services</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="growth" class="pageSection">
+    <div class="wrap">
+      <div class="pageHeader">
+        <h2 id="grPageTitle">Growth Strategy Dimension</h2>
+        <span id="grPageTag">Internal Page</span>
+      </div>
+
+      <div class="grid2">
+        <div class="sideCard">
+          <h3 id="grPageH3">What we enable</h3>
+          <ul id="grEnable"></ul>
+          <div class="mini" id="grMini">Market entry • Digital roadmap • Execution</div>
+        </div>
+
+        <div class="card">
+          <h3 id="grPageH32">Key Services</h3>
+          <ul id="grPageList"></ul>
+          <div class="serviceActions">
+            <a class="slink primary" href="#contact"><span class="ic"></span><span id="grCTA">Request Growth Proposal</span></a>
+            <a class="slink" href="#services"><span class="ic"></span><span id="backSrv3">Back to Services</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Team Section -->
+  <section id="team" class="pageSection">
+    <div class="wrap">
+      <div class="pageHeader">
+        <h2 id="teamTitle">Team</h2>
+        <span id="teamTag">Internal Page</span>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3 id="teamH3">Our Experts</h3>
+          <p id="teamP">A multidisciplinary team combining financial leadership, operational excellence, and strategy execution.</p>
+          <ul id="teamList"></ul>
+        </div>
+
+        <div class="sideCard">
+          <h3 id="teamH32">How we collaborate</h3>
+          <ul id="teamCollab"></ul>
+          <div class="mini" id="teamMini">Stakeholder-ready • Confidential • Results-driven</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Careers Section -->
+  <section id="careers" class="pageSection">
+    <div class="wrap">
+      <div class="pageHeader">
+        <h2 id="careersTitle">Careers</h2>
+        <span id="careersTag">Internal Page</span>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3 id="careersH3">Join Future Dimensions</h3>
+          <p id="careersP">Send your CV and a short introduction. We review applications continuously.</p>
+
+          <div class="serviceActions" style="margin-top:14px">
+            <a class="slink primary" href="mailto:info@futuredimensionsco.com?subject=Career%20Application%20-%20Future%20Dimensions" id="careerEmail">
+              <span class="ic"></span><span id="careerEmailText">Apply via Email</span>
+            </a>
+            <a class="slink" href="#contact"><span class="ic"></span><span id="careerContact">Contact Us</span></a>
+          </div>
+
+          <ul id="careersList"></ul>
+        </div>
+
+        <div class="sideCard">
+          <h3 id="careersH32">What we look for</h3>
+          <ul id="careersNeed"></ul>
+          <div class="mini" id="careersMini">Professional • Ethical • Execution-focused</div>
         </div>
       </div>
     </div>
@@ -837,8 +1006,8 @@
           <a href="#home" id="fHome">Home</a>
           <a href="#about" id="fAbout">About</a>
           <a href="#services" id="fServices">Services</a>
-          <a href="team.html" id="fTeam">Team</a>
-          <a href="careers.html" id="fCareers">Careers</a>
+          <a href="#team" id="fTeam">Team</a>
+          <a href="#careers" id="fCareers">Careers</a>
           <a href="#contact" id="fContact">Contact</a>
         </div>
       </div>
@@ -848,7 +1017,7 @@
 
 <script>
   // Header scroll effect
-  window.addEventListener("scroll",()=>{
+  window.addEventListener("scroll",()=> {
     document.querySelector("header").classList.toggle("scrolled", window.scrollY > 10);
   });
 
@@ -891,17 +1060,38 @@
     a.addEventListener("click", ()=> closeMobile());
   });
 
-  // ===== SEO per language =====
+  // ✅ SEO options (3 modes) + language
   const seo = {
     en:{
-      title:"Future Dimensions | Financial, Operational & Growth Consulting",
-      desc:"Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational Excellence, and Growth Strategy solutions with measurable impact."
+      1:{
+        title:"Future Dimensions | Consulting",
+        desc:"Integrated consulting firm delivering measurable impact."
+      },
+      2:{
+        title:"Future Dimensions | Financial, Operational & Growth Consulting",
+        desc:"Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational Excellence, and Growth Strategy solutions with measurable impact."
+      },
+      3:{
+        title:"Future Dimensions | Financial Advisory, Operational Excellence & Growth Strategy",
+        desc:"Future Dimensions delivers financial diagnostics, profitability improvement, governance & compliance frameworks, operational excellence, and growth & digital transformation roadmaps with measurable results."
+      }
     },
     ar:{
-      title:"Future Dimensions | استشارات مالية وإدارية واستراتيجيات نمو",
-      desc:"تقدم Future Dimensions خدمات استشارية متكاملة تشمل البعد المالي والبعد الإداري والتشغيلي واستراتيجيات النمو والتحول، بمخرجات احترافية قابلة للتنفيذ ونتائج قابلة للقياس."
+      1:{
+        title:"Future Dimensions | استشارات",
+        desc:"شركة استشارات متكاملة بنتائج قابلة للقياس."
+      },
+      2:{
+        title:"Future Dimensions | استشارات مالية وإدارية واستراتيجيات نمو",
+        desc:"تقدم Future Dimensions خدمات استشارية متكاملة تشمل البعد المالي والبعد الإداري والتشغيلي واستراتيجيات النمو والتحول، بمخرجات قابلة للتنفيذ ونتائج قابلة للقياس."
+      },
+      3:{
+        title:"Future Dimensions | تشخيص مالي وحوكمة وامتثال وتحسين تشغيلي واستراتيجية نمو",
+        desc:"نقدم تشخيصًا ماليًا وتحسين ربحية وترشيد تكاليف، وأطر حوكمة وامتثال، وتحسين عمليات وكفاءة تشغيلية، وخطط توسع وتحول رقمي بخارطة تنفيذ واضحة."
+      }
     }
   };
+
   function setMeta(name, content){
     let el=document.querySelector(`meta[name="${name}"]`);
     if(!el){ el=document.createElement("meta"); el.setAttribute("name",name); document.head.appendChild(el); }
@@ -913,12 +1103,13 @@
     el.setAttribute("content",content);
   }
   function updateSEO(lang){
-    document.title = seo[lang].title;
-    setMeta("description", seo[lang].desc);
-    setOg("og:title", seo[lang].title);
-    setOg("og:description", seo[lang].desc);
-    setMeta("twitter:title", seo[lang].title);
-    setMeta("twitter:description", seo[lang].desc);
+    const pack = seo[lang][SEO_MODE] || seo[lang][2];
+    document.title = pack.title;
+    setMeta("description", pack.desc);
+    setOg("og:title", pack.title);
+    setOg("og:description", pack.desc);
+    setMeta("twitter:title", pack.title);
+    setMeta("twitter:description", pack.desc);
   }
 
   // ===== Service bullets (EN + AR) =====
@@ -1004,12 +1195,11 @@
       navHome:"Home",
       navAbout:"About",
       navServicesBtn:"Services ▾",
-      chip:"Page",
+      chip:"Section",
       navApproach:"Approach",
       navContact:"Contact",
       navCta:"Get a Proposal",
 
-      // Mobile
       mBrand:"FUTURE DIMENSIONS",
       mSub:"CONSULTING",
       mHome:"Home",
@@ -1018,6 +1208,7 @@
       mFin:"Financial Dimension",
       mAdm:"Administrative & Operational",
       mGr:"Growth Strategy",
+      mSrv:"Services Overview",
       mTeam:"Team",
       mCareers:"Careers",
       mApproach:"Approach",
@@ -1028,6 +1219,7 @@
       ddFinancial:"Financial Dimension",
       ddAdminOps:"Administrative & Operational",
       ddGrowth:"Growth Strategy",
+      ddBackServices:"Overview",
 
       heroTitle:"Enter with Challenges – Exit with New Dimensions",
       heroText:"Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational, and Growth Strategy solutions with measurable impact — locally and globally.",
@@ -1056,16 +1248,100 @@
       taglineLine:"We don’t just advise — we build dimensions that last.",
 
       servicesTitle:"Our Services",
-      servicesHint:"Explore full details inside each service page.",
+      servicesHint:"Explore full details inside each service section below.",
       finTitle:"Financial Dimension",
       finDesc:"Financial diagnostics, profitability improvement, and IFRS-focused advisory.",
-      finPageBtnText:"Open Service Page",
+      finPageBtnText:"Open Service",
+
       admTitle:"Administrative & Operational Dimension",
       admDesc:"Operational excellence, governance frameworks, and compliance structures.",
-      admPageBtnText:"Open Service Page",
+      admPageBtnText:"Open Service",
+
       grTitle:"Growth Strategy Dimension",
       grDesc:"Expansion planning and digital transformation roadmaps.",
-      grPageBtnText:"Open Service Page",
+      grPageBtnText:"Open Service",
+
+      // Pages
+      finPageTitle:"Financial Dimension",
+      finPageTag:"Internal Page",
+      finPageH3:"What we solve",
+      finSolve:[
+        "Profit leaks & cost structure issues",
+        "Financial reporting gaps & control weaknesses",
+        "Budgeting and planning inconsistencies",
+        "IFRS-focused advisory (IAS 19 / IFRS 9)"
+      ],
+      finMini:"IFRS-ready • KPI-driven • Decision support",
+      finPageH32:"Key Services",
+      finCTA:"Request Financial Proposal",
+      backSrv1:"Back to Services",
+
+      admPageTitle:"Administrative & Operational Dimension",
+      admPageTag:"Internal Page",
+      admPageH3:"What we improve",
+      admImprove:[
+        "Process efficiency and cycle time reduction",
+        "Governance structures and accountability",
+        "Policy, procedure and SOP standardization",
+        "Quality & risk management systems"
+      ],
+      admMini:"Governance • ISO-ready • Process excellence",
+      admPageH32:"Key Services",
+      admCTA:"Request Operational Proposal",
+      backSrv2:"Back to Services",
+
+      grPageTitle:"Growth Strategy Dimension",
+      grPageTag:"Internal Page",
+      grPageH3:"What we enable",
+      grEnable:[
+        "Market entry & expansion planning",
+        "Growth opportunities validation",
+        "Digital transformation roadmap",
+        "Tech assessment and execution support"
+      ],
+      grMini:"Market entry • Digital roadmap • Execution",
+      grPageH32:"Key Services",
+      grCTA:"Request Growth Proposal",
+      backSrv3:"Back to Services",
+
+      teamTitle:"Team",
+      teamTag:"Internal Page",
+      teamH3:"Our Experts",
+      teamP:"A multidisciplinary team combining financial leadership, operational excellence, and strategy execution.",
+      teamList:[
+        "Financial Advisory & IFRS Specialists",
+        "Internal Audit & Risk Professionals",
+        "Operational Excellence & Process Experts",
+        "Growth Strategy & Digital Transformation Leads"
+      ],
+      teamH32:"How we collaborate",
+      teamCollab:[
+        "Confidential assessment and diagnosis",
+        "Stakeholder workshops & alignment",
+        "Execution support with measurable KPIs",
+        "Documentation ready for governance & audit"
+      ],
+      teamMini:"Stakeholder-ready • Confidential • Results-driven",
+
+      careersTitle:"Careers",
+      careersTag:"Internal Page",
+      careersH3:"Join Future Dimensions",
+      careersP:"Send your CV and a short introduction. We review applications continuously.",
+      careerEmailText:"Apply via Email",
+      careerContact:"Contact Us",
+      careersList:[
+        "Email: info@futuredimensionsco.com",
+        "Subject suggestion: Career Application – Your Name – Role",
+        "Attach: CV + Portfolio (if applicable)"
+      ],
+      careersH32:"What we look for",
+      careersNeed:[
+        "Strong ethics and professionalism",
+        "Analytical mindset & structured thinking",
+        "Clear communication and stakeholder management",
+        "Execution focus and ownership"
+      ],
+      careersMini:"Professional • Ethical • Execution-focused",
 
       approachTitle:"Our Methodology",
       approachHint:"From challenge → to dimensions.",
@@ -1098,12 +1374,11 @@
       navHome:"الرئيسية",
       navAbout:"من نحن",
       navServicesBtn:"الخدمات ▾",
-      chip:"صفحة",
+      chip:"قسم",
       navApproach:"منهجيتنا",
       navContact:"تواصل معنا",
       navCta:"اطلب عرضًا",
 
-      // Mobile
       mBrand:"Future Dimensions",
       mSub:"CONSULTING",
       mHome:"الرئيسية",
@@ -1112,6 +1387,7 @@
       mFin:"البعد المالي",
       mAdm:"البعد الإداري والتشغيلي",
       mGr:"بعد استراتيجية النمو",
+      mSrv:"نظرة عامة للخدمات",
       mTeam:"فريق العمل",
       mCareers:"التوظيف",
       mApproach:"منهجيتنا",
@@ -1122,6 +1398,7 @@
       ddFinancial:"البعد المالي",
       ddAdminOps:"البعد الإداري والتشغيلي",
       ddGrowth:"بعد استراتيجية النمو",
+      ddBackServices:"نظرة عامة",
 
       heroTitle:"ادخل بالتحديات – واخرج بأبعاد جديدة",
       heroText:"Future Dimensions شركة استشارات متكاملة تقدم حلولًا في البعد المالي والبعد الإداري والتشغيلي واستراتيجيات النمو بنتائج قابلة للقياس — محليًا وعالميًا.",
@@ -1150,16 +1427,100 @@
       taglineLine:"نحن لا نقدم رأيًا فقط — نحن نبني أبعادًا تدوم.",
 
       servicesTitle:"خدماتنا",
-      servicesHint:"اطّلع على التفاصيل الكاملة داخل صفحات الخدمات.",
+      servicesHint:"اطّلع على التفاصيل الكاملة داخل الأقسام بالأسفل.",
       finTitle:"البعد المالي",
       finDesc:"تشخيص مالي شامل، تحسين ربحية، واستشارات متوافقة مع المعايير الدولية.",
-      finPageBtnText:"افتح صفحة الخدمة",
+      finPageBtnText:"افتح الخدمة",
+
       admTitle:"البعد الإداري والتشغيلي",
       admDesc:"رفع الكفاءة التشغيلية وبناء الحوكمة وأطر الامتثال.",
-      admPageBtnText:"افتح صفحة الخدمة",
+      admPageBtnText:"افتح الخدمة",
+
       grTitle:"بعد استراتيجية النمو",
       grDesc:"خطط توسع وخارطة تحول رقمي لتعزيز التنافسية.",
-      grPageBtnText:"افتح صفحة الخدمة",
+      grPageBtnText:"افتح الخدمة",
+
+      // Pages
+      finPageTitle:"البعد المالي",
+      finPageTag:"صفحة داخلية",
+      finPageH3:"ما الذي نعالجه؟",
+      finSolve:[
+        "تسريبات الربحية وهيكل التكاليف",
+        "فجوات التقارير المالية وضعف الرقابة",
+        "تباينات التخطيط والموازنات",
+        "استشارات معايير (IAS 19 / IFRS 9)"
+      ],
+      finMini:"جاهزية IFRS • مؤشرات أداء • دعم قرار",
+      finPageH32:"الخدمات الرئيسية",
+      finCTA:"اطلب عرضًا ماليًا",
+      backSrv1:"رجوع للخدمات",
+
+      admPageTitle:"البعد الإداري والتشغيلي",
+      admPageTag:"صفحة داخلية",
+      admPageH3:"ما الذي نُحسّنه؟",
+      admImprove:[
+        "رفع كفاءة العمليات وتقليل زمن الدورة",
+        "تطوير الحوكمة والمسؤوليات",
+        "توحيد السياسات والإجراءات و(SOPs)",
+        "نظم الجودة وإدارة المخاطر"
+      ],
+      admMini:"حوكمة • جاهزية ISO • تميّز تشغيلي",
+      admPageH32:"الخدمات الرئيسية",
+      admCTA:"اطلب عرضًا تشغيليًا",
+      backSrv2:"رجوع للخدمات",
+
+      grPageTitle:"بعد استراتيجية النمو",
+      grPageTag:"صفحة داخلية",
+      grPageH3:"ما الذي نمكّنه؟",
+      grEnable:[
+        "التوسع والدخول إلى أسواق جديدة",
+        "التحقق من فرص نمو وقياس جدواها",
+        "خارطة تحول رقمي قابلة للتنفيذ",
+        "تقييم الأنظمة التقنية ودعم التنفيذ"
+      ],
+      grMini:"توسع • تحول رقمي • تنفيذ",
+      grPageH32:"الخدمات الرئيسية",
+      grCTA:"اطلب عرضًا للنمو",
+      backSrv3:"رجوع للخدمات",
+
+      teamTitle:"فريق العمل",
+      teamTag:"صفحة داخلية",
+      teamH3:"خبراتنا",
+      teamP:"فريق متعدد التخصصات يجمع القيادة المالية والتميز التشغيلي وتنفيذ الاستراتيجية.",
+      teamList:[
+        "خبراء الاستشارات المالية ومعايير IFRS",
+        "متخصصو المراجعة الداخلية وإدارة المخاطر",
+        "خبراء تحسين العمليات والتميز التشغيلي",
+        "قادة استراتيجية النمو والتحول الرقمي"
+      ],
+      teamH32:"كيف نعمل معكم؟",
+      teamCollab:[
+        "تشخيص سري ودقيق للوضع الحالي",
+        "ورش عمل وتوافق أصحاب المصلحة",
+        "دعم تنفيذ بمؤشرات قياس واضحة",
+        "توثيق جاهز للحوكمة والمراجعة"
+      ],
+      teamMini:"جاهز لأصحاب المصلحة • سرية • نتائج",
+
+      careersTitle:"التوظيف",
+      careersTag:"صفحة داخلية",
+      careersH3:"انضم إلى Future Dimensions",
+      careersP:"أرسل سيرتك الذاتية وتعريفًا مختصرًا، ويتم مراجعة الطلبات باستمرار.",
+      careerEmailText:"التقديم عبر البريد",
+      careerContact:"تواصل معنا",
+      careersList:[
+        "البريد الرسمي: info@futuredimensionsco.com",
+        "عنوان مقترح: طلب توظيف – الاسم – المسمى",
+        "المرفقات: CV + Portfolio (إن وجد)"
+      ],
+      careersH32:"ما الذي نبحث عنه؟",
+      careersNeed:[
+        "احترافية وأخلاقيات عالية",
+        "تفكير تحليلي ومنهجي",
+        "تواصل واضح وإدارة أصحاب مصلحة",
+        "تركيز على التنفيذ وتملك المسؤولية"
+      ],
+      careersMini:"احترافي • أخلاقي • تنفيذي",
 
       approachTitle:"منهجية العمل",
       approachHint:"من التحدي → إلى أبعاد.",
@@ -1187,7 +1548,6 @@
     }
   };
 
-  // ===== helpers =====
   function setText(id, v){ const el=document.getElementById(id); if(el) el.textContent=v; }
   function setList(id, items){
     const ul=document.getElementById(id); if(!ul) return;
@@ -1200,13 +1560,14 @@
 
   function applyLang(lang){
     const c = i18n[lang];
-
     document.documentElement.dir = c.dir;
     document.documentElement.lang = c.lang;
 
+    // Top buttons
     setText("langToggle", c.toggle);
     setText("mLangToggle", c.mLangToggle);
 
+    // Nav
     setText("navHome", c.navHome);
     setText("navAbout", c.navAbout);
     setText("navServicesBtn", c.navServicesBtn);
@@ -1214,6 +1575,7 @@
     setText("navContact", c.navContact);
     setText("navCta", c.navCta);
 
+    // Mobile
     setText("mBrand", c.mBrand);
     setText("mSub", c.mSub);
     setText("mHome", c.mHome);
@@ -1222,25 +1584,31 @@
     setText("mFin", c.mFin);
     setText("mAdm", c.mAdm);
     setText("mGr", c.mGr);
+    setText("mSrv", c.mSrv);
     setText("mTeam", c.mTeam);
     setText("mCareers", c.mCareers);
     setText("mApproach", c.mApproach);
     setText("mContact", c.mContact);
     setText("mCta", c.mCta);
 
+    // Dropdown
     setText("ddFinancial", c.ddFinancial); setText("chip1", c.chip);
     setText("ddAdminOps", c.ddAdminOps); setText("chip2", c.chip);
     setText("ddGrowth", c.ddGrowth); setText("chip3", c.chip);
+    setText("ddBackServices", c.ddBackServices); setText("chip4", c.chip);
 
+    // Hero
     setText("heroTitle", c.heroTitle);
     setText("heroText", c.heroText);
     setText("heroBtnText", c.heroBtnText);
     setText("heroServicesText", c.heroServicesText);
 
+    // Why
     setText("whyTitle", c.whyTitle);
     setList("whyList", c.whyList);
     setText("miniNote", c.miniNote);
 
+    // About
     setText("aboutTitle", c.aboutTitle);
     setText("aboutHint", c.aboutHint);
     setText("aboutH3_1", c.aboutH3_1);
@@ -1249,21 +1617,70 @@
     setList("aboutList", c.aboutList);
     setText("taglineLine", c.taglineLine);
 
+    // Services cards
     setText("servicesTitle", c.servicesTitle);
     setText("servicesHint", c.servicesHint);
-
     setText("finTitle", c.finTitle);
     setText("finDesc", c.finDesc);
     setText("finPageBtnText", c.finPageBtnText);
-
     setText("admTitle", c.admTitle);
     setText("admDesc", c.admDesc);
     setText("admPageBtnText", c.admPageBtnText);
-
     setText("grTitle", c.grTitle);
     setText("grDesc", c.grDesc);
     setText("grPageBtnText", c.grPageBtnText);
 
+    // “Internal pages”
+    setText("finPageTitle", c.finPageTitle);
+    setText("finPageTag", c.finPageTag);
+    setText("finPageH3", c.finPageH3);
+    setList("finSolve", c.finSolve);
+    setText("finMini", c.finMini);
+    setText("finPageH32", c.finPageH32);
+    setText("finCTA", c.finCTA);
+    setText("backSrv1", c.backSrv1);
+
+    setText("admPageTitle", c.admPageTitle);
+    setText("admPageTag", c.admPageTag);
+    setText("admPageH3", c.admPageH3);
+    setList("admImprove", c.admImprove);
+    setText("admMini", c.admMini);
+    setText("admPageH32", c.admPageH32);
+    setText("admCTA", c.admCTA);
+    setText("backSrv2", c.backSrv2);
+
+    setText("grPageTitle", c.grPageTitle);
+    setText("grPageTag", c.grPageTag);
+    setText("grPageH3", c.grPageH3);
+    setList("grEnable", c.grEnable);
+    setText("grMini", c.grMini);
+    setText("grPageH32", c.grPageH32);
+    setText("grCTA", c.grCTA);
+    setText("backSrv3", c.backSrv3);
+
+    // Team
+    setText("teamTitle", c.teamTitle);
+    setText("teamTag", c.teamTag);
+    setText("teamH3", c.teamH3);
+    setText("teamP", c.teamP);
+    setList("teamList", c.teamList);
+    setText("teamH32", c.teamH32);
+    setList("teamCollab", c.teamCollab);
+    setText("teamMini", c.teamMini);
+
+    // Careers
+    setText("careersTitle", c.careersTitle);
+    setText("careersTag", c.careersTag);
+    setText("careersH3", c.careersH3);
+    setText("careersP", c.careersP);
+    setText("careerEmailText", c.careerEmailText);
+    setText("careerContact", c.careerContact);
+    setList("careersList", c.careersList);
+    setText("careersH32", c.careersH32);
+    setList("careersNeed", c.careersNeed);
+    setText("careersMini", c.careersMini);
+
+    // Approach
     setText("approachTitle", c.approachTitle);
     setText("approachHint", c.approachHint);
     setText("m1", c.m1);
@@ -1271,6 +1688,7 @@
     setText("m2", c.m2);
     setText("mText", c.mText);
 
+    // Contact
     setText("contactTitle", c.contactTitle);
     setText("contactHint", c.contactHint);
     setText("contactH3", c.contactH3);
@@ -1283,10 +1701,10 @@
     setText("ctaText", c.ctaText);
     setText("ctaMini", c.ctaMini);
 
+    // Footer
     setText("footName", c.footName);
     setText("footSub", c.footSub);
     setText("copyText", c.copyText);
-
     setText("fHome", c.fHome);
     setText("fAbout", c.fAbout);
     setText("fServices", c.fServices);
@@ -1294,10 +1712,15 @@
     setText("fCareers", c.fCareers);
     setText("fContact", c.fContact);
 
-    // bullets lists
+    // Bullets (fix: Arabic services translation always present)
     renderList("finBullets", bullets[lang].fin);
     renderList("admBullets", bullets[lang].adm);
     renderList("grBullets", bullets[lang].gr);
+
+    // “Key Services” lists in internal pages (reuse bullets)
+    renderList("finPageList", bullets[lang].fin);
+    renderList("admPageList", bullets[lang].adm);
+    renderList("grPageList", bullets[lang].gr);
 
     // SEO
     updateSEO(lang);
@@ -1307,26 +1730,6 @@
     document.getElementById("navCareers").title = (lang==="ar") ? "التوظيف" : "Careers";
   }
 
-  function updateSEO(lang){
-    document.title = seo[lang].title;
-    setMeta("description", seo[lang].desc);
-    setOg("og:title", seo[lang].title);
-    setOg("og:description", seo[lang].desc);
-    setMeta("twitter:title", seo[lang].title);
-    setMeta("twitter:description", seo[lang].desc);
-  }
-  function setMeta(name, content){
-    let el=document.querySelector(`meta[name="${name}"]`);
-    if(!el){ el=document.createElement("meta"); el.setAttribute("name",name); document.head.appendChild(el); }
-    el.setAttribute("content",content);
-  }
-  function setOg(prop, content){
-    let el=document.querySelector(`meta[property="${prop}"]`);
-    if(!el){ el=document.createElement("meta"); el.setAttribute("property",prop); document.head.appendChild(el); }
-    el.setAttribute("content",content);
-  }
-
-  // Language toggle buttons (desktop + mobile)
   function toggleLang(){
     current = (current === "en") ? "ar" : "en";
     localStorage.setItem("fd_lang", current);
@@ -1335,21 +1738,19 @@
   document.getElementById("langToggle").addEventListener("click", toggleLang);
   document.getElementById("mLangToggle").addEventListener("click", toggleLang);
 
-  // Initialize language
-  applyLang(current);
-
-  // Close mobile on hash navigation
+  // Close dropdown on any link click
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener("click", ()=>{
+    a.addEventListener("click", ()=> {
       dd.classList.remove("open");
       ddBtn.setAttribute("aria-expanded","false");
     });
   });
 
   // Close mobile panel on ESC
-  document.addEventListener("keydown",(e)=>{
-    if(e.key === "Escape") closeMobile();
-  });
+  document.addEventListener("keydown",(e)=>{ if(e.key === "Escape") closeMobile(); });
+
+  // Init
+  applyLang(current);
 </script>
 </body>
 </html>
