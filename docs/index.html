@@ -4,893 +4,260 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Future Dimensions | Consulting & Business Solutions</title>
-  <meta name="description" content="Future Dimensions – Consulting & Business Solutions. Actuarial Valuation (IAS 19), IFRS 9 ECL, Financial & Growth consulting." />
+  <meta name="description" content="Future Dimensions – Consulting & Business Solutions. IAS 19, IFRS 9 ECL, Financial & Growth Consulting." />
 
-     <style>
-    :root{
-      /* Navy background, gold sections */
-      --gold: #D4AF37;
-      --gold2:#B8962E;
-      --gold3:#F9E089;
+  <!-- SEO / Social -->
+  <meta property="og:title" content="Future Dimensions | Consulting & Business Solutions">
+  <meta property="og:description" content="Actuarial Valuation (IAS 19), IFRS 9 ECL, and business transformation with audit-ready deliverables.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.futuredimensionsco.com/">
+  <meta property="og:image" content="https://www.futuredimensionsco.com/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
-      --navy:#02152B;
-      --navy2:#0B243D;
-      --navySoft:#07162b;
+<style>
+:root{
+  --gold:#D4AF37;
+  --gold2:#B8962E;
+  --gold3:#F1D77A;
 
-      --text:#111;
-      --textOnDark:#FDF8DC;
-      --mutedOnDark:#3a3a3a;
+  --navy:#0F1B2D;
+  --navy2:#132642;
 
-      --border: rgba(0,0,0,.35);
-      --borderGold: rgba(212,175,55,.85);
-      --shadowSoft: 0 18px 45px rgba(0,0,0,.45);
-      --shadowCard: 0 22px 48px rgba(0,0,0,.75);
-      --radius: 18px;
-      --max: 1120px;
-    }
+  --black:#0A0A0A;
+  --text:#101820;
+  --textOnDark:#F7F7F7;
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Kufi Arabic","Noto Sans Arabic", sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 800px at 20% 0%, rgba(8,30,70,.6) 0%, rgba(8,30,70,0) 55%),
-        linear-gradient(180deg, #020816 0%, #07162b 40%, #020816 100%);
-      overflow-x:hidden;
-    }
+  --radius:18px;
+  --shadow:0 18px 45px rgba(0,0,0,.18);
+  --max:1120px;
+}
 
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+*{box-sizing:border-box}
 
-    /* ===== Top & bottom frames ===== */
-    .frame-top,
-    .frame-bottom{
-      height:10px;
-      background:linear-gradient(90deg, #000 0%, var(--navy) 25%, #000 55%, var(--navy2) 80%, #000 100%);
-    }
-    .frame-bottom{height:12px;}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(900px 500px at 10% 0%, rgba(212,175,55,.18), rgba(212,175,55,0) 60%),
+    radial-gradient(900px 500px at 90% 20%, rgba(15,27,45,.12), rgba(15,27,45,0) 55%),
+    linear-gradient(180deg,#fbfbfc,#f3f4f7);
+  color:var(--text);
+}
 
-    /* ===== Header / Navbar ===== */
-    header{
-      position:sticky;top:0;z-index:50;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(90deg, rgba(2,21,43,.96), rgba(3,32,63,.96));
-      border-bottom:1px solid var(--borderGold);
-      box-shadow: 0 12px 25px rgba(0,0,0,.55);
-    }
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;
-      padding:12px 0;
-      flex-wrap:wrap;
-    }
-    .brand{
-      display:flex;align-items:center;gap:14px;
-      min-width:260px;
-    }
-    .logo{
-      width:56px;height:56px;border-radius:18px;
-      background: radial-gradient(circle at 10% 0%, var(--gold3) 0%, var(--gold2) 28%, #0a0910 75%);
-      border:1px solid var(--borderGold);
-      box-shadow: 0 16px 40px rgba(0,0,0,.85);
-      display:flex;align-items:center;justify-content:center;
-      overflow:hidden;
-      transform: translateY(1px);
-    }
-    .logo img{
-      width:52px;height:52px;display:block;
-      object-fit:cover;
-      transform: scale(1.03);
-    }
-    .brandText b{
-      display:block;font-size:16px;letter-spacing:.7px;
-      color:#fef6d2;
-    }
-    .brandText small{
-      display:block;
-      color:rgba(255,255,255,.72);
-      font-weight:700;
-      letter-spacing:.4px;
-      text-transform:uppercase;
-      font-size:11px;
-    }
+a{text-decoration:none;color:inherit}
+.wrap{max-width:var(--max);margin:auto;padding:0 18px}
 
-    .menu{
-      display:flex;gap:18px;align-items:center;
-      font-weight:800;
-      color:rgba(255,255,255,.78);
-      flex-wrap:wrap;
-    }
-    .menu a{
-      padding:8px 12px;border-radius:999px;
-      position:relative;
-      transition:.18s ease-out;
-    }
-    .menu a::after{
-      content:"";
-      position:absolute;inset:0;
-      border-radius:inherit;
-      border:1px solid transparent;
-      transition:.18s ease-out;
-    }
-    .menu a:hover{
-      background: rgba(250,232,170,.12);
-      color:#fff;
-    }
-    .menu a:hover::after{
-      border-color:var(--borderGold);
-      box-shadow:0 0 12px rgba(212,175,55,.55);
-    }
+/* ===== HEADER ===== */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(0,0,0,.08);
+  transition:.3s;
+}
+header.scrolled{
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
 
-    .navRight{
-      display:flex;gap:10px;align-items:center;
-    }
-    .btn{
-      border:none;cursor:pointer;
-      border-radius:999px;
-      padding:9px 14px;
-      font-weight:900;
-      font-size:13px;
-      transition:.18s ease-out;
-    }
-    .btn.dark{
-      background:linear-gradient(135deg, var(--gold3) 0%, var(--gold) 45%, var(--gold2) 100%);
-      color:#120b02;
-      border:1px solid var(--borderGold);
-      box-shadow: 0 12px 30px rgba(0,0,0,.8);
-      text-shadow:0 1px 0 rgba(255,255,255,.25);
-    }
-    .btn.dark:hover{
-      filter:brightness(1.04);
-      transform:translateY(-1px);
-      box-shadow:0 16px 36px rgba(0,0,0,.9);
-    }
-    .btn.lang{
-      background:transparent;
-      border:1px solid rgba(255,255,255,.45);
-      color:rgba(255,255,255,.86);
-    }
-    .btn.lang:hover{
-      background:rgba(255,255,255,.06);
-    }
+.nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 0;gap:14px;flex-wrap:wrap
+}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{
+  width:52px;height:52px;border-radius:14px;
+  background:#000;
+  border:1px solid rgba(212,175,55,.5);
+  display:flex;align-items:center;justify-content:center
+}
+.logo img{width:48px;height:48px}
+.brandText b{display:block;font-weight:900;letter-spacing:.5px}
+.brandText small{font-weight:700;color:#555}
 
-    /* ===== Hero ===== */
-    .hero{
-      padding:48px 0 26px;
-    }
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    .heroCard{
-      border-radius: var(--radius);
-      border: 1px solid var(--borderGold);
-      box-shadow: var(--shadowCard);
-      background:
-        radial-gradient(680px 420px at 10% 0%, rgba(255,255,255,.85), rgba(255,255,255,0) 55%),
-        linear-gradient(145deg, #f7e6aa, #f1d77a 45%, #d4af37 100%);
-      padding:26px;
-      position:relative;
-      overflow:hidden;
-      color:var(--text);
-    }
-    .heroCard:after{
-      content:"";
-      position:absolute;inset:-1px;
-      border-radius: inherit;
-      border: 1px solid rgba(255,255,255,.6);
-      pointer-events:none;
-    }
-    .heroTitle{
-      margin:0 0 10px;
-      font-size:42px;
-      line-height:1.1;
-      letter-spacing:.2px;
-      color:#2b1b05;
-      text-shadow:0 1px 0 rgba(255,255,255,.8);
-    }
-    .heroText{
-      margin:0 0 18px;
-      font-size:16px;
-      color: #3b2a0a;
-      font-weight:700;
-    }
-    .heroBadges{
-      display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px;
-    }
-    .badge{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:7px 11px;border-radius:999px;
-      background: rgba(255,255,255,.9);
-      border:1px solid var(--borderGold);
-      font-weight:900;
-      color:#3a2a09;
-      font-size:12px;
-      box-shadow:0 10px 18px rgba(0,0,0,.25);
-    }
-    .badge .dot{
-      width:10px;height:10px;border-radius:50%;
-      background: linear-gradient(135deg, var(--gold3), var(--gold2));
-      border:1px solid rgba(0,0,0,.45);
-      box-shadow:0 0 8px rgba(212,175,55,.9);
-    }
+.menu{display:flex;gap:18px;font-weight:800}
+.menu a{padding:8px 10px;border-radius:10px}
+.menu a:hover{background:rgba(15,27,45,.06)}
 
-    .sideCard{
-      border-radius: var(--radius);
-      border: 1px solid var(--borderGold);
-      box-shadow: var(--shadowCard);
-      background:
-        radial-gradient(520px 260px at 15% 0%, rgba(255,255,255,.85), rgba(255,255,255,0) 60%),
-        linear-gradient(145deg, #f7e6aa, #f1d77a 45%, #d4af37 100%);
-      color:#231708;
-      padding:22px;
-      position:relative;
-      overflow:hidden;
-    }
-    .sideCard:before{
-      content:"";
-      position:absolute;inset:0;
-      background:
-        radial-gradient(260px 260px at 110% 110%, rgba(0,0,0,.15), transparent 60%);
-      pointer-events:none;
-    }
-    .sideCard h3{margin:0 0 10px;font-size:18px}
-    .sideCard ul{margin:0;padding-left:18px;color:#4a3720;font-weight:700}
-    [dir="rtl"] .sideCard ul{padding-right:18px;padding-left:0}
-    .sideCard li{margin:8px 0}
-    .sideCard .mini{
-      margin-top:14px;
-      border-top:1px solid rgba(179,137,22,.45);
-      padding-top:12px;
-      color:#2b1b05;
-      font-weight:800;
-      font-size:13px;
-    }
+.btn{
+  padding:10px 16px;border-radius:14px;
+  font-weight:900;border:none;cursor:pointer
+}
+.btn.gold{
+  background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2));
+  color:var(--navy);
+  box-shadow:var(--shadow)
+}
 
-    /* ===== Sections ===== */
-    section{padding:34px 0}
-    .sectionTitle{
-      display:flex;align-items:baseline;justify-content:space-between;gap:12px;
-      margin-bottom:18px;
-      color:#fdf3cc;
-    }
-    .sectionTitle h2{
-      margin:0;font-size:26px;
-      letter-spacing:.2px;
-      text-shadow:0 1px 4px rgba(0,0,0,.7);
-    }
-    .sectionTitle p{
-      margin:0;color:rgba(255,255,255,.72);
-      font-weight:800;
-      font-size:14px;
-    }
+/* ===== HERO ===== */
+.hero{padding:64px 0}
+.heroGrid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:18px
+}
+.card{
+  background:rgba(255,255,255,.85);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(212,175,55,.25)
+}
+.heroTitle{
+  font-size:44px;
+  color:var(--navy);
+  margin:0 0 14px
+}
+.heroText{font-size:16px;color:#444;font-weight:600}
+.ctaBtn{
+  margin-top:18px;
+  display:inline-block;
+  padding:14px 20px;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2));
+  color:var(--navy);
+  font-weight:900
+}
 
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.side{
+  background:linear-gradient(135deg,var(--black),var(--navy));
+  color:var(--textOnDark)
+}
 
-    .card{
-      border-radius: var(--radius);
-      border:1px solid var(--borderGold);
-      box-shadow: var(--shadowSoft);
-      background:
-        radial-gradient(520px 320px at 0% 0%, rgba(255,255,255,.85), rgba(255,255,255,0) 60%),
-        linear-gradient(145deg, #f7e6aa, #f1d77a 45%, #d4af37 100%);
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-      color:#231708;
-      transform:translateY(0);
-      transition:transform .18s ease-out, box-shadow .18s ease-out;
-    }
-    .card:after{
-      content:"";
-      position:absolute;inset:-1px;border-radius:var(--radius);
-      border: 1px solid rgba(255,255,255,.6);
-      pointer-events:none;
-    }
-    .card h3{margin:0 0 10px;font-size:18px;color:#2b1b05}
-    .card p{margin:0;color:#3b2a0a;font-weight:750}
-    .card ul{margin:0;padding-left:18px;color:#3b2a0a;font-weight:800}
-    [dir="rtl"] .card ul{padding-right:18px;padding-left:0}
-    .card li{margin:7px 0}
-    .card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 20px 40px rgba(0,0,0,.65);
-    }
+/* ===== SECTIONS ===== */
+section{padding:48px 0}
+h2{color:var(--navy)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 
-    .darkBand{
-      margin:24px 0 0;
-      border-radius: 22px;
-      padding:18px;
-      background:
-        radial-gradient(420px 220px at 0% 0%, rgba(255,255,255,.82), rgba(255,255,255,0) 60%),
-        linear-gradient(145deg, #f7e6aa, #f1d77a 45%, #d4af37 100%);
-      border:1px solid var(--borderGold);
-      box-shadow: var(--shadowCard);
-      color:#231708;
-    }
-    .darkBand p{margin:0;color:#2b1b05;font-weight:750}
+/* ===== FOOTER ===== */
+footer{
+  background:linear-gradient(135deg,var(--black),var(--navy));
+  color:#ddd;
+  padding:26px 0
+}
+.footerGrid{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap
+}
 
-    /* ===== Contact ===== */
-    .contactBox{
-      display:grid;grid-template-columns:1.05fr .95fr;gap:16px;align-items:stretch
-    }
-    .contactCard{
-      border-radius: var(--radius);
-      box-shadow: var(--shadowSoft);
-      overflow:hidden;
-      border:1px solid var(--borderGold);
-      background:
-        radial-gradient(520px 320px at 0% 0%, rgba(255,255,255,.85), rgba(255,255,255,0) 60%),
-        linear-gradient(145deg, #f7e6aa, #f1d77a 45%, #d4af37 100%);
-      position:relative;
-      color:#231708;
-    }
-    .contactCard:after{
-      content:"";
-      position:absolute;inset:-1px;border-radius:var(--radius);
-      border: 1px solid rgba(255,255,255,.6);
-      pointer-events:none;
-    }
-    .contactInner{padding:18px}
-    .contactRow{
-      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
-      margin-top:12px;
-    }
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:9px 12px;border-radius:999px;
-      background: rgba(255,255,255,.92);
-      border: 1px solid var(--borderGold);
-      font-weight:900;
-      color: #3a2a09;
-      font-size:13px;
-      box-shadow:0 10px 24px rgba(0,0,0,.25);
-    }
-    .pill strong{color:#2b1b05}
-
-    .ctaBtn{
-      display:inline-flex;justify-content:center;align-items:center;
-      padding:12px 16px;border-radius:18px;
-      background: linear-gradient(135deg, var(--gold3) 0%, var(--gold) 45%, var(--gold2) 100%);
-      border:1px solid var(--borderGold);
-      color:#120b02;
-      font-weight:950;
-      box-shadow: 0 14px 40px rgba(0,0,0,.75);
-      text-shadow:0 1px 0 rgba(255,255,255,.28);
-      transition:.18s ease-out;
-    }
-    .ctaBtn:hover{
-      filter:brightness(1.05);
-      transform:translateY(-2px);
-      box-shadow:0 18px 48px rgba(0,0,0,.9);
-    }
-
-    /* ===== Footer ===== */
-    footer{
-      margin-top:24px;
-      background: radial-gradient(600px 260px at 0% 0%, rgba(8,30,70,.8), transparent 55%),
-                  linear-gradient(135deg, #020816 0%, #050b18 60%, #020816 120%);
-      color: rgba(255,255,255,.9);
-      border-top:1px solid var(--borderGold);
-      padding:22px 0;
-      box-shadow:0 -10px 30px rgba(0,0,0,.85);
-    }
-    .footerGrid{
-      display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap
-    }
-    .footerBrand{display:flex;align-items:center;gap:12px}
-    .footerBrand img{
-      width:44px;height:44px;border-radius:12px;
-      border:1px solid var(--borderGold);
-      background:#000;
-      object-fit:cover;
-      box-shadow:0 10px 26px rgba(0,0,0,.8);
-    }
-    .footerBrand div b{display:block}
-    .footerBrand div small{display:block;color:rgba(255,255,255,.7);font-weight:700}
-    .copy{color:rgba(255,255,255,.68);font-weight:700;font-size:13px}
-
-    /* ===== Smooth scroll ===== */
-    html{scroll-behavior:smooth}
-
-    /* ===== Responsive ===== */
-    @media (max-width: 980px){
-      .heroGrid,.contactBox{grid-template-columns:1fr}
-      .heroTitle{font-size:34px}
-      .grid3{grid-template-columns:1fr}
-      .grid2{grid-template-columns:1fr}
-      .brand{min-width:auto}
-      header{backdrop-filter:blur(12px);}
-    }
-  </style>
-
-
+/* ===== Responsive ===== */
+@media(max-width:900px){
+  .heroGrid,.grid2,.grid3{grid-template-columns:1fr}
+  .heroTitle{font-size:34px}
+}
+</style>
 </head>
 
 <body>
-  <div class="frame-top"></div>
 
-  <header>
-    <div class="wrap nav">
-      <div class="brand">
-        <div class="logo" aria-label="Future Dimensions logo">
-          <img id="logoImg" alt="Future Dimensions Logo" />
-        </div>
-        <div class="brandText">
-          <b id="brandName">FUTURE DIMENSIONS</b>
-          <small id="brandSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
-        </div>
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="logo">
+        <img id="logoImg" alt="Future Dimensions Logo">
       </div>
-
-      <nav class="menu" aria-label="Main navigation">
-        <a href="#about" id="navAbout">About</a>
-        <a href="#services" id="navServices">Services</a>
-        <a href="#approach" id="navApproach">Approach</a>
-        <a href="#contact" id="navContact">Contact</a>
-      </nav>
-
-      <div class="navRight">
-        <button class="btn lang" id="langToggle">العربية</button>
-        <a class="btn dark" href="#contact" id="navCta">Get a Proposal</a>
+      <div class="brandText">
+        <b>FUTURE DIMENSIONS</b>
+        <small>FOR CONSULTING & BUSINESS SOLUTIONS</small>
       </div>
     </div>
-  </header>
+    <nav class="menu">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="btn gold">Get a Proposal</a>
+  </div>
+</header>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="wrap heroGrid">
-        <div class="heroCard">
-          <div class="heroBadges">
-            <span class="badge"><span class="dot"></span><span id="b1">IAS 19 – EOSB</span></span>
-            <span class="badge"><span class="dot"></span><span id="b2">IFRS 9 – ECL</span></span>
-            <span class="badge"><span class="dot"></span><span id="b3">Business Transformation</span></span>
-          </div>
-
-          <h1 class="heroTitle" id="heroTitle">Enter with Challenges – Exit with New Dimensions</h1>
-          <p class="heroText" id="heroText">
-            Future Dimensions is an integrated consulting firm delivering advanced financial,
-            administrative, and growth solutions. We turn complex challenges into sustainable growth with measurable impact.
-          </p>
-
-          <a class="ctaBtn" href="#contact" id="heroBtn">Start Your Transformation</a>
-        </div>
-
-        <aside class="sideCard">
-          <h3 id="whyTitle">Why Future Dimensions?</h3>
-          <ul id="whyList">
-            <li>Transformation, not temporary fixes</li>
-            <li>IFRS-aligned, audit-ready deliverables</li>
-            <li>Clear methodology and practical recommendations</li>
-            <li>Fast turnaround with quality assurance</li>
-          </ul>
-          <div class="mini" id="miniNote">
-            “Enter with Challenges – Exit with New Dimensions”
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="wrap">
-        <div class="sectionTitle">
-          <h2 id="aboutTitle">About Us</h2>
-          <p id="aboutHint">Identity-driven. Execution-focused.</p>
-        </div>
-
-        <div class="grid2">
-          <div class="card">
-            <h3 id="aboutH3_1">Who we are</h3>
-            <p id="aboutP1">
-              Future Dimensions is a modern consulting partner that blends financial expertise,
-              governance, and growth strategy to build resilient organizations.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3 id="aboutH3_2">Our promise</h3>
-            <ul id="aboutList">
-              <li>Structured, documented, and compliant delivery</li>
-              <li>Actionable roadmap with clear milestones</li>
-              <li>Stakeholder-ready outputs (management & audit)</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="darkBand">
-          <p id="taglineLine">
-            We don’t just advise — we build dimensions that last.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section id="services">
-      <div class="wrap">
-        <div class="sectionTitle">
-          <h2 id="servicesTitle">Our Services</h2>
-          <p id="servicesHint">Gold standard deliverables.</p>
-        </div>
-
-        <div class="grid3">
-          <div class="card">
-            <h3 id="s1">Financial Dimension</h3>
-            <ul id="s1List">
-              <li>Actuarial Valuation (EOSB) — IAS 19</li>
-              <li>IFRS 9 Expected Credit Loss (ECL)</li>
-              <li>Financial planning & risk insights</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3 id="s2">Administrative & Operational</h3>
-            <ul id="s2List">
-              <li>Process optimization</li>
-              <li>Governance & compliance frameworks</li>
-              <li>Organization development support</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3 id="s3">Growth Strategy</h3>
-            <ul id="s3List">
-              <li>Expansion & market entry strategy</li>
-              <li>Business development enablement</li>
-              <li>Digital transformation roadmap</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- APPROACH -->
-    <section id="approach">
-      <div class="wrap">
-        <div class="sectionTitle">
-          <h2 id="approachTitle">Our Methodology</h2>
-          <p id="approachHint">From challenge → to dimensions.</p>
-        </div>
-
-        <div class="grid2">
-          <div class="card">
-            <h3 id="m1">How we work</h3>
-            <ul id="mList">
-              <li>Challenge Diagnosis</li>
-              <li>Dimension Design</li>
-              <li>Guided Execution</li>
-              <li>Transformation Confirmation (KPIs)</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h3 id="m2">What you get</h3>
-            <p id="mText">
-              Clear documentation, IFRS alignment, stakeholder-ready outputs, and measurable improvement
-              delivered through a structured consulting engagement.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="wrap">
-        <div class="sectionTitle">
-          <h2 id="contactTitle">Contact</h2>
-          <p id="contactHint">Let’s build your next dimension.</p>
-        </div>
-
-        <div class="contactBox">
-          <div class="contactCard">
-            <div class="contactInner">
-              <h3 id="contactH3">Get in touch</h3>
-              <div class="contactRow">
-                <span class="pill"><strong id="ph1">Email:</strong> <span>info@futuredimensionsco.com</span></span>
-                <span class="pill"><strong id="ph2">Phone:</strong> <span>+20 100 193 8264</span></span>
-              </div>
-              <div class="contactRow">
-                <span class="pill"><strong id="ph3">Address:</strong> <span id="addr">Building No. 6, Mostafa Anani St., Heliopolis, Cairo, Egypt</span></span>
-              </div>
-              <div class="contactRow" style="margin-top:16px;">
-                <a class="ctaBtn" id="emailBtn" href="mailto:info@futuredimensionsco.com">Request a Proposal</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="sideCard">
-            <h3 id="ctaTitle">Take the First Step Today</h3>
-            <p id="ctaText" style="margin:0;color:rgba(255,255,255,.82);font-weight:750;">
-              Book your complimentary Challenge Map Exploratory Session and start your transformation journey.
-            </p>
-            <div class="mini" id="ctaMini">
-              Quick response • Professional delivery • Audit-ready outputs
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap footerGrid">
-      <div class="footerBrand">
-        <img id="logoFooter" alt="Future Dimensions Logo" />
-        <div>
-          <b id="footName">FUTURE DIMENSIONS</b>
-          <small id="footSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
-        </div>
-      </div>
-      <div class="copy" id="copyText">© Future Dimensions — All rights reserved.</div>
+<main>
+<section class="hero">
+  <div class="wrap heroGrid">
+    <div class="card">
+      <h1 class="heroTitle">Enter with Challenges – Exit with New Dimensions</h1>
+      <p class="heroText">
+        We deliver advanced consulting solutions turning complex challenges into sustainable growth with measurable impact.
+      </p>
+      <a href="#contact" class="ctaBtn">Start Your Transformation</a>
     </div>
-  </footer>
 
-  <div class="frame-bottom"></div>
+    <div class="card side">
+      <h3>Why Future Dimensions?</h3>
+      <ul>
+        <li>Transformation, not temporary fixes</li>
+        <li>IFRS-aligned, audit-ready outputs</li>
+        <li>Clear methodology & execution</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-  <script>
-    /* ===== Embedded logo (from your uploaded image, resized & optimized) ===== */
-    const LOGO_DATA_URI = "data:image/webp;base64,UklGRsY2AABXRUJQVlA4ILo2AABQhQCdASogAqgAPpE0l0kkIyIhKJgK0WgA0pQpCwQd6JmQf2Xr4w1iO0Gm1sM6gQ2kQn2o8m0l0o0l0cV9aYgZl2q6tQpYp8d8pQyY0yqgG+fQFv4p6sQ2l3j4d2b9m9+S7b8ZVnT7m7i7GgA9yJQ3d8mKQd9lU7u8r2h2o2m+2wI9o2QhQ3oYyqg6J2m2hQH1p0tqv3gq4m1t3a1gQH7mKz9l3oN5f2B2dC5QG8n3y8JH8Z0v8mR5o4f8j9g2z0hJ9qZx3S+g4jvZVYvFq8bQqvQ7bXQf0mQ0f2u9XyQz2m7pSx0f1o7d8o2mQk2m8pZ4uNqKq8P1d0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7f0kQb2m5f0o2mHkqgq0WmW7e8=";
+<section id="about">
+  <div class="wrap grid2">
+    <div class="card">
+      <h2>Who We Are</h2>
+      <p>We are a modern consulting partner blending finance, governance and growth strategy.</p>
+    </div>
+    <div class="card">
+      <h2>Our Promise</h2>
+      <ul>
+        <li>Structured delivery</li>
+        <li>Clear milestones</li>
+        <li>Stakeholder-ready results</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    document.getElementById("logoImg").src = LOGO_DATA_URI;
-    document.getElementById("logoFooter").src = LOGO_DATA_URI;
+<section id="services">
+  <div class="wrap grid3">
+    <div class="card">
+      <h3>Financial</h3>
+      <p>IAS 19, IFRS 9, planning & risk.</p>
+    </div>
+    <div class="card">
+      <h3>Operational</h3>
+      <p>Governance, process optimization.</p>
+    </div>
+    <div class="card">
+      <h3>Growth</h3>
+      <p>Expansion, strategy & transformation.</p>
+    </div>
+  </div>
+</section>
 
-    /* ===== Language toggle (AR/EN) ===== */
-    const content = {
-      en: {
-        dir: "ltr", lang: "en",
-        toggle: "العربية",
-        navAbout: "About",
-        navServices: "Services",
-        navApproach: "Approach",
-        navContact: "Contact",
-        navCta: "Get a Proposal",
-        brandName: "FUTURE DIMENSIONS",
-        brandSub: "FOR CONSULTING & BUSINESS SOLUTIONS",
+<section id="contact">
+  <div class="wrap grid2">
+    <div class="card">
+      <h2>Contact</h2>
+      <p>Email: info@futuredimensionsco.com</p>
+      <p>Phone: +20 100 193 8264</p>
+    </div>
+    <div class="card side">
+      <h3>Take the First Step</h3>
+      <p>Book your complimentary session and start now.</p>
+    </div>
+  </div>
+</section>
+</main>
 
-        b1:"IAS 19 – EOSB",
-        b2:"IFRS 9 – ECL",
-        b3:"Business Transformation",
+<footer>
+  <div class="wrap footerGrid">
+    <div>© Future Dimensions</div>
+    <div>Consulting & Business Solutions</div>
+  </div>
+</footer>
 
-        heroTitle: "Enter with Challenges – Exit with New Dimensions",
-        heroText: "Future Dimensions is an integrated consulting firm delivering advanced financial, administrative, and growth solutions. We turn complex challenges into sustainable growth with measurable impact.",
-        heroBtn: "Start Your Transformation",
+<script>
+/* Header scroll */
+window.addEventListener("scroll",()=>{
+  document.querySelector("header")
+    .classList.toggle("scrolled",window.scrollY>10);
+});
 
-        whyTitle: "Why Future Dimensions?",
-        whyList: [
-          "Transformation, not temporary fixes",
-          "IFRS-aligned, audit-ready deliverables",
-          "Clear methodology and practical recommendations",
-          "Fast turnaround with quality assurance"
-        ],
-        miniNote: "“Enter with Challenges – Exit with New Dimensions”",
+/* Base64 Logo */
+const LOGO_DATA_URI="data:image/webp;base64,UklGRsY2AABXRUJQVlA4ILo2AABQhQCdASogAqgAPpE0...";
+document.getElementById("logoImg").src=LOGO_DATA_URI;
+</script>
 
-        aboutTitle:"About Us",
-        aboutHint:"Identity-driven. Execution-focused.",
-        aboutH3_1:"Who we are",
-        aboutP1:"Future Dimensions is a modern consulting partner that blends financial expertise, governance, and growth strategy to build resilient organizations.",
-        aboutH3_2:"Our promise",
-        aboutList:[
-          "Structured, documented, and compliant delivery",
-          "Actionable roadmap with clear milestones",
-          "Stakeholder-ready outputs (management & audit)"
-        ],
-        taglineLine:"We don’t just advise — we build dimensions that last.",
-
-        servicesTitle:"Our Services",
-        servicesHint:"Gold standard deliverables.",
-        s1:"Financial Dimension",
-        s1List:["Actuarial Valuation (EOSB) — IAS 19","IFRS 9 Expected Credit Loss (ECL)","Financial planning & risk insights"],
-        s2:"Administrative & Operational",
-        s2List:["Process optimization","Governance & compliance frameworks","Organization development support"],
-        s3:"Growth Strategy",
-        s3List:["Expansion & market entry strategy","Business development enablement","Digital transformation roadmap"],
-
-        approachTitle:"Our Methodology",
-        approachHint:"From challenge → to dimensions.",
-        m1:"How we work",
-        mList:["Challenge Diagnosis","Dimension Design","Guided Execution","Transformation Confirmation (KPIs)"],
-        m2:"What you get",
-        mText:"Clear documentation, IFRS alignment, stakeholder-ready outputs, and measurable improvement delivered through a structured consulting engagement.",
-
-        contactTitle:"Contact",
-        contactHint:"Let’s build your next dimension.",
-        contactH3:"Get in touch",
-        ph1:"Email:",
-        ph2:"Phone:",
-        ph3:"Address:",
-        addr:"Building No. 6, Mostafa Anani St., Heliopolis, Cairo, Egypt",
-        emailBtn:"Request a Proposal",
-        ctaTitle:"Take the First Step Today",
-        ctaText:"Book your complimentary Challenge Map Exploratory Session and start your transformation journey.",
-        ctaMini:"Quick response • Professional delivery • Audit-ready outputs",
-        copyText:"© Future Dimensions — All rights reserved."
-      },
-
-      ar: {
-        dir: "rtl", lang: "ar",
-        toggle: "English",
-        navAbout: "من نحن",
-        navServices: "خدماتنا",
-        navApproach: "منهجيتنا",
-        navContact: "تواصل معنا",
-        navCta: "اطلب عرضًا",
-
-        brandName: "FUTURE DIMENSIONS",
-        brandSub: "FOR CONSULTING & BUSINESS SOLUTIONS",
-
-        b1:"IAS 19 – EOSB",
-        b2:"IFRS 9 – ECL",
-        b3:"تحول الأعمال",
-
-        heroTitle: "ادخل بالتحديات – واخرج بأبعاد جديدة",
-        heroText: "Future Dimensions شركة استشارات متكاملة تقدم حلولًا مالية وإدارية واستراتيجية متقدمة لتحويل التحديات إلى نمو مستدام بنتائج قابلة للقياس.",
-        heroBtn: "ابدأ رحلة التحول",
-
-        whyTitle: "لماذا Future Dimensions؟",
-        whyList: [
-          "تحول حقيقي وليس حلولًا مؤقتة",
-          "مخرجات متوافقة مع المعايير الدولية وجاهزة للمراجعة",
-          "منهجية واضحة وتوصيات عملية قابلة للتنفيذ",
-          "سرعة إنجاز مع ضمان الجودة"
-        ],
-        miniNote: "«ادخل بالتحديات – واخرج بأبعاد جديدة»",
-
-        aboutTitle:"من نحن",
-        aboutHint:"هوية قوية. تنفيذ فعّال.",
-        aboutH3_1:"من نحن",
-        aboutP1:"Future Dimensions شريك استشاري حديث يجمع بين الخبرة المالية والحوكمة واستراتيجيات النمو لبناء مؤسسات أكثر مرونة واستدامة.",
-        aboutH3_2:"وعدنا لك",
-        aboutList:[
-          "تسليم منظم وموثق ومتوافق مع المتطلبات",
-          "خارطة طريق قابلة للتنفيذ بمراحل واضحة",
-          "مخرجات جاهزة للإدارة والمراجعة واللجان"
-        ],
-        taglineLine:"نحن لا نقدم رأيًا فقط — نحن نبني أبعادًا تدوم.",
-
-        servicesTitle:"خدماتنا",
-        servicesHint:"مخرجات بمعيار ذهبي.",
-        s1:"البعد المالي",
-        s1List:["تقييم اكتواري لمنافع نهاية الخدمة (IAS 19)","احتساب الخسائر الائتمانية المتوقعة (IFRS 9 – ECL)","تخطيط مالي وتحليل مخاطر"],
-        s2:"البعد الإداري والتشغيلي",
-        s2List:["تحسين العمليات والإجراءات","حوكمة وإطارات امتثال","دعم التطوير التنظيمي"],
-        s3:"بعد النمو والاستراتيجية",
-        s3List:["استراتيجية توسع ودخول أسواق","تمكين تطوير الأعمال","خارطة طريق للتحول الرقمي"],
-
-        approachTitle:"منهجية العمل",
-        approachHint:"من التحدي → إلى أبعاد.",
-        m1:"كيف نعمل",
-        mList:["تشخيص التحديات","تصميم الأبعاد","تنفيذ موجّه","تأكيد التحول عبر مؤشرات (KPIs)"],
-        m2:"ماذا ستحصل عليه",
-        mText:"توثيق واضح، توافق مع المعايير، مخرجات جاهزة لأصحاب المصلحة، وتحسن ملموس ضمن إطار عمل استشاري منظم.",
-
-        contactTitle:"تواصل معنا",
-        contactHint:"لنصنع بُعدك القادم.",
-        contactH3:"بيانات التواصل",
-        ph1:"البريد:",
-        ph2:"الهاتف:",
-        ph3:"العنوان:",
-        addr:"مبنى رقم 6، شارع مصطفى عناني، مصر الجديدة، القاهرة، مصر",
-        emailBtn:"اطلب عرضًا",
-        ctaTitle:"اتخذ الخطوة الأولى اليوم",
-        ctaText:"احجز جلسة استكشاف Challenge Map المجانية وابدأ رحلة التحول المؤسسي.",
-        ctaMini:"استجابة سريعة • تسليم احترافي • مخرجات جاهزة للمراجعة",
-        copyText:"© Future Dimensions — جميع الحقوق محفوظة."
-      }
-    };
-
-    let current = "en";
-
-    function applyLang(key){
-      const c = content[key];
-      document.documentElement.dir = c.dir;
-      document.documentElement.lang = c.lang;
-
-      document.getElementById("langToggle").textContent = c.toggle;
-
-      document.getElementById("navAbout").textContent = c.navAbout;
-      document.getElementById("navServices").textContent = c.navServices;
-      document.getElementById("navApproach").textContent = c.navApproach;
-      document.getElementById("navContact").textContent = c.navContact;
-      document.getElementById("navCta").textContent = c.navCta;
-
-      document.getElementById("brandName").textContent = c.brandName;
-      document.getElementById("brandSub").textContent = c.brandSub;
-
-      document.getElementById("b1").textContent = c.b1;
-      document.getElementById("b2").textContent = c.b2;
-      document.getElementById("b3").textContent = c.b3;
-
-      document.getElementById("heroTitle").textContent = c.heroTitle;
-      document.getElementById("heroText").textContent = c.heroText;
-      document.getElementById("heroBtn").textContent = c.heroBtn;
-
-      document.getElementById("whyTitle").textContent = c.whyTitle;
-
-      // rebuild whyList
-      const whyUl = document.getElementById("whyList");
-      whyUl.innerHTML = "";
-      c.whyList.forEach(item=>{
-        const li = document.createElement("li");
-        li.textContent = item;
-        whyUl.appendChild(li);
-      });
-      document.getElementById("miniNote").textContent = c.miniNote;
-
-      document.getElementById("aboutTitle").textContent = c.aboutTitle;
-      document.getElementById("aboutHint").textContent = c.aboutHint;
-      document.getElementById("aboutH3_1").textContent = c.aboutH3_1;
-      document.getElementById("aboutP1").textContent = c.aboutP1;
-      document.getElementById("aboutH3_2").textContent = c.aboutH3_2;
-
-      const aboutUl = document.getElementById("aboutList");
-      aboutUl.innerHTML = "";
-      c.aboutList.forEach(item=>{
-        const li = document.createElement("li");
-        li.textContent = item;
-        aboutUl.appendChild(li);
-      });
-      document.getElementById("taglineLine").textContent = c.taglineLine;
-
-      document.getElementById("servicesTitle").textContent = c.servicesTitle;
-      document.getElementById("servicesHint").textContent = c.servicesHint;
-
-      document.getElementById("s1").textContent = c.s1;
-      document.getElementById("s2").textContent = c.s2;
-      document.getElementById("s3").textContent = c.s3;
-
-      const s1Ul = document.getElementById("s1List");
-      const s2Ul = document.getElementById("s2List");
-      const s3Ul = document.getElementById("s3List");
-      s1Ul.innerHTML = ""; s2Ul.innerHTML = ""; s3Ul.innerHTML = "";
-
-      c.s1List.forEach(x=>{ const li=document.createElement("li"); li.textContent=x; s1Ul.appendChild(li); });
-      c.s2List.forEach(x=>{ const li=document.createElement("li"); li.textContent=x; s2Ul.appendChild(li); });
-      c.s3List.forEach(x=>{ const li=document.createElement("li"); li.textContent=x; s3Ul.appendChild(li); });
-
-      document.getElementById("approachTitle").textContent = c.approachTitle;
-      document.getElementById("approachHint").textContent = c.approachHint;
-      document.getElementById("m1").textContent = c.m1;
-
-      const mUl = document.getElementById("mList");
-      mUl.innerHTML = "";
-      c.mList.forEach(x=>{ const li=document.createElement("li"); li.textContent=x; mUl.appendChild(li); });
-
-      document.getElementById("m2").textContent = c.m2;
-      document.getElementById("mText").textContent = c.mText;
-
-      document.getElementById("contactTitle").textContent = c.contactTitle;
-      document.getElementById("contactHint").textContent = c.contactHint;
-      document.getElementById("contactH3").textContent = c.contactH3;
-
-      document.getElementById("ph1").textContent = c.ph1;
-      document.getElementById("ph2").textContent = c.ph2;
-      document.getElementById("ph3").textContent = c.ph3;
-      document.getElementById("addr").textContent = c.addr;
-
-      document.getElementById("emailBtn").textContent = c.emailBtn;
-
-      document.getElementById("ctaTitle").textContent = c.ctaTitle;
-      document.getElementById("ctaText").textContent = c.ctaText;
-      document.getElementById("ctaMini").textContent = c.ctaMini;
-
-      document.getElementById("footName").textContent = c.brandName;
-      document.getElementById("footSub").textContent = c.brandSub;
-      document.getElementById("copyText").textContent = c.copyText;
-    }
-
-    document.getElementById("langToggle").addEventListener("click", ()=>{
-      current = (current === "en") ? "ar" : "en";
-      applyLang(current);
-    });
-
-    // initial
-    applyLang(current);
-  </script>
 </body>
 </html>
