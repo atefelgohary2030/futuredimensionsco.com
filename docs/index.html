@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Future Dimensions | Consulting & Business Solutions</title>
+  <meta name="description" content="Financial diagnostics, operational excellence, governance, and growth strategy — practical consulting with measurable results." />
+  <link rel="canonical" href="https://www.futuredimensionsco.com/" />
+  <meta property="og:title" content="Future Dimensions | Consulting & Business Solutions" />
+  <meta property="og:description" content="Financial diagnostics, operational excellence, governance, and growth strategy — practical consulting with measurable results." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.futuredimensionsco.com/" />
+  <meta name="theme-color" content="#0b1322" />
+  <style>
+
+:root{
+  --navy:#0b1322;
+  --navy2:#0f1b2d;
+  --gold:#d4af37;
+  --gold2:#f3df92;
+  --gold3:#c79d2e;
+  --teal:#18b6a4;      /* third accent */
+  --mint:#bff6e8;      /* soft accent */
+  --ink:#0b1322;
+  --paper:#ffffff;
+  --muted:#9fb0c2;
+  --shadow: 0 24px 60px rgba(0,0,0,.35);
+  --radius: 20px;
+  --radius2: 28px;
+  --max: 1180px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans Arabic", "Noto Kufi Arabic", sans-serif;
+  background:
+    radial-gradient(1200px 700px at 10% 0%, rgba(212,175,55,.12), rgba(212,175,55,0) 60%),
+    radial-gradient(900px 650px at 90% 20%, rgba(24,182,164,.10), rgba(24,182,164,0) 60%),
+    linear-gradient(180deg, var(--navy) 0%, #070c16 100%);
+  color: #eef3ff;
+}
+
+a{color:inherit; text-decoration:none}
+.container{max-width:var(--max); margin:0 auto; padding:0 18px}
+.hr{height:1px; background:linear-gradient(90deg, rgba(212,175,55,0), rgba(212,175,55,.25), rgba(212,175,55,0)); margin:26px 0}
+
+header{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter: blur(10px);
+  background: rgba(11,19,34,.66);
+  border-bottom: 1px solid rgba(212,175,55,.16);
+}
+
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 0;
+}
+.brand{
+  display:flex; align-items:center; gap:10px;
+  min-width: 210px;
+}
+.brand img{
+  width:34px; height:34px; object-fit:contain;
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,.45));
+}
+.brandName{
+  display:flex; flex-direction:column; line-height:1.05;
+}
+.brandName b{font-size:15px; letter-spacing:.4px}
+.brandName span{font-size:12px; color:rgba(212,175,55,.85)}
+.navLinks{
+  display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+}
+.navLinks a{
+  font-size:13px;
+  padding:8px 10px;
+  border-radius:999px;
+  color:rgba(238,243,255,.92);
+  border:1px solid rgba(255,255,255,0);
+  transition:.18s ease;
+}
+.navLinks a:hover{
+  border-color: rgba(212,175,55,.28);
+  background: rgba(212,175,55,.08);
+}
+.navRight{display:flex; gap:10px; align-items:center}
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(212,175,55,.30);
+  background: linear-gradient(135deg, rgba(212,175,55,.22), rgba(212,175,55,.10));
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.btn:hover{transform: translateY(-1px); border-color: rgba(212,175,55,.45)}
+.btnGhost{
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  font-weight:650;
+}
+.pill{
+  display:inline-flex; align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  border-radius:999px;
+  background: rgba(11,19,34,.08);
+  border:1px solid rgba(11,19,34,.16);
+  color: rgba(11,19,34,.92);
+  font-weight:750;
+  font-size:13px;
+}
+.pill:hover{background: rgba(11,19,34,.12)}
+.hero{
+  padding:56px 0 18px;
+}
+.heroGrid{
+  display:grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap:18px;
+  align-items:stretch;
+}
+.heroCard{
+  border-radius: var(--radius2);
+  box-shadow: var(--shadow);
+  border:1px solid rgba(212,175,55,.22);
+  background:
+    radial-gradient(900px 520px at 12% 0%, rgba(212,175,55,.22), rgba(212,175,55,0) 60%),
+    radial-gradient(820px 560px at 94% 18%, rgba(24,182,164,.14), rgba(24,182,164,0) 55%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  padding:26px;
+  overflow:hidden;
+  position:relative;
+}
+.heroCard:before{
+  content:"";
+  position:absolute; inset:-2px;
+  background: radial-gradient(600px 260px at 22% -10%, rgba(243,223,146,.22), rgba(243,223,146,0) 60%);
+  pointer-events:none;
+}
+.kicker{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:8px 12px;
+  border-radius:999px;
+  background: rgba(212,175,55,.12);
+  border:1px solid rgba(212,175,55,.22);
+  color: rgba(243,223,146,.98);
+  font-weight:750;
+  font-size:12px;
+}
+.heroTitle{
+  margin:14px 0 10px;
+  font-size: clamp(30px, 4.7vw, 46px);
+  line-height:1.08;
+}
+.heroTitle .gold{color: var(--gold2)}
+.heroText{
+  color: rgba(238,243,255,.86);
+  font-size: 15px;
+  line-height:1.9;
+  margin: 0 0 16px;
+}
+.heroActions{display:flex; gap:10px; flex-wrap:wrap}
+
+.sideCard{
+  border-radius: var(--radius2);
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+  padding:22px;
+}
+.sideCard h3{margin:0 0 10px; font-size:16px}
+.sideCard p{margin:0; color: rgba(238,243,255,.84); line-height:1.85; font-size:13px}
+
+.section{
+  padding: 20px 0 10px;
+}
+.sectionTitle{
+  display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  margin: 0 0 12px;
+}
+.sectionTitle h2{
+  margin:0;
+  font-size: clamp(20px, 3.2vw, 28px);
+}
+.sectionTitle .hint{color: rgba(238,243,255,.72); font-size:13px}
+
+.grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+.grid2{display:grid; grid-template-columns: repeat(2, 1fr); gap:14px}
+
+.card{
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border:1px solid rgba(0,0,0,.12);
+  padding:18px;
+  position:relative;
+  overflow:hidden;
+  color: var(--ink);
+
+  background:
+    radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, #FBF7EA 0%, var(--gold3) 22%, var(--gold) 62%, #A98022 130%);
+}
+.card h3{margin:0 0 8px; font-size:18px; color: rgba(11,19,34,.98)}
+.card p, .card li{color: rgba(11,19,34,.88); line-height:1.75; font-size:14px}
+.card ul{margin:10px 0 0; padding-inline-start:18px}
+.card .tag{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:12px; font-weight:800;
+  padding:7px 10px;
+  border-radius:999px;
+  background: rgba(11,19,34,.08);
+  border: 1px solid rgba(11,19,34,.16);
+  color: rgba(11,19,34,.92);
+}
+
+.footer{
+  padding: 22px 0 36px;
+  color: rgba(238,243,255,.72);
+  font-size: 13px;
+}
+.footerGrid{display:grid; grid-template-columns: 1.2fr .8fr; gap:16px}
+.footer a{color: rgba(243,223,146,.92)}
+.footer small{color: rgba(238,243,255,.62)}
+
+.toast{
+  position: fixed; bottom: 16px; left: 16px; right: 16px;
+  max-width: 420px; margin: 0 auto;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.70);
+  border: 1px solid rgba(212,175,55,.26);
+  color: rgba(255,255,255,.92);
+  display:none;
+}
+
+/* Mobile */
+@media(max-width: 900px){
+  .heroGrid{grid-template-columns: 1fr}
+  .grid3{grid-template-columns: 1fr}
+  .grid2{grid-template-columns: 1fr}
+  .navLinks{display:none}
+}
+@media(max-width: 480px){
+  body{font-size: 15px}
+  .hero{padding:44px 0 10px}
+  .heroCard, .sideCard{padding:18px}
+  .btn{width:100%; justify-content:center}
+  .btnGhost{width:100%}
+  .brand img{width:32px;height:32px}
+}
+
+  </style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html" aria-label="Future Dimensions Home">
+      <img src="logo.png" alt="Future Dimensions logo" />
+      <div class="brandName">
+        <b>Future Dimensions</b>
+        <span>Consulting & Business Solutions</span>
+      </div>
+    </a>
+
+    <nav class="navLinks" aria-label="Primary">
+      <a href="index.html" id="navHome">Home</a>
+      <a href="index.html#services" id="navServices">Services</a>
+      <a href="financial.html" id="navFinancial">Financial</a>
+      <a href="administrative.html" id="navAdministrative">Administrative</a>
+      <a href="growth.html" id="navGrowth">Growth</a>
+      <a href="team.html" id="navTeam">Team</a>
+      <a href="careers.html" id="navCareers">Careers</a>
+      <a href="index.html#contact" id="navContact">Contact</a>
+    </nav>
+
+    <div class="navRight">
+      <button class="btn btnGhost" id="langToggle" type="button">العربية</button>
+      <a class="btn" href="index.html#contact" id="ctaBtn">Request Consultation</a>
+    </div>
+  </div>
+</header>
+
+
+<main>
+  <section class="hero">
+    <div class="container heroGrid">
+      <div class="heroCard">
+        <div class="kicker" id="kicker">Enter with Challenges – Exit with New Dimensions</div>
+        <h1 class="heroTitle" id="heroTitle">Future <span class="gold">Dimensions</span><br/>Consulting & Business Solutions</h1>
+        <p class="heroText" id="heroText">
+          We blend financial diagnostics, operational excellence, and growth strategy to help leaders improve performance, strengthen governance, and scale confidently.
+        </p>
+        <div class="heroActions">
+          <a class="btn" href="#services" id="heroCta1">Explore Services</a>
+          <a class="btn btnGhost" href="careers.html" id="heroCta2">Join Our Team</a>
+        </div>
+        <div class="hr"></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <span class="kicker" id="k1">Financial Dimension</span>
+          <span class="kicker" id="k2">Administrative & Operational</span>
+          <span class="kicker" id="k3">Growth Strategy</span>
+        </div>
+      </div>
+
+      <aside class="sideCard">
+        <h3 id="sideTitle">What you get</h3>
+        <p id="sideText">
+          Clear diagnostics, actionable roadmaps, and measurable results. We focus on ROI, efficiency, compliance, and sustainable growth — with practical implementation support.
+        </p>
+        <div class="hr"></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <span class="tag" id="t1">ROI & Value</span>
+          <span class="tag" id="t2">Cost Optimization</span>
+          <span class="tag" id="t3">Governance</span>
+          <span class="tag" id="t4">Execution</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="container">
+      <div class="sectionTitle">
+        <h2 id="servicesTitle">Our Services</h2>
+        <div class="hint" id="servicesHint">Open each dimension for full details</div>
+      </div>
+
+      <div class="grid3">
+        <article class="card">
+          <span class="tag" id="finTag">Financial Dimension</span>
+          <h3 id="finTitle">Finance that drives performance</h3>
+          <p id="finText">Comprehensive diagnostics, profitability improvement, IFRS support, and audit & risk assessment.</p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="financial.html" id="finBtn">Open Financial</a>
+            <span class="pill" id="finP1">IFRS 9</span>
+            <span class="pill" id="finP2">IAS 19</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <span class="tag" id="opTag">Administrative & Operational</span>
+          <h3 id="opTitle">Execution & operational excellence</h3>
+          <p id="opText">Strategy execution, process improvement, governance frameworks, and ISO readiness.</p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="administrative.html" id="opBtn">Open Operational</a>
+            <span class="pill" id="opP1">Process</span>
+            <span class="pill" id="opP2">Governance</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <span class="tag" id="grTag">Growth Strategy</span>
+          <h3 id="grTitle">Scale with confidence</h3>
+          <p id="grText">Market entry, expansion planning, digital transformation roadmaps, and technology optimization.</p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="growth.html" id="grBtn">Open Growth</a>
+            <span class="pill" id="grP1">Expansion</span>
+            <span class="pill" id="grP2">Digital</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="sectionTitle">
+        <h2 id="aboutTitle">About Us</h2>
+        <div class="hint" id="aboutHint">Mission, vision, and how we work</div>
+      </div>
+
+      <div class="grid2">
+        <article class="card">
+          <span class="tag" id="whoTag">Who we are</span>
+          <h3 id="whoTitle">A consulting partner built for results</h3>
+          <p id="whoText">
+            Future Dimensions blends financial expertise, operational excellence, and growth strategy to build resilient organizations and sustainable results.
+          </p>
+          <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap">
+            <span class="pill" id="whoP1">Financial</span>
+            <span class="pill" id="whoP2">Operational</span>
+            <span class="pill" id="whoP3">Growth</span>
+            <span class="pill" id="whoP4">Governance</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <span class="tag" id="mvTag">Vision & Mission</span>
+          <h3 id="mvTitle">Purpose-driven, execution-focused</h3>
+          <ul>
+            <li id="mv1">Vision: To be a trusted partner for organizations striving for sustainable growth and operational excellence.</li>
+            <li id="mv2">Mission: Empower organizations through high-quality, practical consulting solutions and ongoing support.</li>
+            <li id="mv3">We build strategic, trust-based relationships and deliver measurable impact.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="sectionTitle">
+        <h2 id="contactTitle">Contact</h2>
+        <div class="hint" id="contactHint">We respond quickly</div>
+      </div>
+
+      <div class="grid2">
+        <article class="card">
+          <span class="tag" id="contactTag">Get in touch</span>
+          <h3 id="contactH">Tell us what you need</h3>
+          <p id="contactP">
+            Share your objectives and challenges. We’ll suggest the best starting point and a clear next step.
+          </p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="mailto:info@futuredimensionsco.com" id="mailBtn">Email us</a>
+            <a class="btn btnGhost" href="team.html" id="teamBtn">Meet the team</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <span class="tag" id="seoTag">SEO (Next Step)</span>
+          <h3 id="seoH">Search Console & Sitemap</h3>
+          <p id="seoP">
+            Your site is verified ✅. Next: keep sitemap.xml updated and request indexing for key pages.
+          </p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <span class="pill" id="seoP1">sitemap.xml</span>
+            <span class="pill" id="seoP2">Indexing</span>
+            <span class="pill" id="seoP3">Meta Tags</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<footer class="footer">
+  <div class="container footerGrid">
+    <div>
+      <b id="footerTitle" style="display:block; font-size:14px; margin-bottom:8px">Future Dimensions</b>
+      <div id="footerText" style="max-width:520px; line-height:1.85">
+        A consulting partner blending financial expertise, operational excellence, and growth strategy to build resilient organizations and sustainable results.
+      </div>
+      <div style="margin-top:10px">
+        <small>© 2025 Future Dimensions. All rights reserved.</small>
+      </div>
+    </div>
+    <div>
+      <b id="footerContact" style="display:block; font-size:14px; margin-bottom:8px">Contact</b>
+      <div style="line-height:1.9">
+        <div><a href="mailto:info@futuredimensionsco.com" id="footerEmail">info@futuredimensionsco.com</a></div>
+        <div><a href="https://www.futuredimensionsco.com" target="_blank" rel="noopener">www.futuredimensionsco.com</a></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const i18n = {
+  en:{
+    dir:"ltr", lang:"en", toggle:"العربية",
+    navHome:"Home", navServices:"Services", navFinancial:"Financial", navAdministrative:"Administrative", navGrowth:"Growth",
+    navTeam:"Team", navCareers:"Careers", navContact:"Contact",
+    cta:"Request Consultation",
+    footerTitle:"Future Dimensions",
+    footerText:"A consulting partner blending financial expertise, operational excellence, and growth strategy to build resilient organizations and sustainable results.",
+    footerContact:"Contact",
+    footerEmail:"info@futuredimensionsco.com",
+    toastCopied:"Copied ✅"
+  },
+  ar:{
+    dir:"rtl", lang:"ar", toggle:"English",
+    navHome:"الرئيسية", navServices:"الخدمات", navFinancial:"المالي", navAdministrative:"الإداري والتشغيلي", navGrowth:"استراتيجيات النمو",
+    navTeam:"فريق العمل", navCareers:"التوظيف", navContact:"تواصل معنا",
+    cta:"اطلب استشارة",
+    footerTitle:"فيوتشر ديمينشنز",
+    footerText:"شريك استشاري يجمع بين الخبرة المالية والتميز التشغيلي واستراتيجيات النمو لبناء منظمات مرنة ونتائج مستدامة.",
+    footerContact:"التواصل",
+    footerEmail:"info@futuredimensionsco.com",
+    toastCopied:"تم النسخ ✅"
+  }
+};
+
+function setText(id, val){
+  const el = document.getElementById(id);
+  if(el) el.textContent = val;
+}
+
+function applyLang(lang){
+  const c = i18n[lang] || i18n.en;
+  document.documentElement.lang = c.lang;
+  document.documentElement.dir  = c.dir;
+
+  setText("navHome", c.navHome);
+  setText("navServices", c.navServices);
+  setText("navFinancial", c.navFinancial);
+  setText("navAdministrative", c.navAdministrative);
+  setText("navGrowth", c.navGrowth);
+  setText("navTeam", c.navTeam);
+  setText("navCareers", c.navCareers);
+  setText("navContact", c.navContact);
+  setText("ctaBtn", c.cta);
+
+  setText("footerTitle", c.footerTitle);
+  setText("footerText", c.footerText);
+  setText("footerContact", c.footerContact);
+  setText("footerEmail", c.footerEmail);
+
+  const t = document.getElementById("langToggle");
+  if(t) t.textContent = c.toggle;
+
+  // page-specific
+  if(typeof applyPageLang === "function") applyPageLang(lang);
+}
+
+function getLang(){
+  return localStorage.getItem("fd_lang") || "en";
+}
+function toggleLang(){
+  const cur = getLang();
+  const next = cur === "en" ? "ar" : "en";
+  localStorage.setItem("fd_lang", next);
+  applyLang(next);
+}
+
+window.addEventListener("DOMContentLoaded", ()=>{
+  const btn = document.getElementById("langToggle");
+  if(btn) btn.addEventListener("click", toggleLang);
+  applyLang(getLang());
+});
+
+
+function toast(msg){
+  const t = document.getElementById("toast");
+  if(!t) return;
+  t.textContent = msg;
+  t.style.display = "block";
+  clearTimeout(window.__t);
+  window.__t = setTimeout(()=> t.style.display="none", 1800);
+}
+
+
+function applyPageLang(lang){
+  const c = (lang==="ar") ? {
+    kicker:"ادخل بتحديات… واخرج بأبعاد جديدة",
+    heroTitle:"فيوتشر <span class='gold'>ديمينشنز</span><br/>حلول استشارية وإدارية",
+    heroText:"نجمع بين التشخيص المالي والتميز التشغيلي واستراتيجيات النمو لمساعدة القيادات على رفع الأداء وتعزيز الحوكمة والتوسع بثقة.",
+    heroCta1:"استكشف الخدمات", heroCta2:"انضم لفريقنا",
+    k1:"البُعد المالي", k2:"البُعد الإداري والتشغيلي", k3:"بُعد استراتيجيات النمو",
+    sideTitle:"ماذا تحصل عليه؟",
+    sideText:"تشخيص واضح + خارطة طريق قابلة للتنفيذ + نتائج قابلة للقياس. تركيزنا: العائد على الاستثمار، خفض التكاليف، الالتزام، ونمو مستدام مع دعم للتنفيذ.",
+    t1:"عائد وقيمة", t2:"خفض التكاليف", t3:"حوكمة", t4:"تنفيذ",
+    servicesTitle:"خدماتنا", servicesHint:"افتح كل بُعد لعرض التفاصيل كاملة",
+    finTag:"البُعد المالي", finTitle:"تمويل يدفع الأداء", finText:"تشخيص شامل، تحسين الربحية، دعم المعايير الدولية، وتقييم المخاطر والمراجعة الداخلية.", finBtn:"افتح المالي", finP1:"IFRS 9", finP2:"IAS 19",
+    opTag:"الإداري والتشغيلي", opTitle:"تنفيذ وتميز تشغيلي", opText:"تطوير الاستراتيجية وتنفيذها، تحسين العمليات، أطر الحوكمة، والاستعداد للـ ISO.", opBtn:"افتح التشغيلي", opP1:"عمليات", opP2:"حوكمة",
+    grTag:"استراتيجيات النمو", grTitle:"توسع بثقة", grText:"دخول أسواق جديدة، خطط التوسع، التحول الرقمي، وتحسين الأنظمة التقنية.", grBtn:"افتح النمو", grP1:"توسع", grP2:"رقمي",
+    aboutTitle:"من نحن", aboutHint:"الرؤية والرسالة وطريقة عملنا",
+    whoTag:"من نحن", whoTitle:"شريك استشاري قائم على النتائج", whoText:"فيوتشر ديمينشنز شريك استشاري يجمع بين الخبرة المالية والتميز التشغيلي واستراتيجيات النمو لبناء منظمات مرنة ونتائج مستدامة.",
+    whoP1:"مالي", whoP2:"تشغيلي", whoP3:"نمو", whoP4:"حوكمة",
+    mvTag:"الرؤية والرسالة", mvTitle:"هدف واضح وتنفيذ قوي",
+    mv1:"الرؤية: أن نكون شريكًا موثوقًا للمنظمات الساعية للنمو المستدام والتميز التشغيلي.",
+    mv2:"الرسالة: تمكين المنظمات عبر حلول استشارية عملية عالية الجودة ودعم مستمر.",
+    mv3:"نُقيم علاقات استراتيجية قائمة على الثقة ونُحقق أثرًا قابلًا للقياس.",
+    contactTitle:"تواصل معنا", contactHint:"نرد بسرعة",
+    contactTag:"تواصل", contactH:"احكيلنا احتياجك", contactP:"شارك أهدافك وتحدياتك وسنقترح أفضل نقطة بداية وخطوة تالية واضحة.",
+    mailBtn:"راسلنا", teamBtn:"تعرف على الفريق",
+    seoTag:"SEO (الخطوة التالية)", seoH:"Search Console + Sitemap", seoP:"تم التحقق من ملكية الموقع ✅. الخطوة التالية: تحديث sitemap.xml وطلب الفهرسة للصفحات الأساسية.",
+    seoP1:"sitemap.xml", seoP2:"فهرسة", seoP3:"Meta"
+  } : null;
+
+  if(c){
+    document.getElementById("kicker").textContent = c.kicker;
+    document.getElementById("heroTitle").innerHTML = c.heroTitle;
+    document.getElementById("heroText").textContent = c.heroText;
+    setText("heroCta1", c.heroCta1); setText("heroCta2", c.heroCta2);
+    setText("k1", c.k1); setText("k2", c.k2); setText("k3", c.k3);
+    setText("sideTitle", c.sideTitle); setText("sideText", c.sideText);
+    setText("t1", c.t1); setText("t2", c.t2); setText("t3", c.t3); setText("t4", c.t4);
+
+    setText("servicesTitle", c.servicesTitle); setText("servicesHint", c.servicesHint);
+    setText("finTag", c.finTag); setText("finTitle", c.finTitle); setText("finText", c.finText); setText("finBtn", c.finBtn);
+    setText("finP1", c.finP1); setText("finP2", c.finP2);
+    setText("opTag", c.opTag); setText("opTitle", c.opTitle); setText("opText", c.opText); setText("opBtn", c.opBtn);
+    setText("opP1", c.opP1); setText("opP2", c.opP2);
+    setText("grTag", c.grTag); setText("grTitle", c.grTitle); setText("grText", c.grText); setText("grBtn", c.grBtn);
+    setText("grP1", c.grP1); setText("grP2", c.grP2);
+
+    setText("aboutTitle", c.aboutTitle); setText("aboutHint", c.aboutHint);
+    setText("whoTag", c.whoTag); setText("whoTitle", c.whoTitle); setText("whoText", c.whoText);
+    setText("whoP1", c.whoP1); setText("whoP2", c.whoP2); setText("whoP3", c.whoP3); setText("whoP4", c.whoP4);
+    setText("mvTag", c.mvTag); setText("mvTitle", c.mvTitle);
+    setText("mv1", c.mv1); setText("mv2", c.mv2); setText("mv3", c.mv3);
+
+    setText("contactTitle", c.contactTitle); setText("contactHint", c.contactHint);
+    setText("contactTag", c.contactTag); setText("contactH", c.contactH); setText("contactP", c.contactP);
+    setText("mailBtn", c.mailBtn); setText("teamBtn", c.teamBtn);
+
+    setText("seoTag", c.seoTag); setText("seoH", c.seoH); setText("seoP", c.seoP);
+    setText("seoP1", c.seoP1); setText("seoP2", c.seoP2); setText("seoP3", c.seoP3);
+  }
+}
+
+</script>
+</body>
+</html>
