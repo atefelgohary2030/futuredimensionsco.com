@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Future Dimensions | Consulting & Business Solutions</title>
+  <meta name="description" content="Future Dimensions – Consulting & Business Solutions. IAS 19, IFRS 9 ECL, Governance, and Growth consulting." />
+  <link rel="preload" href="logo.png" as="image">
+
+  <style>
+    :root{
+      --navy:#0b1322;
+      --navy2:#0f1b2d;
+      --navy3:#132642;
+
+      --gold:#D4AF37;
+      --gold2:#B8962E;
+      --gold3:#F1D77A;
+
+      --champ:#F5F1E6;
+      --teal:#2EC4B6;
+
+      --ink:#0b1322;
+      --onDark:#F6F7FB;
+      --mutedOnDark:#C9D2E4;
+
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Kufi Arabic","Noto Sans Arabic", sans-serif;
+      color: var(--onDark);
+      background:
+        radial-gradient(1100px 700px at 12% 0%, rgba(46,196,182,.18) 0%, rgba(46,196,182,0) 58%),
+        radial-gradient(900px 600px at 88% 12%, rgba(212,175,55,.14) 0%, rgba(212,175,55,0) 60%),
+        radial-gradient(800px 520px at 50% 105%, rgba(245,241,230,.09) 0%, rgba(245,241,230,0) 55%),
+        linear-gradient(180deg, #070b14 0%, var(--navy) 40%, var(--navy2) 100%);
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+    .wrap{max-width:var(--max);margin:auto;padding:0 18px}
+
+    header{
+      position:sticky;top:0;z-index:100;
+      background:rgba(11,19,34,.82);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(212,175,55,.22);
+      transition:.3s;
+    }
+    header.scrolled{
+      box-shadow:0 10px 30px rgba(0,0,0,.28);
+      background:rgba(11,19,34,.92);
+      border-bottom-color: rgba(212,175,55,.32);
+    }
+
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:14px 0;gap:14px;flex-wrap:wrap
+    }
+
+    /* ✅ Keep logo ALWAYS on the LEFT of brand name even in RTL */
+    .brand{
+      display:flex;align-items:center;gap:14px;
+      min-width:260px;
+      direction:ltr;
+    }
+    [dir="rtl"] .brandText{direction:rtl;text-align:right;}
+
+    .logo{
+      width:52px;height:52px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(0,0,0,.92), rgba(0,0,0,.62));
+      border:1px solid rgba(212,175,55,.55);
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    .logo img{width:48px;height:48px;object-fit:contain}
+
+    .brandText b{display:block;font-weight:1000;letter-spacing:.5px;color:rgba(255,255,255,.92)}
+    .brandText small{font-weight:800;color:rgba(255,255,255,.68)}
+
+    .menu{display:flex;gap:18px;font-weight:950;flex-wrap:wrap;color:rgba(255,255,255,.84);align-items:center}
+    .menu a{padding:8px 10px;border-radius:10px}
+    .menu a:hover{background:rgba(46,196,182,.10)}
+
+    .navRight{display:flex;gap:10px;align-items:center}
+
+    .btn{
+      padding:10px 16px;border-radius:14px;
+      font-weight:950;border:none;cursor:pointer
+    }
+    .btn.gold{
+      background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2));
+      color:var(--ink);
+      box-shadow:var(--shadow)
+    }
+    .btn.gold:hover{filter:brightness(1.03)}
+    .btn.lang{
+      background:transparent;
+      border:1px solid rgba(255,255,255,.20);
+      color:rgba(255,255,255,.86);
+      box-shadow:none;
+    }
+    .btn.lang:hover{background:rgba(255,255,255,.08)}
+
+    /* ✅ Services dropdown */
+    .dropdown{position:relative}
+    .dropBtn{
+      display:flex;align-items:center;gap:8px;
+      padding:8px 10px;border-radius:10px;
+      font-weight:950;
+      background:transparent;border:0;color:rgba(255,255,255,.84);
+      cursor:pointer;
+    }
+    .dropBtn:hover{background:rgba(46,196,182,.10)}
+    .dropMenu{
+      position:absolute;top:44px;left:0;
+      min-width:280px;
+      background:rgba(11,19,34,.95);
+      border:1px solid rgba(212,175,55,.25);
+      box-shadow:0 18px 45px rgba(0,0,0,.45);
+      border-radius:14px;
+      padding:8px;
+      display:none;
+      z-index:200;
+    }
+    .dropMenu a{
+      display:block;
+      padding:10px 10px;
+      border-radius:12px;
+      color:rgba(255,255,255,.88);
+      font-weight:900;
+    }
+    .dropMenu a:hover{background:rgba(212,175,55,.14)}
+    .dropdown.open .dropMenu{display:block}
+    [dir="rtl"] .dropMenu{left:auto;right:0}
+
+    /* HERO */
+    .hero{padding:64px 0 26px}
+    .heroGrid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px
+    }
+
+    .heroCard{
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(900px 480px at 10% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
+      border: 1px solid rgba(0,0,0,.14);
+      color: var(--ink);
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* Watermark */
+    .heroWm{
+      position:absolute;
+      right:-28px; bottom:-42px;
+      width:240px; height:240px;
+      opacity:.08;
+      transform:rotate(-10deg);
+      pointer-events:none;
+      filter:saturate(1.05) contrast(1.05);
+    }
+    [dir="rtl"] .heroWm{right:auto; left:-28px; transform:rotate(10deg);}
+
+    .heroTitle{
+      margin:0 0 10px;
+      font-size:44px;
+      line-height:1.08;
+      letter-spacing:.2px;
+      color: var(--ink);
+      font-weight:1000;
+    }
+    .heroText{
+      margin:0 0 18px;
+      font-size:16px;
+      color: rgba(11,19,34,.86);
+      font-weight:850;
+      position:relative;
+      z-index:2;
+    }
+
+    .heroBadges{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px;position:relative;z-index:2}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border-radius:999px;
+      background:rgba(11,19,34,.08);
+      border:1px solid rgba(11,19,34,.14);
+      font-weight:950;
+      color: rgba(11,19,34,.88);
+      font-size:13px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--teal), rgba(46,196,182,.65));
+      border:1px solid rgba(11,19,34,.22);
+    }
+
+    .ctaBtn{
+      margin-top:18px;
+      display:inline-block;
+      padding:14px 20px;
+      border-radius:16px;
+      background:linear-gradient(135deg, rgba(11,19,34,.95), rgba(19,38,66,.95));
+      color:var(--onDark);
+      font-weight:1000;
+      border:1px solid rgba(11,19,34,.18);
+      box-shadow: 0 14px 35px rgba(0,0,0,.26);
+      position:relative;z-index:2;
+    }
+    .ctaBtn:hover{filter:brightness(1.05)}
+
+    .sideCard{
+      border-radius: var(--radius);
+      border: 1px solid rgba(46,196,182,.22);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(700px 420px at 12% 0%, rgba(46,196,182,.20), rgba(46,196,182,0) 60%),
+        linear-gradient(135deg, #05070D 0%, #0B1322 60%, var(--navy2) 120%);
+      color: var(--onDark);
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .sideCard:before{
+      content:"";
+      position:absolute;inset:0;
+      background: radial-gradient(600px 300px at 20% 0%, rgba(212,175,55,.14), rgba(0,0,0,0) 60%);
+      pointer-events:none;
+    }
+    .sideCard h3{margin:0 0 10px;font-size:18px;position:relative;z-index:1}
+    .sideCard ul{margin:0;padding-left:18px;color:rgba(255,255,255,.82);font-weight:850;position:relative;z-index:1}
+    [dir="rtl"] .sideCard ul{padding-right:18px;padding-left:0}
+    .sideCard li{margin:8px 0}
+    .sideCard .mini{
+      margin-top:14px;
+      border-top:1px solid rgba(255,255,255,.12);
+      padding-top:12px;
+      color: rgba(255,255,255,.85);
+      font-weight:900;
+      font-size:13px;
+      position:relative;z-index:1
+    }
+
+    section{padding:48px 0}
+    .sectionTitle{
+      display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+      margin-bottom:14px;
+    }
+    .sectionTitle h2{
+      margin:0;font-size:26px;
+      letter-spacing:.2px;
+      color: rgba(255,255,255,.92);
+    }
+    .sectionTitle p{
+      margin:0;color:rgba(255,255,255,.68);
+      font-weight:850;
+      font-size:14px;
+    }
+
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+
+    /* Gold cards */
+    .card{
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
+      border:1px solid rgba(0,0,0,.12);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      color: var(--ink);
+    }
+    .card h3{margin:0 0 10px;font-size:18px;color:rgba(11,19,34,.96);font-weight:1000;letter-spacing:.3px}
+    .card p{margin:0;color:rgba(11,19,34,.86);font-weight:850}
+    .card ul{margin:0;padding-left:18px;color:rgba(11,19,34,.88);font-weight:900}
+    [dir="rtl"] .card ul{padding-right:18px;padding-left:0}
+    .card li{margin:7px 0}
+
+    /* Clickable service cards */
+    .serviceLink{
+      display:block;
+      border-radius: var(--radius);
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .serviceLink:hover{transform: translateY(-2px); filter:brightness(1.02)}
+    .serviceMeta{
+      margin-top:12px;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      font-weight:950;
+      color: rgba(11,19,34,.92);
+    }
+    .serviceMeta span{font-size:13px;opacity:.8;font-weight:900}
+    .serviceMeta b{
+      font-size:13px;
+      background: rgba(11,19,34,.08);
+      border:1px solid rgba(11,19,34,.14);
+      padding:8px 10px;
+      border-radius:999px;
+    }
+
+    .darkBand{
+      margin:22px 0 0;
+      border-radius: 22px;
+      padding:18px;
+      background:
+        radial-gradient(700px 320px at 12% 0%, rgba(245,241,230,.10), rgba(245,241,230,0) 60%),
+        linear-gradient(135deg, #05070D 0%, #0B1322 60%, var(--navy2) 120%);
+      border:1px solid rgba(212,175,55,.22);
+      box-shadow: var(--shadow);
+      color: var(--onDark);
+    }
+    .darkBand p{margin:0;color:rgba(255,255,255,.84);font-weight:850}
+
+    .contactBox{display:grid;grid-template-columns:1.05fr .95fr;gap:14px;align-items:stretch}
+    .contactCard{
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.12);
+      background:
+        radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
+      position:relative;
+      color: var(--ink);
+    }
+    .contactInner{padding:18px}
+    .contactRow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:999px;
+      background: rgba(11,19,34,.08);
+      border: 1px solid rgba(11,19,34,.14);
+      font-weight:950;
+      color: rgba(11,19,34,.90);
+      font-size:13px;
+    }
+
+    footer{
+      background:linear-gradient(135deg, #05070D 0%, #0B1322 60%, var(--navy2) 120%);
+      color:#ddd;
+      padding:26px 0;
+      border-top:1px solid rgba(212,175,55,.22);
+    }
+    .footerGrid{
+      display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px
+    }
+    .footerBrand{display:flex;align-items:center;gap:12px}
+    .footerBrand img{
+      width:44px;height:44px;border-radius:12px;
+      border:1px solid rgba(212,175,55,.45);
+      background:#000;
+      object-fit:contain;
+    }
+    .footerBrand div b{display:block}
+    .footerBrand div small{display:block;color:rgba(255,255,255,.68);font-weight:800}
+    .copy{color:rgba(255,255,255,.65);font-weight:800;font-size:13px}
+
+    a:focus-visible, button:focus-visible{
+      outline: 3px solid rgba(46,196,182,.70);
+      outline-offset: 3px;
+      border-radius: 14px;
+    }
+
+    /* ======== Single-file "Pages" ======== */
+    .page{display:none}
+    .page.active{display:block}
+
+    .servicePage{
+      padding:34px 0 54px;
+    }
+    .serviceHero{
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      background:
+        radial-gradient(900px 480px at 10% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
+      border:1px solid rgba(0,0,0,.14);
+      color:var(--ink);
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+    }
+    .serviceHeroWm{
+      position:absolute;right:-28px;bottom:-42px;width:240px;height:240px;opacity:.08;transform:rotate(-10deg);pointer-events:none
+    }
+    [dir="rtl"] .serviceHeroWm{right:auto;left:-28px;transform:rotate(10deg)}
+    .serviceHero h1{margin:0 0 10px;font-size:34px;line-height:1.12;font-weight:1000}
+    .serviceHero p{margin:0 0 14px;font-weight:850;color:rgba(11,19,34,.86)}
+    .svcGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+    .svcCard{
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      background:rgba(11,19,34,.92);
+      border:1px solid rgba(212,175,55,.22);
+      padding:18px;
+      color:rgba(255,255,255,.88);
+    }
+    .svcCard h3{margin:0 0 10px;font-size:18px}
+    .svcCard ul{margin:0;padding-left:18px;font-weight:850;color:rgba(255,255,255,.82)}
+    [dir="rtl"] .svcCard ul{padding-right:18px;padding-left:0}
+    .svcCta{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .svcPill{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);font-weight:900;color:rgba(255,255,255,.88);font-size:13px}
+    .backRow{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+    .ghostLink{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      font-weight:900;color:rgba(255,255,255,.86);
+    }
+    .ghostLink:hover{background:rgba(255,255,255,.10)}
+    .svcNav{display:flex;gap:10px;flex-wrap:wrap}
+
+    @media(max-width:900px){
+      .heroGrid,.grid2,.contactBox,.svcGrid{grid-template-columns:1fr}
+      .grid4{grid-template-columns:1fr}
+      .heroTitle{font-size:34px}
+      .brand{min-width:auto}
+      .dropMenu{min-width:240px}
+      .serviceHero h1{font-size:30px}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="logo">
+        <img id="logoImg" src="logo.png" alt="Future Dimensions Logo">
+      </div>
+      <div class="brandText">
+        <b id="brandName">FUTURE DIMENSIONS</b>
+        <small id="brandSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
+      </div>
+    </div>
+
+    <nav class="menu" aria-label="Main navigation">
+      <a href="#home" id="navHome">Home</a>
+      <a href="#about" id="navAbout">About</a>
+      <a href="#services" id="navServices">Services</a>
+
+      <div class="dropdown" id="servicesDropdown">
+        <button class="dropBtn" id="navServicePages" type="button">Service Pages ▾</button>
+        <div class="dropMenu" role="menu" aria-label="Service pages">
+          <a href="#service-ias19" id="sp1">IAS 19 (EOSB)</a>
+          <a href="#service-ifrs9" id="sp2">IFRS 9 (ECL)</a>
+          <a href="#service-governance" id="sp3">Governance & Compliance</a>
+          <a href="#service-growth" id="sp4">Growth Strategy</a>
+        </div>
+      </div>
+
+      <a href="#approach" id="navApproach">Approach</a>
+      <a href="#contact" id="navContact">Contact</a>
+    </nav>
+
+    <div class="navRight">
+      <button class="btn lang" id="langToggle">العربية</button>
+      <a href="#contact" class="btn gold" id="navCta">Get a Proposal</a>
+    </div>
+  </div>
+</header>
+
+<!-- ======= HOME PAGE (as-is) ======= -->
+<main id="pageHome" class="page active">
+  <section class="hero" id="home">
+    <div class="wrap heroGrid">
+      <div class="heroCard">
+        <img class="heroWm" src="logo.png" alt="">
+        <div class="heroBadges">
+          <span class="badge"><span class="dot"></span><span id="b1">IAS 19 – EOSB</span></span>
+          <span class="badge"><span class="dot"></span><span id="b2">IFRS 9 – ECL</span></span>
+          <span class="badge"><span class="dot"></span><span id="b3">Business Transformation</span></span>
+        </div>
+
+        <h1 class="heroTitle" id="heroTitle">Enter with Challenges – Exit with New Dimensions</h1>
+        <p class="heroText" id="heroText">
+          Future Dimensions is an integrated consulting firm delivering advanced financial,
+          administrative, and growth solutions. We turn complex challenges into sustainable growth with measurable impact.
+        </p>
+        <a href="#contact" class="ctaBtn" id="heroBtn">Start Your Transformation</a>
+      </div>
+
+      <div class="sideCard">
+        <h3 id="whyTitle">Why Future Dimensions?</h3>
+        <ul id="whyList">
+          <li>Transformation, not temporary fixes</li>
+          <li>IFRS-aligned, audit-ready deliverables</li>
+          <li>Clear methodology and practical recommendations</li>
+          <li>Fast turnaround with quality assurance</li>
+        </ul>
+        <div class="mini" id="miniNote">“Enter with Challenges – Exit with New Dimensions”</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <h2 id="aboutTitle">About Us</h2>
+        <p id="aboutHint">Identity-driven. Execution-focused.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3 id="aboutH3_1">Who we are</h3>
+          <p id="aboutP1">
+            Future Dimensions is a modern consulting partner that blends financial expertise,
+            governance, and growth strategy to build resilient organizations.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 id="aboutH3_2">Our promise</h3>
+          <ul id="aboutList">
+            <li>Structured, documented, and compliant delivery</li>
+            <li>Actionable roadmap with clear milestones</li>
+            <li>Stakeholder-ready outputs (management & audit)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="darkBand">
+        <p id="taglineLine">We don’t just advise — we build dimensions that last.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <h2 id="servicesTitle">Our Services</h2>
+        <p id="servicesHint">Gold standard deliverables.</p>
+      </div>
+
+      <div class="grid4">
+        <a class="serviceLink" href="#service-ias19" aria-label="Open IAS 19 service page">
+          <div class="card">
+            <h3 id="s1">IAS 19 (EOSB)</h3>
+            <ul id="s1List">
+              <li>Actuarial Valuation (EOSB)</li>
+              <li>Assumptions & sensitivity</li>
+              <li>Audit-ready reporting</li>
+            </ul>
+            <div class="serviceMeta">
+              <span id="sMeta1">Service Page</span><b id="sBtn1">View Details →</b>
+            </div>
+          </div>
+        </a>
+
+        <a class="serviceLink" href="#service-ifrs9" aria-label="Open IFRS 9 service page">
+          <div class="card">
+            <h3 id="s2">IFRS 9 (ECL)</h3>
+            <ul id="s2List">
+              <li>ECL model design</li>
+              <li>Stage allocation & PD/LGD/EAD</li>
+              <li>Governance & documentation</li>
+            </ul>
+            <div class="serviceMeta">
+              <span id="sMeta2">Service Page</span><b id="sBtn2">View Details →</b>
+            </div>
+          </div>
+        </a>
+
+        <a class="serviceLink" href="#service-governance" aria-label="Open Governance service page">
+          <div class="card">
+            <h3 id="s3">Governance & Compliance</h3>
+            <ul id="s3List">
+              <li>Policies & controls</li>
+              <li>Process optimization</li>
+              <li>Risk & compliance frameworks</li>
+            </ul>
+            <div class="serviceMeta">
+              <span id="sMeta3">Service Page</span><b id="sBtn3">View Details →</b>
+            </div>
+          </div>
+        </a>
+
+        <a class="serviceLink" href="#service-growth" aria-label="Open Growth Strategy service page">
+          <div class="card">
+            <h3 id="s4">Growth Strategy</h3>
+            <ul id="s4List">
+              <li>Market entry & expansion</li>
+              <li>Business development enablement</li>
+              <li>Digital transformation roadmap</li>
+            </ul>
+            <div class="serviceMeta">
+              <span id="sMeta4">Service Page</span><b id="sBtn4">View Details →</b>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="approach">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <h2 id="approachTitle">Our Methodology</h2>
+        <p id="approachHint">From challenge → to dimensions.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3 id="m1">How we work</h3>
+          <ul id="mList">
+            <li>Challenge Diagnosis</li>
+            <li>Dimension Design</li>
+            <li>Guided Execution</li>
+            <li>Transformation Confirmation (KPIs)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 id="m2">What you get</h3>
+          <p id="mText">
+            Clear documentation, IFRS alignment, stakeholder-ready outputs, and measurable improvement
+            delivered through a structured consulting engagement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <h2 id="contactTitle">Contact</h2>
+        <p id="contactHint">Let’s build your next dimension.</p>
+      </div>
+
+      <div class="contactBox">
+        <div class="contactCard">
+          <div class="contactInner">
+            <h3 id="contactH3">Get in touch</h3>
+            <div class="contactRow">
+              <span class="pill"><strong id="ph1">Email:</strong> <span>info@futuredimensionsco.com</span></span>
+              <span class="pill"><strong id="ph2">Phone:</strong> <span>+20 100 193 8264</span></span>
+            </div>
+            <div class="contactRow">
+              <span class="pill"><strong id="ph3">Address:</strong> <span id="addr">Building No. 6, Mostafa Anani St., Heliopolis, Cairo, Egypt</span></span>
+            </div>
+            <div class="contactRow" style="margin-top:16px;">
+              <a class="ctaBtn" id="emailBtn" href="mailto:info@futuredimensionsco.com">Request a Proposal</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sideCard">
+          <h3 id="ctaTitle">Take the First Step Today</h3>
+          <p id="ctaText" style="margin:0;color:rgba(255,255,255,.82);font-weight:850;">
+            Book your complimentary Challenge Map Exploratory Session and start your transformation journey.
+          </p>
+          <div class="mini" id="ctaMini">
+            Quick response • Professional delivery • Audit-ready outputs
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ======= SERVICE PAGES (inside same file) ======= -->
+<main id="pageIAS19" class="page servicePage">
+  <div class="wrap">
+    <section class="serviceHero">
+      <img class="serviceHeroWm" src="logo.png" alt="">
+      <h1 id="ias19Title">IAS 19 (EOSB) – Actuarial Valuation</h1>
+      <p id="ias19Lead">Audit-ready actuarial valuation for End of Service Benefits with clear assumptions, sensitivity, and disclosure support.</p>
+
+      <div class="svcGrid">
+        <div class="svcCard">
+          <h3 id="ias19C1">What we deliver</h3>
+          <ul id="ias19L1">
+            <li>IAS 19 compliant valuation report</li>
+            <li>Key assumptions & sensitivity analysis</li>
+            <li>Reconciliation movement schedule</li>
+            <li>Disclosure-ready tables</li>
+          </ul>
+        </div>
+        <div class="svcCard">
+          <h3 id="ias19C2">When you need it</h3>
+          <ul id="ias19L2">
+            <li>Year-end / audit cycle</li>
+            <li>Policy changes & benefits redesign</li>
+            <li>M&A / restructuring</li>
+            <li>Board & management reporting</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="svcCta">
+        <a class="btn gold" href="mailto:info@futuredimensionsco.com" id="ias19CtaBtn">Request a Proposal</a>
+        <span class="svcPill" id="ias19Pill">Fast turnaround • Clear documentation • Audit-ready</span>
+      </div>
+
+      <div class="backRow">
+        <a class="ghostLink" href="#services" id="backToServices1">← Back to Services</a>
+        <div class="svcNav">
+          <a class="ghostLink" href="#service-ifrs9" id="nextIfs9_1">Next: IFRS 9</a>
+          <a class="ghostLink" href="#service-governance" id="nextGov_1">Governance</a>
+          <a class="ghostLink" href="#service-growth" id="nextGrowth_1">Growth</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<main id="pageIFRS9" class="page servicePage">
+  <div class="wrap">
+    <section class="serviceHero">
+      <img class="serviceHeroWm" src="logo.png" alt="">
+      <h1 id="ifrs9Title">IFRS 9 (ECL) – Expected Credit Loss</h1>
+      <p id="ifrs9Lead">Design, enhancement, and documentation of ECL models with governance that stands up to audit and regulators.</p>
+
+      <div class="svcGrid">
+        <div class="svcCard">
+          <h3 id="ifrs9C1">What we deliver</h3>
+          <ul id="ifrs9L1">
+            <li>ECL model methodology (PD/LGD/EAD)</li>
+            <li>Stage allocation & SICR framework</li>
+            <li>Model validation support</li>
+            <li>Documentation & disclosure packs</li>
+          </ul>
+        </div>
+        <div class="svcCard">
+          <h3 id="ifrs9C2">When you need it</h3>
+          <ul id="ifrs9L2">
+            <li>IFRS 9 implementation or upgrade</li>
+            <li>Audit findings / remediation</li>
+            <li>Portfolio expansion or policy changes</li>
+            <li>Governance improvements</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="svcCta">
+        <a class="btn gold" href="mailto:info@futuredimensionsco.com" id="ifrs9CtaBtn">Request a Proposal</a>
+        <span class="svcPill" id="ifrs9Pill">Model governance • Clear documentation • Audit-ready</span>
+      </div>
+
+      <div class="backRow">
+        <a class="ghostLink" href="#services" id="backToServices2">← Back to Services</a>
+        <div class="svcNav">
+          <a class="ghostLink" href="#service-ias19" id="prevIas19_2">Prev: IAS 19</a>
+          <a class="ghostLink" href="#service-governance" id="nextGov_2">Next: Governance</a>
+          <a class="ghostLink" href="#service-growth" id="nextGrowth_2">Growth</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<main id="pageGOV" class="page servicePage">
+  <div class="wrap">
+    <section class="serviceHero">
+      <img class="serviceHeroWm" src="logo.png" alt="">
+      <h1 id="govTitle">Governance & Compliance – Policies, Controls, and Process Excellence</h1>
+      <p id="govLead">Build robust governance, internal controls, and compliant processes that improve performance and reduce risk.</p>
+
+      <div class="svcGrid">
+        <div class="svcCard">
+          <h3 id="govC1">What we deliver</h3>
+          <ul id="govL1">
+            <li>Policy & procedure design</li>
+            <li>Internal controls & RCM support</li>
+            <li>Process optimization & SOPs</li>
+            <li>Compliance documentation</li>
+          </ul>
+        </div>
+        <div class="svcCard">
+          <h3 id="govC2">When you need it</h3>
+          <ul id="govL2">
+            <li>Rapid growth / scaling</li>
+            <li>Audit & compliance gaps</li>
+            <li>Process inefficiencies</li>
+            <li>Need stronger governance</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="svcCta">
+        <a class="btn gold" href="mailto:info@futuredimensionsco.com" id="govCtaBtn">Request a Proposal</a>
+        <span class="svcPill" id="govPill">Stronger controls • Better processes • Lower risk</span>
+      </div>
+
+      <div class="backRow">
+        <a class="ghostLink" href="#services" id="backToServices3">← Back to Services</a>
+        <div class="svcNav">
+          <a class="ghostLink" href="#service-ifrs9" id="prevIfs9_3">Prev: IFRS 9</a>
+          <a class="ghostLink" href="#service-growth" id="nextGrowth_3">Next: Growth</a>
+          <a class="ghostLink" href="#service-ias19" id="goIas19_3">IAS 19</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<main id="pageGROWTH" class="page servicePage">
+  <div class="wrap">
+    <section class="serviceHero">
+      <img class="serviceHeroWm" src="logo.png" alt="">
+      <h1 id="growthTitle">Growth Strategy – Expansion, Market Entry, and Business Development</h1>
+      <p id="growthLead">A practical growth roadmap: market entry, expansion planning, and execution support with measurable KPIs.</p>
+
+      <div class="svcGrid">
+        <div class="svcCard">
+          <h3 id="growthC1">What we deliver</h3>
+          <ul id="growthL1">
+            <li>Market entry strategy</li>
+            <li>Expansion plan & business case</li>
+            <li>Business development enablement</li>
+            <li>KPIs & execution roadmap</li>
+          </ul>
+        </div>
+        <div class="svcCard">
+          <h3 id="growthC2">When you need it</h3>
+          <ul id="growthL2">
+            <li>Entering new markets</li>
+            <li>Launching new offerings</li>
+            <li>Improving sales pipeline</li>
+            <li>Scaling operations</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="svcCta">
+        <a class="btn gold" href="mailto:info@futuredimensionsco.com" id="growthCtaBtn">Request a Proposal</a>
+        <span class="svcPill" id="growthPill">Clear roadmap • Executable plan • Measurable KPIs</span>
+      </div>
+
+      <div class="backRow">
+        <a class="ghostLink" href="#services" id="backToServices4">← Back to Services</a>
+        <div class="svcNav">
+          <a class="ghostLink" href="#service-governance" id="prevGov_4">Prev: Governance</a>
+          <a class="ghostLink" href="#service-ias19" id="goIas19_4">IAS 19</a>
+          <a class="ghostLink" href="#service-ifrs9" id="goIfs9_4">IFRS 9</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap footerGrid">
+    <div class="footerBrand">
+      <img id="logoFooter" src="logo.png" alt="Future Dimensions Logo" />
+      <div>
+        <b id="footName">FUTURE DIMENSIONS</b>
+        <small id="footSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
+      </div>
+    </div>
+    <div class="copy" id="copyText">© Future Dimensions — All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll
+  window.addEventListener("scroll",()=>{
+    document.querySelector("header")
+      .classList.toggle("scrolled",window.scrollY>10);
+  });
+
+  // Dropdown open/close
+  const dd = document.getElementById("servicesDropdown");
+  const btn = document.getElementById("navServicePages");
+  btn.addEventListener("click", (e)=>{
+    e.stopPropagation();
+    dd.classList.toggle("open");
+  });
+  document.addEventListener("click", ()=> dd.classList.remove("open"));
+
+  // ====== Single-file routing (hash pages) ======
+  const pages = {
+    home: document.getElementById("pageHome"),
+    "service-ias19": document.getElementById("pageIAS19"),
+    "service-ifrs9": document.getElementById("pageIFRS9"),
+    "service-governance": document.getElementById("pageGOV"),
+    "service-growth": document.getElementById("pageGROWTH"),
+  };
+
+  function showPage(key){
+    Object.values(pages).forEach(p=>p.classList.remove("active"));
+    if(pages[key]){
+      pages[key].classList.add("active");
+      window.scrollTo({top:0, behavior:"instant"});
+    }else{
+      pages.home.classList.add("active");
+    }
+  }
+
+  function onRoute(){
+    const hash = (location.hash || "#home").replace("#","");
+    if(hash.startsWith("service-")){
+      showPage(hash);
+      return;
+    }
+    // Any normal section: show home page and scroll to that section
+    showPage("home");
+    if(hash && hash !== "home"){
+      const el = document.getElementById(hash);
+      if(el) setTimeout(()=> el.scrollIntoView({behavior:"smooth"}), 50);
+    }
+  }
+
+  window.addEventListener("hashchange", onRoute);
+  onRoute();
+
+  // ====== Language toggle (bilingual across ALL pages) ======
+  const content = {
+    en: {
+      dir:"ltr", lang:"en", toggle:"العربية",
+
+      navHome:"Home",
+      navAbout:"About",
+      navServices:"Services",
+      navApproach:"Approach",
+      navContact:"Contact",
+      navCta:"Get a Proposal",
+      navServicePages:"Service Pages ▾",
+
+      sp1:"IAS 19 (EOSB)",
+      sp2:"IFRS 9 (ECL)",
+      sp3:"Governance & Compliance",
+      sp4:"Growth Strategy",
+
+      brandName:"FUTURE DIMENSIONS",
+      brandSub:"FOR CONSULTING & BUSINESS SOLUTIONS",
+
+      b1:"IAS 19 – EOSB",
+      b2:"IFRS 9 – ECL",
+      b3:"Business Transformation",
+
+      heroTitle:"Enter with Challenges – Exit with New Dimensions",
+      heroText:"Future Dimensions is an integrated consulting firm delivering advanced financial, administrative, and growth solutions. We turn complex challenges into sustainable growth with measurable impact.",
+      heroBtn:"Start Your Transformation",
+
+      whyTitle:"Why Future Dimensions?",
+      whyList:["Transformation, not temporary fixes","IFRS-aligned, audit-ready deliverables","Clear methodology and practical recommendations","Fast turnaround with quality assurance"],
+      miniNote:"“Enter with Challenges – Exit with New Dimensions”",
+
+      aboutTitle:"About Us",
+      aboutHint:"Identity-driven. Execution-focused.",
+      aboutH3_1:"Who we are",
+      aboutP1:"Future Dimensions is a modern consulting partner that blends financial expertise, governance, and growth strategy to build resilient organizations.",
+      aboutH3_2:"Our promise",
+      aboutList:["Structured, documented, and compliant delivery","Actionable roadmap with clear milestones","Stakeholder-ready outputs (management & audit)"],
+      taglineLine:"We don’t just advise — we build dimensions that last.",
+
+      servicesTitle:"Our Services",
+      servicesHint:"Gold standard deliverables.",
+
+      s1:"IAS 19 (EOSB)",
+      s1List:["Actuarial Valuation (EOSB)","Assumptions & sensitivity","Audit-ready reporting"],
+      s2:"IFRS 9 (ECL)",
+      s2List:["ECL model design","Stage allocation & PD/LGD/EAD","Governance & documentation"],
+      s3:"Governance & Compliance",
+      s3List:["Policies & controls","Process optimization","Risk & compliance frameworks"],
+      s4:"Growth Strategy",
+      s4List:["Market entry & expansion","Business development enablement","Digital transformation roadmap"],
+
+      sMeta:"Service Page",
+      sBtn:"View Details →",
+
+      approachTitle:"Our Methodology",
+      approachHint:"From challenge → to dimensions.",
+      m1:"How we work",
+      mList:["Challenge Diagnosis","Dimension Design","Guided Execution","Transformation Confirmation (KPIs)"],
+      m2:"What you get",
+      mText:"Clear documentation, IFRS alignment, stakeholder-ready outputs, and measurable improvement delivered through a structured consulting engagement.",
+
+      contactTitle:"Contact",
+      contactHint:"Let’s build your next dimension.",
+      contactH3:"Get in touch",
+      ph1:"Email:",
+      ph2:"Phone:",
+      ph3:"Address:",
+      addr:"Building No. 6, Mostafa Anani St., Heliopolis, Cairo, Egypt",
+      emailBtn:"Request a Proposal",
+
+      ctaTitle:"Take the First Step Today",
+      ctaText:"Book your complimentary Challenge Map Exploratory Session and start your transformation journey.",
+      ctaMini:"Quick response • Professional delivery • Audit-ready outputs",
+
+      copyText:"© Future Dimensions — All rights reserved.",
+
+      // Service pages EN
+      backToServices:"← Back to Services",
+      nextIFRS9:"Next: IFRS 9",
+      nextGov:"Governance",
+      nextGrowth:"Growth",
+      prevIAS19:"Prev: IAS 19",
+      prevIFRS9:"Prev: IFRS 9",
+      prevGov:"Prev: Governance",
+      goIAS19:"IAS 19",
+      goIFRS9:"IFRS 9",
+
+      ias19Title:"IAS 19 (EOSB) – Actuarial Valuation",
+      ias19Lead:"Audit-ready actuarial valuation for End of Service Benefits with clear assumptions, sensitivity, and disclosure support.",
+      ias19C1:"What we deliver",
+      ias19L1:["IAS 19 compliant valuation report","Key assumptions & sensitivity analysis","Reconciliation movement schedule","Disclosure-ready tables"],
+      ias19C2:"When you need it",
+      ias19L2:["Year-end / audit cycle","Policy changes & benefits redesign","M&A / restructuring","Board & management reporting"],
+      ias19CtaBtn:"Request a Proposal",
+      ias19Pill:"Fast turnaround • Clear documentation • Audit-ready",
+
+      ifrs9Title:"IFRS 9 (ECL) – Expected Credit Loss",
+      ifrs9Lead:"Design, enhancement, and documentation of ECL models with governance that stands up to audit and regulators.",
+      ifrs9C1:"What we deliver",
+      ifrs9L1:["ECL model methodology (PD/LGD/EAD)","Stage allocation & SICR framework","Model validation support","Documentation & disclosure packs"],
+      ifrs9C2:"When you need it",
+      ifrs9L2:["IFRS 9 implementation or upgrade","Audit findings / remediation","Portfolio expansion or policy changes","Governance improvements"],
+      ifrs9CtaBtn:"Request a Proposal",
+      ifrs9Pill:"Model governance • Clear documentation • Audit-ready",
+
+      govTitle:"Governance & Compliance – Policies, Controls, and Process Excellence",
+      govLead:"Build robust governance, internal controls, and compliant processes that improve performance and reduce risk.",
+      govC1:"What we deliver",
+      govL1:["Policy & procedure design","Internal controls & RCM support","Process optimization & SOPs","Compliance documentation"],
+      govC2:"When you need it",
+      govL2:["Rapid growth / scaling","Audit & compliance gaps","Process inefficiencies","Need stronger governance"],
+      govCtaBtn:"Request a Proposal",
+      govPill:"Stronger controls • Better processes • Lower risk",
+
+      growthTitle:"Growth Strategy – Expansion, Market Entry, and Business Development",
+      growthLead:"A practical growth roadmap: market entry, expansion planning, and execution support with measurable KPIs.",
+      growthC1:"What we deliver",
+      growthL1:["Market entry strategy","Expansion plan & business case","Business development enablement","KPIs & execution roadmap"],
+      growthC2:"When you need it",
+      growthL2:["Entering new markets","Launching new offerings","Improving sales pipeline","Scaling operations"],
+      growthCtaBtn:"Request a Proposal",
+      growthPill:"Clear roadmap • Executable plan • Measurable KPIs",
+    },
+
+    ar: {
+      dir:"rtl", lang:"ar", toggle:"English",
+
+      navHome:"الرئيسية",
+      navAbout:"من نحن",
+      navServices:"خدماتنا",
+      navApproach:"منهجيتنا",
+      navContact:"تواصل معنا",
+      navCta:"اطلب عرضًا",
+      navServicePages:"صفحات الخدمات ▾",
+
+      sp1:"IAS 19 (نهاية الخدمة)",
+      sp2:"IFRS 9 (ECL)",
+      sp3:"الحوكمة والامتثال",
+      sp4:"استراتيجية النمو",
+
+      brandName:"FUTURE DIMENSIONS",
+      brandSub:"FOR CONSULTING & BUSINESS SOLUTIONS",
+
+      b1:"IAS 19 – EOSB",
+      b2:"IFRS 9 – ECL",
+      b3:"تحول الأعمال",
+
+      heroTitle:"ادخل بالتحديات – واخرج بأبعاد جديدة",
+      heroText:"Future Dimensions شركة استشارات متكاملة تقدم حلولًا مالية وإدارية واستراتيجية متقدمة لتحويل التحديات إلى نمو مستدام بنتائج قابلة للقياس.",
+      heroBtn:"ابدأ رحلة التحول",
+
+      whyTitle:"لماذا Future Dimensions؟",
+      whyList:["تحول حقيقي وليس حلولًا مؤقتة","مخرجات متوافقة مع المعايير الدولية وجاهزة للمراجعة","منهجية واضحة وتوصيات عملية قابلة للتنفيذ","سرعة إنجاز مع ضمان الجودة"],
+      miniNote:"«ادخل بالتحديات – واخرج بأبعاد جديدة»",
+
+      aboutTitle:"من نحن",
+      aboutHint:"هوية قوية. تنفيذ فعّال.",
+      aboutH3_1:"من نحن",
+      aboutP1:"Future Dimensions شريك استشاري حديث يجمع بين الخبرة المالية والحوكمة واستراتيجيات النمو لبناء مؤسسات أكثر مرونة واستدامة.",
+      aboutH3_2:"وعدنا لك",
+      aboutList:["تسليم منظم وموثق ومتوافق مع المتطلبات","خارطة طريق قابلة للتنفيذ بمراحل واضحة","مخرجات جاهزة للإدارة والمراجعة واللجان"],
+      taglineLine:"نحن لا نقدم رأيًا فقط — نحن نبني أبعادًا تدوم.",
+
+      servicesTitle:"خدماتنا",
+      servicesHint:"مخرجات بمعيار ذهبي.",
+
+      s1:"IAS 19 (نهاية الخدمة)",
+      s1List:["تقييم اكتواري لمنافع نهاية الخدمة","افتراضات وحساسية النتائج","تقارير جاهزة للمراجعة"],
+      s2:"IFRS 9 (ECL)",
+      s2List:["تصميم نموذج الخسائر المتوقعة","تحديد المراحل PD/LGD/EAD","حوكمة وتوثيق كامل"],
+      s3:"الحوكمة والامتثال",
+      s3List:["سياسات وضوابط داخلية","تحسين العمليات","أطر المخاطر والامتثال"],
+      s4:"استراتيجية النمو",
+      s4List:["توسع ودخول أسواق","تمكين تطوير الأعمال","خارطة تحول رقمي"],
+
+      sMeta:"صفحة خدمة",
+      sBtn:"عرض التفاصيل →",
+
+      approachTitle:"منهجية العمل",
+      approachHint:"من التحدي → إلى أبعاد.",
+      m1:"كيف نعمل",
+      mList:["تشخيص التحديات","تصميم الأبعاد","تنفيذ موجّه","تأكيد التحول عبر مؤشرات (KPIs)"],
+      m2:"ماذا ستحصل عليه",
+      mText:"توثيق واضح، توافق مع المعايير، مخرجات جاهزة لأصحاب المصلحة، وتحسن ملموس ضمن إطار عمل استشاري منظم.",
+
+      contactTitle:"تواصل معنا",
+      contactHint:"لنصنع بُعدك القادم.",
+      contactH3:"بيانات التواصل",
+      ph1:"البريد:",
+      ph2:"الهاتف:",
+      ph3:"العنوان:",
+      addr:"مبنى رقم 6، شارع مصطفى عناني، مصر الجديدة، القاهرة، مصر",
+      emailBtn:"اطلب عرضًا",
+
+      ctaTitle:"اتخذ الخطوة الأولى اليوم",
+      ctaText:"احجز جلسة استكشاف Challenge Map المجانية وابدأ رحلة التحول المؤسسي.",
+      ctaMini:"استجابة سريعة • تسليم احترافي • مخرجات جاهزة للمراجعة",
+
+      copyText:"© Future Dimensions — جميع الحقوق محفوظة.",
+
+      // Service pages AR
+      backToServices:"← العودة إلى الخدمات",
+      nextIFRS9:"التالي: IFRS 9",
+      nextGov:"الحوكمة",
+      nextGrowth:"النمو",
+      prevIAS19:"السابق: IAS 19",
+      prevIFRS9:"السابق: IFRS 9",
+      prevGov:"السابق: الحوكمة",
+      goIAS19:"IAS 19",
+      goIFRS9:"IFRS 9",
+
+      ias19Title:"IAS 19 (نهاية الخدمة) – تقييم اكتواري",
+      ias19Lead:"تقييم اكتواري متوافق مع IAS 19 لمنافع نهاية الخدمة مع افتراضات واضحة، حساسية النتائج، ودعم الإفصاحات.",
+      ias19C1:"مخرجاتنا",
+      ias19L1:["تقرير تقييم متوافق مع IAS 19","افتراضات رئيسية وتحليل حساسية","جدول حركة الالتزام (Reconciliation)","جداول إفصاح جاهزة للمراجعة"],
+      ias19C2:"متى تحتاجها؟",
+      ias19L2:["نهاية السنة / موسم المراجعة","تغيير السياسات أو تصميم المزايا","استحواذات/إعادة هيكلة","تقارير للإدارة واللجان"],
+      ias19CtaBtn:"اطلب عرضًا",
+      ias19Pill:"إنجاز سريع • توثيق واضح • جاهز للمراجعة",
+
+      ifrs9Title:"IFRS 9 (ECL) – الخسائر الائتمانية المتوقعة",
+      ifrs9Lead:"تصميم/تطوير وتوثيق نماذج ECL مع حوكمة قوية تدعم المراجعة والجهات الرقابية.",
+      ifrs9C1:"مخرجاتنا",
+      ifrs9L1:["منهجية نموذج ECL (PD/LGD/EAD)","إطار SICR وتحديد المراحل","دعم التحقق/التحقق من النموذج","توثيق وجداول إفصاح"],
+      ifrs9C2:"متى تحتاجها؟",
+      ifrs9L2:["تطبيق IFRS 9 أو تطويره","ملاحظات مراجعة/خطط تصحيح","تغيرات المحافظ أو السياسات","تحسينات الحوكمة"],
+      ifrs9CtaBtn:"اطلب عرضًا",
+      ifrs9Pill:"حوكمة النموذج • توثيق واضح • جاهز للمراجعة",
+
+      govTitle:"الحوكمة والامتثال – سياسات وضوابط وتميّز تشغيلي",
+      govLead:"بناء حوكمة قوية وضوابط داخلية وعمليات متوافقة ترفع الأداء وتقلل المخاطر.",
+      govC1:"مخرجاتنا",
+      govL1:["تصميم السياسات والإجراءات","دعم الضوابط الداخلية وRCM","تحسين العمليات وSOPs","توثيق الامتثال"],
+      govC2:"متى تحتاجها؟",
+      govL2:["التوسع السريع","فجوات مراجعة/امتثال","ضعف كفاءة العمليات","الحاجة لهيكل حوكمة أقوى"],
+      govCtaBtn:"اطلب عرضًا",
+      govPill:"ضوابط أقوى • عمليات أفضل • مخاطر أقل",
+
+      growthTitle:"استراتيجية النمو – التوسع ودخول الأسواق وتطوير الأعمال",
+      growthLead:"خارطة نمو عملية: دخول أسواق، خطة توسع، ودعم تنفيذ بمؤشرات أداء قابلة للقياس.",
+      growthC1:"مخرجاتنا",
+      growthL1:["استراتيجية دخول السوق","خطة توسع ودراسة جدوى","تمكين تطوير الأعمال","مؤشرات أداء وخارطة تنفيذ"],
+      growthC2:"متى تحتاجها؟",
+      growthL2:["دخول أسواق جديدة","إطلاق خدمات/منتجات","تحسين مسار المبيعات","توسيع العمليات"],
+      growthCtaBtn:"اطلب عرضًا",
+      growthPill:"خارطة واضحة • خطة قابلة للتنفيذ • مؤشرات قابلة للقياس",
+    }
+  };
+
+  let current="en";
+
+  function setText(id, value){
+    const el=document.getElementById(id);
+    if(el) el.textContent=value;
+  }
+  function setList(id, items){
+    const ul=document.getElementById(id); if(!ul) return;
+    ul.innerHTML="";
+    items.forEach(x=>{
+      const li=document.createElement("li");
+      li.textContent=x;
+      ul.appendChild(li);
+    });
+  }
+
+  function applyLang(key){
+    const c=content[key];
+    document.documentElement.dir=c.dir;
+    document.documentElement.lang=c.lang;
+
+    setText("langToggle", c.toggle);
+
+    setText("navHome", c.navHome);
+    setText("navAbout", c.navAbout);
+    setText("navServices", c.navServices);
+    setText("navApproach", c.navApproach);
+    setText("navContact", c.navContact);
+    setText("navCta", c.navCta);
+
+    setText("navServicePages", c.navServicePages);
+    setText("sp1", c.sp1); setText("sp2", c.sp2); setText("sp3", c.sp3); setText("sp4", c.sp4);
+
+    setText("brandName", c.brandName);
+    setText("brandSub", c.brandSub);
+    setText("footName", c.brandName);
+    setText("footSub", c.brandSub);
+
+    setText("b1", c.b1); setText("b2", c.b2); setText("b3", c.b3);
+    setText("heroTitle", c.heroTitle);
+    setText("heroText", c.heroText);
+    setText("heroBtn", c.heroBtn);
+
+    setText("whyTitle", c.whyTitle);
+    setList("whyList", c.whyList);
+    setText("miniNote", c.miniNote);
+
+    setText("aboutTitle", c.aboutTitle);
+    setText("aboutHint", c.aboutHint);
+    setText("aboutH3_1", c.aboutH3_1);
+    setText("aboutP1", c.aboutP1);
+    setText("aboutH3_2", c.aboutH3_2);
+    setList("aboutList", c.aboutList);
+    setText("taglineLine", c.taglineLine);
+
+    setText("servicesTitle", c.servicesTitle);
+    setText("servicesHint", c.servicesHint);
+
+    setText("s1", c.s1); setList("s1List", c.s1List);
+    setText("s2", c.s2); setList("s2List", c.s2List);
+    setText("s3", c.s3); setList("s3List", c.s3List);
+    setText("s4", c.s4); setList("s4List", c.s4List);
+
+    setText("sMeta1", c.sMeta); setText("sBtn1", c.sBtn);
+    setText("sMeta2", c.sMeta); setText("sBtn2", c.sBtn);
+    setText("sMeta3", c.sMeta); setText("sBtn3", c.sBtn);
+    setText("sMeta4", c.sMeta); setText("sBtn4", c.sBtn);
+
+    setText("approachTitle", c.approachTitle);
+    setText("approachHint", c.approachHint);
+    setText("m1", c.m1);
+    setList("mList", c.mList);
+    setText("m2", c.m2);
+    setText("mText", c.mText);
+
+    setText("contactTitle", c.contactTitle);
+    setText("contactHint", c.contactHint);
+    setText("contactH3", c.contactH3);
+    setText("ph1", c.ph1); setText("ph2", c.ph2); setText("ph3", c.ph3);
+    setText("addr", c.addr);
+    setText("emailBtn", c.emailBtn);
+
+    setText("ctaTitle", c.ctaTitle);
+    setText("ctaText", c.ctaText);
+    setText("ctaMini", c.ctaMini);
+    setText("copyText", c.copyText);
+
+    // Service pages
+    setText("ias19Title", c.ias19Title);
+    setText("ias19Lead", c.ias19Lead);
+    setText("ias19C1", c.ias19C1); setList("ias19L1", c.ias19L1);
+    setText("ias19C2", c.ias19C2); setList("ias19L2", c.ias19L2);
+    setText("ias19CtaBtn", c.ias19CtaBtn);
+    setText("ias19Pill", c.ias19Pill);
+
+    setText("ifrs9Title", c.ifrs9Title);
+    setText("ifrs9Lead", c.ifrs9Lead);
+    setText("ifrs9C1", c.ifrs9C1); setList("ifrs9L1", c.ifrs9L1);
+    setText("ifrs9C2", c.ifrs9C2); setList("ifrs9L2", c.ifrs9L2);
+    setText("ifrs9CtaBtn", c.ifrs9CtaBtn);
+    setText("ifrs9Pill", c.ifrs9Pill);
+
+    setText("govTitle", c.govTitle);
+    setText("govLead", c.govLead);
+    setText("govC1", c.govC1); setList("govL1", c.govL1);
+    setText("govC2", c.govC2); setList("govL2", c.govL2);
+    setText("govCtaBtn", c.govCtaBtn);
+    setText("govPill", c.govPill);
+
+    setText("growthTitle", c.growthTitle);
+    setText("growthLead", c.growthLead);
+    setText("growthC1", c.growthC1); setList("growthL1", c.growthL1);
+    setText("growthC2", c.growthC2); setList("growthL2", c.growthL2);
+    setText("growthCtaBtn", c.growthCtaBtn);
+    setText("growthPill", c.growthPill);
+
+    // Back/next labels (shared IDs)
+    setText("backToServices1", c.backToServices);
+    setText("backToServices2", c.backToServices);
+    setText("backToServices3", c.backToServices);
+    setText("backToServices4", c.backToServices);
+
+    setText("nextIfs9_1", c.nextIFRS9);
+    setText("nextGov_1", c.nextGov);
+    setText("nextGrowth_1", c.nextGrowth);
+
+    setText("prevIas19_2", c.prevIAS19);
+    setText("nextGov_2", c.nextGov);
+    setText("nextGrowth_2", c.nextGrowth);
+
+    setText("prevIfs9_3", c.prevIFRS9);
+    setText("nextGrowth_3", c.nextGrowth);
+    setText("goIas19_3", c.goIAS19);
+
+    setText("prevGov_4", c.prevGov);
+    setText("goIas19_4", c.goIAS19);
+    setText("goIfs9_4", c.goIFRS9);
+  }
+
+  document.getElementById("langToggle").addEventListener("click", ()=>{
+    current = (current==="en") ? "ar" : "en";
+    applyLang(current);
+  });
+
+  applyLang(current);
+</script>
+</body>
+</html>
