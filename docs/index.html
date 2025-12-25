@@ -1,46 +1,53 @@
 <!DOCTYPE html>
-
-<html dir="ltr" lang="en">
+<html lang="en" dir="ltr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<!-- ✅ Google Search Console Verification -->
-<meta content="apPz_urNfcx8kFW" name="google-site-verification"/>
-<!-- ✅ SEO -->
-<title>Future Dimensions | Financial, Operational &amp; Growth Consulting</title>
-<meta content="Future Dimensions is an integrated consulting firm delivering Financial, Administrative &amp; Operational Excellence, and Growth Strategy solutions with measurable impact." name="description"/>
-<meta content="index, follow" name="robots"/>
-<link href="https://www.futuredimensionsco.com/" rel="canonical"/>
-<link href="https://www.futuredimensionsco.com/" hreflang="en" rel="alternate"/>
-<link href="https://www.futuredimensionsco.com/" hreflang="ar" rel="alternate"/>
-<link href="https://www.futuredimensionsco.com/" hreflang="x-default" rel="alternate"/>
-<!-- Open Graph -->
-<meta content="website" property="og:type"/>
-<meta content="Future Dimensions" property="og:site_name"/>
-<meta content="Future Dimensions | Consulting &amp; Business Solutions" property="og:title"/>
-<meta content="Financial • Administrative &amp; Operational • Growth Strategy" property="og:description"/>
-<meta content="https://www.futuredimensionsco.com/" property="og:url"/>
-<!-- Twitter -->
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="Future Dimensions | Consulting &amp; Business Solutions" name="twitter:title"/>
-<meta content="Integrated consulting firm delivering measurable impact." name="twitter:description"/>
-<!-- ✅ Favicon (no external file) -->
-<link href='data:image/svg+xml;utf8,
-        &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"&gt;
-          &lt;defs&gt;
-            &lt;linearGradient id="g" x1="0" y1="0" x2="1" y2="1"&gt;
-              &lt;stop offset="0" stop-color="%23F1D77A"/&gt;
-              &lt;stop offset="0.5" stop-color="%23D4AF37"/&gt;
-              &lt;stop offset="1" stop-color="%23B8962E"/&gt;
-            &lt;/linearGradient&gt;
-          &lt;/defs&gt;
-          &lt;rect width="64" height="64" rx="14" fill="%230b1322"/&gt;
-          &lt;path d="M18 20h16c7 0 12 4 12 10s-5 10-12 10H28v8h-10V20zm10 8v8h6c3 0 5-1 5-4s-2-4-5-4h-6z"
-                fill="url(%23g)"/&gt;
-        &lt;/svg&gt;' rel="icon" type="image/svg+xml"/>
-<link as="image" href="logo.png" rel="preload"/>
-<!-- ✅ Structured Data -->
-<script type="application/ld+json">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ✅ Google Search Console Verification -->
+  <meta name="google-site-verification" content="apPz_urNfcx8kFW" />
+
+  <!-- ✅ SEO -->
+  <title>Future Dimensions | Financial, Operational & Growth Consulting</title>
+  <meta name="description" content="Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational Excellence, and Growth Strategy solutions with measurable impact." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.futuredimensionsco.com/" />
+  <link rel="alternate" href="https://www.futuredimensionsco.com/" hreflang="en" />
+  <link rel="alternate" href="https://www.futuredimensionsco.com/" hreflang="ar" />
+  <link rel="alternate" href="https://www.futuredimensionsco.com/" hreflang="x-default" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Future Dimensions" />
+  <meta property="og:title" content="Future Dimensions | Consulting & Business Solutions" />
+  <meta property="og:description" content="Financial • Administrative & Operational • Growth Strategy" />
+  <meta property="og:url" content="https://www.futuredimensionsco.com/" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Future Dimensions | Consulting & Business Solutions" />
+  <meta name="twitter:description" content="Integrated consulting firm delivering measurable impact." />
+
+  <!-- ✅ Favicon (no external file) -->
+  <link rel="icon" type="image/svg+xml"
+        href='data:image/svg+xml;utf8,
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="%23F1D77A"/>
+              <stop offset="0.5" stop-color="%23D4AF37"/>
+              <stop offset="1" stop-color="%23B8962E"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="14" fill="%230b1322"/>
+          <path d="M18 20h16c7 0 12 4 12 10s-5 10-12 10H28v8h-10V20zm10 8v8h6c3 0 5-1 5-4s-2-4-5-4h-6z"
+                fill="url(%23g)"/>
+        </svg>' />
+
+  <link rel="preload" href="logo.png" as="image" />
+
+  <!-- ✅ Structured Data -->
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -58,7 +65,8 @@
     }
   }
   </script>
-<style>
+
+  <style>
     :root{
       --navy:#0d1830;
       --navy2:#11213a;
@@ -680,286 +688,468 @@
     @media (max-width:900px){.ctaPanel{flex-direction:column;align-items:flex-start}}
 
 
-/* ===== Requested refinements ===== */
-:root{
-  --navy:#071427;
-  --navy2:#0b1f38;
-  --gold1:#f6e7b0;
-  --gold2:#cfa73a;
-  --gold3:#9a7a1f;
-}
+/* === Equal heights per row === */
+.equalCards{align-items:stretch;}
+.cardFlex{display:flex;flex-direction:column;}
+.cardActions{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
+.pStrong{color:#000;font-weight:900;line-height:1.55}
+.blackBullets li{color:#000}
 
-/* Card baseline */
-.card{
+/* === Gold cards luxury + watermark === */
+.cardGold{
   position:relative;
-  border-radius:22px;
-  overflow:hidden;
-  transform:translateZ(0);
-}
-
-/* Premium gold + 3D */
-.card.gold, .grid3 .card, #about .card{
-  background:linear-gradient(135deg,var(--gold1) 0%, #e8cf79 35%, var(--gold2) 70%, #b68a1a 100%);
-  box-shadow:
-    0 18px 45px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.65),
-    inset 0 -10px 30px rgba(0,0,0,.18);
-  border:1px solid rgba(255,255,255,.18);
+  background: radial-gradient(120% 120% at 12% 10%, rgba(255,255,255,.85) 0%, rgba(255,255,255,.25) 18%, rgba(255,255,255,0) 38%),
+              linear-gradient(135deg, #f6e7a8 0%, #d8b24a 52%, #b98b1f 100%);
   color:#000;
+  box-shadow: 0 18px 55px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.55), inset 0 -1px 0 rgba(0,0,0,.18);
 }
-.card.gold a{color:#000;text-decoration:underline;text-underline-offset:3px;}
-.card.gold .muted{color:#000;opacity:.85;}
-/* Subtle watermark inside gold cards */
-.card.gold::before, #about .card::before, #services .card::before{
+.cardGold:before{
   content:"";
   position:absolute; inset:0;
-  background:url("logo.png") center/70% no-repeat;
-  opacity:.10;
-  filter: drop-shadow(0 10px 14px rgba(0,0,0,.18)) saturate(1.15) brightness(1.08);
-  transform:translateZ(0);
+  background-image:url('logo.png');
+  background-repeat:no-repeat;
+  background-position: 85% 18%;
+  background-size: 320px;
+  opacity:.12;
+  filter: brightness(1.35) contrast(1.05) saturate(1.15);
   pointer-events:none;
 }
-/* keep navy cards (Why Future Dimensions) untouched */
-.hero .sideCard{
-  background:radial-gradient(1200px 500px at 20% 0%, rgba(32,87,125,.35), transparent 55%),
-             linear-gradient(180deg, rgba(7,20,39,.92), rgba(7,20,39,.82));
-  box-shadow:0 18px 45px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.06);
+.cardGold:after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0) 40%, rgba(0,0,0,.10));
+  pointer-events:none;
 }
-/* bullet list */
-.bullets{margin:14px 0 0; padding-left:20px; list-style:disc;}
-.bullets li{margin:8px 0; font-weight:850; color:#000;}
-/* buttons */
-.slink.moreBtn{margin-top:16px; display:inline-flex;}
-.slink.moreBtn.bottom{margin-top:18px;}
-/* ensure equal heights per row */
-.grid2, .grid3{align-items:stretch;}
-.grid2 > .card, .grid3 > .card{height:100%; display:flex; flex-direction:column;}
-.grid3 > .card .svcBullets{flex:1;}
-/* Services spacing */
-.svcTitle{margin:0 0 10px; font-size:22px; font-weight:950;}
-.svcDesc{margin:0 0 10px; font-weight:850; color:#000; opacity:.9;}
-/* Contact gold cards keep buttons at bottom visually */
-.contactGold .btnRow{margin-top:auto;}
-.btnRow{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;}
-/* Make any gray text black in gold areas */
-#about .card *, #services .card *, #contact .card.gold *{color:#000;}
-#about .card a, #services .card a, #contact .card.gold a{color:#000;}
-#about .card .muted, #services .card .muted{opacity:.88;}
+.cardGold h3, .cardGold b{color:#000;}
+.cardGold p, .cardGold li{color:#000;}
+.vmMini{display:grid;gap:12px;margin-top:12px}
+.vmBlock b{display:block;margin-bottom:4px}
+.vmBlock p{margin:0;color:#000;font-weight:850}
+
+/* === Single-file pages routing === */
+.pageView{display:none;padding:70px 0 10px}
+body[data-page="home"] .pageView{display:none;}
+body[data-page]:not([data-page="home"]) main{display:none;}
+body[data-page="about"] .pageView[data-page="about"]{display:block;}
+body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
+.pageTop{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.backHome{color:#fff;text-decoration:none;font-weight:900}
+.backHome:hover{text-decoration:underline}
+
 </style>
 </head>
+
 <body>
 <header>
-<div class="wrap nav">
-<div class="brand">
-<div class="logo">
-<img alt="Future Dimensions Logo" src="logo.png"/>
-</div>
-<div class="brandText">
-<b id="brandName">FUTURE DIMENSIONS</b>
-<small id="brandSub">FOR CONSULTING &amp; BUSINESS SOLUTIONS</small>
-</div>
-</div>
-<!-- Desktop Menu -->
-<nav aria-label="Main navigation" class="menu">
-<a class="active" href="#home" id="navHome">Home</a>
-<a href="#about" id="navAbout">About</a>
-<!-- ✅ Services Dropdown -> Internal pages -->
-<div class="dropdown" id="servicesDropdown">
-<button aria-expanded="false" aria-haspopup="true" id="navServicesBtn" type="button">Services ▾</button>
-<div aria-label="Services menu" class="dropMenu" role="menu">
-<a href="financial.html" id="ddFinancial">Financial Dimension <span class="chip" id="chip1">Page</span></a>
-<a href="administrative.html" id="ddAdminOps">Administrative &amp; Operational <span class="chip" id="chip2">Page</span></a>
-<a href="growth.html" id="ddGrowth">Growth Strategy <span class="chip" id="chip3">Page</span></a>
-</div>
-</div>
-<!-- ✅ Additional pages (icons only) -->
-<a href="team.html" id="navTeam">Team</a>
-<a href="careers.html" id="navCareers">Careers</a>
-<a href="#approach" id="navApproach">Approach</a>
-<a href="#contact" id="navContact">Contact</a>
-</nav>
-<div class="navRight">
-<button aria-label="Open menu" class="burger" id="burgerBtn">☰</button>
-<button class="btn lang" id="langToggle">العربية</button>
-<a class="btn gold" href="#contact" id="navCta">Get a Proposal</a>
-</div>
-</div>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="logo">
+        <img src="logo.png" alt="Future Dimensions Logo" />
+      </div>
+      <div class="brandText">
+        <b id="brandName">FUTURE DIMENSIONS</b>
+        <small id="brandSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
+      </div>
+    </div>
+
+    <!-- Desktop Menu -->
+    <nav class="menu" aria-label="Main navigation">
+      <a href="#home" id="navHome" class="active">Home</a>
+      <a href="#about" id="navAbout">About</a>
+
+      <!-- ✅ Services Dropdown -> Internal pages -->
+      <div class="dropdown" id="servicesDropdown">
+        <button type="button" id="navServicesBtn" aria-haspopup="true" aria-expanded="false">Services ▾</button>
+        <div class="dropMenu" role="menu" aria-label="Services menu">
+          <a href="financial.html" id="ddFinancial">Financial Dimension <span class="chip" id="chip1">Page</span></a>
+          <a href="administrative.html" id="ddAdminOps">Administrative & Operational <span class="chip" id="chip2">Page</span></a>
+          <a href="growth.html" id="ddGrowth">Growth Strategy <span class="chip" id="chip3">Page</span></a>
+        </div>
+      </div>
+
+      <!-- ✅ Additional pages (icons only) -->
+      <a href="team.html" id="navTeam">Team</a>
+      <a href="careers.html" id="navCareers">Careers</a>
+
+      <a href="#approach" id="navApproach">Approach</a>
+      <a href="#contact" id="navContact">Contact</a>
+    </nav>
+
+    <div class="navRight">
+      <button class="burger" id="burgerBtn" aria-label="Open menu">☰</button>
+      <button class="btn lang" id="langToggle">العربية</button>
+      <a href="#contact" class="btn gold" id="navCta">Get a Proposal</a>
+    </div>
+  </div>
 </header>
+
 <!-- Mobile Menu -->
-<div aria-hidden="true" class="mobilePanel" id="mobilePanel">
-<div class="mobileSheet">
-<div class="mobileTop">
-<div style="display:flex;align-items:center;gap:10px">
-<div class="logo" style="width:44px;height:44px;border-radius:14px">
-<img alt="Logo" src="logo.png"/>
+<div class="mobilePanel" id="mobilePanel" aria-hidden="true">
+  <div class="mobileSheet">
+    <div class="mobileTop">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="logo" style="width:44px;height:44px;border-radius:14px">
+          <img src="logo.png" alt="Logo" />
+        </div>
+        <div style="line-height:1.1">
+          <div style="font-weight:1000;color:rgba(255,255,255,.92)" id="mBrand">FUTURE DIMENSIONS</div>
+          <div style="font-weight:800;color:rgba(255,255,255,.68);font-size:12px" id="mSub">CONSULTING</div>
+        </div>
+      </div>
+      <button class="mclose" id="mCloseBtn" aria-label="Close menu">✕</button>
+    </div>
+
+    <div class="mnav">
+      <a href="#home" id="mHome">Home</a>
+      <a href="#about" id="mAbout">About</a>
+
+      <button type="button" id="mServicesBtn">
+        <span id="mServicesTxt">Services</span>
+        <span>▾</span>
+      </button>
+      <div class="mSub" id="mServicesSub">
+        <a href="financial.html" id="mFin">Financial Dimension</a>
+        <a href="administrative.html" id="mAdm">Administrative & Operational</a>
+        <a href="growth.html" id="mGr">Growth Strategy</a>
+      </div>
+
+      <a href="team.html" id="mTeam">Team</a>
+      <a href="careers.html" id="mCareers">Careers</a>
+
+      <a href="#approach" id="mApproach">Approach</a>
+      <a href="#contact" id="mContact">Contact</a>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+      <button class="btn lang" id="mLangToggle" style="padding:10px 14px">العربية</button>
+      <a class="btn gold" href="#contact" id="mCta" style="padding:10px 14px;display:inline-flex;align-items:center">Get a Proposal</a>
+    </div>
+  </div>
 </div>
-<div style="line-height:1.1">
-<div id="mBrand" style="font-weight:1000;color:rgba(255,255,255,.92)">FUTURE DIMENSIONS</div>
-<div id="mSub" style="font-weight:800;color:rgba(255,255,255,.68);font-size:12px">CONSULTING</div>
-</div>
-</div>
-<button aria-label="Close menu" class="mclose" id="mCloseBtn">✕</button>
-</div>
-<div class="mnav">
-<a href="#home" id="mHome">Home</a>
-<a href="#about" id="mAbout">About</a>
-<button id="mServicesBtn" type="button">
-<span id="mServicesTxt">Services</span>
-<span>▾</span>
-</button>
-<div class="mSub" id="mServicesSub">
-<a href="financial.html" id="mFin">Financial Dimension</a>
-<a href="administrative.html" id="mAdm">Administrative &amp; Operational</a>
-<a href="growth.html" id="mGr">Growth Strategy</a>
-</div>
-<a href="team.html" id="mTeam">Team</a>
-<a href="careers.html" id="mCareers">Careers</a>
-<a href="#approach" id="mApproach">Approach</a>
-<a href="#contact" id="mContact">Contact</a>
-</div>
-<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-<button class="btn lang" id="mLangToggle" style="padding:10px 14px">العربية</button>
-<a class="btn gold" href="#contact" id="mCta" style="padding:10px 14px;display:inline-flex;align-items:center">Get a Proposal</a>
-</div>
-</div>
-</div>
+
 <main>
-<!-- HERO -->
-<section class="hero" id="home">
-<div class="wrap heroGrid">
-<div class="heroCard">
-<img alt="" class="wm" src="logo.png"/>
-<div class="heroKicker" id="heroKicker">Enter with Challenges – Exit with New Dimensions</div>
-<h1 class="heroTitle" id="heroTitle">Future <span class="goldWord">Dimensions</span><br/><span class="heroSub" id="heroSub">Consulting &amp; Business Solutions</span></h1>
-<p class="heroText" id="heroText">
-          Future Dimensions is an integrated consulting firm delivering Financial, Administrative &amp; Operational,
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="wrap heroGrid">
+      <div class="heroCard">
+        <img class="wm" src="logo.png" alt="" />
+        <div class="heroKicker" id="heroKicker">Enter with Challenges – Exit with New Dimensions</div>
+        <h1 class="heroTitle" id="heroTitle">Future <span class="goldWord">Dimensions</span><br><span class="heroSub" id="heroSub">Consulting &amp; Business Solutions</span></h1>
+        <p class="heroText" id="heroText">
+          Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational,
           and Growth Strategy solutions with measurable impact — locally and globally.
         </p>
-<div class="heroBadges">
-<span class="badge"><span class="dot"></span><span id="b1">Financial Diagnostics</span></span>
-<span class="badge"><span class="dot"></span><span id="b2">Governance &amp; Compliance</span></span>
-<span class="badge"><span class="dot"></span><span id="b3">Growth &amp; Transformation</span></span>
-</div>
-</div>
-<div class="sideCard">
-<h3 id="whyTitle">Why Future Dimensions?</h3>
-<ul id="whyList"></ul>
-<div class="mini" id="miniNote">Premium look • Strong identity • Clear value</div>
-</div>
-</div>
-</section>
-<!-- ABOUT -->
-<section id="about">
-<div class="wrap">
-<div class="sectionTitle">
-<h2 id="aboutTitle">About Us</h2>
-<p id="aboutHint">Identity-driven. Execution-focused.</p>
-</div>
-<div class="grid2">
-<div class="card">
 
+        <div class="heroBadges">
+          <span class="badge"><span class="dot"></span><span id="b1">Financial Diagnostics</span></span>
+          <span class="badge"><span class="dot"></span><span id="b2">Governance & Compliance</span></span>
+          <span class="badge"><span class="dot"></span><span id="b3">Growth & Transformation</span></span>
+        </div>
 
+        </div>
 
+      <div class="sideCard">
+        <h3 id="whyTitle">Why Future Dimensions?</h3>
+        <ul id="whyList"></ul>
+        <div class="mini" id="miniNote">Premium look • Strong identity • Clear value</div>
+      </div>
+    </div>
+  </section>
 
-</div>
-<div class="card">
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <h2 id="aboutTitle">About</h2>
+        <p id="aboutHint">Who we are & what sets us apart</p>
+      </div>
 
+      <div class="grid2 equalCards">
+        <div class="card cardGold cardFlex">
+          <div>
+            <h3 id="aboutH3">About Us</h3>
+            <p id="aboutP" class="pStrong">
+              Future Dimensions for Consulting &amp; Business Solutions is a strategic consulting partner that blends
+              financial expertise, operational excellence, and growth strategy to deliver measurable impact.
+            </p>
 
+            <ul class="bullets blackBullets" id="aboutBullets">
+              <li>Financial Consulting &amp; Advisory</li>
+              <li>Administrative &amp; Operational Optimization</li>
+              <li>Business Development &amp; Strategic Growth</li>
+              <li>Sustainable execution with measurable impact</li>
+              <li>Regional expertise in asset‑intensive industries</li>
+            </ul>
+          </div>
 
+          <div class="cardActions">
+            <a class="slink primary" href="?page=about" id="aboutMoreBtn">
+              <span class="ic"></span><span>More</span>
+            </a>
+          </div>
+        </div>
 
-</div>
-</div>
-<div class="darkBand">
-<p id="taglineLine">We don’t just advise — we build dimensions that last.</p>
-</div>
-</div>
-</section>
+        <div class="card cardGold cardFlex">
+          <div>
+            <h3 id="vmH3">Vision &amp; Mission</h3>
+            <p class="pStrong" id="vmLead">
+              A future where organizations operate efficiently, make confident decisions, and grow sustainably—powered by
+              excellence, governance, and actionable strategy.
+            </p>
+
+            <div class="vmMini">
+              <div class="vmBlock">
+                <b>Mission</b>
+                <p>
+                  Empower organizations through high‑quality professional services by delivering tailored expertise, designing
+                  customized strategies, and supporting implementation.
+                </p>
+              </div>
+              <div class="vmBlock">
+                <b>Vision</b>
+                <p>
+                  To be the trusted consulting partner in the region—recognized for innovation, international standards, and
+                  measurable positive impact.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cardActions">
+            <a class="slink primary" href="?page=vision" id="vmMoreBtn">
+              <span class="ic"></span><span>More</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 <!-- SERVICES -->
-<section id="services">
-<div class="wrap">
-<div class="sectionTitle">
-<h2 id="servicesTitle">Our Services</h2>
-<p id="servicesHint">Explore full details inside each service page.</p>
-</div>
-<div class="grid3">
-<!-- Financial -->
-<div class="card">
+  <section id="services">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <h2 id="servicesTitle">Our Services</h2>
+        <p id="servicesHint">Three dimensions — one integrated impact</p>
+      </div>
 
+      <div class="grid3 equalCards">
+        <div class="card cardGold cardFlex">
+          <div>
+            <h3 id="finTitle">Financial Dimension</h3>
+            <p id="finDesc" class="pStrong">
+              Comprehensive diagnostics, profitability improvement, IFRS support, and audit &amp; risk assessment.
+            </p>
+            <ul class="bullets blackBullets">
+              <li>Comprehensive Financial Diagnostics &amp; Performance Analysis</li>
+              <li>Profitability Improvement &amp; Cost Optimization</li>
+              <li>ROI Enhancement &amp; Shareholder Value Maximization</li>
+              <li>Internal Audit &amp; Risk Assessment</li>
+              <li>IFRS Advisory (IFRS 9, IAS 19) &amp; Financial Policies</li>
+            </ul>
+          </div>
+          <div class="cardActions">
+            <a class="slink primary" href="financial.html" id="finMoreBtn"><span class="ic"></span><span>More</span></a>
+          </div>
+        </div>
 
+        <div class="card cardGold cardFlex">
+          <div>
+            <h3 id="adTitle">Administrative &amp; Operational Dimension</h3>
+            <p id="adDesc" class="pStrong">
+              Execution excellence, governance frameworks, and compliance structures.
+            </p>
+            <ul class="bullets blackBullets">
+              <li>Business Strategy Development &amp; Execution</li>
+              <li>Process Improvement &amp; Operational Efficiency</li>
+              <li>Corporate Restructuring &amp; Organizational Optimization</li>
+              <li>Quality &amp; Risk Management Systems</li>
+              <li>Compliance with International Standards (ISO)</li>
+            </ul>
+          </div>
+          <div class="cardActions">
+            <a class="slink primary" href="administrative.html" id="adMoreBtn"><span class="ic"></span><span>More</span></a>
+          </div>
+        </div>
 
+        <div class="card cardGold cardFlex">
+          <div>
+            <h3 id="grTitle">Growth Strategy Dimension</h3>
+            <p id="grDesc" class="pStrong">
+              Expansion planning, market entry, and digital transformation roadmaps.
+            </p>
+            <ul class="bullets blackBullets">
+              <li>Expansion Planning &amp; Market Entry Strategies</li>
+              <li>New Growth Opportunities Identification &amp; Validation</li>
+              <li>Digital Transformation Roadmaps</li>
+              <li>Technology Systems Assessment &amp; Optimization</li>
+              <li>Technology Project Management &amp; Execution</li>
+            </ul>
+          </div>
+          <div class="cardActions">
+            <a class="slink primary" href="growth.html" id="grMoreBtn"><span class="ic"></span><span>More</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-</div>
-<!-- Admin & Ops -->
-<div class="card">
-
-
-
-
-</div>
-<!-- Growth -->
-<div class="card">
-
-
-
-
-</div>
-</div>
-</div>
-</section>
 <!-- APPROACH -->
-<section id="approach">
-<div class="wrap">
-<div class="sectionTitle">
-<h2 id="approachTitle">Work Methodology</h2>
-<p id="approachHint">Our approach — practical, measurable, and execution‑driven</p>
-</div>
-<div class="grid3">
+  <section id="methodology">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <h2 id="methTitle">Work Methodology</h2>
+        <p id="methHint">Our approach — practical, measurable, and execution‑driven</p>
+      </div>
 
+      <div class="grid3 equalCards">
+        <div class="card cardGold">
+          <h3>1) Diagnose</h3>
+          <p class="pStrong">Structured assessment of current performance, risks, gaps, and root causes.</p>
+        </div>
 
+        <div class="card cardGold">
+          <h3>2) Design</h3>
+          <p class="pStrong">Build a pragmatic roadmap, policies, tools, and governance aligned with goals.</p>
+        </div>
 
-</div>
-</div>
-</section>
+        <div class="card cardGold">
+          <h3>3) Deliver</h3>
+          <p class="pStrong">Execute with disciplined follow‑up, KPIs, and documentation to ensure adoption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 <!-- CONTACT -->
-<section id="contact">
-<div class="wrap">
-<div class="sectionTitle">
-<h2 id="contactTitle">Contact</h2>
-<p id="contactHint">Let’s start your transformation</p>
-</div>
-<div class="contactBox">
+  <section id="contact">
+    <div class="wrap">
+      <div class="sectionTitle">
+        <h2 id="contactTitle">Contact</h2>
+        <p id="contactHint">Let’s start your transformation</p>
+      </div>
 
-</div>
-</div>
-</section>
-</main>
-<footer>
-<div class="wrap">
-<div class="footerGrid">
-<div>
-<div class="footerBrand">
-<img alt="Future Dimensions Logo" src="logo.png"/>
-<div>
-<b id="footName">FUTURE DIMENSIONS</b>
-<small id="footSub">FOR CONSULTING &amp; BUSINESS SOLUTIONS</small>
-</div>
-</div>
-<div class="copy" id="copyText">© Future Dimensions — All rights reserved.</div>
-</div>
-<div>
-<div aria-label="Quick links" class="footerLinks">
-<a href="#home" id="fHome">Home</a>
-<a href="#about" id="fAbout">About</a>
-<a href="#services" id="fServices">Services</a>
-<a href="team.html" id="fTeam">Team</a>
-<a href="careers.html" id="fCareers">Careers</a>
-<a href="#contact" id="fContact">Contact</a>
-</div>
-</div>
-</div>
-</div>
+      <div class="grid2 equalCards">
+        <div class="card cardGold cardFlex">
+          <div>
+            <h3>Contact Info</h3>
+            <p class="pStrong">Reach us through the channels below — we respond promptly.</p>
+            <ul class="bullets blackBullets">
+              <li><b>Email:</b> info@futuredimensionsco.com</li>
+              <li><b>Website:</b> www.futuredimensionsco.com</li>
+              <li><b>Phone:</b> +20 100 193 8264</li>
+            </ul>
+          </div>
+
+          <div class="cardActions">
+            <a class="slink primary" href="mailto:info@futuredimensionsco.com"><span class="ic"></span><span>Email</span></a>
+            <a class="slink" href="https://www.futuredimensionsco.com" target="_blank" rel="noopener"><span class="ic"></span><span>Website</span></a>
+            <a class="slink" href="tel:+201001938264"><span class="ic"></span><span>Call</span></a>
+          </div>
+        </div>
+
+        <div class="card cardGold cardFlex">
+          <div>
+            <h3>Careers</h3>
+            <p class="pStrong">Interested in joining? Submit your CV and we’ll contact you when a fit opens.</p>
+          </div>
+
+          <div class="cardActions">
+            <a class="slink primary" href="careers.html"><span class="ic"></span><span>Apply</span></a>
+            <a class="slink" href="team.html"><span class="ic"></span><span>Team</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- INTERNAL PAGES (single-file routing) -->
+  <section class="pageView" data-page="about">
+    <div class="wrap">
+      <div class="pageTop">
+        <a class="backHome" href="./" data-home>← Back</a>
+        <h2>About Us</h2>
+      </div>
+      <div class="card cardGold">
+        <p class="pStrong">
+          Future Dimensions for Consulting &amp; Business Solutions operates as a strategic partner — not just a consultant —
+          supporting leaders from diagnostics to implementation, with audit‑ready deliverables and measurable outcomes.
+        </p>
+        <ul class="bullets blackBullets">
+          <li>Transformation — not temporary fixes</li>
+          <li>Clear methodology and practical execution</li>
+          <li>High standards with fast turnaround</li>
+          <li>ROI, efficiency, compliance, and sustainable growth</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="pageView" data-page="vision">
+    <div class="wrap">
+      <div class="pageTop">
+        <a class="backHome" href="./" data-home>← Back</a>
+        <h2>Vision &amp; Mission</h2>
+      </div>
+
+      <div class="grid2 equalCards">
+        <div class="card cardGold">
+          <h3>Mission</h3>
+          <p class="pStrong">Empower organizations through high‑quality professional services by:</p>
+          <ul class="bullets blackBullets">
+            <li>Delivering advanced consulting expertise tailored to complex challenges</li>
+            <li>Developing deep sector and market understanding</li>
+            <li>Designing customized strategies that generate measurable results</li>
+            <li>Ensuring effective solution implementation through ongoing support</li>
+            <li>Building strategic, trust‑based long‑term partnerships</li>
+          </ul>
+        </div>
+
+        <div class="card cardGold">
+          <h3>Vision</h3>
+          <p class="pStrong">To be the trusted consulting partner in the region, recognized for:</p>
+          <ul class="bullets blackBullets">
+            <li>Excellence and innovation in solution delivery</li>
+            <li>Highest professional standards aligned with international best practices</li>
+            <li>Demonstrable positive impact on client growth and competitive position</li>
+            <li>Strategic relationships built on transparency and accountability</li>
+            <li>A culture that fosters creativity and continuous development</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+<footer<footer>
+  <div class="wrap">
+    <div class="footerGrid">
+      <div>
+        <div class="footerBrand">
+          <img src="logo.png" alt="Future Dimensions Logo" />
+          <div>
+            <b id="footName">FUTURE DIMENSIONS</b>
+            <small id="footSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
+          </div>
+        </div>
+        <div class="copy" id="copyText">© Future Dimensions — All rights reserved.</div>
+      </div>
+
+      <div>
+        <div class="footerLinks" aria-label="Quick links">
+          <a href="#home" id="fHome">Home</a>
+          <a href="#about" id="fAbout">About</a>
+          <a href="#services" id="fServices">Services</a>
+          <a href="team.html" id="fTeam">Team</a>
+          <a href="careers.html" id="fCareers">Careers</a>
+          <a href="#contact" id="fContact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>
+
 <script>
   // Header scroll effect
   window.addEventListener("scroll",()=>{
@@ -1474,76 +1664,54 @@
   document.addEventListener("keydown",(e)=>{
     if(e.key === "Escape") closeMobile();
   });
-
-  // ===== Single-file "More" pages for About / Vision (fallback) =====
-  function openStandalonePage(title, htmlBody){
-    const w = window.open("", "_blank");
-    if(!w) return;
-    w.document.open();
-    w.document.write(`<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-      <title>${title}</title>
-      <style>
-        body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; background:#071427; color:#fff;}
-        .wrap{max-width:980px;margin:0 auto;padding:28px 18px 60px;}
-        .card{background:linear-gradient(135deg,#f6e7b0 0%, #e8cf79 35%, #cfa73a 70%, #b68a1a 100%);
-              border-radius:22px; padding:22px; color:#000;
-              box-shadow:0 18px 45px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.65), inset 0 -10px 30px rgba(0,0,0,.18);
-              position:relative; overflow:hidden;}
-        .card:before{content:"";position:absolute;inset:0;background:url("logo.png") center/72% no-repeat;opacity:.10;
-                     filter: drop-shadow(0 10px 14px rgba(0,0,0,.18)) saturate(1.15) brightness(1.08);pointer-events:none;}
-        h1{margin:0 0 10px;font-size:34px;font-weight:950;}
-        p,li{font-weight:850;line-height:1.6;}
-        ul{padding-left:20px;}
-        a{color:#000;text-decoration:underline;text-underline-offset:3px;}
-      </style></head><body><div class="wrap"><div class="card">${htmlBody}</div></div></body></html>`);
-    w.document.close();
-  }
-
-  const aboutMore = document.getElementById("aboutMoreBtn");
-  const visionMore = document.getElementById("visionMoreBtn");
-
-  if(aboutMore){
-    aboutMore.addEventListener("click",(e)=>{
-      e.preventDefault();
-      openStandalonePage("About Us", `
-        <h1>About Us</h1>
-        <p>Future Dimensions for Consulting & Business Solutions was founded on a core belief: every challenge contains a hidden opportunity for transformation and growth.</p>
-        <p>We operate as a strategic partner — not just a consultant — going beyond recommendations to ensure sustainable execution and measurable impact.</p>
-        <ul>
-          <li>Financial Consulting & Advisory</li>
-          <li>Administrative & Operational Optimization</li>
-          <li>Business Development & Strategic Growth</li>
-          <li>Sustainable execution with measurable impact</li>
-          <li>Regional expertise in asset‑intensive industries</li>
-        </ul>
-      `);
-    });
-  }
-  if(visionMore){
-    visionMore.addEventListener("click",(e)=>{
-      e.preventDefault();
-      openStandalonePage("Vision & Mission", `
-        <h1>Vision & Mission</h1>
-        <p><strong>Vision:</strong> A future where organizations operate efficiently, make confident decisions, and grow sustainably—powered by excellence, governance, and actionable strategy.</p>
-        <p><strong>Mission:</strong> We help leaders translate ambition into clear roadmaps, disciplined execution, and measurable outcomes—through diagnostic rigor, execution discipline, and a practical, hands‑on approach.</p>
-      `);
-    });
-  }
 </script>
+
+<script>
+(function(){
+  function getPage(){
+    const p = new URLSearchParams(window.location.search).get('page');
+    return p ? p.toLowerCase() : 'home';
+  }
+  function apply(){ document.body.setAttribute('data-page', getPage()); }
+  window.addEventListener('popstate', apply);
+  apply();
+
+  document.addEventListener('click', function(e){
+    const a = e.target.closest('a');
+    if(!a) return;
+    const href = a.getAttribute('href') || '';
+    if(href.startsWith('?page=')){
+      e.preventDefault();
+      history.pushState({}, '', href);
+      apply();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+    if(a.hasAttribute('data-home')){
+      e.preventDefault();
+      history.pushState({}, '', './');
+      apply();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
-<!-- Bottom CTA -->
-<section class="section" id="bottomCta">
-<div class="wrap">
-<div class="ctaPanel">
-<div>
-<h2 id="bottomCtaTitle">Ready to start?</h2>
-<p class="muted" id="bottomCtaText">Tell us where you are today — and we’ll propose a practical roadmap to move forward.</p>
-</div>
-<div class="ctaPanelBtns">
-<a class="ctaBtn" href="#contact" id="bottomBtn1"><span class="spark"></span><span id="bottomBtn1Text">Start Your Transformation</span></a>
-<a class="ghostBtn" href="#services" id="bottomBtn2"><span class="spark"></span><span id="bottomBtn2Text">Explore Services</span></a>
-</div>
-</div>
-</div>
-</section>
+
+  <!-- Bottom CTA -->
+  <section class="section" id="bottomCta">
+    <div class="wrap">
+      <div class="ctaPanel">
+        <div>
+          <h2 id="bottomCtaTitle">Ready to start?</h2>
+          <p class="muted" id="bottomCtaText">Tell us where you are today — and we’ll propose a practical roadmap to move forward.</p>
+        </div>
+        <div class="ctaPanelBtns">
+          <a class="ctaBtn" href="#contact" id="bottomBtn1"><span class="spark"></span><span id="bottomBtn1Text">Start Your Transformation</span></a>
+          <a class="ghostBtn" href="#services" id="bottomBtn2"><span class="spark"></span><span id="bottomBtn2Text">Explore Services</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
