@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vision & Mission | Future Dimensions</title>
+  <meta name="description" content="Future Dimensions Vision & Mission — bilingual (Arabic/English)." />
+  <link rel="canonical" href="https://www.futuredimensionsco.com/vision.html" />
+
+  <style>
+    :root{
+      --navy:#0b1322;
+      --navy2:#0f1b2d;
+
+      --gold:#D4AF37;
+      --gold2:#B8962E;
+      --gold3:#F4DE8A;
+      --champ:#F7F3E9;
+
+      --onDark:#F6F7FB;
+      --ink:#0b1322;
+
+      --radius: 18px;
+      --max: 1140px;
+
+      --shadowDeep: 0 28px 90px rgba(0,0,0,.42), 0 6px 18px rgba(0,0,0,.28);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Kufi Arabic","Noto Sans Arabic", sans-serif;
+      color: var(--onDark);
+      background:
+        radial-gradient(1100px 700px at 12% 0%, rgba(212,175,55,.08) 0%, rgba(212,175,55,0) 58%),
+        radial-gradient(900px 600px at 98% 15%, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 55%),
+        linear-gradient(180deg, var(--navy), #060b14 70%, #04070e);
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    /* NAVY watermark (more visible + 3D hint) */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      opacity:.14;
+      background:
+        radial-gradient(1200px 800px at 65% 15%, rgba(11,19,34,.34), rgba(11,19,34,0) 62%),
+        radial-gradient(1000px 700px at 20% 78%, rgba(11,19,34,.30), rgba(11,19,34,0) 60%);
+      -webkit-mask-image: url('logo.png');
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 65% 18%;
+      -webkit-mask-size: 720px;
+      mask-image: url('logo.png');
+      mask-repeat: no-repeat;
+      mask-position: 65% 18%;
+      mask-size: 720px;
+      filter: drop-shadow(0 14px 22px rgba(0,0,0,.28));
+    }
+    body::after{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none; z-index:0;
+      opacity:.08;
+      background: rgba(255,255,255,.10);
+      -webkit-mask-image: url('logo.png');
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 66% 19%;
+      -webkit-mask-size: 720px;
+      mask-image: url('logo.png');
+      mask-repeat: no-repeat;
+      mask-position: 66% 19%;
+      mask-size: 720px;
+      filter: blur(.7px);
+      mix-blend-mode: overlay;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px; position:relative; z-index:1;}
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:1000;
+      backdrop-filter: blur(10px);
+      background: rgba(11,19,34,.62);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 0;
+      gap:16px;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      min-width:240px;
+    }
+    .brand img{
+      width:42px;height:42px;object-fit:contain;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+    .brandText{display:flex;flex-direction:column;line-height:1.1}
+    .brandText b{font-size:16px;letter-spacing:.2px}
+    .brandText small{font-size:12px;color:rgba(246,247,251,.72);font-weight:800}
+
+    .navLinks{
+      display:flex;gap:18px;align-items:center;justify-content:flex-end;
+      flex:1;
+      flex-wrap:wrap;
+    }
+    .navLinks a{
+      padding:10px 12px;
+      border-radius: 999px;
+      color: rgba(246,247,251,.92);
+      font-weight:800;
+      transition: .2s ease;
+    }
+    .navLinks a:hover{background: rgba(255,255,255,.06); transform: translateY(-1px);}
+    .navLinks .active{
+      background: rgba(212,175,55,.12);
+      border: 1px solid rgba(212,175,55,.18);
+    }
+    .langBtn{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:rgba(246,247,251,.92);
+      padding:10px 12px;border-radius:999px;
+      font-weight:900;cursor:pointer;
+    }
+    .langBtn:hover{background:rgba(255,255,255,.10)}
+
+    /* Page hero */
+    .pageHero{padding:20px 0 8px}
+    .pageHero h1{margin:0;font-weight:1000;font-size:36px}
+    .pageHero p{margin:8px 0 0;color:rgba(246,247,251,.78);font-weight:650;line-height:1.6}
+
+    /* Gold cards */
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
+    .card{
+      border-radius: var(--radius);
+      position:relative;
+      overflow:hidden;
+      color: var(--ink);
+      padding:18px;
+      background:
+        radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
+      border:1px solid rgba(0,0,0,.12);
+      box-shadow:
+        0 28px 90px rgba(0,0,0,.42),
+        0 8px 22px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.55),
+        inset 0 -18px 28px rgba(0,0,0,.12);
+      display:flex; flex-direction:column;
+      min-height: 340px;
+    }
+    .card:after{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        radial-gradient(560px 240px at 18% 6%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%),
+        linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,0) 42%);
+      pointer-events:none;
+      opacity:.72;
+    }
+
+    /* Gold watermark inside card (brighter + shine + 3D hint) */
+    .goldMark{
+      position:absolute; inset:-20px;
+      pointer-events:none;
+      opacity:.16;
+      transform: rotate(-8deg);
+      background:
+        radial-gradient(220px 180px at 72% 65%, rgba(255,255,255,.60), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, rgba(244,222,138,.95), rgba(212,175,55,.95));
+      -webkit-mask-image:url('logo.png');
+      -webkit-mask-repeat:no-repeat;
+      -webkit-mask-position: 92% 78%;
+      -webkit-mask-size: 380px;
+      mask-image:url('logo.png');
+      mask-repeat:no-repeat;
+      mask-position: 92% 78%;
+      mask-size: 380px;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,.18));
+      mix-blend-mode:multiply;
+    }
+
+    .muted{color:rgba(11,22,36,.84);font-weight:800;line-height:1.65}
+    .card h2{margin:0 0 10px;font-size:22px;font-weight:1000}
+    .lead{margin:0 0 12px}
+    .list{margin:0;padding-left:18px;list-style:disc;list-style-position:outside}
+    .list li{margin:8px 0}
+    .list li::marker{color: rgba(11,19,34,.70)}
+    [dir="rtl"] .list{padding-right:18px;padding-left:0}
+
+    .quote{
+      margin-top:auto;
+      padding:12px 14px;
+      border-radius: 14px;
+      background: rgba(11,19,34,.10);
+      border: 1px solid rgba(0,0,0,.14);
+      font-weight:900;
+      color: rgba(11,19,34,.92);
+    }
+
+    /* Footer */
+    footer{
+      padding:22px 0 26px;
+      border-top:1px solid rgba(255,255,255,.08);
+      color:rgba(246,247,251,.80);
+      background: rgba(0,0,0,.18);
+      position:relative;
+      z-index:1;
+      margin-top:22px;
+    }
+    .footerGrid{
+      display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;
+    }
+    .footerBrand{display:flex;align-items:center;gap:12px}
+    .footerBrand img{
+      width:42px;height:42px;object-fit:contain;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+    .footerBrand b{display:block}
+    .footerBrand small{display:block;color:rgba(246,247,251,.68);font-weight:800}
+
+    .footerLinks{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    [dir="rtl"] .footerLinks{justify-content:flex-start}
+    .footerLinks a{
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.88);
+      font-weight:900;
+      font-size:13px;
+    }
+    .footerLinks a:hover{background:rgba(255,255,255,.10)}
+
+    .copy{
+      color:rgba(246,247,251,.65);
+      font-weight:800;
+      font-size:13px;
+      margin-top:8px;
+      width:100%;
+    }
+
+    @media (max-width: 980px){
+      .grid2{grid-template-columns:1fr}
+      .pageHero h1{font-size:30px}
+      body::before, body::after{
+        -webkit-mask-size: 520px;
+        mask-size: 520px;
+        -webkit-mask-position: 60% 10%;
+        mask-position: 60% 10%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <a class="brand" href="index.html">
+        <img src="logo.png" alt="Future Dimensions logo" />
+        <span class="brandText">
+          <b id="brandName">Future Dimensions</b>
+          <small id="brandSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
+        </span>
+      </a>
+
+      <nav class="navLinks" aria-label="Primary navigation">
+        <a href="index.html" id="navHome">Home</a>
+        <a href="index.html#about" id="navAbout">About</a>
+        <a href="index.html#services" id="navServices">Services</a>
+        <a href="team.html" id="navTeam">Team</a>
+        <a href="careers.html" id="navCareers">Careers</a>
+        <a class="active" href="vision.html" id="navVision">Vision</a>
+        <a href="index.html#contact" id="navContact">Contact</a>
+      </nav>
+
+      <button class="langBtn" id="langToggle" type="button">AR</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="pageHero">
+    <div class="wrap">
+      <h1 id="pageTitle">Vision & Mission</h1>
+      <p id="pageSub">
+        Learn the principles that guide Future Dimensions and define our long-term direction.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="grid2">
+        <!-- MISSION -->
+        <div class="card">
+          <div class="goldMark" aria-hidden="true"></div>
+          <h2 id="missionTitle">Mission</h2>
+          <p class="muted lead" id="missionLead">
+            Empower organizations through high-quality professional services by:
+          </p>
+          <ul class="list muted" id="missionList">
+            <li>Delivering advanced consulting expertise tailored to complex challenges</li>
+            <li>Developing deep sector and market understanding</li>
+            <li>Designing customized strategies that generate measurable results</li>
+            <li>Ensuring effective solution implementation through ongoing support</li>
+            <li>Building strategic, trust-based long-term partnerships</li>
+          </ul>
+          <div class="quote" id="missionQuote">“From challenge to dimension — with measurable impact.”</div>
+        </div>
+
+        <!-- VISION -->
+        <div class="card">
+          <div class="goldMark" aria-hidden="true"></div>
+          <h2 id="visionTitle">Vision</h2>
+          <p class="muted lead" id="visionLead">
+            To be the trusted consulting partner in the region, recognized for:
+          </p>
+          <ul class="list muted" id="visionList">
+            <li>Excellence and innovation in solution delivery</li>
+            <li>Highest professional standards aligned with international best practices</li>
+            <li>Demonstrable, positive impact on client growth and competitive position</li>
+            <li>Strategic relationships built on transparency and accountability</li>
+            <li>A working culture that fosters creativity and continuous development</li>
+          </ul>
+          <div class="quote" id="visionQuote">“Trust. Standards. Results.”</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footerGrid">
+      <div class="footerBrand">
+        <img src="logo.png" alt="Future Dimensions logo" />
+        <div>
+          <b id="footName">Future Dimensions</b>
+          <small id="footSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
+        </div>
+      </div>
+
+      <div class="footerLinks" aria-label="Footer links">
+        <a href="index.html" id="fHome">Home</a>
+        <a href="index.html#services" id="fServices">Services</a>
+        <a href="team.html" id="fTeam">Team</a>
+        <a href="careers.html" id="fCareers">Careers</a>
+        <a href="vision.html" id="fVision">Vision</a>
+        <a href="index.html#contact" id="fContact">Contact</a>
+      </div>
+
+      <div class="copy" id="copyText">© <span id="year"></span> Future Dimensions — All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  function setText(id, text){ const el=document.getElementById(id); if(el) el.textContent=text; }
+  function setHTML(id, html){ const el=document.getElementById(id); if(el) el.innerHTML=html; }
+  function setList(id, items){
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.innerHTML = items.map(x => `<li>${x}</li>`).join("");
+  }
+
+  let isAR=false;
+  const toggle=document.getElementById("langToggle");
+
+  const i18n = {
+    en:{
+      dir:"ltr", lang:"en", toggle:"AR",
+      nav:{home:"Home", about:"About", services:"Services", team:"Team", careers:"Careers", vision:"Vision", contact:"Contact"},
+      page:{title:"Vision & Mission", sub:"Learn the principles that guide Future Dimensions and define our long-term direction."},
+      mission:{
+        title:"Mission",
+        lead:"Empower organizations through high-quality professional services by:",
+        list:[
+          "Delivering advanced consulting expertise tailored to complex challenges",
+          "Developing deep sector and market understanding",
+          "Designing customized strategies that generate measurable results",
+          "Ensuring effective solution implementation through ongoing support",
+          "Building strategic, trust-based long-term partnerships"
+        ],
+        quote:"“From challenge to dimension — with measurable impact.”"
+      },
+      vision:{
+        title:"Vision",
+        lead:"To be the trusted consulting partner in the region, recognized for:",
+        list:[
+          "Excellence and innovation in solution delivery",
+          "Highest professional standards aligned with international best practices",
+          "Demonstrable, positive impact on client growth and competitive position",
+          "Strategic relationships built on transparency and accountability",
+          "A working culture that fosters creativity and continuous development"
+        ],
+        quote:"“Trust. Standards. Results.”"
+      },
+      footer:{home:"Home", services:"Services", team:"Team", careers:"Careers", vision:"Vision", contact:"Contact",
+              copy:"© {Y} Future Dimensions — All rights reserved."}
+    },
+    ar:{
+      dir:"rtl", lang:"ar", toggle:"EN",
+      nav:{home:"الرئيسية", about:"من نحن", services:"خدماتنا", team:"فريق العمل", careers:"التوظيف", vision:"الرؤية والرسالة", contact:"تواصل معنا"},
+      page:{title:"الرؤية والرسالة", sub:"تعرف على المبادئ التي تقود Future Dimensions وتحدد اتجاهنا طويل المدى."},
+      mission:{
+        title:"الرسالة",
+        lead:"تمكين المؤسسات عبر خدمات مهنية عالية الجودة من خلال:",
+        list:[
+          "تقديم خبرات استشارية متقدمة تناسب التحديات المعقدة",
+          "تطوير فهم عميق للقطاعات والأسواق",
+          "تصميم استراتيجيات مخصصة بنتائج قابلة للقياس",
+          "ضمان تطبيق الحلول بفاعلية عبر دعم مستمر",
+          "بناء شراكات استراتيجية طويلة الأمد قائمة على الثقة"
+        ],
+        quote:"“من التحدي إلى بُعد — بأثر قابل للقياس.”"
+      },
+      vision:{
+        title:"الرؤية",
+        lead:"أن نكون الشريك الاستشاري الموثوق في المنطقة، ومعترفًا بنا من خلال:",
+        list:[
+          "التميز والابتكار في تقديم الحلول",
+          "أعلى المعايير المهنية المتوافقة مع أفضل الممارسات الدولية",
+          "أثر إيجابي ملموس على نمو العملاء ومكانتهم التنافسية",
+          "علاقات استراتيجية قائمة على الشفافية والمساءلة",
+          "ثقافة عمل تعزز الإبداع والتطوير المستمر"
+        ],
+        quote:"“ثقة. معايير. نتائج.”"
+      },
+      footer:{home:"الرئيسية", services:"خدماتنا", team:"فريق العمل", careers:"التوظيف", vision:"الرؤية", contact:"تواصل معنا",
+              copy:"© {Y} Future Dimensions — جميع الحقوق محفوظة."}
+    }
+  };
+
+  function applyLang(){
+    const pack = isAR ? i18n.ar : i18n.en;
+    document.documentElement.dir = pack.dir;
+    document.documentElement.lang = pack.lang;
+    toggle.textContent = pack.toggle;
+
+    setText("navHome", pack.nav.home);
+    setText("navAbout", pack.nav.about);
+    setText("navServices", pack.nav.services);
+    setText("navTeam", pack.nav.team);
+    setText("navCareers", pack.nav.careers);
+    setText("navVision", pack.nav.vision);
+    setText("navContact", pack.nav.contact);
+
+    setText("pageTitle", pack.page.title);
+    setText("pageSub", pack.page.sub);
+
+    setText("missionTitle", pack.mission.title);
+    setText("missionLead", pack.mission.lead);
+    setList("missionList", pack.mission.list);
+    setText("missionQuote", pack.mission.quote);
+
+    setText("visionTitle", pack.vision.title);
+    setText("visionLead", pack.vision.lead);
+    setList("visionList", pack.vision.list);
+    setText("visionQuote", pack.vision.quote);
+
+    setText("fHome", pack.footer.home);
+    setText("fServices", pack.footer.services);
+    setText("fTeam", pack.footer.team);
+    setText("fCareers", pack.footer.careers);
+    setText("fVision", pack.footer.vision);
+    setText("fContact", pack.footer.contact);
+
+    const y = new Date().getFullYear();
+    setText("copyText", pack.footer.copy.replace("{Y}", y));
+  }
+
+  toggle.addEventListener("click", ()=>{ isAR=!isAR; applyLang(); });
+  applyLang();
+</script>
+
+</body>
+</html>
