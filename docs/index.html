@@ -1044,10 +1044,10 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
           <div>
             <h3 id="contactInfoTitle">Contact Info</h3>
             <p class="pStrong" id="contactInfoDesc">Reach us through the channels below — we respond promptly.</p>
-            <ul class="bullets blackBullets" id="aboutWhyList">
+            <ul class="bullets blackBullets">
               <li><b id="contactInfoEmailLabel">Email:</b> info@futuredimensionsco.com</li>
-              <li><b id="contactInfoWebsiteLabel">Website:</b> www.futuredimensionsco.com</li>
-              <li><b id="contactInfoPhoneLabel">Phone:</b> +20 100 193 8264</li>
+              <li><b id="contactInfoWebsiteLabel">Website:</b> <span dir="ltr">www.futuredimensionsco.com</span></li>
+              <li><b id="contactInfoPhoneLabel">Phone:</b> <span dir="ltr">+20 100 193 8264</span></li>
             </ul>
           </div>
 
@@ -1083,7 +1083,10 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
         <h2><span id="pageAboutTitle">About Us</span></h2>
       </div>
       <div class="card cardGold">
-        <p class="pStrong" id="pageAboutP">Future Dimensions for Consulting &amp; Business Solutions operates as a strategic partner — not just a consultant — supporting leaders from diagnostics to implementation, with audit‑ready deliverables and measurable outcomes.</p>
+        <p class="pStrong" id="pageAboutP">
+          Future Dimensions for Consulting &amp; Business Solutions operates as a strategic partner — not just a consultant —
+          supporting leaders from diagnostics to implementation, with audit‑ready deliverables and measurable outcomes.
+        </p>
         <ul class="bullets blackBullets">
           <li>Transformation — not temporary fixes</li>
           <li>Clear methodology and practical execution</li>
@@ -1362,7 +1365,6 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       aboutHint:"Identity-driven. Execution-focused.",
       aboutH3_1:"Who we are",
       aboutP1:"Future Dimensions for Consulting & Business Solutions was founded on a core belief: every challenge contains a hidden opportunity for transformation and growth. We operate as a strategic partner — not just a consultant — going beyond recommendations to ensure sustainable execution and measurable impact.",
-      aboutPageDesc:"Future Dimensions operates as a strategic partner — not just a consultant — supporting leaders from diagnostics to implementation, with audit‑ready deliverables and measurable outcomes."
       aboutLinkFinancial:"Financial Dimension",
       aboutLinkAdmin:"Administrative & Operational",
       aboutLinkGrowth:"Growth Strategy",
@@ -1528,7 +1530,6 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       aboutHint:"هوية قوية. تنفيذ فعّال.",
       aboutH3_1:"تعريف بالشركة",
       aboutP1:"تأسست Future Dimensions للاستشارات وحلول الأعمال على قناعة أساسية: كل تحدٍّ يحمل فرصة خفية للتحول والنمو. نحن نعمل كشريك استراتيجي—not مجرد مستشار— ونتجاوز تقديم التوصيات إلى ضمان تنفيذ مستدام وأثر قابل للقياس.",
-      aboutPageDesc:"تعمل Future Dimensions كشريك استراتيجي — وليس مجرد مستشار — لدعم القيادات من التشخيص حتى التنفيذ، بمخرجات موثقة وجاهزة للمراجعة ونتائج قابلة للقياس."
       aboutLinkFinancial:"البعد المالي",
       aboutLinkAdmin:"البعد الإداري والتشغيلي",
       aboutLinkGrowth:"استراتيجية النمو",
@@ -1614,30 +1615,28 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       footSub:"للاستشارات وحلول الأعمال",
       copyText:"© Future Dimensions — جميع الحقوق محفوظة.",
       fHome:"الرئيسية", fAbout:"من نحن", fServices:"الخدمات", fTeam:"فريق العمل", fCareers:"التوظيف", fContact:"تواصل معنا"
-
-      // Approach steps (cards)
-      step1Title:"1) التشخيص",
-      step1Desc:"تقييم منظم للأداء الحالي والمخاطر والفجوات والأسباب الجذرية.",
-      step2Title:"2) التصميم",
-      step2Desc:"بناء خارطة طريق عملية وسياسات وأدوات وحوكمة متسقة مع الأهداف.",
-      step3Title:"3) التنفيذ",
-      step3Desc:"تنفيذ منضبط مع المتابعة ومؤشرات الأداء والتوثيق لضمان تبنّي الحلول.",
-
-      // Contact info card
-      contactInfoTitle:"بيانات التواصل",
-      contactInfoDesc:"تواصل معنا عبر القنوات التالية — ونرد بسرعة.",
-      contactInfoEmailLabel:"البريد:",
+    
+      // Contact + Careers + Methodology steps
+      contactInfoTitle:"معلومات التواصل",
+      contactInfoDesc:"تواصل معنا عبر القنوات التالية — نرد بسرعة.",
+      contactInfoEmailLabel:"البريد الإلكتروني:",
       contactInfoWebsiteLabel:"الموقع:",
       contactInfoPhoneLabel:"الهاتف:",
       contactInfoBtnEmail:"إيميل",
       contactInfoBtnWebsite:"الموقع",
       contactInfoBtnCall:"اتصال",
 
-      // Careers card
-      careersCardTitle:"التوظيف",
+      careersCardTitle:"الوظائف",
       careersCardDesc:"مهتم بالانضمام؟ أرسل سيرتك الذاتية وسنتواصل معك عند توفر فرصة مناسبة.",
       careersBtnApply:"قدّم",
-      careersBtnTeam:"الفريق",
+      careersBtnTeam:"فريق العمل",
+
+      step1Title:"التشخيص (1)",
+      step1Desc:"تقييم منظم للأداء الحالي، والمخاطر، والفجوات، والأسباب الجذرية.",
+      step2Title:"التصميم (2)",
+      step2Desc:"بناء خارطة طريق عملية، وسياسات، وأدوات، وأطر حوكمة متوافقة مع الأهداف.",
+      step3Title:"التنفيذ (3)",
+      step3Desc:"التنفيذ بمتابعة منضبطة، ومؤشرات أداء، وتوثيق لضمان تبنّي النتائج.",
 
 }
   };
@@ -1708,14 +1707,12 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
     setText("aboutHint", c.aboutHint);
     setText("aboutH3_1", c.aboutH3_1);
     setText("aboutP1", c.aboutP1);
-    setText("aboutPageDesc", c.aboutPageDesc);
-    setList("aboutWhyList", c.whyList);
     setText("aboutLinkFinancial", c.aboutLinkFinancial);
     setText("aboutLinkAdmin", c.aboutLinkAdmin);
     setText("aboutLinkGrowth", c.aboutLinkGrowth);
     setText("aboutLinkGov", c.aboutLinkGov);
     setText("aboutH3_2", c.aboutH3_2);
-    setList("aboutList", c.aboutList);
+    setList("aboutBullets", c.aboutList);
     setText("taglineLine", c.taglineLine);
 
     setText("servicesTitle", c.servicesTitle);
