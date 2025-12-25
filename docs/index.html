@@ -18,13 +18,14 @@
 
   <style>
     :root{
-      --navy:#0b1322;
-      --navy2:#0f1b2d;
+      /* ✅ تفتيح بسيط للخلفية الكحلي */
+      --navy:#0e1830;
+      --navy2:#122040;
 
       --gold:#D4AF37;
       --gold2:#B8962E;
-      --gold3:#F4DE8A;
-      --champ:#F7F3E9;
+      --gold3:#F7E7A6;   /* ✅ أفتح ولمّاع */
+      --champ:#FBF7EE;
 
       --onDark:#F6F7FB;
       --ink:#0b1322;
@@ -44,22 +45,22 @@
       background:
         radial-gradient(1100px 700px at 12% 0%, rgba(212,175,55,.08) 0%, rgba(212,175,55,0) 58%),
         radial-gradient(900px 600px at 98% 15%, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 55%),
-        linear-gradient(180deg, var(--navy), #060b14 70%, #04070e);
+        linear-gradient(180deg, var(--navy), #070f1f 70%, #040714);
       position:relative;
       overflow-x:hidden;
     }
 
-    /* NAVY watermark (more visible + 3D hint) */
+    /* ✅ اللوجو في الخلفية الكحلي: أوضح شوية + 3D خفيف */
     body::before{
       content:"";
       position:fixed;
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:.14;
+      opacity:.20; /* كان .14 */
       background:
-        radial-gradient(1200px 800px at 65% 15%, rgba(11,19,34,.34), rgba(11,19,34,0) 62%),
-        radial-gradient(1000px 700px at 20% 78%, rgba(11,19,34,.30), rgba(11,19,34,0) 60%);
+        radial-gradient(1200px 800px at 65% 15%, rgba(255,255,255,.08), rgba(255,255,255,0) 62%),
+        radial-gradient(1000px 700px at 20% 78%, rgba(255,255,255,.06), rgba(255,255,255,0) 60%);
       -webkit-mask-image: url('logo.png');
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-position: 65% 18%;
@@ -68,14 +69,18 @@
       mask-repeat: no-repeat;
       mask-position: 65% 18%;
       mask-size: 720px;
-      filter: drop-shadow(0 14px 22px rgba(0,0,0,.28));
+      filter:
+        drop-shadow(0 18px 26px rgba(0,0,0,.35))
+        drop-shadow(0 2px 0 rgba(255,255,255,.06));
     }
+
+    /* highlight layer */
     body::after{
       content:"";
       position:fixed; inset:0;
       pointer-events:none; z-index:0;
-      opacity:.08;
-      background: rgba(255,255,255,.10);
+      opacity:.10; /* كان .08 */
+      background: rgba(255,255,255,.16);
       -webkit-mask-image: url('logo.png');
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-position: 66% 19%;
@@ -84,7 +89,7 @@
       mask-repeat: no-repeat;
       mask-position: 66% 19%;
       mask-size: 720px;
-      filter: blur(.7px);
+      filter: blur(.6px);
       mix-blend-mode: overlay;
     }
 
@@ -95,7 +100,7 @@
     header{
       position:sticky;top:0;z-index:1000;
       backdrop-filter: blur(10px);
-      background: rgba(11,19,34,.62);
+      background: rgba(14,24,48,.62);
       border-bottom: 1px solid rgba(255,255,255,.06);
     }
     .nav{
@@ -166,34 +171,34 @@
       padding:14px;
       color: var(--ink);
       background:
-        radial-gradient(900px 480px at 10% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        radial-gradient(900px 480px at 10% 0%, rgba(255,255,255,.65), rgba(255,255,255,0) 60%),
         linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
       border: 1px solid rgba(0,0,0,.14);
       box-shadow:
         0 28px 90px rgba(0,0,0,.42),
         0 8px 22px rgba(0,0,0,.28),
-        inset 0 1px 0 rgba(255,255,255,.55),
+        inset 0 1px 0 rgba(255,255,255,.62),
         inset 0 -18px 28px rgba(0,0,0,.12);
     }
     .heroCard:after{
       content:"";
       position:absolute;inset:0;
       background:
-        radial-gradient(560px 240px at 18% 6%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%),
-        linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,0) 42%);
+        radial-gradient(560px 240px at 18% 6%, rgba(255,255,255,.38), rgba(255,255,255,0) 60%),
+        linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,0) 42%);
       pointer-events:none;
       opacity:.7;
     }
 
-    /* Gold watermark inside cards (brighter + shine + 3D hint) */
+    /* ✅ اللوجو داخل الخلفية الذهبية: أفتح/لامع + إحساس 3D */
     .goldMark{
       position:absolute; inset:-20px;
       pointer-events:none;
-      opacity:.16;
+      opacity:.26;  /* كان .16 */
       transform: rotate(-8deg);
       background:
-        radial-gradient(220px 180px at 72% 65%, rgba(255,255,255,.60), rgba(255,255,255,0) 60%),
-        linear-gradient(135deg, rgba(244,222,138,.95), rgba(212,175,55,.95));
+        radial-gradient(260px 200px at 70% 62%, rgba(255,255,255,.82), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, rgba(255,245,210,.95), rgba(244,222,138,.92), rgba(212,175,55,.95));
       -webkit-mask-image:url('logo.png');
       -webkit-mask-repeat:no-repeat;
       -webkit-mask-position: 92% 78%;
@@ -202,7 +207,9 @@
       mask-repeat:no-repeat;
       mask-position: 92% 78%;
       mask-size: 360px;
-      filter: drop-shadow(0 12px 18px rgba(0,0,0,.18));
+      filter:
+        drop-shadow(0 18px 22px rgba(0,0,0,.18))
+        drop-shadow(0 2px 0 rgba(255,255,255,.26));
       mix-blend-mode:multiply;
     }
 
@@ -262,7 +269,8 @@
     .sectionTitle{font-size:34px;margin:0 0 14px;font-weight:1000}
     .sectionSub{margin:0 0 18px;color:rgba(246,247,251,.76);font-weight:650}
 
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
+    /* ✅ (من نحن + الرؤية والرسالة) و (كونتاكت + كارير): بدل Stretch نخليهم على قد المحتوى */
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 
@@ -273,23 +281,26 @@
       color: var(--ink);
       padding:18px;
       background:
-        radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.65), rgba(255,255,255,0) 60%),
         linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
       border:1px solid rgba(0,0,0,.12);
       box-shadow:
         0 28px 90px rgba(0,0,0,.42),
         0 8px 22px rgba(0,0,0,.28),
-        inset 0 1px 0 rgba(255,255,255,.55),
+        inset 0 1px 0 rgba(255,255,255,.62),
         inset 0 -18px 28px rgba(0,0,0,.12);
       display:flex; flex-direction:column;
-      min-height: 290px;
+
+      /* ✅ إلغاء الطول الإجباري اللي كان بيعمل فراغات */
+      min-height: unset;
+      height: fit-content;
     }
     .card:after{
       content:"";
       position:absolute;inset:0;
       background:
-        radial-gradient(560px 240px at 18% 6%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%),
-        linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,0) 42%);
+        radial-gradient(560px 240px at 18% 6%, rgba(255,255,255,.38), rgba(255,255,255,0) 60%),
+        linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,0) 42%);
       pointer-events:none;
       opacity:.7;
     }
@@ -324,8 +335,10 @@
     .svcList li::marker{color: rgba(11,19,34,.75)}
     [dir="rtl"] .svcList{padding-right:18px;padding-left:0}
 
+    /* Deliverable alignment stays for methodology */
     .tag{
-      display:inline-block;margin-top:auto;   /* ✅ align deliverables */
+      display:inline-block;
+      margin-top:auto;
       padding:8px 10px;border-radius:999px;
       font-weight:850;font-size:12px;
       background: rgba(11,19,34,.10);
@@ -458,7 +471,6 @@
     </div>
   </section>
 
-  <!-- ABOUT + VISION & MISSION (same height + More to page) -->
   <section id="about">
     <div class="wrap">
       <h2 class="sectionTitle" id="aboutTitle">About Us</h2>
@@ -484,7 +496,6 @@
           <div class="goldMark" aria-hidden="true"></div>
           <h3 id="vmTitle" style="margin:0 0 10px;font-size:20px;font-weight:1000">Vision &amp; Mission</h3>
 
-          <!-- ✅ short preview (reader continues in vision.html) -->
           <div class="muted" style="font-weight:950;margin-bottom:6px" id="vmMissionHead">Mission (preview)</div>
           <ul class="svcList muted" id="vmMissionList">
             <li>Advanced consulting expertise for complex challenges</li>
@@ -507,7 +518,6 @@
     </div>
   </section>
 
-  <!-- SERVICES -->
   <section id="services">
     <div class="wrap">
       <h2 class="sectionTitle" id="servicesTitle">Our Services</h2>
@@ -542,7 +552,6 @@
             <li>Strategic Planning &amp; Organizational Development</li>
             <li>Process Improvement &amp; Operational Efficiency</li>
             <li>Quality &amp; Risk Management Systems</li>
-            <!-- ✅ ISO removed -->
             <li>Compliance with International Standards</li>
           </ul>
 
@@ -572,7 +581,6 @@
     </div>
   </section>
 
-  <!-- WORK METHODOLOGY (deliverables aligned) -->
   <section id="methodology">
     <div class="wrap">
       <h2 class="sectionTitle" id="methodTitle">Work Methodology</h2>
@@ -610,7 +618,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div class="wrap">
       <h2 class="sectionTitle" id="contactTitle">Contact</h2>
@@ -654,7 +661,6 @@
 <footer>
   <div class="wrap">
     <div class="footerGrid">
-      <!-- ✅ logo back in footer (like header) -->
       <div class="footerBrand">
         <img src="logo.png" alt="Future Dimensions logo" />
         <div>
@@ -663,7 +669,6 @@
         </div>
       </div>
 
-      <!-- ✅ footer menu back -->
       <div class="footerLinks" aria-label="Footer links">
         <a href="index.html" id="fHome">Home</a>
         <a href="#services" id="fServices">Services</a>
@@ -854,6 +859,7 @@
     setText("copyText", pack.footer.copy.replace("{Y}", y));
   }
 
+  document.getElementById("year").textContent = new Date().getFullYear();
   toggle.addEventListener("click", ()=>{ isAR=!isAR; applyLang(); });
   applyLang();
 </script>
