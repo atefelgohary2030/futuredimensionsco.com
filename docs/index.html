@@ -5,10 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ✅ SEO (Base - will be updated dynamically) -->
   <title>Future Dimensions | Consulting & Business Solutions</title>
   <meta name="description" content="Future Dimensions is a premium consulting partner delivering Financial, Administrative & Operational, and Growth Strategy solutions with measurable impact." />
-  <meta name="keywords" content="consulting, financial diagnostics, IFRS, IAS 19, IFRS 9, internal audit, risk, governance, strategy, operational excellence, digital transformation" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.futuredimensionsco.com/" />
 
@@ -19,12 +17,6 @@
   <meta property="og:url" content="https://www.futuredimensionsco.com/" />
   <meta property="og:image" content="https://www.futuredimensionsco.com/logo.png" />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Future Dimensions | Consulting & Business Solutions" />
-  <meta name="twitter:description" content="Financial, Operational, and Growth Strategy consulting with measurable impact." />
-  <meta name="twitter:image" content="https://www.futuredimensionsco.com/logo.png" />
-
   <style>
     :root{
       --navy:#0b1322;
@@ -33,16 +25,17 @@
       --gold:#D4AF37;
       --gold2:#B8962E;
       --gold3:#F1D77A;
+      --champ:#F5F1E6;
 
       --teal:#2EC4B6;
-      --champ:#F5F1E6;
 
       --onDark:#F6F7FB;
       --ink:#0b1322;
 
-      --shadow: 0 28px 90px rgba(0,0,0,.42), 0 6px 18px rgba(0,0,0,.28);
       --radius: 18px;
       --max: 1140px;
+
+      --shadowDeep: 0 28px 90px rgba(0,0,0,.42), 0 6px 18px rgba(0,0,0,.28);
     }
 
     *{box-sizing:border-box}
@@ -52,8 +45,8 @@
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Kufi Arabic","Noto Sans Arabic", sans-serif;
       color: var(--onDark);
       background:
-        radial-gradient(1100px 700px at 12% 0%, rgba(46,196,182,.18) 0%, rgba(46,196,182,0) 58%),
-        radial-gradient(900px 600px at 98% 15%, rgba(212,175,55,.16) 0%, rgba(212,175,55,0) 55%),
+        radial-gradient(1100px 700px at 12% 0%, rgba(46,196,182,.14) 0%, rgba(46,196,182,0) 58%),
+        radial-gradient(900px 600px at 98% 15%, rgba(212,175,55,.14) 0%, rgba(212,175,55,0) 55%),
         linear-gradient(180deg, var(--navy), #060b14 70%, #04070e);
     }
 
@@ -82,17 +75,18 @@
     }
     .brandText{display:flex;flex-direction:column;line-height:1.1}
     .brandText b{font-size:16px;letter-spacing:.2px}
-    .brandText small{font-size:12px;color:rgba(246,247,251,.72);font-weight:700}
+    .brandText small{font-size:12px;color:rgba(246,247,251,.72);font-weight:800}
 
     .navLinks{
       display:flex;gap:18px;align-items:center;justify-content:flex-end;
       flex:1;
+      flex-wrap:wrap;
     }
     .navLinks a{
       padding:10px 12px;
       border-radius: 999px;
-      color: rgba(246,247,251,.9);
-      font-weight:750;
+      color: rgba(246,247,251,.92);
+      font-weight:800;
       transition: .2s ease;
     }
     .navLinks a:hover{
@@ -109,101 +103,120 @@
       background:rgba(255,255,255,.06);
       color:rgba(246,247,251,.92);
       padding:10px 12px;border-radius:999px;
-      font-weight:800;cursor:pointer;
+      font-weight:900;cursor:pointer;
     }
     .langBtn:hover{background:rgba(255,255,255,.10)}
 
-    /* Hero */
-    .hero{padding:18px 0 22px}
-    .heroGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    /* HERO */
+    .hero{padding:18px 0 18px}
+    .heroGrid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
 
-    .heroCard{
+    .heroCard, .sideCard{
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadowDeep);
+      overflow:hidden;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      height: 250px; /* أقصر + متساويين */
+    }
+
+    /* Premium Gold Card (Hero) */
+    .heroCard{
+      padding:14px;
+      color: var(--ink);
       background:
         radial-gradient(900px 480px at 10% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
         linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
       border: 1px solid rgba(0,0,0,.14);
-      color: var(--ink);
-      padding:14px;
-      position:relative;
-      overflow:hidden;
+      box-shadow:
+        0 28px 90px rgba(0,0,0,.42),
+        0 8px 22px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.55),
+        inset 0 -18px 28px rgba(0,0,0,.12);
     }
-    .heroCard .wm{
-      position:absolute;
-      right:-60px;bottom:-70px;
-      width:420px;height:auto;
-      opacity:.06;
-      filter:saturate(0) brightness(0.8);
-      mix-blend-mode:soft-light;
+    .heroCard:after{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        radial-gradient(560px 240px at 18% 6%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%),
+        linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,0) 42%);
       pointer-events:none;
-      transform: rotate(-10deg);
+      opacity:.7;
+    }
+    /* watermark inside gold (clearer) */
+    .heroCard:before{
+      content:"";
+      position:absolute; inset:-20px;
+      background-image:url('logo.png');
+      background-repeat:no-repeat;
+      background-position: 92% 78%;
+      background-size: 360px;
+      opacity:.18;
+      filter:saturate(0) brightness(.9);
+      mix-blend-mode:multiply;
+      transform: rotate(-8deg);
+      pointer-events:none;
     }
 
+    /* bigger slogan */
     .heroKicker{
       display:inline-block;
       padding:10px 14px;
       border-radius:999px;
       background: rgba(11,19,34,.10);
       border: 1px solid rgba(0,0,0,.12);
-      font-weight:900;
-      font-size:clamp(18px, 1.9vw, 22px);
-      margin-bottom:10px;
-      color:#0b1322; /* black */
+      font-weight:950;
+      font-size: 22px;
+      margin-bottom:8px;
+      color:#0b1322;
+      width: fit-content;
+      max-width: 100%;
     }
 
+    /* smaller company name */
     .heroTitle{
       font-weight:1000;
-      letter-spacing:.2px;
-      margin:0 0 8px;
-      font-size:clamp(26px, 3.0vw, 40px);
-      line-height:1.08;
-      color:#0b1322; /* black */
+      margin:0 0 4px;
+      font-size: 36px;
+      line-height:1.06;
+      color:#0b1322;
     }
     .heroSub{
       display:block;
       font-weight:900;
       margin-top:6px;
-      font-size:clamp(19px, 2.0vw, 26px);
-      color:#0b1322; /* black */
+      font-size: 22px;
+      color:#0b1322;
       opacity:.92;
     }
-
     .heroText{
-      margin:0 0 8px;
-      font-size:16px;
-      line-height:1.65;
-      color: rgba(11,19,34,.90);
-      font-weight:700;
-      max-width: 60ch;
+      margin:0;
+      margin-top:6px;
+      font-size:14.5px;
+      line-height:1.55;
+      color: rgba(11,19,34,.88);
+      font-weight:750;
+      max-width: 62ch;
     }
 
-    .heroPills{
-      display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;
-    }
-    .pill{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 12px;border-radius:999px;
-      font-weight:900;font-size:13px;
-      background: rgba(255,255,255,.35);
-      border:1px solid rgba(0,0,0,.10);
-      color: rgba(11,22,36,.92);
-      cursor:pointer;
-      transition:.2s ease;
-    }
-    .pill:hover{transform:translateY(-1px);background:rgba(255,255,255,.45)}
-    .dot{width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(46,196,182,.18)}
-
+    /* Side card */
     .sideCard{
-      border-radius: var(--radius);
+      padding:14px;
       background: rgba(255,255,255,.04);
       border:1px solid rgba(255,255,255,.08);
-      box-shadow: 0 30px 90px rgba(0,0,0,.42);
-      padding:18px;
+      box-shadow:
+        0 30px 90px rgba(0,0,0,.42),
+        inset 0 1px 0 rgba(255,255,255,.08);
     }
-    .sideCard h3{margin:0 0 10px;font-size:22px}
-    .sideCard ul{margin:0;padding-left:18px;color:rgba(246,247,251,.88);line-height:1.75;font-weight:650}
-    .sideCard small{display:block;margin-top:14px;color:rgba(246,247,251,.70);font-weight:700}
+    .sideCard h3{margin:0 0 8px;font-size:20px}
+    .sideCard ul{margin:0;padding-left:18px;color:rgba(246,247,251,.88);line-height:1.6;font-weight:650}
+    .sideCard small{display:block;margin-top:auto;color:rgba(246,247,251,.70);font-weight:750}
 
     /* Sections */
     section{padding:26px 0}
@@ -212,81 +225,118 @@
 
     .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 
+    /* Gold cards */
     .card{
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+      color: var(--ink);
+      padding:18px;
       background:
         radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
         linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
       border:1px solid rgba(0,0,0,.12);
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-      color: var(--ink);
-    }
-
-    /* Premium 3D depth + subtle watermark */
-    .heroCard,.card{
       box-shadow:
         0 28px 90px rgba(0,0,0,.42),
         0 8px 22px rgba(0,0,0,.28),
-        inset 0 1px 0 rgba(255,255,255,.45),
-        inset 0 -18px 28px rgba(0,0,0,.10);
+        inset 0 1px 0 rgba(255,255,255,.55),
+        inset 0 -18px 28px rgba(0,0,0,.12);
     }
-    .heroCard::before,.card::before{
-      content:"";
-      position:absolute;inset:-20px;
-      background-image:url('logo.png');
-      background-repeat:no-repeat;
-      background-position: 92% 78%;
-      background-size: 360px;
-      opacity:.075;
-      filter:saturate(0) brightness(.9);
-      mix-blend-mode:soft-light;
-      pointer-events:none;
-      transform: rotate(-8deg);
-    }
-    .heroCard::after,.card::after{
+    .card:after{
       content:"";
       position:absolute;inset:0;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,0) 45%),
-        radial-gradient(500px 220px at 18% 10%, rgba(255,255,255,.28), rgba(255,255,255,0) 60%);
-      opacity:.55;
+        radial-gradient(560px 240px at 18% 6%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%),
+        linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,0) 42%);
+      pointer-events:none;
+      opacity:.7;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-20px;
+      background-image:url('logo.png');
+      background-repeat:no-repeat;
+      background-position: 92% 78%;
+      background-size: 340px;
+      opacity:.14; /* clearer */
+      filter:saturate(0) brightness(.9);
+      mix-blend-mode:multiply;
+      transform: rotate(-8deg);
       pointer-events:none;
     }
 
-    .aboutPills{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-    .aboutPills a{
+    .muted{color:rgba(11,22,36,.82);font-weight:750;line-height:1.6}
+
+    /* About like old (not too wide) */
+    .aboutWrap{
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .aboutCard{padding:16px;}
+    .aboutRow{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;}
+    .aboutIcon{
+      width:52px;height:52px;border-radius:14px;
+      background: rgba(11,19,34,.10);
+      border:1px solid rgba(0,0,0,.12);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:1000;color:rgba(11,19,34,.9);
+      flex:0 0 auto;
+    }
+    .aboutTextWrap{flex:1;min-width:240px}
+    .aboutTitleSmall{margin:0 0 6px;font-size:20px;font-weight:1000}
+    .aboutP{margin:0}
+
+    /* Services bullets */
+    .svcList{
+      margin:12px 0 0;
+      padding-left:18px;
+      list-style: disc;
+      list-style-position: outside;
+    }
+    .svcList li{margin:6px 0}
+    .svcList li::marker{color: rgba(11,19,34,.75)}
+
+    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+    .btn{
       display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 12px;border-radius:999px;
+      padding:10px 14px;border-radius:999px;
       font-weight:950;font-size:13px;
-      color:rgba(11,22,36,.92);
-      background:rgba(255,255,255,.45);
-      border:1px solid rgba(0,0,0,.10);
+      border:1px solid rgba(0,0,0,.16);
+      background: rgba(11,19,34,.10);
+      color: rgba(11,22,36,.95);
       transition:.2s ease;
     }
-    .aboutPills a:hover{transform:translateY(-1px);background:rgba(255,255,255,.55)}
-
-    .serviceBtns{
-      display:flex;gap:10px;flex-wrap:wrap;
-      margin-top:12px;
+    .btn:hover{transform:translateY(-1px);background:rgba(11,19,34,.14)}
+    .btnDark{
+      background: rgba(11,19,34,.92);
+      color: rgba(246,247,251,.94);
+      border:1px solid rgba(0,0,0,.25);
     }
-    .btnSm{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 12px;border-radius:999px;
-      font-weight:950;font-size:13px;
-      border:1px solid rgba(0,0,0,.14);
-      background: rgba(255,255,255,.18);
-      color: rgba(11,22,36,.92);
-      transition:.2s ease;
+    .btnDark:hover{background: rgba(11,19,34,.98)}
+
+    /* Dark cards */
+    .darkCard{
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:
+        0 30px 90px rgba(0,0,0,.42),
+        inset 0 1px 0 rgba(255,255,255,.08);
+      padding:18px;
     }
-    .btnSm:hover{transform:translateY(-1px);background:rgba(255,255,255,.28)}
+    .darkCard h3{margin:0 0 8px;font-size:18px}
+    .darkCard p{margin:0;color:rgba(246,247,251,.82);line-height:1.7;font-weight:650}
+    .tag{
+      display:inline-block;margin-top:10px;
+      padding:8px 10px;border-radius:999px;
+      font-weight:850;font-size:12px;
+      background: rgba(212,175,55,.12);
+      border:1px solid rgba(212,175,55,.20);
+      color: rgba(246,247,251,.92);
+    }
 
-    .muted{color:rgba(11,22,36,.82);font-weight:700;line-height:1.6}
-
-    /* Footer */
     footer{
       padding:26px 0 34px;
       border-top:1px solid rgba(255,255,255,.08);
@@ -297,13 +347,13 @@
     footer b{color:rgba(246,247,251,.94)}
     .tiny{font-size:12px;color:rgba(246,247,251,.65);font-weight:650}
 
-    /* Responsive */
     @media (max-width: 980px){
       .heroGrid{grid-template-columns:1fr}
-      .grid3{grid-template-columns:1fr}
-      .grid2{grid-template-columns:1fr}
-      .navLinks{gap:8px;flex-wrap:wrap;justify-content:flex-start}
-      .brand{min-width:auto}
+      .heroCard,.sideCard{height:auto}
+      .grid3,.grid2,.grid4{grid-template-columns:1fr}
+      .heroTitle{font-size:30px}
+      .heroKicker{font-size:20px}
+      .heroSub{font-size:20px}
     }
   </style>
 </head>
@@ -327,7 +377,7 @@
         <a href="#services" id="navServices">Services</a>
         <a href="team.html" id="navTeam">Team</a>
         <a href="careers.html" id="navCareers">Careers</a>
-        <a href="#approach" id="navApproach">Approach</a>
+        <a href="#methodology" id="navMethodology">Work Methodology</a>
         <a href="#contact" id="navContact">Contact</a>
       </nav>
 
@@ -338,12 +388,12 @@
 
 <main>
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="home">
     <div class="wrap">
       <div class="heroGrid">
         <div class="heroCard">
-          <img class="wm" src="logo.png" alt="" aria-hidden="true" />
           <div class="heroKicker" id="heroKicker">Enter with Challenges – Exit with New Dimensions</div>
+
           <h1 class="heroTitle" id="heroTitle">
             Future Dimensions
             <span class="heroSub" id="heroSub">for Consulting &amp; Business Solutions</span>
@@ -354,13 +404,6 @@
             Administrative &amp; Operational, and Growth Strategy solutions with measurable
             impact — locally and globally.
           </p>
-
-          <!-- pills moved below (as requested earlier) -->
-          <div class="heroPills" aria-label="Key dimensions">
-            <a class="pill" href="financial.html"><span class="dot"></span><span id="pill1">Financial Diagnostics</span></a>
-            <a class="pill" href="administrative.html"><span class="dot"></span><span id="pill2">Governance &amp; Compliance</span></a>
-            <a class="pill" href="growth.html"><span class="dot"></span><span id="pill3">Growth &amp; Transformation</span></a>
-          </div>
         </div>
 
         <aside class="sideCard">
@@ -379,21 +422,27 @@
 
   <!-- ABOUT -->
   <section id="about">
-    <div class="wrap">
+    <div class="wrap aboutWrap">
       <h2 class="sectionTitle" id="aboutTitle">About Us</h2>
       <p class="sectionSub" id="aboutSub">Who we are and how we create measurable impact.</p>
 
-      <div class="card">
-        <h3 id="aboutWho">Who we are</h3>
-        <p class="muted" id="aboutText">
-          Future Dimensions is a consulting partner that blends financial expertise, operational excellence, and growth strategy to build resilient organizations and sustainable results.
-        </p>
+      <div class="card aboutCard">
+        <div class="aboutRow">
+          <div class="aboutIcon" aria-hidden="true">FD</div>
+          <div class="aboutTextWrap">
+            <h3 class="aboutTitleSmall" id="aboutWho">Who we are</h3>
+            <p class="muted aboutP" id="aboutText">
+              Future Dimensions is a consulting partner that blends financial expertise,
+              operational excellence, and growth strategy to build resilient organizations and sustainable results.
+            </p>
 
-        <div class="aboutPills">
-          <a href="financial.html" id="aboutLink1">Financial</a>
-          <a href="administrative.html" id="aboutLink2">Operational</a>
-          <a href="growth.html" id="aboutLink3">Growth</a>
-          <a href="#approach" id="aboutLink4">Governance</a>
+            <div class="btnRow">
+              <a class="btn" href="financial.html" id="aboutLink1">Financial</a>
+              <a class="btn" href="administrative.html" id="aboutLink2">Operational</a>
+              <a class="btn" href="growth.html" id="aboutLink3">Growth</a>
+              <a class="btn" href="#methodology" id="aboutLink4">Governance</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -403,59 +452,51 @@
   <section id="services">
     <div class="wrap">
       <h2 class="sectionTitle" id="servicesTitle">Our Services</h2>
-      <p class="sectionSub" id="servicesSub">Open each dimension for full details.</p>
+      <p class="sectionSub" id="servicesSub">Each dimension below shows 5 key services. Open “More” for full details.</p>
 
       <div class="grid3">
+        <!-- Financial -->
         <div class="card">
           <div style="font-weight:1000;font-size:22px;margin-bottom:8px" id="svc1Title">Financial Dimension</div>
-          <div class="muted" id="svc1Desc">Financial diagnostics, profitability improvement, and IFRS-focused advisory.</div>
+          <div class="muted" id="svc1Desc">Finance that drives performance.</div>
 
-          <ul class="muted" style="margin:12px 0 0;padding-left:18px" id="svc1List">
+          <ul class="svcList muted" id="svc1List">
             <li>Comprehensive Financial Diagnostics &amp; Performance Analysis</li>
             <li>Profitability Improvement &amp; Cost Optimization</li>
             <li>ROI Enhancement &amp; Shareholder Value Maximization</li>
-            <li>Strategic Financial Planning &amp; Budgeting</li>
-            <li>Financial Restructuring &amp; Optimization</li>
-            <li>Internal Audit &amp; Risk Assessment</li>
             <li>End of Service Benefits Actuarial Valuation (IAS 19)</li>
             <li>Expected Credit Loss Consultation (IFRS 9)</li>
-            <li>Financial Policies &amp; Procedures Development</li>
           </ul>
 
-          <div class="serviceBtns" style="margin-top:14px">
-            <a class="btnSm" href="financial.html" id="svc1BtnMain">Open Service Page</a>
-            <a class="btnSm" href="financial.html#ifrs9" id="svc1Btn2">IFRS 9</a>
-            <a class="btnSm" href="financial.html#ias19" id="svc1Btn3">IAS 19</a>
+          <div class="btnRow">
+            <a class="btnDark btn" href="financial.html" id="svc1More">More</a>
           </div>
         </div>
 
+        <!-- Administrative -->
         <div class="card">
           <div style="font-weight:1000;font-size:22px;margin-bottom:8px" id="svc2Title">Administrative &amp; Operational Dimension</div>
-          <div class="muted" id="svc2Desc">Operational excellence, governance frameworks, and compliance structures.</div>
+          <div class="muted" id="svc2Desc">Execution &amp; operational excellence.</div>
 
-          <ul class="muted" style="margin:12px 0 0;padding-left:18px" id="svc2List">
+          <ul class="svcList muted" id="svc2List">
             <li>Business Strategy Development &amp; Execution</li>
             <li>Strategic Planning &amp; Organizational Development</li>
             <li>Process Improvement &amp; Operational Efficiency</li>
-            <li>Corporate Restructuring &amp; Organizational Optimization</li>
-            <li>Administrative Systems &amp; Procedures Development</li>
             <li>Quality &amp; Risk Management Systems</li>
-            <li>Effective Governance Structures &amp; Frameworks</li>
             <li>Compliance with International Standards (ISO)</li>
           </ul>
 
-          <div class="serviceBtns" style="margin-top:14px">
-            <a class="btnSm" href="administrative.html" id="svc2BtnMain">Open Service Page</a>
-            <a class="btnSm" href="administrative.html#process" id="svc2Btn2">Process</a>
-            <a class="btnSm" href="administrative.html#governance" id="svc2Btn3">Governance</a>
+          <div class="btnRow">
+            <a class="btnDark btn" href="administrative.html" id="svc2More">More</a>
           </div>
         </div>
 
+        <!-- Growth -->
         <div class="card">
           <div style="font-weight:1000;font-size:22px;margin-bottom:8px" id="svc3Title">Growth Strategy Dimension</div>
-          <div class="muted" id="svc3Desc">Expansion planning and digital transformation roadmaps.</div>
+          <div class="muted" id="svc3Desc">Scale with confidence.</div>
 
-          <ul class="muted" style="margin:12px 0 0;padding-left:18px" id="svc3List">
+          <ul class="svcList muted" id="svc3List">
             <li>Expansion Planning &amp; Market Entry Strategies</li>
             <li>New Growth Opportunities Identification &amp; Validation</li>
             <li>Digital Transformation Strategies &amp; Implementation Roadmaps</li>
@@ -463,38 +504,43 @@
             <li>Technology Project Management &amp; Execution</li>
           </ul>
 
-          <div class="serviceBtns" style="margin-top:14px">
-            <a class="btnSm" href="growth.html" id="svc3BtnMain">Open Service Page</a>
-            <a class="btnSm" href="growth.html#expansion" id="svc3Btn2">Expansion</a>
-            <a class="btnSm" href="growth.html#digital" id="svc3Btn3">Digital</a>
+          <div class="btnRow">
+            <a class="btnDark btn" href="growth.html" id="svc3More">More</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- APPROACH -->
-  <section id="approach">
+  <!-- WORK METHODOLOGY -->
+  <section id="methodology">
     <div class="wrap">
-      <h2 class="sectionTitle" id="approachTitle">Our Approach</h2>
-      <p class="sectionSub" id="approachSub">Clear diagnostics → actionable roadmap → measurable delivery.</p>
+      <h2 class="sectionTitle" id="methodTitle">Work Methodology</h2>
+      <p class="sectionSub" id="methodSub">A clear 4-phase methodology from diagnosis to confirmation.</p>
 
-      <div class="grid2">
-        <div class="card">
-          <h3 id="approachH1">1) Diagnose</h3>
-          <p class="muted" id="approachP1">We assess performance, risks, and root causes using practical, data-backed diagnostics.</p>
+      <div class="grid4">
+        <div class="darkCard">
+          <h3 id="m1">PHASE 1: CHALLENGE DIAGNOSIS</h3>
+          <p id="m1p">Comprehensive analysis of internal and external factors to identify root causes and opportunities.</p>
+          <span class="tag" id="m1t">Deliverable: Challenge Map Report · Duration: 1 Week</span>
         </div>
-        <div class="card">
-          <h3 id="approachH2">2) Design</h3>
-          <p class="muted" id="approachP2">We build a prioritized roadmap, KPIs, and governance that fit your organization.</p>
+
+        <div class="darkCard">
+          <h3 id="m2">PHASE 2: DIMENSION DESIGN</h3>
+          <p id="m2p">Development of customized strategic solutions as a detailed blueprint for sustainable transformation and competitive advantage.</p>
+          <span class="tag" id="m2t">Deliverable: Dimension Design Blueprint · Duration: 1–2 Weeks</span>
         </div>
-        <div class="card">
-          <h3 id="approachH3">3) Deliver</h3>
-          <p class="muted" id="approachP3">We support implementation with measurable milestones and documentation.</p>
+
+        <div class="darkCard">
+          <h3 id="m3">PHASE 3: GUIDED EXECUTION</h3>
+          <p id="m3p">Implementation support with knowledge transfer and on-the-ground partnership to ensure practical, measurable impact.</p>
+          <span class="tag" id="m3t">Deliverable: Execution Implementation Plan · Duration: 1–2 Weeks</span>
         </div>
-        <div class="card">
-          <h3 id="approachH4">4) Sustain</h3>
-          <p class="muted" id="approachP4">We institutionalize processes, policies, and capability building for lasting results.</p>
+
+        <div class="darkCard">
+          <h3 id="m4">PHASE 4: TRANSFORMATION CONFIRMATION</h3>
+          <p id="m4p">Measurement of performance against KPIs and validation of sustainable growth trajectory aligned with strategic objectives.</p>
+          <span class="tag" id="m4t">Deliverable: Transformation KPI Dashboard · Duration: 1 Week</span>
         </div>
       </div>
     </div>
@@ -507,20 +553,24 @@
       <p class="sectionSub" id="contactSub">Let’s discuss your challenges and design the right dimension.</p>
 
       <div class="grid2">
-        <div class="card">
-          <h3 id="contactH1">Get in touch</h3>
-          <p class="muted" id="contactP1">
-            Email us at <b>info@futuredimensionsco.com</b> and we’ll respond quickly.
+        <div class="darkCard">
+          <h3 id="c1">Contact Info</h3>
+          <p id="c1p" style="margin:0;color:rgba(246,247,251,.85);line-height:1.9;font-weight:700">
+            <b>Email:</b> info@futuredimensionsco.com<br/>
+            <b>Website:</b> https://www.futuredimensionsco.com<br/>
+            <b>Phone:</b> +[Your Phone Number]
           </p>
+          <span class="tag" id="c1t">Replace the phone number with your official line</span>
         </div>
-        <div class="card">
-          <h3 id="contactH2">Careers</h3>
-          <p class="muted" id="contactP2">
+
+        <div class="darkCard">
+          <h3 id="c2">Careers</h3>
+          <p id="c2p" style="margin:0;color:rgba(246,247,251,.82);line-height:1.8;font-weight:650">
             Want to join the team? Send your CV to <b>info@futuredimensionsco.com</b> or visit the Careers page.
           </p>
-          <div class="serviceBtns" style="margin-top:14px">
-            <a class="btnSm" href="careers.html" id="contactBtn">Open Careers</a>
-            <a class="btnSm" href="team.html" id="contactBtn2">Meet the Team</a>
+          <div class="btnRow">
+            <a class="btnDark btn" href="careers.html" id="c2b1">Open Careers</a>
+            <a class="btn btn" href="team.html" id="c2b2">Meet the Team</a>
           </div>
         </div>
       </div>
@@ -533,11 +583,9 @@
     <div class="fgrid">
       <div>
         <b>Future Dimensions</b><br/>
-        <span class="tiny">Premium consulting · measurable impact</span>
+        <span class="tiny" id="footerTag">Premium consulting · measurable impact</span>
       </div>
-      <div class="tiny">
-        © <span id="year"></span> Future Dimensions. All rights reserved.
-      </div>
+      <div class="tiny">© <span id="year"></span> Future Dimensions. All rights reserved.</div>
     </div>
   </div>
 </footer>
@@ -545,10 +593,7 @@
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Simple bilingual toggle (EN/AR) for main labels (keeps layout)
-  let isAR = false;
-  const toggle = document.getElementById("langToggle");
-
+  // Helpers
   function setText(id, text){
     const el = document.getElementById(id);
     if(el) el.textContent = text;
@@ -557,157 +602,249 @@
     const el = document.getElementById(id);
     if(el) el.innerHTML = html;
   }
+  function setList(id, items){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.innerHTML = items.map(x => `<li>${x}</li>`).join("");
+  }
+
+  // Bilingual toggle
+  let isAR = false;
+  const toggle = document.getElementById("langToggle");
+
+  const content = {
+    en: {
+      dir:"ltr", lang:"en",
+      nav: {home:"Home", about:"About", services:"Services", team:"Team", careers:"Careers", methodology:"Work Methodology", contact:"Contact"},
+      hero: {
+        kicker:"Enter with Challenges – Exit with New Dimensions",
+        title:"Future Dimensions",
+        sub:"for Consulting & Business Solutions",
+        text:"Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational, and Growth Strategy solutions with measurable impact — locally and globally."
+      },
+      why:{
+        title:"Why Future Dimensions?",
+        list:[
+          "Transformation, not temporary fixes",
+          "Audit-ready deliverables & documentation",
+          "Clear methodology and practical execution",
+          "High standards — fast turnaround"
+        ],
+        small:"Premium look · Strong identity · Clear value"
+      },
+      about:{
+        title:"About Us",
+        sub:"Who we are and how we create measurable impact.",
+        who:"Who we are",
+        text:"Future Dimensions is a consulting partner that blends financial expertise, operational excellence, and growth strategy to build resilient organizations and sustainable results.",
+        links:{f:"Financial", a:"Operational", g:"Growth", gov:"Governance"}
+      },
+      services:{
+        title:"Our Services",
+        sub:"Each dimension below shows 5 key services. Open “More” for full details.",
+        s1:{title:"Financial Dimension", desc:"Finance that drives performance.", more:"More",
+          list:[
+            "Comprehensive Financial Diagnostics & Performance Analysis",
+            "Profitability Improvement & Cost Optimization",
+            "ROI Enhancement & Shareholder Value Maximization",
+            "End of Service Benefits Actuarial Valuation (IAS 19)",
+            "Expected Credit Loss Consultation (IFRS 9)"
+          ]},
+        s2:{title:"Administrative & Operational Dimension", desc:"Execution & operational excellence.", more:"More",
+          list:[
+            "Business Strategy Development & Execution",
+            "Strategic Planning & Organizational Development",
+            "Process Improvement & Operational Efficiency",
+            "Quality & Risk Management Systems",
+            "Compliance with International Standards (ISO)"
+          ]},
+        s3:{title:"Growth Strategy Dimension", desc:"Scale with confidence.", more:"More",
+          list:[
+            "Expansion Planning & Market Entry Strategies",
+            "New Growth Opportunities Identification & Validation",
+            "Digital Transformation Strategies & Implementation Roadmaps",
+            "Technology Systems Assessment & Optimization",
+            "Technology Project Management & Execution"
+          ]}
+      },
+      method:{
+        title:"Work Methodology",
+        sub:"A clear 4-phase methodology from diagnosis to confirmation.",
+        m1:{h:"PHASE 1: CHALLENGE DIAGNOSIS", p:"Comprehensive analysis of internal and external factors to identify root causes and opportunities.", t:"Deliverable: Challenge Map Report · Duration: 1 Week"},
+        m2:{h:"PHASE 2: DIMENSION DESIGN", p:"Development of customized strategic solutions as a detailed blueprint for sustainable transformation and competitive advantage.", t:"Deliverable: Dimension Design Blueprint · Duration: 1–2 Weeks"},
+        m3:{h:"PHASE 3: GUIDED EXECUTION", p:"Implementation support with knowledge transfer and on-the-ground partnership to ensure practical, measurable impact.", t:"Deliverable: Execution Implementation Plan · Duration: 1–2 Weeks"},
+        m4:{h:"PHASE 4: TRANSFORMATION CONFIRMATION", p:"Measurement of performance against KPIs and validation of sustainable growth trajectory aligned with strategic objectives.", t:"Deliverable: Transformation KPI Dashboard · Duration: 1 Week"},
+      },
+      contact:{
+        title:"Contact",
+        sub:"Let’s discuss your challenges and design the right dimension.",
+        c1:"Contact Info",
+        c1p:`<b>Email:</b> info@futuredimensionsco.com<br/><b>Website:</b> https://www.futuredimensionsco.com<br/><b>Phone:</b> +[Your Phone Number]`,
+        c1t:"Replace the phone number with your official line",
+        c2:"Careers",
+        c2p:`Want to join the team? Send your CV to <b>info@futuredimensionsco.com</b> or visit the Careers page.`,
+        c2b1:"Open Careers",
+        c2b2:"Meet the Team"
+      },
+      footerTag:"Premium consulting · measurable impact"
+    },
+
+    ar: {
+      dir:"rtl", lang:"ar",
+      nav: {home:"الرئيسية", about:"من نحن", services:"خدماتنا", team:"فريق العمل", careers:"التوظيف", methodology:"منهجية العمل", contact:"تواصل معنا"},
+      hero: {
+        kicker:"ادخل بتحديات – اخرج بأبعاد جديدة",
+        title:"Future Dimensions",
+        sub:"للإستشارات وحلول الأعمال",
+        text:"Future Dimensions شركة استشارات متكاملة تقدم حلولًا مالية وإدارية وتشغيلية واستراتيجيات نمو بأثر قابل للقياس — محليًا وعالميًا."
+      },
+      why:{
+        title:"لماذا Future Dimensions؟",
+        list:[
+          "تحوّل حقيقي وليس حلولًا مؤقتة",
+          "مخرجات جاهزة للتدقيق والتوثيق",
+          "منهجية واضحة وتنفيذ عملي",
+          "معايير عالية وسرعة إنجاز"
+        ],
+        small:"مظهر فاخر · هوية قوية · قيمة واضحة"
+      },
+      about:{
+        title:"من نحن",
+        sub:"تعرف على هويتنا وكيف نصنع أثرًا قابلًا للقياس.",
+        who:"من نحن",
+        text:"Future Dimensions شريك استشاري يدمج الخبرة المالية والتميز التشغيلي واستراتيجيات النمو لبناء مؤسسات مرنة ونتائج مستدامة.",
+        links:{f:"مالي", a:"إداري/تشغيلي", g:"نمو", gov:"حوكمة"}
+      },
+      services:{
+        title:"خدماتنا",
+        sub:"كل بُعد يعرض 5 خدمات أساسية — اضغط More للتفاصيل الكاملة.",
+        s1:{title:"البعد المالي", desc:"المالية التي تقود الأداء.", more:"More",
+          list:[
+            "تشخيص مالي شامل وتحليل أداء",
+            "رفع الربحية وتحسين التكاليف",
+            "تعظيم العائد على الاستثمار وقيمة المساهمين",
+            "تقييم اكتواري لمكافأة نهاية الخدمة (IAS 19)",
+            "استشارات الخسائر الائتمانية المتوقعة (IFRS 9)"
+          ]},
+        s2:{title:"البعد الإداري والتشغيلي", desc:"التنفيذ والتميز التشغيلي.", more:"More",
+          list:[
+            "تطوير استراتيجية الأعمال ودعم التنفيذ",
+            "التخطيط الاستراتيجي والتطوير التنظيمي",
+            "تحسين العمليات ورفع الكفاءة التشغيلية",
+            "أنظمة الجودة وإدارة المخاطر",
+            "الامتثال للمعايير الدولية (ISO)"
+          ]},
+        s3:{title:"بعد استراتيجية النمو", desc:"توسّع بثقة.", more:"More",
+          list:[
+            "خطط التوسع واستراتيجيات دخول الأسواق",
+            "تحديد فرص نمو جديدة والتحقق منها",
+            "استراتيجيات التحول الرقمي وخطط التنفيذ",
+            "تقييم الأنظمة التقنية وتحسينها",
+            "إدارة وتنفيذ المشاريع التقنية"
+          ]}
+      },
+      method:{
+        title:"منهجية العمل",
+        sub:"منهجية واضحة من التشخيص حتى التأكيد.",
+        m1:{h:"المرحلة 1: تشخيص التحدي", p:"تحليل شامل للعوامل الداخلية والخارجية لتحديد الأسباب الجذرية والفرص.", t:"المخرج: تقرير خريطة التحديات · المدة: أسبوع"},
+        m2:{h:"المرحلة 2: تصميم الأبعاد", p:"تطوير حلول استراتيجية مخصصة كخطة تفصيلية لتحول مستدام وميزة تنافسية.", t:"المخرج: مخطط تصميم الأبعاد · المدة: 1–2 أسبوع"},
+        m3:{h:"المرحلة 3: تنفيذ موجّه", p:"دعم تنفيذ مع نقل معرفة وشراكة ميدانية لضمان أثر عملي قابل للقياس.", t:"المخرج: خطة تنفيذ تطبيقية · المدة: 1–2 أسبوع"},
+        m4:{h:"المرحلة 4: تأكيد التحول", p:"قياس الأداء مقابل مؤشرات KPI والتحقق من مسار نمو مستدام متوافق مع الأهداف.", t:"المخرج: لوحة مؤشرات التحول · المدة: أسبوع"},
+      },
+      contact:{
+        title:"تواصل معنا",
+        sub:"دعنا نناقش تحدياتك ونصمم البعد المناسب.",
+        c1:"بيانات التواصل",
+        c1p:`<b>البريد:</b> info@futuredimensionsco.com<br/><b>الموقع:</b> https://www.futuredimensionsco.com<br/><b>الهاتف:</b> +[رقمك الرسمي]`,
+        c1t:"استبدل رقم الهاتف بالخط الرسمي",
+        c2:"التوظيف",
+        c2p:`للإنضمام للفريق، أرسل سيرتك إلى <b>info@futuredimensionsco.com</b> أو ادخل صفحة التوظيف.`,
+        c2b1:"فتح التوظيف",
+        c2b2:"عرض الفريق"
+      },
+      footerTag:"استشارات فاخرة · أثر قابل للقياس"
+    }
+  };
 
   function applyLang(){
-    const html = document.documentElement;
+    const pack = isAR ? content.ar : content.en;
+    document.documentElement.setAttribute("lang", pack.lang);
+    document.documentElement.setAttribute("dir", pack.dir);
 
-    if(isAR){
-      html.setAttribute("lang","ar");
-      html.setAttribute("dir","rtl");
+    // Nav
+    setText("navHome", pack.nav.home);
+    setText("navAbout", pack.nav.about);
+    setText("navServices", pack.nav.services);
+    setText("navTeam", pack.nav.team);
+    setText("navCareers", pack.nav.careers);
+    setText("navMethodology", pack.nav.methodology);
+    setText("navContact", pack.nav.contact);
 
-      setText("navHome","الرئيسية");
-      setText("navAbout","من نحن");
-      setText("navServices","خدماتنا");
-      setText("navTeam","فريق العمل");
-      setText("navCareers","التوظيف");
-      setText("navApproach","منهجيتنا");
-      setText("navContact","تواصل معنا");
+    // Hero
+    setText("heroKicker", pack.hero.kicker);
+    // keep title as brand, just update sub & text
+    setText("heroSub", pack.hero.sub);
+    setText("heroText", pack.hero.text);
 
-      setText("heroKicker","ادخل بتحديات – اخرج بأبعاد جديدة");
-      setText("heroSub","للاستشارات وحلول الأعمال");
-      setHTML("heroText","Future Dimensions شركة استشارات متكاملة تقدم حلولًا مالية وإدارية وتشغيلية واستراتيجيات نمو بأثر قابل للقياس — محليًا وعالميًا.");
+    // Why
+    setText("whyTitle", pack.why.title);
+    setList("whyList", pack.why.list);
+    setText("whySmall", pack.why.small);
 
-      setText("pill1","تشخيصات مالية");
-      setText("pill2","حوكمة وامتثال");
-      setText("pill3","نمو وتحول");
+    // About
+    setText("aboutTitle", pack.about.title);
+    setText("aboutSub", pack.about.sub);
+    setText("aboutWho", pack.about.who);
+    setText("aboutText", pack.about.text);
+    setText("aboutLink1", pack.about.links.f);
+    setText("aboutLink2", pack.about.links.a);
+    setText("aboutLink3", pack.about.links.g);
+    setText("aboutLink4", pack.about.links.gov);
 
-      setText("whyTitle","لماذا Future Dimensions؟");
-      document.getElementById("whyList").innerHTML = `
-        <li>تحول حقيقي وليس حلولًا مؤقتة</li>
-        <li>مخرجات جاهزة للتدقيق وتوثيق كامل</li>
-        <li>منهجية واضحة وتنفيذ عملي</li>
-        <li>معايير عالية — سرعة في الإنجاز</li>
-      `;
-      setText("whySmall","مظهر فاخر · هوية قوية · قيمة واضحة");
+    // Services
+    setText("servicesTitle", pack.services.title);
+    setText("servicesSub", pack.services.sub);
 
-      setText("aboutTitle","من نحن");
-      setText("aboutSub","تعرف على هويتنا وكيف نصنع أثرًا قابلًا للقياس.");
-      setText("aboutWho","من نحن");
-      setText("aboutText","Future Dimensions شريك استشاري يدمج الخبرة المالية والتميز التشغيلي واستراتيجيات النمو لبناء مؤسسات مرنة ونتائج مستدامة.");
-      setText("aboutLink1","مالي");
-      setText("aboutLink2","تشغيلي");
-      setText("aboutLink3","نمو");
-      setText("aboutLink4","حوكمة");
+    setText("svc1Title", pack.services.s1.title);
+    setText("svc1Desc", pack.services.s1.desc);
+    setList("svc1List", pack.services.s1.list);
+    setText("svc1More", pack.services.s1.more);
 
-      setText("servicesTitle","خدماتنا");
-      setText("servicesSub","افتح كل بُعد لعرض التفاصيل كاملة.");
+    setText("svc2Title", pack.services.s2.title);
+    setText("svc2Desc", pack.services.s2.desc);
+    setList("svc2List", pack.services.s2.list);
+    setText("svc2More", pack.services.s2.more);
 
-      setText("svc1Title","البعد المالي");
-      setText("svc1Desc","تشخيصات مالية، تحسين ربحية، ودعم معايير IFRS.");
-      setText("svc1BtnMain","فتح صفحة الخدمة");
-      setText("svc2Title","البعد الإداري والتشغيلي");
-      setText("svc2Desc","تميز تشغيلي، أطر حوكمة، وهياكل امتثال.");
-      setText("svc2BtnMain","فتح صفحة الخدمة");
-      setText("svc3Title","بعد استراتيجية النمو");
-      setText("svc3Desc","خطط توسع ومسارات التحول الرقمي.");
-      setText("svc3BtnMain","فتح صفحة الخدمة");
+    setText("svc3Title", pack.services.s3.title);
+    setText("svc3Desc", pack.services.s3.desc);
+    setList("svc3List", pack.services.s3.list);
+    setText("svc3More", pack.services.s3.more);
 
-      setText("approachTitle","منهجيتنا");
-      setText("approachSub","تشخيص واضح → خارطة طريق عملية → تنفيذ بقياس النتائج.");
-      setText("approachH1","1) التشخيص");
-      setText("approachP1","نقيّم الأداء والمخاطر والأسباب الجذرية عبر تشخيصات عملية مدعومة بالبيانات.");
-      setText("approachH2","2) التصميم");
-      setText("approachP2","نبني خارطة طريق ذات أولويات وقياسات أداء وحوكمة تناسب منشأتك.");
-      setText("approachH3","3) التنفيذ");
-      setText("approachP3","ندعم التنفيذ بمراحل واضحة ومخرجات موثقة.");
-      setText("approachH4","4) الاستدامة");
-      setText("approachP4","نؤسس العمليات والسياسات وبناء القدرات لنتائج طويلة الأمد.");
+    // Methodology
+    setText("methodTitle", pack.method.title);
+    setText("methodSub", pack.method.sub);
 
-      setText("contactTitle","تواصل معنا");
-      setText("contactSub","دعنا نناقش تحدياتك ونصمم البعد المناسب.");
-      setText("contactH1","تواصل مباشر");
-      setHTML("contactP1",'راسلنا على <b>info@futuredimensionsco.com</b> وسنرد بسرعة.');
-      setText("contactH2","التوظيف");
-      setHTML("contactP2",'للانضمام للفريق، أرسل سيرتك إلى <b>info@futuredimensionsco.com</b> أو ادخل صفحة التوظيف.');
-      setText("contactBtn","فتح التوظيف");
-      setText("contactBtn2","عرض الفريق");
+    setText("m1", pack.method.m1.h); setText("m1p", pack.method.m1.p); setText("m1t", pack.method.m1.t);
+    setText("m2", pack.method.m2.h); setText("m2p", pack.method.m2.p); setText("m2t", pack.method.m2.t);
+    setText("m3", pack.method.m3.h); setText("m3p", pack.method.m3.p); setText("m3t", pack.method.m3.t);
+    setText("m4", pack.method.m4.h); setText("m4p", pack.method.m4.p); setText("m4t", pack.method.m4.t);
 
-      toggle.textContent = "EN";
-    } else {
-      html.setAttribute("lang","en");
-      html.setAttribute("dir","ltr");
+    // Contact
+    setText("contactTitle", pack.contact.title);
+    setText("contactSub", pack.contact.sub);
+    setText("c1", pack.contact.c1);
+    setHTML("c1p", pack.contact.c1p);
+    setText("c1t", pack.contact.c1t);
 
-      setText("navHome","Home");
-      setText("navAbout","About");
-      setText("navServices","Services");
-      setText("navTeam","Team");
-      setText("navCareers","Careers");
-      setText("navApproach","Approach");
-      setText("navContact","Contact");
+    setText("c2", pack.contact.c2);
+    setHTML("c2p", pack.contact.c2p);
+    setText("c2b1", pack.contact.c2b1);
+    setText("c2b2", pack.contact.c2b2);
 
-      setText("heroKicker","Enter with Challenges – Exit with New Dimensions");
-      setText("heroSub","for Consulting & Business Solutions");
-      setHTML("heroText","Future Dimensions is an integrated consulting firm delivering Financial, Administrative &amp; Operational, and Growth Strategy solutions with measurable impact — locally and globally.");
+    // Footer
+    setText("footerTag", pack.footerTag);
 
-      setText("pill1","Financial Diagnostics");
-      setText("pill2","Governance & Compliance");
-      setText("pill3","Growth & Transformation");
-
-      setText("whyTitle","Why Future Dimensions?");
-      document.getElementById("whyList").innerHTML = `
-        <li>Transformation, not temporary fixes</li>
-        <li>Audit-ready deliverables &amp; documentation</li>
-        <li>Clear methodology and practical execution</li>
-        <li>High standards — fast turnaround</li>
-      `;
-      setText("whySmall","Premium look · Strong identity · Clear value");
-
-      setText("aboutTitle","About Us");
-      setText("aboutSub","Who we are and how we create measurable impact.");
-      setText("aboutWho","Who we are");
-      setText("aboutText","Future Dimensions is a consulting partner that blends financial expertise, operational excellence, and growth strategy to build resilient organizations and sustainable results.");
-      setText("aboutLink1","Financial");
-      setText("aboutLink2","Operational");
-      setText("aboutLink3","Growth");
-      setText("aboutLink4","Governance");
-
-      setText("servicesTitle","Our Services");
-      setText("servicesSub","Open each dimension for full details.");
-
-      setText("svc1Title","Financial Dimension");
-      setText("svc1Desc","Financial diagnostics, profitability improvement, and IFRS-focused advisory.");
-      setText("svc1BtnMain","Open Service Page");
-
-      setText("svc2Title","Administrative & Operational Dimension");
-      setText("svc2Desc","Operational excellence, governance frameworks, and compliance structures.");
-      setText("svc2BtnMain","Open Service Page");
-
-      setText("svc3Title","Growth Strategy Dimension");
-      setText("svc3Desc","Expansion planning and digital transformation roadmaps.");
-      setText("svc3BtnMain","Open Service Page");
-
-      setText("approachTitle","Our Approach");
-      setText("approachSub","Clear diagnostics → actionable roadmap → measurable delivery.");
-      setText("approachH1","1) Diagnose");
-      setText("approachP1","We assess performance, risks, and root causes using practical, data-backed diagnostics.");
-      setText("approachH2","2) Design");
-      setText("approachP2","We build a prioritized roadmap, KPIs, and governance that fit your organization.");
-      setText("approachH3","3) Deliver");
-      setText("approachP3","We support implementation with measurable milestones and documentation.");
-      setText("approachH4","4) Sustain");
-      setText("approachP4","We institutionalize processes, policies, and capability building for lasting results.");
-
-      setText("contactTitle","Contact");
-      setText("contactSub","Let’s discuss your challenges and design the right dimension.");
-      setText("contactH1","Get in touch");
-      setHTML("contactP1",'Email us at <b>info@futuredimensionsco.com</b> and we’ll respond quickly.');
-      setText("contactH2","Careers");
-      setHTML("contactP2",'Want to join the team? Send your CV to <b>info@futuredimensionsco.com</b> or visit the Careers page.');
-      setText("contactBtn","Open Careers");
-      setText("contactBtn2","Meet the Team");
-
-      toggle.textContent = "AR";
-    }
+    toggle.textContent = isAR ? "EN" : "AR";
   }
 
   toggle.addEventListener("click", ()=>{
@@ -715,7 +852,6 @@
     applyLang();
   });
 
-  // default EN
   applyLang();
 </script>
 
