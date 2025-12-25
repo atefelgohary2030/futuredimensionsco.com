@@ -1,454 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Future Dimensions | Vision & Mission</title>
-  <meta name="description" content="Our vision and mission define how we deliver measurable value — with excellence, governance, and actionable strategy." />
-  <style>/* --- نفس ستايل موقعك كما هو --- */
-:root{
-  --bg:#0b1322;
-  --bg2:#071022;
-  --gold:#d4af37;
-  --gold2:#f1d77a;
-  --txt:rgba(255,255,255,.92);
-  --muted:rgba(255,255,255,.7);
-  --muted2:rgba(255,255,255,.55);
-  --card:linear-gradient(180deg, rgba(241,215,122,.95), rgba(212,175,55,.85));
-  --card2:linear-gradient(180deg, rgba(241,215,122,.92), rgba(212,175,55,.82));
-  --darkCard:rgba(11,19,34,.72);
-  --line:rgba(212,175,55,.25);
-  --shadow:0 22px 60px rgba(0,0,0,.35);
-  --radius:22px;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans","Helvetica Neue",sans-serif;
-  background:radial-gradient(1200px 800px at 70% 0%, rgba(212,175,55,.22), rgba(11,19,34,0) 55%),
-             radial-gradient(1000px 700px at 20% 20%, rgba(74,124,255,.12), rgba(11,19,34,0) 55%),
-             linear-gradient(180deg, var(--bg), var(--bg2));
-  color:var(--txt);
-  overflow-x:hidden;
-}
-.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
-header{
-  position:sticky;top:0;z-index:1000;
-  backdrop-filter: blur(10px);
-  background:linear-gradient(180deg, rgba(8,14,26,.88), rgba(8,14,26,.70));
-  border-bottom:1px solid rgba(212,175,55,.18);
-}
-header.scrolled{
-  background:linear-gradient(180deg, rgba(8,14,26,.96), rgba(8,14,26,.78));
-  border-bottom:1px solid rgba(212,175,55,.26);
-}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0}
-.brand{display:flex;align-items:center;gap:12px;min-width:260px}
-.logo{
-  width:54px;height:54px;border-radius:18px;
-  background:rgba(0,0,0,.15);
-  border:1px solid rgba(212,175,55,.30);
-  box-shadow:0 12px 28px rgba(0,0,0,.25);
-  display:grid;place-items:center;overflow:hidden;
-}
-.logo img{width:100%;height:100%;object-fit:cover}
-.brandText b{display:block;font-weight:1000;letter-spacing:.4px}
-.brandText small{color:var(--muted2);font-weight:800}
-.menu{display:flex;align-items:center;gap:2px;flex-wrap:wrap;justify-content:center}
-.menu a, .menu button{
-  color:rgba(255,255,255,.86);
-  text-decoration:none;
-  font-weight:900;
-  border:0;
-  background:transparent;
-  padding:10px 12px;
-  border-radius:14px;
-  cursor:pointer;
-  transition:.2s ease;
-}
-.menu a:hover, .menu button:hover{background:rgba(255,255,255,.06);color:#fff}
-.menu .active{background:rgba(212,175,55,.14);border:1px solid rgba(212,175,55,.26)}
-.navRight{display:flex;align-items:center;gap:10px}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  padding:10px 14px;border-radius:14px;
-  text-decoration:none;
-  font-weight:1000;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.06);
-  color:rgba(255,255,255,.92);
-  cursor:pointer;
-  transition:.2s ease;
-  white-space:nowrap;
-}
-.btn:hover{background:rgba(255,255,255,.10)}
-.btn.gold{
-  background:linear-gradient(135deg, rgba(241,215,122,.95), rgba(212,175,55,.92), rgba(184,150,46,.92));
-  color:#0b1322;
-  border:1px solid rgba(0,0,0,.18);
-}
-.btn.gold:hover{filter:saturate(1.05) brightness(1.02)}
-.btn.lang{background:rgba(255,255,255,.04)}
-.burger{display:none}
-@media (max-width: 980px){
-  .menu{display:none}
-  .burger{display:inline-flex}
-}
-.dropdown{position:relative}
-.dropMenu{
-  position:absolute;top:44px;left:0;
-  min-width:260px;
-  background:linear-gradient(180deg, rgba(8,14,26,.98), rgba(8,14,26,.90));
-  border:1px solid rgba(212,175,55,.22);
-  border-radius:18px;
-  box-shadow:var(--shadow);
-  padding:10px;
-  display:none;
-}
-.dropdown.open .dropMenu{display:block}
-.dropMenu a{display:flex;justify-content:space-between;align-items:center;padding:10px 10px;border-radius:14px}
-.dropMenu a:hover{background:rgba(255,255,255,.06)}
-.chip{
-  font-size:12px;
-  padding:4px 10px;
-  border-radius:999px;
-  background:rgba(212,175,55,.12);
-  border:1px solid rgba(212,175,55,.22);
-  color:rgba(255,255,255,.86);
-  font-weight:1000;
-}
-.mobilePanel{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.55);
-  display:none;
-  z-index:1200;
-}
-.mobilePanel.open{display:block}
-.mobileSheet{
-  position:absolute;top:0;right:0;height:100%;width:min(420px, 92vw);
-  background:linear-gradient(180deg, rgba(8,14,26,.98), rgba(8,14,26,.90));
-  border-left:1px solid rgba(212,175,55,.22);
-  padding:14px;
-}
-.mobileTop{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.mclose{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:14px;padding:8px 12px;cursor:pointer;font-weight:1000}
-.mnav a, .mnav button{
-  width:100%;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 12px;
-  border-radius:16px;
-  text-decoration:none;
-  color:rgba(255,255,255,.88);
-  font-weight:950;
-  background:transparent;
-  border:0;
-  cursor:pointer;
-}
-.mnav a:hover, .mnav button:hover{background:rgba(255,255,255,.06)}
-.mSub{display:none;padding-left:8px}
-.mSub.open{display:block}
-.mSub a{font-weight:900;color:rgba(255,255,255,.82)}
-.pageView{padding:70px 0 10px}
-.pageTop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
-.pageTop h2{margin:0;font-size:42px;letter-spacing:.2px}
-.backHome{color:rgba(255,255,255,.86);text-decoration:none;font-weight:1000}
-.backHome:hover{color:#fff}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media (max-width: 980px){.grid2{grid-template-columns:1fr}.pageTop h2{font-size:34px}}
-.equalCards > *{height:100%}
-.card{
-  border-radius:var(--radius);
-  overflow:hidden;
-  border:1px solid rgba(212,175,55,.26);
-  box-shadow:var(--shadow);
-}
-.cardGold{background:var(--card)}
-.cardFlex{display:flex;flex-direction:column}
-.pStrong{color:#0b1322;font-weight:900}
-.bullets{margin:12px 0 0;padding:0 0 0 20px}
-[dir="rtl"] .bullets{padding:0 20px 0 0}
-.blackBullets{color:#0b1322}
-.blackBullets li{margin:10px 0;font-weight:900}
-.footer{
-  margin-top:30px;
-  background:linear-gradient(180deg, rgba(8,14,26,.92), rgba(5,7,13,.98));
-  border-top:1px solid rgba(212,175,55,.20);
-  padding:22px 0;
-}
-.footerGrid{display:grid;grid-template-columns:1.4fr .8fr;gap:16px}
-@media (max-width:980px){.footerGrid{grid-template-columns:1fr}}
-.footerBrand{display:flex;align-items:center;gap:12px}
-.footerBrand img{width:54px;height:54px;border-radius:18px;border:1px solid rgba(212,175,55,.25);background:rgba(0,0,0,.15)}
-.footerLinks{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
-@media (max-width:980px){.footerLinks{justify-content:flex-start}}
-.footerLinks a{color:rgba(255,255,255,.78);text-decoration:none;font-weight:900;padding:8px 10px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04)}
-.footerLinks a:hover{background:rgba(255,255,255,.08);color:#fff}
-.copy{color:rgba(255,255,255,.55);font-weight:900;margin-top:10px}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision & Mission</title>
 </head>
+
 <body>
 
-<header>
-  <div class="wrap nav">
-    <div class="brand">
-      <div class="logo">
-        <img src="logo.png" alt="Future Dimensions Logo" />
-      </div>
-      <div class="brandText">
-        <b id="brandName">FUTURE DIMENSIONS</b>
-        <small id="brandSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
-      </div>
-    </div>
-
-    <nav class="menu" aria-label="Main navigation">
-      <a href="index.html#home" id="navHome">Home</a>
-      <a href="about.html" id="navAbout">About</a>
-
-      <div class="dropdown" id="servicesDropdown">
-        <button type="button" id="navServicesBtn" aria-haspopup="true" aria-expanded="false">Services ▾</button>
-        <div class="dropMenu" role="menu" aria-label="Services menu">
-          <a href="financial.html" id="ddFinancial">Financial Dimension <span class="chip" id="chip1">Page</span></a>
-          <a href="administrative.html" id="ddAdminOps">Administrative & Operational <span class="chip" id="chip2">Page</span></a>
-          <a href="growth.html" id="ddGrowth">Growth Strategy <span class="chip" id="chip3">Page</span></a>
-        </div>
-      </div>
-
-      <a href="team.html" id="navTeam">Team</a>
-      <a href="careers.html" id="navCareers">Careers</a>
-      <a href="index.html#methodology" id="navApproach">Approach</a>
-      <a href="contact.html" id="navContact">Contact</a>
-    </nav>
-
-    <div class="navRight">
-      <button class="burger btn" id="burgerBtn" aria-label="Open menu">☰</button>
-      <button class="btn lang" id="langToggle">العربية</button>
-      <a href="contact.html" class="btn gold" id="navCta">Get a Proposal</a>
-    </div>
-  </div>
-</header>
-
-<div class="mobilePanel" id="mobilePanel" aria-hidden="true">
-  <div class="mobileSheet">
-    <div class="mobileTop">
-      <div style="display:flex;align-items:center;gap:10px">
-        <div class="logo" style="width:44px;height:44px;border-radius:14px">
-          <img src="logo.png" alt="Logo" />
-        </div>
-        <div style="line-height:1.1">
-          <div style="font-weight:1000;color:rgba(255,255,255,.92)" id="mBrand">FUTURE DIMENSIONS</div>
-          <div style="font-weight:800;color:rgba(255,255,255,.68);font-size:12px" id="mSub">CONSULTING</div>
-        </div>
-      </div>
-      <button class="mclose" id="mCloseBtn" aria-label="Close menu">✕</button>
-    </div>
-
-    <div class="mnav">
-      <a href="index.html#home" id="mHome">Home</a>
-      <a href="about.html" id="mAbout">About</a>
-
-      <button type="button" id="mServicesBtn">
-        <span id="mServicesTxt">Services</span>
-        <span>▾</span>
-      </button>
-      <div class="mSub" id="mServicesSub">
-        <a href="financial.html" id="mFin">Financial Dimension</a>
-        <a href="administrative.html" id="mAdm">Administrative & Operational</a>
-        <a href="growth.html" id="mGr">Growth Strategy</a>
-      </div>
-
-      <a href="team.html" id="mTeam">Team</a>
-      <a href="careers.html" id="mCareers">Careers</a>
-      <a href="index.html#methodology" id="mApproach">Approach</a>
-      <a href="contact.html" id="mContact">Contact</a>
-    </div>
-
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-      <button class="btn lang" id="mLangToggle" style="padding:10px 14px">العربية</button>
-      <a class="btn gold" href="contact.html" id="mCta" style="padding:10px 14px;display:inline-flex;align-items:center">Get a Proposal</a>
-    </div>
-  </div>
-</div>
-
-<main>
-  <section class="pageView" style="display:block;padding:70px 0 10px">
-    <div class="wrap">
-      <div class="pageTop">
-        <a class="backHome" href="index.html" id="backLabel">← Back</a>
-        <h2><span id="pageTitle">Vision & Mission</span></h2>
-      </div>
-
-      <div class="grid2 equalCards">
-        <div class="card cardGold cardFlex">
-          <div>
-            <h3 id="visionTitle">Vision</h3>
-            <p class="pStrong" id="pageLead">Our vision and mission define how we deliver measurable value — with excellence, governance, and actionable strategy.</p>
-            <ul class="bullets blackBullets" id="visionBullets"></ul>
-          </div>
-        </div>
-
-        <div class="card cardGold cardFlex">
-          <div>
-            <h3 id="missionTitle">Mission</h3>
-            <p class="pStrong" style="opacity:.0;height:0;margin:0">.</p>
-            <ul class="bullets blackBullets" id="missionBullets"></ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="footer">
+<section class="pageView">
   <div class="wrap">
-    <div class="footerGrid">
-      <div>
-        <div class="footerBrand">
-          <img src="logo.png" alt="Future Dimensions Logo" />
-          <div>
-            <b id="footName">FUTURE DIMENSIONS</b>
-            <small id="footSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
-          </div>
-        </div>
-        <div class="copy" id="copyText">© Future Dimensions — All rights reserved.</div>
+    <div class="pageTop">
+      <a href="index.html" id="backBtn">← Back</a>
+      <h2 id="pageTitle">Vision & Mission</h2>
+    </div>
+
+    <div class="grid2">
+      <!-- Vision -->
+      <div class="card cardGold">
+        <h3 id="visionTitle">Vision</h3>
+        <ul id="visionList"></ul>
       </div>
 
-      <div>
-        <div class="footerLinks" aria-label="Quick links">
-          <a href="index.html#home" id="fHome">Home</a>
-          <a href="about.html" id="fAbout">About</a>
-          <a href="index.html#services" id="fServices">Services</a>
-          <a href="team.html" id="fTeam">Team</a>
-          <a href="careers.html" id="fCareers">Careers</a>
-          <a href="contact.html" id="fContact">Contact</a>
-        </div>
+      <!-- Mission -->
+      <div class="card cardGold">
+        <h3 id="missionTitle">Mission</h3>
+        <ul id="missionList"></ul>
       </div>
     </div>
   </div>
-</footer>
+</section>
 
 <script>
-(function(){
-  const DATA = {
-    en:{
-      title:"Vision & Mission",
-      lead:"Our vision and mission define how we deliver measurable value — with excellence, governance, and actionable strategy.",
-      back:"\u2190 Back",
-      visionLabel:"Vision",
-      missionLabel:"Mission",
-      vision:[
-        "Excellence and innovation in solution delivery",
-        "Highest professional standards aligned with international best practices",
-        "Demonstrable positive impact on client growth and competitive position",
-        "Strategic relationships built on transparency and accountability",
-        "A culture that fosters creativity and continuous development"
-      ],
-      mission:[
-        "Delivering advanced consulting expertise tailored to complex challenges",
-        "Developing deep sector and market understanding",
-        "Designing customized strategies that generate measurable results",
-        "Ensuring effective solution implementation through ongoing support",
-        "Building strategic, trust-based long-term partnerships"
-      ]
-    },
-    ar:{
-      title:"الرؤية والرسالة",
-      lead:"تحدد رؤيتنا ورسالتنا كيف نحقق قيمة قابلة للقياس — عبر التميز والحوكمة والاستراتيجية القابلة للتنفيذ.",
-      back:"عودة \u2190",
-      visionLabel:"الرؤية",
-      missionLabel:"الرسالة",
-      vision:[
-        "التميز والابتكار في تقديم الحلول",
-        "أعلى المعايير المهنية المتوافقة مع أفضل الممارسات الدولية",
-        "أثر إيجابي ملموس على نمو العملاء ومكانتهم التنافسية",
-        "علاقات استراتيجية قائمة على الشفافية والمسؤولية",
-        "ثقافة تعزز الإبداع والتطوير المستمر"
-      ],
-      mission:[
-        "تقديم خبرات استشارية متقدمة مخصصة للتحديات المعقدة",
-        "تطوير فهم عميق للقطاعات والأسواق",
-        "تصميم استراتيجيات مخصصة تحقق نتائج قابلة للقياس",
-        "ضمان تنفيذ الحلول بفعالية عبر دعم مستمر",
-        "بناء شراكات استراتيجية طويلة الأمد قائمة على الثقة"
-      ]
-    }
-  };
+/* ===== TRANSLATION DATA ===== */
+const CONTENT = {
+  en: {
+    pageTitle: "Vision & Mission",
+    back: "← Back",
+    visionTitle: "Vision",
+    missionTitle: "Mission",
+    vision: [
+      "Excellence and innovation in solution delivery",
+      "Highest professional standards aligned with international best practices",
+      "Demonstrable positive impact on client growth and competitive position",
+      "Strategic relationships built on transparency and accountability",
+      "A culture that fosters creativity and continuous development"
+    ],
+    mission: [
+      "Delivering advanced consulting expertise tailored to complex challenges",
+      "Developing deep sector and market understanding",
+      "Designing customized strategies that generate measurable results",
+      "Ensuring effective solution implementation through ongoing support",
+      "Building strategic, trust-based long-term partnerships"
+    ]
+  },
 
-  function currentLang(){
-    const ls = (localStorage.getItem("fd_lang") || "").toLowerCase();
-    if(ls === "ar" || ls === "arabic") return "ar";
-    const docLang = (document.documentElement.lang || "").toLowerCase();
-    if(docLang.startsWith("ar")) return "ar";
-    const dir = (document.documentElement.dir || "").toLowerCase();
-    if(dir === "rtl") return "ar";
-    return "en";
+  ar: {
+    pageTitle: "الرؤية والرسالة",
+    back: "عودة ←",
+    visionTitle: "الرؤية",
+    missionTitle: "الرسالة",
+    vision: [
+      "التميز والابتكار في تقديم الحلول",
+      "أعلى المعايير المهنية المتوافقة مع أفضل الممارسات الدولية",
+      "أثر إيجابي ملموس على نمو العملاء ومكانتهم التنافسية",
+      "علاقات استراتيجية قائمة على الشفافية والمسؤولية",
+      "ثقافة تعزز الإبداع والتطوير المستمر"
+    ],
+    mission: [
+      "تقديم خبرات استشارية متقدمة مخصصة للتحديات المعقدة",
+      "تطوير فهم عميق للقطاعات والأسواق",
+      "تصميم استراتيجيات مخصصة تحقق نتائج قابلة للقياس",
+      "ضمان تنفيذ الحلول بفعالية من خلال دعم مستمر",
+      "بناء شراكات استراتيجية طويلة الأمد قائمة على الثقة"
+    ]
   }
+};
 
-  function renderList(id, items){
-    const ul = document.getElementById(id);
-    if(!ul) return;
-    ul.innerHTML = items.map(x => `<li>${x}</li>`).join("");
-  }
+/* ===== APPLY LANGUAGE ===== */
+function applyLanguage() {
+  const lang = localStorage.getItem("fd_lang") === "ar" ? "ar" : "en";
+  const t = CONTENT[lang];
 
-  function apply(){
-    const lang = currentLang();
-    const t = DATA[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir  = lang === "ar" ? "rtl" : "ltr";
 
-    const pageTitle = document.getElementById("pageTitle");
-    const pageLead  = document.getElementById("pageLead");
-    const back      = document.getElementById("backLabel");
-    const vTitle    = document.getElementById("visionTitle");
-    const mTitle    = document.getElementById("missionTitle");
+  document.getElementById("pageTitle").textContent = t.pageTitle;
+  document.getElementById("backBtn").textContent = t.back;
+  document.getElementById("visionTitle").textContent = t.visionTitle;
+  document.getElementById("missionTitle").textContent = t.missionTitle;
 
-    if(pageTitle) pageTitle.textContent = t.title;
-    if(pageLead)  pageLead.textContent  = t.lead;
-    if(back)      back.textContent      = t.back;
-    if(vTitle)    vTitle.textContent    = t.visionLabel;
-    if(mTitle)    mTitle.textContent    = t.missionLabel;
+  document.getElementById("visionList").innerHTML =
+    t.vision.map(i => `<li>${i}</li>`).join("");
 
-    renderList("visionBullets", t.vision);
-    renderList("missionBullets", t.mission);
-
-    if(lang === "ar"){
-      document.documentElement.dir = "rtl";
-      document.documentElement.lang = "ar";
-    } else {
-      document.documentElement.dir = "ltr";
-      document.documentElement.lang = "en";
-    }
-  }
-
-  window.addEventListener("storage", apply);
-  apply();
-})();
-</script>
-
-<script>
-  // Basic mobile open/close (keeps your existing look)
-  const mobilePanel = document.getElementById("mobilePanel");
-  const burgerBtn = document.getElementById("burgerBtn");
-  const mCloseBtn = document.getElementById("mCloseBtn");
-  function openMobile(){ if(mobilePanel){ mobilePanel.classList.add("open"); mobilePanel.setAttribute("aria-hidden","false"); } }
-  function closeMobile(){ if(mobilePanel){ mobilePanel.classList.remove("open"); mobilePanel.setAttribute("aria-hidden","true"); } }
-  if(burgerBtn) burgerBtn.addEventListener("click",(e)=>{e.stopPropagation(); openMobile();});
-  if(mCloseBtn) mCloseBtn.addEventListener("click",closeMobile);
-  if(mobilePanel) mobilePanel.addEventListener("click",(e)=>{ if(e.target === mobilePanel) closeMobile(); });
-
-  // Dropdown
-  const dd = document.getElementById("servicesDropdown");
-  const ddBtn = document.getElementById("navServicesBtn");
-  if(dd && ddBtn){
-    ddBtn.addEventListener("click",(e)=>{
-      e.stopPropagation();
-      dd.classList.toggle("open");
-      ddBtn.setAttribute("aria-expanded", dd.classList.contains("open") ? "true" : "false");
-    });
-    document.addEventListener("click",()=> {
-      dd.classList.remove("open");
-      ddBtn.setAttribute("aria-expanded","false");
-    });
-  }
-</script>
-
-</body>
-</html>
+  document.getElementById(
