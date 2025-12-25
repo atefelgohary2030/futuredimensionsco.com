@@ -737,6 +737,18 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 .backHome{color:#fff;text-decoration:none;font-weight:900}
 .backHome:hover{text-decoration:underline}
 
+
+/* Arabic mode: only affect text flow, not layout */
+html.lang-ar body { font-family: 'Cairo', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+html.lang-ar .rtlText { direction: rtl; text-align: right; }
+
+
+
+/* ===== Arabic (no layout flip) ===== */
+html.lang-ar body{font-family: "Cairo", "Tajawal", system-ui, -apple-system, Segoe UI, Arial, sans-serif;}
+html.lang-ar .rtlText{direction:rtl; text-align:right;}
+html.lang-ar .rtlText *{direction:rtl;}
+html.lang-ar .rtlCenter{direction:rtl; text-align:center;}
 </style>
 </head>
 
@@ -834,8 +846,8 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
     <div class="wrap heroGrid">
       <div class="heroCard">
         <img class="wm" src="logo.png" alt="" />
-        <div class="heroKicker" id="heroKicker">Enter with Challenges – Exit with New Dimensions</div>
-        <h1 class="heroTitle" id="heroTitle">Future <span class="goldWord">Dimensions</span><br><span class="heroSub" id="heroSub">Consulting &amp; Business Solutions</span></h1>
+        <div class="heroKicker" id="heroKicker" class="rtlText">Enter with Challenges – Exit with New Dimensions</div>
+        <h1 class="heroTitle" id="heroTitle" class="rtlText">Future <span class="goldWord">Dimensions</span><br><span class="heroSub" id="heroSub">Consulting &amp; Business Solutions</span></h1>
         <p class="heroText" id="heroText">
           Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational,
           and Growth Strategy solutions with measurable impact — locally and globally.
@@ -850,7 +862,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
         </div>
 
       <div class="sideCard">
-        <h3 id="whyTitle">Why Future Dimensions?</h3>
+        <h3 id="whyTitle" class="rtlText">Why Future Dimensions?</h3>
         <ul id="whyList"></ul>
         <div class="mini" id="miniNote">Premium look • Strong identity • Clear value</div>
       </div>
@@ -861,7 +873,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
   <section id="about">
     <div class="wrap">
       <div class="sectionTitle">
-        <h2 id="aboutTitle">About</h2>
+        <h2 id="aboutTitle" class="rtlText">About</h2>
         <p id="aboutHint">Who we are & what sets us apart</p>
       </div>
 
@@ -869,7 +881,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
         <div class="card cardGold cardFlex">
           <div>
             <h3 id="aboutH3">About Us</h3>
-            <p id="aboutP" class="pStrong">
+            <p id="aboutP" class="rtlText" class="pStrong">
               Future Dimensions for Consulting &amp; Business Solutions is a strategic consulting partner that blends
               financial expertise, operational excellence, and growth strategy to deliver measurable impact.
             </p>
@@ -930,7 +942,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
   <section id="services">
     <div class="wrap">
       <div class="sectionTitle">
-        <h2 id="servicesTitle">Our Services</h2>
+        <h2 id="servicesTitle" class="rtlText">Our Services</h2>
         <p id="servicesHint">Three dimensions — one integrated impact</p>
       </div>
 
@@ -1026,7 +1038,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
   <section id="contact">
     <div class="wrap">
       <div class="sectionTitle">
-        <h2 id="contactTitle">Contact</h2>
+        <h2 id="contactTitle" class="rtlText">Contact</h2>
         <p id="contactHint">Let’s start your transformation</p>
       </div>
 
@@ -1315,7 +1327,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 
       // Mobile
       mBrand:"FUTURE DIMENSIONS",
-      mSub:"للاستشارات",
+      mSub:"CONSULTING",
       mHome:"Home",
       mAbout:"About",
       mServicesTxt:"Services",
@@ -1334,9 +1346,9 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       ddGrowth:"Growth Strategy",
 
       heroKicker:"Enter with Challenges – Exit with New Dimensions",
-      heroTitle:"فيوتشر دايمينشنز",
+      heroTitle:"Future Dimensions",
       heroSub:"Consulting & Business Solutions",
-      heroText:"نحن في فيوتشر دايمينشنز نمزج بين التشخيص المالي، والتميّز التشغيلي والإداري، واستراتيجيات النمو لمساعدة القادة على تحسين الأداء، وتعزيز الحوكمة والامتثال، والتوسع بثقة بنتائج قابلة للقياس — محليًا وعالميًا.",
+      heroText:"Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational, and Growth Strategy solutions with measurable impact — locally and globally.",
       heroBtnText:"Start Your Transformation",
       heroServicesText:"Explore Services",
 
@@ -1352,7 +1364,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       aboutTitle:"About Us",
       aboutHint:"Identity-driven. Execution-focused.",
       aboutH3_1:"Who we are",
-      aboutP1:"تأسست فيوتشر دايمينشنز للاستشارات وحلول الأعمال على قناعة أساسية: كل تحدٍ يحمل فرصة خفية للتحول والنمو. نعمل كشريك استراتيجي — وليس كمستشار يقدم توصيات فقط — بل نساند التنفيذ الفعلي لضمان استدامة النتائج وأثر ملموس قابل للقياس.",
+      aboutP1:"Future Dimensions for Consulting & Business Solutions was founded on a core belief: every challenge contains a hidden opportunity for transformation and growth. We operate as a strategic partner — not just a consultant — going beyond recommendations to ensure sustainable execution and measurable impact.",
       aboutLinkFinancial:"Financial Dimension",
       aboutLinkAdmin:"Administrative & Operational",
       aboutLinkGrowth:"Growth Strategy",
@@ -1410,8 +1422,8 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       navCta:"اطلب عرضًا",
 
       // Mobile
-      mBrand:"فيوتشر دايمينشنز",
-      mSub:"للاستشارات",
+      mBrand:"Future Dimensions",
+      mSub:"CONSULTING",
       mHome:"الرئيسية",
       mAbout:"من نحن",
       mServicesTxt:"الخدمات",
@@ -1430,13 +1442,13 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       ddGrowth:"بعد استراتيجية النمو",
 
       heroKicker:"ادخل بالتحديات – واخرج بأبعاد جديدة",
-      heroTitle:"فيوتشر دايمينشنز",
+      heroTitle:"Future Dimensions",
       heroSub:"الاستشارات وحلول الأعمال",
-      heroText:"نحن في فيوتشر دايمينشنز نمزج بين التشخيص المالي، والتميّز التشغيلي والإداري، واستراتيجيات النمو لمساعدة القادة على تحسين الأداء، وتعزيز الحوكمة والامتثال، والتوسع بثقة بنتائج قابلة للقياس — محليًا وعالميًا.",
+      heroText:"Future Dimensions شركة استشارات متكاملة تقدم حلولًا في البعد المالي والبعد الإداري والتشغيلي واستراتيجيات النمو بنتائج قابلة للقياس — محليًا وعالميًا.",
       heroBtnText:"ابدأ رحلة التحول",
       heroServicesText:"استكشف الخدمات",
 
-      whyTitle:"لماذا فيوتشر دايمينشنز؟",
+      whyTitle:"لماذا Future Dimensions؟",
       whyList:[
         "تحول حقيقي وليس حلولًا مؤقتة",
         "مخرجات موثقة وجاهزة للمراجعة",
@@ -1448,7 +1460,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       aboutTitle:"من نحن",
       aboutHint:"هوية قوية. تنفيذ فعّال.",
       aboutH3_1:"تعريف بالشركة",
-      aboutP1:"تأسست فيوتشر دايمينشنز للاستشارات وحلول الأعمال على قناعة أساسية: كل تحدٍ يحمل فرصة خفية للتحول والنمو. نعمل كشريك استراتيجي — وليس كمستشار يقدم توصيات فقط — بل نساند التنفيذ الفعلي لضمان استدامة النتائج وأثر ملموس قابل للقياس.",
+      aboutP1:"تأسست Future Dimensions للاستشارات وحلول الأعمال على قناعة أساسية: كل تحدٍّ يحمل فرصة خفية للتحول والنمو. نحن نعمل كشريك استراتيجي—not مجرد مستشار— ونتجاوز تقديم التوصيات إلى ضمان تنفيذ مستدام وأثر قابل للقياس.",
       aboutLinkFinancial:"البعد المالي",
       aboutLinkAdmin:"البعد الإداري والتشغيلي",
       aboutLinkGrowth:"استراتيجية النمو",
@@ -1488,9 +1500,9 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       ctaText:"احجز جلسة استكشاف وابدأ رحلة التحول المؤسسي.",
       ctaMini:"استجابة سريعة • تسليم احترافي • مخرجات جاهزة للمراجعة",
 
-      footName:"فيوتشر دايمينشنز",
+      footName:"Future Dimensions",
       footSub:"للاستشارات وحلول الأعمال",
-      copyText:"© فيوتشر دايمينشنز — جميع الحقوق محفوظة.",
+      copyText:"© Future Dimensions — جميع الحقوق محفوظة.",
       fHome:"الرئيسية", fAbout:"من نحن", fServices:"الخدمات", fTeam:"فريق العمل", fCareers:"التوظيف", fContact:"تواصل معنا"
     }
   };
@@ -1614,6 +1626,80 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
     renderList("grBullets", bullets[lang].gr);
 
     // SEO
+
+
+    // === Language additions (header + hero + common) ===
+    // Header nav
+    setText("navHome", ar ? "الرئيسية" : "Home");
+    setText("navAbout", ar ? "من نحن" : "About");
+    setText("navServices", ar ? "الخدمات" : "Services");
+    setText("navMethod", ar ? "منهجية العمل" : "Work Methodology");
+    setText("navTeam", ar ? "فريق العمل" : "Team");
+    setText("navCareers", ar ? "التوظيف" : "Careers");
+    setText("navContact", ar ? "تواصل معنا" : "Contact");
+
+    // CTA + language button
+    setText("proposalBtn", ar ? "اطلب عرض سعر" : "Get a Proposal");
+    setText("langToggle", ar ? "English" : "العربية");
+
+    // Hero
+    setText("heroKicker", ar ? "ادخل بتحديات — اخرج بأبعاد جديدة" : "Enter with Challenges – Exit with New Dimensions");
+
+    // Hero title uses innerHTML to keep gold word + line break + subline
+    const heroTitleEl = document.getElementById("heroTitle");
+    if (heroTitleEl) {
+      heroTitleEl.innerHTML = ar
+        ? 'فيوتشر <span class="goldWord">دايمنشنز</span><br><span class="heroSub" id="heroSub">للاستشارات وحلول الأعمال</span>'
+        : 'Future <span class="goldWord">Dimensions</span><br><span class="heroSub" id="heroSub">Consulting &amp; Business Solutions</span>';
+    }
+
+    // Hero badges
+    setText("b1", ar ? "التشخيص المالي" : "Financial Diagnostics");
+    setText("b2", ar ? "الحوكمة والامتثال" : "Governance & Compliance");
+    setText("b3", ar ? "النمو والتحول" : "Growth & Transformation");
+
+    // Section headings
+    setText("aboutTitle", ar ? "من نحن" : "About Us");
+    setText("visionTitle", ar ? "الرؤية والرسالة" : "Vision & Mission");
+    setText("servicesTitle", ar ? "خدماتنا" : "Our Services");
+    setText("methodTitle", ar ? "منهجية العمل" : "Work Methodology");
+    setText("contactTitle", ar ? "تواصل معنا" : "Contact");
+    setText("careersTitle", ar ? "التوظيف" : "Careers");
+
+    // Shared "More" buttons (if present)
+    ["aboutMoreBtn","visionMoreBtn","finMoreBtn","admMoreBtn","groMoreBtn"].forEach((id) => {
+      if (document.getElementById(id)) setText(id, ar ? "المزيد" : "More");
+    });
+
+    // Footer nav (if present)
+    if (document.getElementById("footerNavHome")) {
+      setText("footerNavHome", ar ? "الرئيسية" : "Home");
+      setText("footerNavAbout", ar ? "من نحن" : "About");
+      setText("footerNavServices", ar ? "الخدمات" : "Services");
+      setText("footerNavMethod", ar ? "منهجية العمل" : "Work Methodology");
+      setText("footerNavTeam", ar ? "فريق العمل" : "Team");
+      setText("footerNavCareers", ar ? "التوظيف" : "Careers");
+      setText("footerNavContact", ar ? "تواصل معنا" : "Contact");
+    }
+
+
+    // Arabic text direction only (keep layout LTR)
+    const rtlIds = [
+      "heroKicker","heroTitle","heroSub","heroText",
+      "whyTitle","whyList","whyTag",
+      "aboutTitle","aboutP","aboutBullets","aboutMoreBtn",
+      "visionTitle","visionP","visionMoreBtn",
+      "servicesTitle","servicesTag",
+      "methodTitle","methodTag",
+      "contactTitle","contactTag","contactInfoTitle","contactInfoLead",
+      "careersCardTitle","careersCardLead",
+      "footerCompanyName","footerTagline"
+    ];
+    rtlIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle("rtlText", ar);
+    });
     updateSEO(lang);
 
     // Tooltips
