@@ -1014,18 +1014,18 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 
       <div class="grid3 equalCards">
         <div class="card cardGold">
-          <h3>1) Diagnose</h3>
-          <p class="pStrong">Structured assessment of current performance, risks, gaps, and root causes.</p>
+          <h3 id="step1Title">1) Diagnose</h3>
+          <p class="pStrong" id="step1Desc">Structured assessment of current performance, risks, gaps, and root causes.</p>
         </div>
 
         <div class="card cardGold">
-          <h3>2) Design</h3>
-          <p class="pStrong">Build a pragmatic roadmap, policies, tools, and governance aligned with goals.</p>
+          <h3 id="step2Title">2) Design</h3>
+          <p class="pStrong" id="step2Desc">Build a pragmatic roadmap, policies, tools, and governance aligned with goals.</p>
         </div>
 
         <div class="card cardGold">
-          <h3>3) Deliver</h3>
-          <p class="pStrong">Execute with disciplined follow‑up, KPIs, and documentation to ensure adoption.</p>
+          <h3 id="step3Title">3) Deliver</h3>
+          <p class="pStrong" id="step3Desc">Execute with disciplined follow‑up, KPIs, and documentation to ensure adoption.</p>
         </div>
       </div>
     </div>
@@ -1042,31 +1042,31 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       <div class="grid2 equalCards">
         <div class="card cardGold cardFlex">
           <div>
-            <h3>Contact Info</h3>
-            <p class="pStrong">Reach us through the channels below — we respond promptly.</p>
+            <h3 id="contactInfoTitle">Contact Info</h3>
+            <p class="pStrong" id="contactInfoDesc">Reach us through the channels below — we respond promptly.</p>
             <ul class="bullets blackBullets">
-              <li><b>Email:</b> info@futuredimensionsco.com</li>
-              <li><b>Website:</b> www.futuredimensionsco.com</li>
-              <li><b>Phone:</b> +20 100 193 8264</li>
+              <li><b id="contactInfoEmailLabel">Email:</b> info@futuredimensionsco.com</li>
+              <li><b id="contactInfoWebsiteLabel">Website:</b> www.futuredimensionsco.com</li>
+              <li><b id="contactInfoPhoneLabel">Phone:</b> +20 100 193 8264</li>
             </ul>
           </div>
 
           <div class="cardActions">
-            <a class="slink primary" href="mailto:info@futuredimensionsco.com"><span class="ic"></span><span>Email</span></a>
-            <a class="slink" href="https://www.futuredimensionsco.com" target="_blank" rel="noopener"><span class="ic"></span><span>Website</span></a>
-            <a class="slink" href="tel:+201001938264"><span class="ic"></span><span>Call</span></a>
+            <a class="slink primary" href="mailto:info@futuredimensionsco.com"><span class="ic"></span><span id="contactInfoBtnEmail">Email</span></a>
+            <a class="slink" href="https://www.futuredimensionsco.com" target="_blank" rel="noopener"><span class="ic"></span><span id="contactInfoBtnWebsite">Website</span></a>
+            <a class="slink" href="tel:+201001938264"><span class="ic"></span><span id="contactInfoBtnCall">Call</span></a>
           </div>
         </div>
 
         <div class="card cardGold cardFlex">
           <div>
-            <h3>Careers</h3>
-            <p class="pStrong">Interested in joining? Submit your CV and we’ll contact you when a fit opens.</p>
+            <h3 id="careersCardTitle">Careers</h3>
+            <p class="pStrong" id="careersCardDesc">Interested in joining? Submit your CV and we’ll contact you when a fit opens.</p>
           </div>
 
           <div class="cardActions">
-            <a class="slink primary" href="careers.html"><span class="ic"></span><span>Apply</span></a>
-            <a class="slink" href="team.html"><span class="ic"></span><span>Team</span></a>
+            <a class="slink primary" href="careers.html"><span class="ic"></span><span id="careersBtnApply">Apply</span></a>
+            <a class="slink" href="team.html"><span class="ic"></span><span id="careersBtnTeam">Team</span></a>
           </div>
         </div>
       </div>
@@ -1429,6 +1429,30 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 
       approachTitle:"Our Methodology",
       approachHint:"From challenge → to dimensions.",
+
+      // Approach steps (cards)
+      step1Title:"1) Diagnose",
+      step1Desc:"Structured assessment of current performance, risks, gaps, and root causes.",
+      step2Title:"2) Design",
+      step2Desc:"Build a pragmatic roadmap, policies, tools, and governance aligned with goals.",
+      step3Title:"3) Deliver",
+      step3Desc:"Execute with disciplined follow-up, KPIs, and documentation to ensure adoption.",
+
+      // Contact info card
+      contactInfoTitle:"Contact Info",
+      contactInfoDesc:"Reach us through the channels below — we respond promptly.",
+      contactInfoEmailLabel:"Email:",
+      contactInfoWebsiteLabel:"Website:",
+      contactInfoPhoneLabel:"Phone:",
+      contactInfoBtnEmail:"Email",
+      contactInfoBtnWebsite:"Website",
+      contactInfoBtnCall:"Call",
+
+      // Careers card
+      careersCardTitle:"Careers",
+      careersCardDesc:"Interested in joining? Submit your CV and we’ll contact you when a fit opens.",
+      careersBtnApply:"Apply",
+      careersBtnTeam:"Team",
       m1:"How we work",
       mList:["Challenge Diagnosis","Dimension Design","Guided Execution","Transformation Confirmation (KPIs)"],
       m2:"What you get",
@@ -1450,8 +1474,8 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       footSub:"FOR CONSULTING & BUSINESS SOLUTIONS",
       copyText:"© Future Dimensions — All rights reserved.",
       fHome:"Home", fAbout:"About", fServices:"Services", fTeam:"Team", fCareers:"Careers", fContact:"Contact"
-    },
-
+    }
+    ,
     ar:{
       dir:"rtl", lang:"ar", toggle:"English",
 
@@ -1670,6 +1694,36 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 
     setText("servicesTitle", c.servicesTitle);
     setText("servicesHint", c.servicesHint);
+
+    setText("methTitle", c.approachTitle);
+    setText("methHint", c.approachHint);
+
+    setText("step1Title", c.step1Title);
+    setText("step1Desc", c.step1Desc);
+    setText("step2Title", c.step2Title);
+    setText("step2Desc", c.step2Desc);
+    setText("step3Title", c.step3Title);
+    setText("step3Desc", c.step3Desc);
+
+    // Services middle card id compatibility
+    setText("adTitle", c.admTitle);
+    setText("adDesc", c.admDesc);
+
+    // Contact info card
+    setText("contactInfoTitle", c.contactInfoTitle);
+    setText("contactInfoDesc", c.contactInfoDesc);
+    setText("contactInfoEmailLabel", c.contactInfoEmailLabel);
+    setText("contactInfoWebsiteLabel", c.contactInfoWebsiteLabel);
+    setText("contactInfoPhoneLabel", c.contactInfoPhoneLabel);
+    setText("contactInfoBtnEmail", c.contactInfoBtnEmail);
+    setText("contactInfoBtnWebsite", c.contactInfoBtnWebsite);
+    setText("contactInfoBtnCall", c.contactInfoBtnCall);
+
+    // Careers card
+    setText("careersCardTitle", c.careersCardTitle);
+    setText("careersCardDesc", c.careersCardDesc);
+    setText("careersBtnApply", c.careersBtnApply);
+    setText("careersBtnTeam", c.careersBtnTeam);
 
     setText("finTitle", c.finTitle);
     setText("finDesc", c.finDesc);
