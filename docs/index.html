@@ -27,8 +27,6 @@
       --gold3:#F1D77A;
       --champ:#F5F1E6;
 
-      --teal:#2EC4B6;
-
       --onDark:#F6F7FB;
       --ink:#0b1322;
 
@@ -45,13 +43,37 @@
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Kufi Arabic","Noto Sans Arabic", sans-serif;
       color: var(--onDark);
       background:
-        radial-gradient(1100px 700px at 12% 0%, rgba(46,196,182,.14) 0%, rgba(46,196,182,0) 58%),
-        radial-gradient(900px 600px at 98% 15%, rgba(212,175,55,.14) 0%, rgba(212,175,55,0) 55%),
+        radial-gradient(1100px 700px at 12% 0%, rgba(212,175,55,.08) 0%, rgba(212,175,55,0) 58%),
+        radial-gradient(900px 600px at 98% 15%, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 55%),
         linear-gradient(180deg, var(--navy), #060b14 70%, #04070e);
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    /* NAVY watermark in background (very subtle) */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      opacity:.07; /* super light */
+      background:
+        radial-gradient(1200px 800px at 65% 15%, rgba(11,19,34,.30), rgba(11,19,34,0) 62%),
+        radial-gradient(1000px 700px at 20% 78%, rgba(11,19,34,.26), rgba(11,19,34,0) 60%);
+      -webkit-mask-image: url('logo.png');
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 65% 18%;
+      -webkit-mask-size: 720px;
+      mask-image: url('logo.png');
+      mask-repeat: no-repeat;
+      mask-position: 65% 18%;
+      mask-size: 720px;
+      filter: blur(.2px);
     }
 
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px; position:relative; z-index:1;}
 
     /* Header */
     header{
@@ -123,7 +145,7 @@
       position:relative;
       display:flex;
       flex-direction:column;
-      height: 250px; /* أقصر + متساويين */
+      height: 250px; /* shorter + equal */
     }
 
     /* Premium Gold Card (Hero) */
@@ -149,22 +171,26 @@
       pointer-events:none;
       opacity:.7;
     }
-    /* watermark inside gold (clearer) */
-    .heroCard:before{
-      content:"";
+
+    /* GOLD watermark via mask (lighter + gold) */
+    .goldMark{
       position:absolute; inset:-20px;
-      background-image:url('logo.png');
-      background-repeat:no-repeat;
-      background-position: 92% 78%;
-      background-size: 360px;
-      opacity:.18;
-      filter:saturate(0) brightness(.9);
-      mix-blend-mode:multiply;
-      transform: rotate(-8deg);
       pointer-events:none;
+      opacity:.10; /* lighter */
+      transform: rotate(-8deg);
+      background: rgba(212,175,55,.95); /* gold */
+      -webkit-mask-image:url('logo.png');
+      -webkit-mask-repeat:no-repeat;
+      -webkit-mask-position: 92% 78%;
+      -webkit-mask-size: 360px;
+      mask-image:url('logo.png');
+      mask-repeat:no-repeat;
+      mask-position: 92% 78%;
+      mask-size: 360px;
+      filter: blur(.1px);
+      mix-blend-mode:multiply;
     }
 
-    /* bigger slogan */
     .heroKicker{
       display:inline-block;
       padding:10px 14px;
@@ -179,7 +205,6 @@
       max-width: 100%;
     }
 
-    /* smaller company name */
     .heroTitle{
       font-weight:1000;
       margin:0 0 4px;
@@ -205,7 +230,7 @@
       max-width: 62ch;
     }
 
-    /* Side card */
+    /* Side card (ONLY navy) - Why Future Dimensions */
     .sideCard{
       padding:14px;
       background: rgba(255,255,255,.04);
@@ -227,7 +252,7 @@
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 
-    /* Gold cards */
+    /* GOLD cards (for ALL boxes except Why) */
     .card{
       border-radius: var(--radius);
       position:relative;
@@ -253,28 +278,11 @@
       pointer-events:none;
       opacity:.7;
     }
-    .card:before{
-      content:"";
-      position:absolute; inset:-20px;
-      background-image:url('logo.png');
-      background-repeat:no-repeat;
-      background-position: 92% 78%;
-      background-size: 340px;
-      opacity:.14; /* clearer */
-      filter:saturate(0) brightness(.9);
-      mix-blend-mode:multiply;
-      transform: rotate(-8deg);
-      pointer-events:none;
-    }
 
     .muted{color:rgba(11,22,36,.82);font-weight:750;line-height:1.6}
 
-    /* About like old (not too wide) */
-    .aboutWrap{
-      max-width: 760px;
-      margin: 0 auto;
-    }
-    .aboutCard{padding:16px;}
+    /* About area */
+    .aboutWrap{max-width: 980px;margin: 0 auto;}
     .aboutRow{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;}
     .aboutIcon{
       width:52px;height:52px;border-radius:14px;
@@ -288,7 +296,7 @@
     .aboutTitleSmall{margin:0 0 6px;font-size:20px;font-weight:1000}
     .aboutP{margin:0}
 
-    /* Services bullets */
+    /* Lists */
     .svcList{
       margin:12px 0 0;
       padding-left:18px;
@@ -316,25 +324,14 @@
     }
     .btnDark:hover{background: rgba(11,19,34,.98)}
 
-    /* Dark cards */
-    .darkCard{
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:
-        0 30px 90px rgba(0,0,0,.42),
-        inset 0 1px 0 rgba(255,255,255,.08);
-      padding:18px;
-    }
-    .darkCard h3{margin:0 0 8px;font-size:18px}
-    .darkCard p{margin:0;color:rgba(246,247,251,.82);line-height:1.7;font-weight:650}
+    /* Tag inside gold cards */
     .tag{
       display:inline-block;margin-top:10px;
       padding:8px 10px;border-radius:999px;
       font-weight:850;font-size:12px;
-      background: rgba(212,175,55,.12);
-      border:1px solid rgba(212,175,55,.20);
-      color: rgba(246,247,251,.92);
+      background: rgba(11,19,34,.10);
+      border:1px solid rgba(0,0,0,.16);
+      color: rgba(11,19,34,.92);
     }
 
     footer{
@@ -342,6 +339,8 @@
       border-top:1px solid rgba(255,255,255,.08);
       color:rgba(246,247,251,.78);
       background: rgba(0,0,0,.18);
+      position:relative;
+      z-index:1;
     }
     footer .fgrid{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
     footer b{color:rgba(246,247,251,.94)}
@@ -354,6 +353,12 @@
       .heroTitle{font-size:30px}
       .heroKicker{font-size:20px}
       .heroSub{font-size:20px}
+      body::before{
+        -webkit-mask-size: 520px;
+        mask-size: 520px;
+        -webkit-mask-position: 60% 10%;
+        mask-position: 60% 10%;
+      }
     }
   </style>
 </head>
@@ -392,6 +397,8 @@
     <div class="wrap">
       <div class="heroGrid">
         <div class="heroCard">
+          <div class="goldMark" aria-hidden="true"></div>
+
           <div class="heroKicker" id="heroKicker">Enter with Challenges – Exit with New Dimensions</div>
 
           <h1 class="heroTitle" id="heroTitle">
@@ -406,6 +413,7 @@
           </p>
         </div>
 
+        <!-- ONLY NAVY CARD -->
         <aside class="sideCard">
           <h3 id="whyTitle">Why Future Dimensions?</h3>
           <ul id="whyList">
@@ -420,28 +428,59 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ABOUT + VISION & MISSION (two gold cards same row) -->
   <section id="about">
     <div class="wrap aboutWrap">
       <h2 class="sectionTitle" id="aboutTitle">About Us</h2>
       <p class="sectionSub" id="aboutSub">Who we are and how we create measurable impact.</p>
 
-      <div class="card aboutCard">
-        <div class="aboutRow">
-          <div class="aboutIcon" aria-hidden="true">FD</div>
-          <div class="aboutTextWrap">
-            <h3 class="aboutTitleSmall" id="aboutWho">Who we are</h3>
-            <p class="muted aboutP" id="aboutText">
-              Future Dimensions is a consulting partner that blends financial expertise,
-              operational excellence, and growth strategy to build resilient organizations and sustainable results.
-            </p>
+      <div class="grid2">
+        <!-- ABOUT -->
+        <div class="card">
+          <div class="goldMark" aria-hidden="true" style="opacity:.09; -webkit-mask-size:320px; mask-size:320px;"></div>
+          <div class="aboutRow">
+            <div class="aboutIcon" aria-hidden="true">FD</div>
+            <div class="aboutTextWrap">
+              <h3 class="aboutTitleSmall" id="aboutWho">Who we are</h3>
+              <p class="muted aboutP" id="aboutText">
+                Future Dimensions is a consulting partner that blends financial expertise,
+                operational excellence, and growth strategy to build resilient organizations and sustainable results.
+              </p>
 
-            <div class="btnRow">
-              <a class="btn" href="financial.html" id="aboutLink1">Financial</a>
-              <a class="btn" href="administrative.html" id="aboutLink2">Operational</a>
-              <a class="btn" href="growth.html" id="aboutLink3">Growth</a>
-              <a class="btn" href="#methodology" id="aboutLink4">Governance</a>
+              <div class="btnRow">
+                <a class="btn" href="financial.html" id="aboutLink1">Financial</a>
+                <a class="btn" href="administrative.html" id="aboutLink2">Operational</a>
+                <a class="btn" href="growth.html" id="aboutLink3">Growth</a>
+              </div>
             </div>
+          </div>
+        </div>
+
+        <!-- VISION & MISSION -->
+        <div class="card">
+          <div class="goldMark" aria-hidden="true" style="opacity:.09; -webkit-mask-size:320px; mask-size:320px;"></div>
+          <h3 class="aboutTitleSmall" id="vmTitle" style="margin:0 0 10px;">Vision &amp; Mission</h3>
+
+          <div class="muted" style="font-weight:900;margin-bottom:6px;" id="vmMissionHead">Mission</div>
+          <ul class="svcList muted" id="vmMissionList">
+            <li>Deliver advanced consulting expertise tailored to complex challenges</li>
+            <li>Develop deep sector and market understanding</li>
+            <li>Design customized strategies that generate measurable results</li>
+            <li>Ensure effective solution implementation through ongoing support</li>
+            <li>Build strategic, trust-based long-term partnerships</li>
+          </ul>
+
+          <div class="muted" style="font-weight:900;margin:12px 0 6px;" id="vmVisionHead">Vision</div>
+          <ul class="svcList muted" id="vmVisionList">
+            <li>Excellence and innovation in solution delivery</li>
+            <li>Highest professional standards aligned with international best practices</li>
+            <li>Positive impact on client growth and competitive position</li>
+            <li>Strategic relationships built on transparency and accountability</li>
+            <li>A culture that fosters creativity and continuous development</li>
+          </ul>
+
+          <div class="btnRow">
+            <a class="btnDark btn" href="vision.html" id="vmMore">More</a>
           </div>
         </div>
       </div>
@@ -457,6 +496,7 @@
       <div class="grid3">
         <!-- Financial -->
         <div class="card">
+          <div class="goldMark" aria-hidden="true"></div>
           <div style="font-weight:1000;font-size:22px;margin-bottom:8px" id="svc1Title">Financial Dimension</div>
           <div class="muted" id="svc1Desc">Finance that drives performance.</div>
 
@@ -475,6 +515,7 @@
 
         <!-- Administrative -->
         <div class="card">
+          <div class="goldMark" aria-hidden="true"></div>
           <div style="font-weight:1000;font-size:22px;margin-bottom:8px" id="svc2Title">Administrative &amp; Operational Dimension</div>
           <div class="muted" id="svc2Desc">Execution &amp; operational excellence.</div>
 
@@ -493,6 +534,7 @@
 
         <!-- Growth -->
         <div class="card">
+          <div class="goldMark" aria-hidden="true"></div>
           <div style="font-weight:1000;font-size:22px;margin-bottom:8px" id="svc3Title">Growth Strategy Dimension</div>
           <div class="muted" id="svc3Desc">Scale with confidence.</div>
 
@@ -512,62 +554,75 @@
     </div>
   </section>
 
-  <!-- WORK METHODOLOGY -->
+  <!-- WORK METHODOLOGY (GOLD cards, NO DURATION LINE) -->
   <section id="methodology">
     <div class="wrap">
       <h2 class="sectionTitle" id="methodTitle">Work Methodology</h2>
       <p class="sectionSub" id="methodSub">A clear 4-phase methodology from diagnosis to confirmation.</p>
 
       <div class="grid4">
-        <div class="darkCard">
-          <h3 id="m1">PHASE 1: CHALLENGE DIAGNOSIS</h3>
-          <p id="m1p">Comprehensive analysis of internal and external factors to identify root causes and opportunities.</p>
-          <span class="tag" id="m1t">Deliverable: Challenge Map Report · Duration: 1 Week</span>
+        <div class="card">
+          <div class="goldMark" aria-hidden="true"></div>
+          <h3 id="m1" style="margin:0 0 8px;font-size:18px">PHASE 1: CHALLENGE DIAGNOSIS</h3>
+          <p id="m1p" class="muted" style="margin:0">Comprehensive analysis of internal and external factors to identify root causes and opportunities.</p>
+          <span class="tag" id="m1t">Deliverable: Challenge Map Report</span>
         </div>
 
-        <div class="darkCard">
-          <h3 id="m2">PHASE 2: DIMENSION DESIGN</h3>
-          <p id="m2p">Development of customized strategic solutions as a detailed blueprint for sustainable transformation and competitive advantage.</p>
-          <span class="tag" id="m2t">Deliverable: Dimension Design Blueprint · Duration: 1–2 Weeks</span>
+        <div class="card">
+          <div class="goldMark" aria-hidden="true"></div>
+          <h3 id="m2" style="margin:0 0 8px;font-size:18px">PHASE 2: DIMENSION DESIGN</h3>
+          <p id="m2p" class="muted" style="margin:0">Development of customized strategic solutions as a detailed blueprint for sustainable transformation and competitive advantage.</p>
+          <span class="tag" id="m2t">Deliverable: Dimension Design Blueprint</span>
         </div>
 
-        <div class="darkCard">
-          <h3 id="m3">PHASE 3: GUIDED EXECUTION</h3>
-          <p id="m3p">Implementation support with knowledge transfer and on-the-ground partnership to ensure practical, measurable impact.</p>
-          <span class="tag" id="m3t">Deliverable: Execution Implementation Plan · Duration: 1–2 Weeks</span>
+        <div class="card">
+          <div class="goldMark" aria-hidden="true"></div>
+          <h3 id="m3" style="margin:0 0 8px;font-size:18px">PHASE 3: GUIDED EXECUTION</h3>
+          <p id="m3p" class="muted" style="margin:0">Implementation support with knowledge transfer and on-the-ground partnership to ensure practical, measurable impact.</p>
+          <span class="tag" id="m3t">Deliverable: Execution Implementation Plan</span>
         </div>
 
-        <div class="darkCard">
-          <h3 id="m4">PHASE 4: TRANSFORMATION CONFIRMATION</h3>
-          <p id="m4p">Measurement of performance against KPIs and validation of sustainable growth trajectory aligned with strategic objectives.</p>
-          <span class="tag" id="m4t">Deliverable: Transformation KPI Dashboard · Duration: 1 Week</span>
+        <div class="card">
+          <div class="goldMark" aria-hidden="true"></div>
+          <h3 id="m4" style="margin:0 0 8px;font-size:18px">PHASE 4: TRANSFORMATION CONFIRMATION</h3>
+          <p id="m4p" class="muted" style="margin:0">Measurement of performance against KPIs and validation of sustainable growth trajectory aligned with strategic objectives.</p>
+          <span class="tag" id="m4t">Deliverable: Transformation KPI Dashboard</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT (GOLD) -->
   <section id="contact">
     <div class="wrap">
       <h2 class="sectionTitle" id="contactTitle">Contact</h2>
       <p class="sectionSub" id="contactSub">Let’s discuss your challenges and design the right dimension.</p>
 
       <div class="grid2">
-        <div class="darkCard">
-          <h3 id="c1">Contact Info</h3>
-          <p id="c1p" style="margin:0;color:rgba(246,247,251,.85);line-height:1.9;font-weight:700">
+        <div class="card">
+          <div class="goldMark" aria-hidden="true"></div>
+          <h3 id="c1" style="margin:0 0 10px;font-size:18px">Contact Info</h3>
+
+          <p id="c1p" class="muted" style="margin:0;line-height:1.95;font-weight:800">
             <b>Email:</b> info@futuredimensionsco.com<br/>
             <b>Website:</b> https://www.futuredimensionsco.com<br/>
-            <b>Phone:</b> +[Your Phone Number]
+            <b>Phone:</b> +20 100 193 8264
           </p>
-          <span class="tag" id="c1t">Replace the phone number with your official line</span>
+
+          <div class="btnRow" style="margin-top:14px;">
+            <a class="btnDark btn" href="mailto:info@futuredimensionsco.com" id="emailBtn">Request a Proposal</a>
+            <a class="btn btn" href="tel:+201001938264" id="callBtn">Call</a>
+          </div>
         </div>
 
-        <div class="darkCard">
-          <h3 id="c2">Careers</h3>
-          <p id="c2p" style="margin:0;color:rgba(246,247,251,.82);line-height:1.8;font-weight:650">
+        <div class="card">
+          <div class="goldMark" aria-hidden="true"></div>
+          <h3 id="c2" style="margin:0 0 10px;font-size:18px">Careers</h3>
+
+          <p id="c2p" class="muted" style="margin:0;line-height:1.85;font-weight:800">
             Want to join the team? Send your CV to <b>info@futuredimensionsco.com</b> or visit the Careers page.
           </p>
+
           <div class="btnRow">
             <a class="btnDark btn" href="careers.html" id="c2b1">Open Careers</a>
             <a class="btn btn" href="team.html" id="c2b2">Meet the Team</a>
@@ -618,7 +673,6 @@
       nav: {home:"Home", about:"About", services:"Services", team:"Team", careers:"Careers", methodology:"Work Methodology", contact:"Contact"},
       hero: {
         kicker:"Enter with Challenges – Exit with New Dimensions",
-        title:"Future Dimensions",
         sub:"for Consulting & Business Solutions",
         text:"Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational, and Growth Strategy solutions with measurable impact — locally and globally."
       },
@@ -637,7 +691,27 @@
         sub:"Who we are and how we create measurable impact.",
         who:"Who we are",
         text:"Future Dimensions is a consulting partner that blends financial expertise, operational excellence, and growth strategy to build resilient organizations and sustainable results.",
-        links:{f:"Financial", a:"Operational", g:"Growth", gov:"Governance"}
+        links:{f:"Financial", a:"Operational", g:"Growth"}
+      },
+      vm:{
+        title:"Vision & Mission",
+        missionHead:"Mission",
+        visionHead:"Vision",
+        more:"More",
+        mission:[
+          "Deliver advanced consulting expertise tailored to complex challenges",
+          "Develop deep sector and market understanding",
+          "Design customized strategies that generate measurable results",
+          "Ensure effective solution implementation through ongoing support",
+          "Build strategic, trust-based long-term partnerships"
+        ],
+        vision:[
+          "Excellence and innovation in solution delivery",
+          "Highest professional standards aligned with international best practices",
+          "Positive impact on client growth and competitive position",
+          "Strategic relationships built on transparency and accountability",
+          "A culture that fosters creativity and continuous development"
+        ]
       },
       services:{
         title:"Our Services",
@@ -670,17 +744,18 @@
       method:{
         title:"Work Methodology",
         sub:"A clear 4-phase methodology from diagnosis to confirmation.",
-        m1:{h:"PHASE 1: CHALLENGE DIAGNOSIS", p:"Comprehensive analysis of internal and external factors to identify root causes and opportunities.", t:"Deliverable: Challenge Map Report · Duration: 1 Week"},
-        m2:{h:"PHASE 2: DIMENSION DESIGN", p:"Development of customized strategic solutions as a detailed blueprint for sustainable transformation and competitive advantage.", t:"Deliverable: Dimension Design Blueprint · Duration: 1–2 Weeks"},
-        m3:{h:"PHASE 3: GUIDED EXECUTION", p:"Implementation support with knowledge transfer and on-the-ground partnership to ensure practical, measurable impact.", t:"Deliverable: Execution Implementation Plan · Duration: 1–2 Weeks"},
-        m4:{h:"PHASE 4: TRANSFORMATION CONFIRMATION", p:"Measurement of performance against KPIs and validation of sustainable growth trajectory aligned with strategic objectives.", t:"Deliverable: Transformation KPI Dashboard · Duration: 1 Week"},
+        m1:{h:"PHASE 1: CHALLENGE DIAGNOSIS", p:"Comprehensive analysis of internal and external factors to identify root causes and opportunities.", t:"Deliverable: Challenge Map Report"},
+        m2:{h:"PHASE 2: DIMENSION DESIGN", p:"Development of customized strategic solutions as a detailed blueprint for sustainable transformation and competitive advantage.", t:"Deliverable: Dimension Design Blueprint"},
+        m3:{h:"PHASE 3: GUIDED EXECUTION", p:"Implementation support with knowledge transfer and on-the-ground partnership to ensure practical, measurable impact.", t:"Deliverable: Execution Implementation Plan"},
+        m4:{h:"PHASE 4: TRANSFORMATION CONFIRMATION", p:"Measurement of performance against KPIs and validation of sustainable growth trajectory aligned with strategic objectives.", t:"Deliverable: Transformation KPI Dashboard"},
       },
       contact:{
         title:"Contact",
         sub:"Let’s discuss your challenges and design the right dimension.",
         c1:"Contact Info",
-        c1p:`<b>Email:</b> info@futuredimensionsco.com<br/><b>Website:</b> https://www.futuredimensionsco.com<br/><b>Phone:</b> +[Your Phone Number]`,
-        c1t:"Replace the phone number with your official line",
+        c1p:`<b>Email:</b> info@futuredimensionsco.com<br/><b>Website:</b> https://www.futuredimensionsco.com<br/><b>Phone:</b> +20 100 193 8264`,
+        emailBtn:"Request a Proposal",
+        callBtn:"Call",
         c2:"Careers",
         c2p:`Want to join the team? Send your CV to <b>info@futuredimensionsco.com</b> or visit the Careers page.`,
         c2b1:"Open Careers",
@@ -694,7 +769,6 @@
       nav: {home:"الرئيسية", about:"من نحن", services:"خدماتنا", team:"فريق العمل", careers:"التوظيف", methodology:"منهجية العمل", contact:"تواصل معنا"},
       hero: {
         kicker:"ادخل بتحديات – اخرج بأبعاد جديدة",
-        title:"Future Dimensions",
         sub:"للإستشارات وحلول الأعمال",
         text:"Future Dimensions شركة استشارات متكاملة تقدم حلولًا مالية وإدارية وتشغيلية واستراتيجيات نمو بأثر قابل للقياس — محليًا وعالميًا."
       },
@@ -713,7 +787,29 @@
         sub:"تعرف على هويتنا وكيف نصنع أثرًا قابلًا للقياس.",
         who:"من نحن",
         text:"Future Dimensions شريك استشاري يدمج الخبرة المالية والتميز التشغيلي واستراتيجيات النمو لبناء مؤسسات مرنة ونتائج مستدامة.",
-        links:{f:"مالي", a:"إداري/تشغيلي", g:"نمو", gov:"حوكمة"}
+        links:{f:"مالي", a:"إداري/تشغيلي", g:"نمو"}
+      },
+      vm:{
+        title:"الرؤية والرسالة",
+        missionHead:"الرسالة",
+        visionHead:"الرؤية",
+        more:"More",
+        mission:[
+          "تمكين المؤسسات عبر خدمات مهنية عالية الجودة من خلال:",
+          "تقديم خبرات استشارية متقدمة تناسب التحديات المعقدة",
+          "تطوير فهم عميق للقطاعات والأسواق",
+          "تصميم استراتيجيات مخصصة بنتائج قابلة للقياس",
+          "ضمان تطبيق الحلول بفاعلية عبر دعم مستمر",
+          "بناء شراكات استراتيجية طويلة الأمد قائمة على الثقة"
+        ],
+        vision:[
+          "أن نكون الشريك الاستشاري الموثوق في المنطقة، ومعترفًا بنا من خلال:",
+          "التميز والابتكار في تقديم الحلول",
+          "أعلى المعايير المهنية المتوافقة مع أفضل الممارسات الدولية",
+          "أثر إيجابي ملموس على نمو العملاء ومكانتهم التنافسية",
+          "علاقات استراتيجية قائمة على الشفافية والمساءلة",
+          "ثقافة عمل تعزز الإبداع والتطوير المستمر"
+        ]
       },
       services:{
         title:"خدماتنا",
@@ -746,17 +842,18 @@
       method:{
         title:"منهجية العمل",
         sub:"منهجية واضحة من التشخيص حتى التأكيد.",
-        m1:{h:"المرحلة 1: تشخيص التحدي", p:"تحليل شامل للعوامل الداخلية والخارجية لتحديد الأسباب الجذرية والفرص.", t:"المخرج: تقرير خريطة التحديات · المدة: أسبوع"},
-        m2:{h:"المرحلة 2: تصميم الأبعاد", p:"تطوير حلول استراتيجية مخصصة كخطة تفصيلية لتحول مستدام وميزة تنافسية.", t:"المخرج: مخطط تصميم الأبعاد · المدة: 1–2 أسبوع"},
-        m3:{h:"المرحلة 3: تنفيذ موجّه", p:"دعم تنفيذ مع نقل معرفة وشراكة ميدانية لضمان أثر عملي قابل للقياس.", t:"المخرج: خطة تنفيذ تطبيقية · المدة: 1–2 أسبوع"},
-        m4:{h:"المرحلة 4: تأكيد التحول", p:"قياس الأداء مقابل مؤشرات KPI والتحقق من مسار نمو مستدام متوافق مع الأهداف.", t:"المخرج: لوحة مؤشرات التحول · المدة: أسبوع"},
+        m1:{h:"المرحلة 1: تشخيص التحدي", p:"تحليل شامل للعوامل الداخلية والخارجية لتحديد الأسباب الجذرية والفرص.", t:"المخرج: تقرير خريطة التحديات"},
+        m2:{h:"المرحلة 2: تصميم الأبعاد", p:"تطوير حلول استراتيجية مخصصة كخطة تفصيلية لتحول مستدام وميزة تنافسية.", t:"المخرج: مخطط تصميم الأبعاد"},
+        m3:{h:"المرحلة 3: تنفيذ موجّه", p:"دعم تنفيذ مع نقل معرفة وشراكة ميدانية لضمان أثر عملي قابل للقياس.", t:"المخرج: خطة تنفيذ تطبيقية"},
+        m4:{h:"المرحلة 4: تأكيد التحول", p:"قياس الأداء مقابل مؤشرات KPI والتحقق من مسار نمو مستدام متوافق مع الأهداف.", t:"المخرج: لوحة مؤشرات التحول"},
       },
       contact:{
         title:"تواصل معنا",
         sub:"دعنا نناقش تحدياتك ونصمم البعد المناسب.",
         c1:"بيانات التواصل",
-        c1p:`<b>البريد:</b> info@futuredimensionsco.com<br/><b>الموقع:</b> https://www.futuredimensionsco.com<br/><b>الهاتف:</b> +[رقمك الرسمي]`,
-        c1t:"استبدل رقم الهاتف بالخط الرسمي",
+        c1p:`<b>البريد:</b> info@futuredimensionsco.com<br/><b>الموقع:</b> https://www.futuredimensionsco.com<br/><b>الهاتف:</b> +20 100 193 8264`,
+        emailBtn:"اطلب عرضًا",
+        callBtn:"اتصال",
         c2:"التوظيف",
         c2p:`للإنضمام للفريق، أرسل سيرتك إلى <b>info@futuredimensionsco.com</b> أو ادخل صفحة التوظيف.`,
         c2b1:"فتح التوظيف",
@@ -782,7 +879,6 @@
 
     // Hero
     setText("heroKicker", pack.hero.kicker);
-    // keep title as brand, just update sub & text
     setText("heroSub", pack.hero.sub);
     setText("heroText", pack.hero.text);
 
@@ -799,7 +895,14 @@
     setText("aboutLink1", pack.about.links.f);
     setText("aboutLink2", pack.about.links.a);
     setText("aboutLink3", pack.about.links.g);
-    setText("aboutLink4", pack.about.links.gov);
+
+    // Vision & Mission
+    setText("vmTitle", pack.vm.title);
+    setText("vmMissionHead", pack.vm.missionHead);
+    setText("vmVisionHead", pack.vm.visionHead);
+    setText("vmMore", pack.vm.more);
+    setList("vmMissionList", pack.vm.mission);
+    setList("vmVisionList", pack.vm.vision);
 
     // Services
     setText("servicesTitle", pack.services.title);
@@ -820,10 +923,9 @@
     setList("svc3List", pack.services.s3.list);
     setText("svc3More", pack.services.s3.more);
 
-    // Methodology
+    // Methodology (no duration)
     setText("methodTitle", pack.method.title);
     setText("methodSub", pack.method.sub);
-
     setText("m1", pack.method.m1.h); setText("m1p", pack.method.m1.p); setText("m1t", pack.method.m1.t);
     setText("m2", pack.method.m2.h); setText("m2p", pack.method.m2.p); setText("m2t", pack.method.m2.t);
     setText("m3", pack.method.m3.h); setText("m3p", pack.method.m3.p); setText("m3t", pack.method.m3.t);
@@ -834,7 +936,8 @@
     setText("contactSub", pack.contact.sub);
     setText("c1", pack.contact.c1);
     setHTML("c1p", pack.contact.c1p);
-    setText("c1t", pack.contact.c1t);
+    setText("emailBtn", pack.contact.emailBtn);
+    setText("callBtn", pack.contact.callBtn);
 
     setText("c2", pack.contact.c2);
     setHTML("c2p", pack.contact.c2p);
