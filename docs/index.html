@@ -1046,8 +1046,8 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
             <p class="pStrong" id="contactInfoDesc">Reach us through the channels below — we respond promptly.</p>
             <ul class="bullets blackBullets">
               <li><b id="contactInfoEmailLabel">Email:</b> info@futuredimensionsco.com</li>
-              <li><b id="contactInfoWebsiteLabel">Website:</b> <span dir="ltr">www.futuredimensionsco.com</span></li>
-              <li><b id="contactInfoPhoneLabel">Phone:</b> <span dir="ltr">+20 100 193 8264</span></li>
+              <li><b id="contactInfoWebsiteLabel">Website:</b> www.futuredimensionsco.com</li>
+              <li><b id="contactInfoPhoneLabel">Phone:</b> +20 100 193 8264</li>
             </ul>
           </div>
 
@@ -1087,7 +1087,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
           Future Dimensions for Consulting &amp; Business Solutions operates as a strategic partner — not just a consultant —
           supporting leaders from diagnostics to implementation, with audit‑ready deliverables and measurable outcomes.
         </p>
-        <ul class="bullets blackBullets">
+        <ul class="bullets blackBullets" id="pageAboutBullets">
           <li>Transformation — not temporary fixes</li>
           <li>Clear methodology and practical execution</li>
           <li>High standards with fast turnaround</li>
@@ -1160,7 +1160,39 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 </footer>
 
 <script>
-  // Header scroll effect
+  
+  // ===== Single-file routing for ?page=about / ?page=vision (fix blank pages) =====
+  function getPage(){
+    const p = new URLSearchParams(window.location.search).get('page');
+    return p ? p : 'home';
+  }
+  function applyRoute(){
+    document.body.setAttribute('data-page', getPage());
+  }
+  window.addEventListener('popstate', applyRoute);
+  applyRoute();
+
+  // Intercept internal SPA links
+  document.addEventListener('click', function(e){
+    const a = e.target.closest('a');
+    if(!a) return;
+    const href = a.getAttribute('href') || '';
+    if(href.startsWith('?page=')){
+      e.preventDefault();
+      history.pushState({}, '', href);
+      applyRoute();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+    if(a.hasAttribute('data-home')){
+      e.preventDefault();
+      history.pushState({}, '', './');
+      applyRoute();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+  });
+
+
+// Header scroll effect
   window.addEventListener("scroll",()=>{
     document.querySelector("header").classList.toggle("scrolled", window.scrollY > 10);
   });
@@ -1208,13 +1240,30 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
   const seo = {
     en:{
       title:"Future Dimensions | Financial, Operational & Growth Consulting",
-      desc:"Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational Excellence, and Growth Strategy solutions with measurable impact."
+      desc:"Future Dimensions is an integrated consulting firm delivering Financial, Administrative & Operational Excellence, and Growth Strategy solutions with measurable impact.",
+      servicesSub:"Three dimensions — one integrated impact",
+      contactSub:"Let’s start your transformation",
+      bottomCtaTitle:"Ready to start?",
+      bottomCtaText:"Tell us where you are today — and we’ll propose a practical roadmap to move forward.",
+      bottomBtn1Text:"Start Your Transformation",
+      bottomBtn2Text:"Explore Services",
+      pageAboutBullets:["Transformation — not temporary fixes","Clear methodology and practical execution","High standards with fast turnaround","ROI, efficiency, compliance, and sustainable growth"],
+      aboutBullets:["Financial Consulting & Advisory","Administrative & Operational Optimization","Business Development & Strategic Growth","Sustainable execution with measurable impact","Regional expertise in asset‑intensive industries"]
     },
     ar:{
       title:"Future Dimensions | استشارات مالية وإدارية واستراتيجيات نمو",
-      desc:"تقدم Future Dimensions خدمات استشارية متكاملة تشمل البعد المالي والبعد الإداري والتشغيلي واستراتيجيات النمو والتحول، بمخرجات احترافية قابلة للتنفيذ ونتائج قابلة للقياس."
+      desc:"تقدم Future Dimensions خدمات استشارية متكاملة تشمل البعد المالي والبعد الإداري والتشغيلي واستراتيجيات النمو والتحول، بمخرجات احترافية قابلة للتنفيذ ونتائج قابلة للقياس.",
+      servicesSub:"ثلاثة أبعاد — أثر متكامل",
+      contactSub:"لنبدأ رحلة التحول",
+      bottomCtaTitle:"جاهز للبدء؟",
+      bottomCtaText:"احكِ لنا أين تقف اليوم — وسنقترح خارطة طريق عملية تساعدك على التقدّم.",
+      bottomBtn1Text:"ابدأ رحلة التحول",
+      bottomBtn2Text:"استكشف الخدمات",
+      pageAboutBullets:["تحول حقيقي وليس حلولًا مؤقتة","منهجية واضحة وتنفيذ عملي","معايير عالية مع سرعة إنجاز","عائد استثمار وكفاءة وامتثال ونمو مستدام"],
+      aboutBullets:["الاستشارات المالية والحلول المتقدمة","تحسين الكفاءة الإدارية والتشغيلية","تطوير الأعمال واستراتيجيات النمو","تنفيذ مستدام بأثر قابل للقياس","خبرة إقليمية بالقطاعات كثيفة الأصول"]
     }
   };
+
   function setMeta(name, content){
     let el=document.querySelector(`meta[name="${name}"]`);
     if(!el){ el=document.createElement("meta"); el.setAttribute("name",name); document.head.appendChild(el); }
@@ -1615,30 +1664,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       footSub:"للاستشارات وحلول الأعمال",
       copyText:"© Future Dimensions — جميع الحقوق محفوظة.",
       fHome:"الرئيسية", fAbout:"من نحن", fServices:"الخدمات", fTeam:"فريق العمل", fCareers:"التوظيف", fContact:"تواصل معنا"
-    
-      // Contact + Careers + Methodology steps
-      contactInfoTitle:"معلومات التواصل",
-      contactInfoDesc:"تواصل معنا عبر القنوات التالية — نرد بسرعة.",
-      contactInfoEmailLabel:"البريد الإلكتروني:",
-      contactInfoWebsiteLabel:"الموقع:",
-      contactInfoPhoneLabel:"الهاتف:",
-      contactInfoBtnEmail:"إيميل",
-      contactInfoBtnWebsite:"الموقع",
-      contactInfoBtnCall:"اتصال",
-
-      careersCardTitle:"الوظائف",
-      careersCardDesc:"مهتم بالانضمام؟ أرسل سيرتك الذاتية وسنتواصل معك عند توفر فرصة مناسبة.",
-      careersBtnApply:"قدّم",
-      careersBtnTeam:"فريق العمل",
-
-      step1Title:"التشخيص (1)",
-      step1Desc:"تقييم منظم للأداء الحالي، والمخاطر، والفجوات، والأسباب الجذرية.",
-      step2Title:"التصميم (2)",
-      step2Desc:"بناء خارطة طريق عملية، وسياسات، وأدوات، وأطر حوكمة متوافقة مع الأهداف.",
-      step3Title:"التنفيذ (3)",
-      step3Desc:"التنفيذ بمتابعة منضبطة، ومؤشرات أداء، وتوثيق لضمان تبنّي النتائج.",
-
-}
+    }
   };
 
   // ===== helpers =====
@@ -1712,7 +1738,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
     setText("aboutLinkGrowth", c.aboutLinkGrowth);
     setText("aboutLinkGov", c.aboutLinkGov);
     setText("aboutH3_2", c.aboutH3_2);
-    setList("aboutBullets", c.aboutList);
+    setList("aboutList", c.aboutList);
     setText("taglineLine", c.taglineLine);
 
     setText("servicesTitle", c.servicesTitle);
@@ -1823,6 +1849,20 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
     setText("pageVisionLabel2", c.pageVisionLabel2);
     setText("pageVisionLead", c.pageVisionLead);
     if(c.pageVisionBullets) setList("pageVisionBullets", c.pageVisionBullets);
+
+    // Missing sub-lines (fix partial translation)
+    setText("servicesSub", c.servicesSub);
+    setText("contactSub", c.contactSub);
+
+    // Bottom CTA panel (fix remaining English text)
+    setText("bottomCtaTitle", c.bottomCtaTitle);
+    setText("bottomCtaText", c.bottomCtaText);
+    setText("bottomBtn1Text", c.bottomBtn1Text);
+    setText("bottomBtn2Text", c.bottomBtn2Text);
+
+    // About / Page lists that were hardcoded
+    if(c.aboutBullets) setList("aboutBullets", c.aboutBullets);
+    if(c.pageAboutBullets) setList("pageAboutBullets", c.pageAboutBullets);
 
 
 
