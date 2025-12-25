@@ -3,490 +3,451 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vision & Mission | Future Dimensions</title>
-  <meta name="description" content="Future Dimensions Vision & Mission — bilingual (Arabic/English)." />
-  <link rel="canonical" href="https://www.futuredimensionsco.com/vision.html" />
-
-  <style>
-    :root{
-      --navy:#0b1322;
-      --navy2:#0f1b2d;
-
-      --gold:#D4AF37;
-      --gold2:#B8962E;
-      --gold3:#F4DE8A;
-      --champ:#F7F3E9;
-
-      --onDark:#F6F7FB;
-      --ink:#0b1322;
-
-      --radius: 18px;
-      --max: 1140px;
-
-      --shadowDeep: 0 28px 90px rgba(0,0,0,.42), 0 6px 18px rgba(0,0,0,.28);
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Kufi Arabic","Noto Sans Arabic", sans-serif;
-      color: var(--onDark);
-      background:
-        radial-gradient(1100px 700px at 12% 0%, rgba(212,175,55,.08) 0%, rgba(212,175,55,0) 58%),
-        radial-gradient(900px 600px at 98% 15%, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 55%),
-        linear-gradient(180deg, var(--navy), #060b14 70%, #04070e);
-      position:relative;
-      overflow-x:hidden;
-    }
-
-    /* NAVY watermark (more visible + 3D hint) */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:0;
-      opacity:.14;
-      background:
-        radial-gradient(1200px 800px at 65% 15%, rgba(11,19,34,.34), rgba(11,19,34,0) 62%),
-        radial-gradient(1000px 700px at 20% 78%, rgba(11,19,34,.30), rgba(11,19,34,0) 60%);
-      -webkit-mask-image: url('logo.png');
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: 65% 18%;
-      -webkit-mask-size: 720px;
-      mask-image: url('logo.png');
-      mask-repeat: no-repeat;
-      mask-position: 65% 18%;
-      mask-size: 720px;
-      filter: drop-shadow(0 14px 22px rgba(0,0,0,.28));
-    }
-    body::after{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none; z-index:0;
-      opacity:.08;
-      background: rgba(255,255,255,.10);
-      -webkit-mask-image: url('logo.png');
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: 66% 19%;
-      -webkit-mask-size: 720px;
-      mask-image: url('logo.png');
-      mask-repeat: no-repeat;
-      mask-position: 66% 19%;
-      mask-size: 720px;
-      filter: blur(.7px);
-      mix-blend-mode: overlay;
-    }
-
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px; position:relative; z-index:1;}
-
-    /* Header */
-    header{
-      position:sticky;top:0;z-index:1000;
-      backdrop-filter: blur(10px);
-      background: rgba(11,19,34,.62);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 0;
-      gap:16px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:12px;
-      min-width:240px;
-    }
-    .brand img{
-      width:42px;height:42px;object-fit:contain;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
-    }
-    .brandText{display:flex;flex-direction:column;line-height:1.1}
-    .brandText b{font-size:16px;letter-spacing:.2px}
-    .brandText small{font-size:12px;color:rgba(246,247,251,.72);font-weight:800}
-
-    .navLinks{
-      display:flex;gap:18px;align-items:center;justify-content:flex-end;
-      flex:1;
-      flex-wrap:wrap;
-    }
-    .navLinks a{
-      padding:10px 12px;
-      border-radius: 999px;
-      color: rgba(246,247,251,.92);
-      font-weight:800;
-      transition: .2s ease;
-    }
-    .navLinks a:hover{background: rgba(255,255,255,.06); transform: translateY(-1px);}
-    .navLinks .active{
-      background: rgba(212,175,55,.12);
-      border: 1px solid rgba(212,175,55,.18);
-    }
-    .langBtn{
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.06);
-      color:rgba(246,247,251,.92);
-      padding:10px 12px;border-radius:999px;
-      font-weight:900;cursor:pointer;
-    }
-    .langBtn:hover{background:rgba(255,255,255,.10)}
-
-    /* Page hero */
-    .pageHero{padding:20px 0 8px}
-    .pageHero h1{margin:0;font-weight:1000;font-size:36px}
-    .pageHero p{margin:8px 0 0;color:rgba(246,247,251,.78);font-weight:650;line-height:1.6}
-
-    /* Gold cards */
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
-    .card{
-      border-radius: var(--radius);
-      position:relative;
-      overflow:hidden;
-      color: var(--ink);
-      padding:18px;
-      background:
-        radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
-        linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
-      border:1px solid rgba(0,0,0,.12);
-      box-shadow:
-        0 28px 90px rgba(0,0,0,.42),
-        0 8px 22px rgba(0,0,0,.28),
-        inset 0 1px 0 rgba(255,255,255,.55),
-        inset 0 -18px 28px rgba(0,0,0,.12);
-      display:flex; flex-direction:column;
-      min-height: 340px;
-    }
-    .card:after{
-      content:"";
-      position:absolute;inset:0;
-      background:
-        radial-gradient(560px 240px at 18% 6%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%),
-        linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,0) 42%);
-      pointer-events:none;
-      opacity:.72;
-    }
-
-    /* Gold watermark inside card (brighter + shine + 3D hint) */
-    .goldMark{
-      position:absolute; inset:-20px;
-      pointer-events:none;
-      opacity:.16;
-      transform: rotate(-8deg);
-      background:
-        radial-gradient(220px 180px at 72% 65%, rgba(255,255,255,.60), rgba(255,255,255,0) 60%),
-        linear-gradient(135deg, rgba(244,222,138,.95), rgba(212,175,55,.95));
-      -webkit-mask-image:url('logo.png');
-      -webkit-mask-repeat:no-repeat;
-      -webkit-mask-position: 92% 78%;
-      -webkit-mask-size: 380px;
-      mask-image:url('logo.png');
-      mask-repeat:no-repeat;
-      mask-position: 92% 78%;
-      mask-size: 380px;
-      filter: drop-shadow(0 12px 18px rgba(0,0,0,.18));
-      mix-blend-mode:multiply;
-    }
-
-    .muted{color:rgba(11,22,36,.84);font-weight:800;line-height:1.65}
-    .card h2{margin:0 0 10px;font-size:22px;font-weight:1000}
-    .lead{margin:0 0 12px}
-    .list{margin:0;padding-left:18px;list-style:disc;list-style-position:outside}
-    .list li{margin:8px 0}
-    .list li::marker{color: rgba(11,19,34,.70)}
-    [dir="rtl"] .list{padding-right:18px;padding-left:0}
-
-    .quote{
-      margin-top:auto;
-      padding:12px 14px;
-      border-radius: 14px;
-      background: rgba(11,19,34,.10);
-      border: 1px solid rgba(0,0,0,.14);
-      font-weight:900;
-      color: rgba(11,19,34,.92);
-    }
-
-    /* Footer */
-    footer{
-      padding:22px 0 26px;
-      border-top:1px solid rgba(255,255,255,.08);
-      color:rgba(246,247,251,.80);
-      background: rgba(0,0,0,.18);
-      position:relative;
-      z-index:1;
-      margin-top:22px;
-    }
-    .footerGrid{
-      display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap;
-    }
-    .footerBrand{display:flex;align-items:center;gap:12px}
-    .footerBrand img{
-      width:42px;height:42px;object-fit:contain;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
-    }
-    .footerBrand b{display:block}
-    .footerBrand small{display:block;color:rgba(246,247,251,.68);font-weight:800}
-
-    .footerLinks{
-      display:flex; gap:10px; flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    [dir="rtl"] .footerLinks{justify-content:flex-start}
-    .footerLinks a{
-      padding:8px 10px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.06);
-      color:rgba(255,255,255,.88);
-      font-weight:900;
-      font-size:13px;
-    }
-    .footerLinks a:hover{background:rgba(255,255,255,.10)}
-
-    .copy{
-      color:rgba(246,247,251,.65);
-      font-weight:800;
-      font-size:13px;
-      margin-top:8px;
-      width:100%;
-    }
-
-    @media (max-width: 980px){
-      .grid2{grid-template-columns:1fr}
-      .pageHero h1{font-size:30px}
-      body::before, body::after{
-        -webkit-mask-size: 520px;
-        mask-size: 520px;
-        -webkit-mask-position: 60% 10%;
-        mask-position: 60% 10%;
-      }
-    }
-  </style>
+  <title>Future Dimensions | Vision & Mission</title>
+  <meta name="description" content="Our vision and mission define how we deliver measurable value — with excellence, governance, and actionable strategy." />
+  <style>/* --- نفس ستايل موقعك كما هو --- */
+:root{
+  --bg:#0b1322;
+  --bg2:#071022;
+  --gold:#d4af37;
+  --gold2:#f1d77a;
+  --txt:rgba(255,255,255,.92);
+  --muted:rgba(255,255,255,.7);
+  --muted2:rgba(255,255,255,.55);
+  --card:linear-gradient(180deg, rgba(241,215,122,.95), rgba(212,175,55,.85));
+  --card2:linear-gradient(180deg, rgba(241,215,122,.92), rgba(212,175,55,.82));
+  --darkCard:rgba(11,19,34,.72);
+  --line:rgba(212,175,55,.25);
+  --shadow:0 22px 60px rgba(0,0,0,.35);
+  --radius:22px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans","Helvetica Neue",sans-serif;
+  background:radial-gradient(1200px 800px at 70% 0%, rgba(212,175,55,.22), rgba(11,19,34,0) 55%),
+             radial-gradient(1000px 700px at 20% 20%, rgba(74,124,255,.12), rgba(11,19,34,0) 55%),
+             linear-gradient(180deg, var(--bg), var(--bg2));
+  color:var(--txt);
+  overflow-x:hidden;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+header{
+  position:sticky;top:0;z-index:1000;
+  backdrop-filter: blur(10px);
+  background:linear-gradient(180deg, rgba(8,14,26,.88), rgba(8,14,26,.70));
+  border-bottom:1px solid rgba(212,175,55,.18);
+}
+header.scrolled{
+  background:linear-gradient(180deg, rgba(8,14,26,.96), rgba(8,14,26,.78));
+  border-bottom:1px solid rgba(212,175,55,.26);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0}
+.brand{display:flex;align-items:center;gap:12px;min-width:260px}
+.logo{
+  width:54px;height:54px;border-radius:18px;
+  background:rgba(0,0,0,.15);
+  border:1px solid rgba(212,175,55,.30);
+  box-shadow:0 12px 28px rgba(0,0,0,.25);
+  display:grid;place-items:center;overflow:hidden;
+}
+.logo img{width:100%;height:100%;object-fit:cover}
+.brandText b{display:block;font-weight:1000;letter-spacing:.4px}
+.brandText small{color:var(--muted2);font-weight:800}
+.menu{display:flex;align-items:center;gap:2px;flex-wrap:wrap;justify-content:center}
+.menu a, .menu button{
+  color:rgba(255,255,255,.86);
+  text-decoration:none;
+  font-weight:900;
+  border:0;
+  background:transparent;
+  padding:10px 12px;
+  border-radius:14px;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.menu a:hover, .menu button:hover{background:rgba(255,255,255,.06);color:#fff}
+.menu .active{background:rgba(212,175,55,.14);border:1px solid rgba(212,175,55,.26)}
+.navRight{display:flex;align-items:center;gap:10px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:10px 14px;border-radius:14px;
+  text-decoration:none;
+  font-weight:1000;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.92);
+  cursor:pointer;
+  transition:.2s ease;
+  white-space:nowrap;
+}
+.btn:hover{background:rgba(255,255,255,.10)}
+.btn.gold{
+  background:linear-gradient(135deg, rgba(241,215,122,.95), rgba(212,175,55,.92), rgba(184,150,46,.92));
+  color:#0b1322;
+  border:1px solid rgba(0,0,0,.18);
+}
+.btn.gold:hover{filter:saturate(1.05) brightness(1.02)}
+.btn.lang{background:rgba(255,255,255,.04)}
+.burger{display:none}
+@media (max-width: 980px){
+  .menu{display:none}
+  .burger{display:inline-flex}
+}
+.dropdown{position:relative}
+.dropMenu{
+  position:absolute;top:44px;left:0;
+  min-width:260px;
+  background:linear-gradient(180deg, rgba(8,14,26,.98), rgba(8,14,26,.90));
+  border:1px solid rgba(212,175,55,.22);
+  border-radius:18px;
+  box-shadow:var(--shadow);
+  padding:10px;
+  display:none;
+}
+.dropdown.open .dropMenu{display:block}
+.dropMenu a{display:flex;justify-content:space-between;align-items:center;padding:10px 10px;border-radius:14px}
+.dropMenu a:hover{background:rgba(255,255,255,.06)}
+.chip{
+  font-size:12px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:rgba(212,175,55,.12);
+  border:1px solid rgba(212,175,55,.22);
+  color:rgba(255,255,255,.86);
+  font-weight:1000;
+}
+.mobilePanel{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  z-index:1200;
+}
+.mobilePanel.open{display:block}
+.mobileSheet{
+  position:absolute;top:0;right:0;height:100%;width:min(420px, 92vw);
+  background:linear-gradient(180deg, rgba(8,14,26,.98), rgba(8,14,26,.90));
+  border-left:1px solid rgba(212,175,55,.22);
+  padding:14px;
+}
+.mobileTop{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.mclose{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:14px;padding:8px 12px;cursor:pointer;font-weight:1000}
+.mnav a, .mnav button{
+  width:100%;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 12px;
+  border-radius:16px;
+  text-decoration:none;
+  color:rgba(255,255,255,.88);
+  font-weight:950;
+  background:transparent;
+  border:0;
+  cursor:pointer;
+}
+.mnav a:hover, .mnav button:hover{background:rgba(255,255,255,.06)}
+.mSub{display:none;padding-left:8px}
+.mSub.open{display:block}
+.mSub a{font-weight:900;color:rgba(255,255,255,.82)}
+.pageView{padding:70px 0 10px}
+.pageTop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.pageTop h2{margin:0;font-size:42px;letter-spacing:.2px}
+.backHome{color:rgba(255,255,255,.86);text-decoration:none;font-weight:1000}
+.backHome:hover{color:#fff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width: 980px){.grid2{grid-template-columns:1fr}.pageTop h2{font-size:34px}}
+.equalCards > *{height:100%}
+.card{
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid rgba(212,175,55,.26);
+  box-shadow:var(--shadow);
+}
+.cardGold{background:var(--card)}
+.cardFlex{display:flex;flex-direction:column}
+.pStrong{color:#0b1322;font-weight:900}
+.bullets{margin:12px 0 0;padding:0 0 0 20px}
+[dir="rtl"] .bullets{padding:0 20px 0 0}
+.blackBullets{color:#0b1322}
+.blackBullets li{margin:10px 0;font-weight:900}
+.footer{
+  margin-top:30px;
+  background:linear-gradient(180deg, rgba(8,14,26,.92), rgba(5,7,13,.98));
+  border-top:1px solid rgba(212,175,55,.20);
+  padding:22px 0;
+}
+.footerGrid{display:grid;grid-template-columns:1.4fr .8fr;gap:16px}
+@media (max-width:980px){.footerGrid{grid-template-columns:1fr}}
+.footerBrand{display:flex;align-items:center;gap:12px}
+.footerBrand img{width:54px;height:54px;border-radius:18px;border:1px solid rgba(212,175,55,.25);background:rgba(0,0,0,.15)}
+.footerLinks{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+@media (max-width:980px){.footerLinks{justify-content:flex-start}}
+.footerLinks a{color:rgba(255,255,255,.78);text-decoration:none;font-weight:900;padding:8px 10px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04)}
+.footerLinks a:hover{background:rgba(255,255,255,.08);color:#fff}
+.copy{color:rgba(255,255,255,.55);font-weight:900;margin-top:10px}
+</style>
 </head>
-
 <body>
 
 <header>
-  <div class="wrap">
-    <div class="nav">
-      <a class="brand" href="index.html">
-        <img src="logo.png" alt="Future Dimensions logo" />
-        <span class="brandText">
-          <b id="brandName">Future Dimensions</b>
-          <small id="brandSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
-        </span>
-      </a>
+  <div class="wrap nav">
+    <div class="brand">
+      <div class="logo">
+        <img src="logo.png" alt="Future Dimensions Logo" />
+      </div>
+      <div class="brandText">
+        <b id="brandName">FUTURE DIMENSIONS</b>
+        <small id="brandSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
+      </div>
+    </div>
 
-      <nav class="navLinks" aria-label="Primary navigation">
-        <a href="index.html" id="navHome">Home</a>
-        <a href="index.html#about" id="navAbout">About</a>
-        <a href="index.html#services" id="navServices">Services</a>
-        <a href="team.html" id="navTeam">Team</a>
-        <a href="careers.html" id="navCareers">Careers</a>
-        <a class="active" href="vision.html" id="navVision">Vision</a>
-        <a href="index.html#contact" id="navContact">Contact</a>
-      </nav>
+    <nav class="menu" aria-label="Main navigation">
+      <a href="index.html#home" id="navHome">Home</a>
+      <a href="about.html" id="navAbout">About</a>
 
-      <button class="langBtn" id="langToggle" type="button">AR</button>
+      <div class="dropdown" id="servicesDropdown">
+        <button type="button" id="navServicesBtn" aria-haspopup="true" aria-expanded="false">Services ▾</button>
+        <div class="dropMenu" role="menu" aria-label="Services menu">
+          <a href="financial.html" id="ddFinancial">Financial Dimension <span class="chip" id="chip1">Page</span></a>
+          <a href="administrative.html" id="ddAdminOps">Administrative & Operational <span class="chip" id="chip2">Page</span></a>
+          <a href="growth.html" id="ddGrowth">Growth Strategy <span class="chip" id="chip3">Page</span></a>
+        </div>
+      </div>
+
+      <a href="team.html" id="navTeam">Team</a>
+      <a href="careers.html" id="navCareers">Careers</a>
+      <a href="index.html#methodology" id="navApproach">Approach</a>
+      <a href="contact.html" id="navContact">Contact</a>
+    </nav>
+
+    <div class="navRight">
+      <button class="burger btn" id="burgerBtn" aria-label="Open menu">☰</button>
+      <button class="btn lang" id="langToggle">العربية</button>
+      <a href="contact.html" class="btn gold" id="navCta">Get a Proposal</a>
     </div>
   </div>
 </header>
 
-<main>
-  <section class="pageHero">
-    <div class="wrap">
-      <h1 id="pageTitle">Vision & Mission</h1>
-      <p id="pageSub">
-        Learn the principles that guide Future Dimensions and define our long-term direction.
-      </p>
+<div class="mobilePanel" id="mobilePanel" aria-hidden="true">
+  <div class="mobileSheet">
+    <div class="mobileTop">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="logo" style="width:44px;height:44px;border-radius:14px">
+          <img src="logo.png" alt="Logo" />
+        </div>
+        <div style="line-height:1.1">
+          <div style="font-weight:1000;color:rgba(255,255,255,.92)" id="mBrand">FUTURE DIMENSIONS</div>
+          <div style="font-weight:800;color:rgba(255,255,255,.68);font-size:12px" id="mSub">CONSULTING</div>
+        </div>
+      </div>
+      <button class="mclose" id="mCloseBtn" aria-label="Close menu">✕</button>
     </div>
-  </section>
 
-  <section>
+    <div class="mnav">
+      <a href="index.html#home" id="mHome">Home</a>
+      <a href="about.html" id="mAbout">About</a>
+
+      <button type="button" id="mServicesBtn">
+        <span id="mServicesTxt">Services</span>
+        <span>▾</span>
+      </button>
+      <div class="mSub" id="mServicesSub">
+        <a href="financial.html" id="mFin">Financial Dimension</a>
+        <a href="administrative.html" id="mAdm">Administrative & Operational</a>
+        <a href="growth.html" id="mGr">Growth Strategy</a>
+      </div>
+
+      <a href="team.html" id="mTeam">Team</a>
+      <a href="careers.html" id="mCareers">Careers</a>
+      <a href="index.html#methodology" id="mApproach">Approach</a>
+      <a href="contact.html" id="mContact">Contact</a>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+      <button class="btn lang" id="mLangToggle" style="padding:10px 14px">العربية</button>
+      <a class="btn gold" href="contact.html" id="mCta" style="padding:10px 14px;display:inline-flex;align-items:center">Get a Proposal</a>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section class="pageView" style="display:block;padding:70px 0 10px">
     <div class="wrap">
-      <div class="grid2">
-        <!-- MISSION -->
-        <div class="card">
-          <div class="goldMark" aria-hidden="true"></div>
-          <h2 id="missionTitle">Mission</h2>
-          <p class="muted lead" id="missionLead">
-            Empower organizations through high-quality professional services by:
-          </p>
-          <ul class="list muted" id="missionList">
-            <li>Delivering advanced consulting expertise tailored to complex challenges</li>
-            <li>Developing deep sector and market understanding</li>
-            <li>Designing customized strategies that generate measurable results</li>
-            <li>Ensuring effective solution implementation through ongoing support</li>
-            <li>Building strategic, trust-based long-term partnerships</li>
-          </ul>
-          <div class="quote" id="missionQuote">“From challenge to dimension — with measurable impact.”</div>
+      <div class="pageTop">
+        <a class="backHome" href="index.html" id="backLabel">← Back</a>
+        <h2><span id="pageTitle">Vision & Mission</span></h2>
+      </div>
+
+      <div class="grid2 equalCards">
+        <div class="card cardGold cardFlex">
+          <div>
+            <h3 id="visionTitle">Vision</h3>
+            <p class="pStrong" id="pageLead">Our vision and mission define how we deliver measurable value — with excellence, governance, and actionable strategy.</p>
+            <ul class="bullets blackBullets" id="visionBullets"></ul>
+          </div>
         </div>
 
-        <!-- VISION -->
-        <div class="card">
-          <div class="goldMark" aria-hidden="true"></div>
-          <h2 id="visionTitle">Vision</h2>
-          <p class="muted lead" id="visionLead">
-            To be the trusted consulting partner in the region, recognized for:
-          </p>
-          <ul class="list muted" id="visionList">
-            <li>Excellence and innovation in solution delivery</li>
-            <li>Highest professional standards aligned with international best practices</li>
-            <li>Demonstrable, positive impact on client growth and competitive position</li>
-            <li>Strategic relationships built on transparency and accountability</li>
-            <li>A working culture that fosters creativity and continuous development</li>
-          </ul>
-          <div class="quote" id="visionQuote">“Trust. Standards. Results.”</div>
+        <div class="card cardGold cardFlex">
+          <div>
+            <h3 id="missionTitle">Mission</h3>
+            <p class="pStrong" style="opacity:.0;height:0;margin:0">.</p>
+            <ul class="bullets blackBullets" id="missionBullets"></ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
 </main>
 
-<footer>
+<footer class="footer">
   <div class="wrap">
     <div class="footerGrid">
-      <div class="footerBrand">
-        <img src="logo.png" alt="Future Dimensions logo" />
-        <div>
-          <b id="footName">Future Dimensions</b>
-          <small id="footSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
+      <div>
+        <div class="footerBrand">
+          <img src="logo.png" alt="Future Dimensions Logo" />
+          <div>
+            <b id="footName">FUTURE DIMENSIONS</b>
+            <small id="footSub">FOR CONSULTING & BUSINESS SOLUTIONS</small>
+          </div>
+        </div>
+        <div class="copy" id="copyText">© Future Dimensions — All rights reserved.</div>
+      </div>
+
+      <div>
+        <div class="footerLinks" aria-label="Quick links">
+          <a href="index.html#home" id="fHome">Home</a>
+          <a href="about.html" id="fAbout">About</a>
+          <a href="index.html#services" id="fServices">Services</a>
+          <a href="team.html" id="fTeam">Team</a>
+          <a href="careers.html" id="fCareers">Careers</a>
+          <a href="contact.html" id="fContact">Contact</a>
         </div>
       </div>
-
-      <div class="footerLinks" aria-label="Footer links">
-        <a href="index.html" id="fHome">Home</a>
-        <a href="index.html#services" id="fServices">Services</a>
-        <a href="team.html" id="fTeam">Team</a>
-        <a href="careers.html" id="fCareers">Careers</a>
-        <a href="vision.html" id="fVision">Vision</a>
-        <a href="index.html#contact" id="fContact">Contact</a>
-      </div>
-
-      <div class="copy" id="copyText">© <span id="year"></span> Future Dimensions — All rights reserved.</div>
     </div>
   </div>
 </footer>
 
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  function setText(id, text){ const el=document.getElementById(id); if(el) el.textContent=text; }
-  function setHTML(id, html){ const el=document.getElementById(id); if(el) el.innerHTML=html; }
-  function setList(id, items){
-    const el=document.getElementById(id);
-    if(!el) return;
-    el.innerHTML = items.map(x => `<li>${x}</li>`).join("");
-  }
-
-  let isAR=false;
-  const toggle=document.getElementById("langToggle");
-
-  const i18n = {
+(function(){
+  const DATA = {
     en:{
-      dir:"ltr", lang:"en", toggle:"AR",
-      nav:{home:"Home", about:"About", services:"Services", team:"Team", careers:"Careers", vision:"Vision", contact:"Contact"},
-      page:{title:"Vision & Mission", sub:"Learn the principles that guide Future Dimensions and define our long-term direction."},
-      mission:{
-        title:"Mission",
-        lead:"Empower organizations through high-quality professional services by:",
-        list:[
-          "Delivering advanced consulting expertise tailored to complex challenges",
-          "Developing deep sector and market understanding",
-          "Designing customized strategies that generate measurable results",
-          "Ensuring effective solution implementation through ongoing support",
-          "Building strategic, trust-based long-term partnerships"
-        ],
-        quote:"“From challenge to dimension — with measurable impact.”"
-      },
-      vision:{
-        title:"Vision",
-        lead:"To be the trusted consulting partner in the region, recognized for:",
-        list:[
-          "Excellence and innovation in solution delivery",
-          "Highest professional standards aligned with international best practices",
-          "Demonstrable, positive impact on client growth and competitive position",
-          "Strategic relationships built on transparency and accountability",
-          "A working culture that fosters creativity and continuous development"
-        ],
-        quote:"“Trust. Standards. Results.”"
-      },
-      footer:{home:"Home", services:"Services", team:"Team", careers:"Careers", vision:"Vision", contact:"Contact",
-              copy:"© {Y} Future Dimensions — All rights reserved."}
+      title:"Vision & Mission",
+      lead:"Our vision and mission define how we deliver measurable value — with excellence, governance, and actionable strategy.",
+      back:"\u2190 Back",
+      visionLabel:"Vision",
+      missionLabel:"Mission",
+      vision:[
+        "Excellence and innovation in solution delivery",
+        "Highest professional standards aligned with international best practices",
+        "Demonstrable positive impact on client growth and competitive position",
+        "Strategic relationships built on transparency and accountability",
+        "A culture that fosters creativity and continuous development"
+      ],
+      mission:[
+        "Delivering advanced consulting expertise tailored to complex challenges",
+        "Developing deep sector and market understanding",
+        "Designing customized strategies that generate measurable results",
+        "Ensuring effective solution implementation through ongoing support",
+        "Building strategic, trust-based long-term partnerships"
+      ]
     },
     ar:{
-      dir:"rtl", lang:"ar", toggle:"EN",
-      nav:{home:"الرئيسية", about:"من نحن", services:"خدماتنا", team:"فريق العمل", careers:"التوظيف", vision:"الرؤية والرسالة", contact:"تواصل معنا"},
-      page:{title:"الرؤية والرسالة", sub:"تعرف على المبادئ التي تقود Future Dimensions وتحدد اتجاهنا طويل المدى."},
-      mission:{
-        title:"الرسالة",
-        lead:"تمكين المؤسسات عبر خدمات مهنية عالية الجودة من خلال:",
-        list:[
-          "تقديم خبرات استشارية متقدمة تناسب التحديات المعقدة",
-          "تطوير فهم عميق للقطاعات والأسواق",
-          "تصميم استراتيجيات مخصصة بنتائج قابلة للقياس",
-          "ضمان تطبيق الحلول بفاعلية عبر دعم مستمر",
-          "بناء شراكات استراتيجية طويلة الأمد قائمة على الثقة"
-        ],
-        quote:"“من التحدي إلى بُعد — بأثر قابل للقياس.”"
-      },
-      vision:{
-        title:"الرؤية",
-        lead:"أن نكون الشريك الاستشاري الموثوق في المنطقة، ومعترفًا بنا من خلال:",
-        list:[
-          "التميز والابتكار في تقديم الحلول",
-          "أعلى المعايير المهنية المتوافقة مع أفضل الممارسات الدولية",
-          "أثر إيجابي ملموس على نمو العملاء ومكانتهم التنافسية",
-          "علاقات استراتيجية قائمة على الشفافية والمساءلة",
-          "ثقافة عمل تعزز الإبداع والتطوير المستمر"
-        ],
-        quote:"“ثقة. معايير. نتائج.”"
-      },
-      footer:{home:"الرئيسية", services:"خدماتنا", team:"فريق العمل", careers:"التوظيف", vision:"الرؤية", contact:"تواصل معنا",
-              copy:"© {Y} Future Dimensions — جميع الحقوق محفوظة."}
+      title:"الرؤية والرسالة",
+      lead:"تحدد رؤيتنا ورسالتنا كيف نحقق قيمة قابلة للقياس — عبر التميز والحوكمة والاستراتيجية القابلة للتنفيذ.",
+      back:"عودة \u2190",
+      visionLabel:"الرؤية",
+      missionLabel:"الرسالة",
+      vision:[
+        "التميز والابتكار في تقديم الحلول",
+        "أعلى المعايير المهنية المتوافقة مع أفضل الممارسات الدولية",
+        "أثر إيجابي ملموس على نمو العملاء ومكانتهم التنافسية",
+        "علاقات استراتيجية قائمة على الشفافية والمسؤولية",
+        "ثقافة تعزز الإبداع والتطوير المستمر"
+      ],
+      mission:[
+        "تقديم خبرات استشارية متقدمة مخصصة للتحديات المعقدة",
+        "تطوير فهم عميق للقطاعات والأسواق",
+        "تصميم استراتيجيات مخصصة تحقق نتائج قابلة للقياس",
+        "ضمان تنفيذ الحلول بفعالية عبر دعم مستمر",
+        "بناء شراكات استراتيجية طويلة الأمد قائمة على الثقة"
+      ]
     }
   };
 
-  function applyLang(){
-    const pack = isAR ? i18n.ar : i18n.en;
-    document.documentElement.dir = pack.dir;
-    document.documentElement.lang = pack.lang;
-    toggle.textContent = pack.toggle;
-
-    setText("navHome", pack.nav.home);
-    setText("navAbout", pack.nav.about);
-    setText("navServices", pack.nav.services);
-    setText("navTeam", pack.nav.team);
-    setText("navCareers", pack.nav.careers);
-    setText("navVision", pack.nav.vision);
-    setText("navContact", pack.nav.contact);
-
-    setText("pageTitle", pack.page.title);
-    setText("pageSub", pack.page.sub);
-
-    setText("missionTitle", pack.mission.title);
-    setText("missionLead", pack.mission.lead);
-    setList("missionList", pack.mission.list);
-    setText("missionQuote", pack.mission.quote);
-
-    setText("visionTitle", pack.vision.title);
-    setText("visionLead", pack.vision.lead);
-    setList("visionList", pack.vision.list);
-    setText("visionQuote", pack.vision.quote);
-
-    setText("fHome", pack.footer.home);
-    setText("fServices", pack.footer.services);
-    setText("fTeam", pack.footer.team);
-    setText("fCareers", pack.footer.careers);
-    setText("fVision", pack.footer.vision);
-    setText("fContact", pack.footer.contact);
-
-    const y = new Date().getFullYear();
-    setText("copyText", pack.footer.copy.replace("{Y}", y));
+  function currentLang(){
+    const ls = (localStorage.getItem("fd_lang") || "").toLowerCase();
+    if(ls === "ar" || ls === "arabic") return "ar";
+    const docLang = (document.documentElement.lang || "").toLowerCase();
+    if(docLang.startsWith("ar")) return "ar";
+    const dir = (document.documentElement.dir || "").toLowerCase();
+    if(dir === "rtl") return "ar";
+    return "en";
   }
 
-  toggle.addEventListener("click", ()=>{ isAR=!isAR; applyLang(); });
-  applyLang();
+  function renderList(id, items){
+    const ul = document.getElementById(id);
+    if(!ul) return;
+    ul.innerHTML = items.map(x => `<li>${x}</li>`).join("");
+  }
+
+  function apply(){
+    const lang = currentLang();
+    const t = DATA[lang];
+
+    const pageTitle = document.getElementById("pageTitle");
+    const pageLead  = document.getElementById("pageLead");
+    const back      = document.getElementById("backLabel");
+    const vTitle    = document.getElementById("visionTitle");
+    const mTitle    = document.getElementById("missionTitle");
+
+    if(pageTitle) pageTitle.textContent = t.title;
+    if(pageLead)  pageLead.textContent  = t.lead;
+    if(back)      back.textContent      = t.back;
+    if(vTitle)    vTitle.textContent    = t.visionLabel;
+    if(mTitle)    mTitle.textContent    = t.missionLabel;
+
+    renderList("visionBullets", t.vision);
+    renderList("missionBullets", t.mission);
+
+    if(lang === "ar"){
+      document.documentElement.dir = "rtl";
+      document.documentElement.lang = "ar";
+    } else {
+      document.documentElement.dir = "ltr";
+      document.documentElement.lang = "en";
+    }
+  }
+
+  window.addEventListener("storage", apply);
+  apply();
+})();
+</script>
+
+<script>
+  // Basic mobile open/close (keeps your existing look)
+  const mobilePanel = document.getElementById("mobilePanel");
+  const burgerBtn = document.getElementById("burgerBtn");
+  const mCloseBtn = document.getElementById("mCloseBtn");
+  function openMobile(){ if(mobilePanel){ mobilePanel.classList.add("open"); mobilePanel.setAttribute("aria-hidden","false"); } }
+  function closeMobile(){ if(mobilePanel){ mobilePanel.classList.remove("open"); mobilePanel.setAttribute("aria-hidden","true"); } }
+  if(burgerBtn) burgerBtn.addEventListener("click",(e)=>{e.stopPropagation(); openMobile();});
+  if(mCloseBtn) mCloseBtn.addEventListener("click",closeMobile);
+  if(mobilePanel) mobilePanel.addEventListener("click",(e)=>{ if(e.target === mobilePanel) closeMobile(); });
+
+  // Dropdown
+  const dd = document.getElementById("servicesDropdown");
+  const ddBtn = document.getElementById("navServicesBtn");
+  if(dd && ddBtn){
+    ddBtn.addEventListener("click",(e)=>{
+      e.stopPropagation();
+      dd.classList.toggle("open");
+      ddBtn.setAttribute("aria-expanded", dd.classList.contains("open") ? "true" : "false");
+    });
+    document.addEventListener("click",()=> {
+      dd.classList.remove("open");
+      ddBtn.setAttribute("aria-expanded","false");
+    });
+  }
 </script>
 
 </body>
