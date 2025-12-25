@@ -730,7 +730,8 @@
 /* === Single-file pages routing === */
 .pageView{display:none;padding:70px 0 10px}
 body[data-page="home"] .pageView{display:none;}
-body[data-page]:not([data-page="home"]) main{display:none;}
+body[data-page]:not([data-page="home"]) main{display:block;}
+body[data-page]:not([data-page="home"]) main > section:not(.pageView){display:none;}
 body[data-page="about"] .pageView[data-page="about"]{display:block;}
 body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 .pageTop{display:flex;align-items:center;gap:14px;margin-bottom:18px}
@@ -893,7 +894,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 
           <div class="cardActions">
             <a class="slink primary" href="?page=about" id="aboutMoreBtn">
-              <span class="ic"></span><span>More</span>
+              <span class="ic"></span><span id="aboutMoreLabel">More</span>
             </a>
           </div>
         </div>
@@ -908,15 +909,15 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 
             <div class="vmMini">
               <div class="vmBlock">
-                <b>Mission</b>
-                <p>
+                <b id="vmMissionLabel">Mission</b>
+                <p id="vmMissionText">
                   Empower organizations through high‑quality professional services by delivering tailored expertise, designing
                   customized strategies, and supporting implementation.
                 </p>
               </div>
               <div class="vmBlock">
-                <b>Vision</b>
-                <p>
+                <b id="vmVisionLabel">Vision</b>
+                <p id="vmVisionText">
                   To be the trusted consulting partner in the region—recognized for innovation, international standards, and
                   measurable positive impact.
                 </p>
@@ -926,7 +927,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 
           <div class="cardActions">
             <a class="slink primary" href="?page=vision" id="vmMoreBtn">
-              <span class="ic"></span><span>More</span>
+              <span class="ic"></span><span id="vmMoreLabel">More</span>
             </a>
           </div>
         </div>
@@ -949,7 +950,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
             <p id="finDesc" class="pStrong">
               Comprehensive diagnostics, profitability improvement, IFRS support, and audit &amp; risk assessment.
             </p>
-            <ul class="bullets blackBullets">
+            <ul class="bullets blackBullets" id="finBullets">
               <li>Comprehensive Financial Diagnostics &amp; Performance Analysis</li>
               <li>Profitability Improvement &amp; Cost Optimization</li>
               <li>ROI Enhancement &amp; Shareholder Value Maximization</li>
@@ -958,7 +959,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
             </ul>
           </div>
           <div class="cardActions">
-            <a class="slink primary" href="financial.html" id="finMoreBtn"><span class="ic"></span><span>More</span></a>
+            <a class="slink primary" href="financial.html" id="finMoreBtn"><span class="ic"></span><span id="finMoreLabel">More</span></a>
           </div>
         </div>
 
@@ -968,7 +969,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
             <p id="adDesc" class="pStrong">
               Execution excellence, governance frameworks, and compliance structures.
             </p>
-            <ul class="bullets blackBullets">
+            <ul class="bullets blackBullets" id="admBullets">
               <li>Business Strategy Development &amp; Execution</li>
               <li>Process Improvement &amp; Operational Efficiency</li>
               <li>Corporate Restructuring &amp; Organizational Optimization</li>
@@ -977,7 +978,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
             </ul>
           </div>
           <div class="cardActions">
-            <a class="slink primary" href="administrative.html" id="adMoreBtn"><span class="ic"></span><span>More</span></a>
+            <a class="slink primary" href="administrative.html" id="adMoreBtn"><span class="ic"></span><span id="adMoreLabel">More</span></a>
           </div>
         </div>
 
@@ -987,7 +988,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
             <p id="grDesc" class="pStrong">
               Expansion planning, market entry, and digital transformation roadmaps.
             </p>
-            <ul class="bullets blackBullets">
+            <ul class="bullets blackBullets" id="grBullets">
               <li>Expansion Planning &amp; Market Entry Strategies</li>
               <li>New Growth Opportunities Identification &amp; Validation</li>
               <li>Digital Transformation Roadmaps</li>
@@ -996,7 +997,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
             </ul>
           </div>
           <div class="cardActions">
-            <a class="slink primary" href="growth.html" id="grMoreBtn"><span class="ic"></span><span>More</span></a>
+            <a class="slink primary" href="growth.html" id="grMoreBtn"><span class="ic"></span><span id="grMoreLabel">More</span></a>
           </div>
         </div>
       </div>
@@ -1078,11 +1079,11 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
   <section class="pageView" data-page="about">
     <div class="wrap">
       <div class="pageTop">
-        <a class="backHome" href="./" data-home>← Back</a>
-        <h2>About Us</h2>
+        <a class="backHome" href="./" data-home><span id="backLabelAbout">← Back</span></a>
+        <h2><span id="pageAboutTitle">About Us</span></h2>
       </div>
       <div class="card cardGold">
-        <p class="pStrong">
+        <p class="pStrong" id="pageAboutP">
           Future Dimensions for Consulting &amp; Business Solutions operates as a strategic partner — not just a consultant —
           supporting leaders from diagnostics to implementation, with audit‑ready deliverables and measurable outcomes.
         </p>
@@ -1099,15 +1100,15 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
   <section class="pageView" data-page="vision">
     <div class="wrap">
       <div class="pageTop">
-        <a class="backHome" href="./" data-home>← Back</a>
-        <h2>Vision &amp; Mission</h2>
+        <a class="backHome" href="./" data-home><span id="backLabelVision">← Back</span></a>
+        <h2><span id="pageVisionTitle">Vision &amp; Mission</span></h2>
       </div>
 
       <div class="grid2 equalCards">
         <div class="card cardGold">
-          <h3>Mission</h3>
-          <p class="pStrong">Empower organizations through high‑quality professional services by:</p>
-          <ul class="bullets blackBullets">
+          <h3 id="pageMissionLabel">Mission</h3>
+          <p class="pStrong" id="pageMissionLead">Empower organizations through high‑quality professional services by:</p>
+          <ul class="bullets blackBullets" id="pageMissionBullets">
             <li>Delivering advanced consulting expertise tailored to complex challenges</li>
             <li>Developing deep sector and market understanding</li>
             <li>Designing customized strategies that generate measurable results</li>
@@ -1117,9 +1118,9 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
         </div>
 
         <div class="card cardGold">
-          <h3>Vision</h3>
-          <p class="pStrong">To be the trusted consulting partner in the region, recognized for:</p>
-          <ul class="bullets blackBullets">
+          <h3 id="pageVisionLabel2">Vision</h3>
+          <p class="pStrong" id="pageVisionLead">To be the trusted consulting partner in the region, recognized for:</p>
+          <ul class="bullets blackBullets" id="pageVisionBullets">
             <li>Excellence and innovation in solution delivery</li>
             <li>Highest professional standards aligned with international best practices</li>
             <li>Demonstrable positive impact on client growth and competitive position</li>
@@ -1321,6 +1322,9 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       navContact:"Contact",
       navCta:"Get a Proposal",
 
+      navTeam:"Team",
+      navCareers:"Careers",
+
       // Mobile
       mBrand:"FUTURE DIMENSIONS",
       mSub:"CONSULTING",
@@ -1369,6 +1373,48 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       aboutList:["Financial Consulting & Advisory","Administrative & Operational Optimization","Business Development & Strategic Growth","Sustainable execution with measurable impact","Regional expertise in asset‑intensive industries"],
       taglineLine:"We don’t just advise — we build dimensions that last.",
 
+
+      aboutH3:"About Us",
+      aboutP:"Future Dimensions for Consulting & Business Solutions is a strategic consulting partner that blends financial expertise, operational excellence, and growth strategy to deliver measurable impact.",
+      aboutMoreLabel:"More",
+      vmH3:"Vision & Mission",
+      vmLead:"A future where organizations operate efficiently, make confident decisions, and grow sustainably—powered by excellence, governance, and actionable strategy.",
+      vmMissionLabel:"Mission",
+      vmMissionText:"Empower organizations through high‑quality professional services by delivering tailored expertise, designing customized strategies, and supporting implementation.",
+      vmVisionLabel:"Vision",
+      vmVisionText:"To be the trusted consulting partner in the region—recognized for innovation, international standards, and measurable positive impact.",
+      vmMoreLabel:"More",
+      finMoreLabel:"More",
+      adMoreLabel:"More",
+      grMoreLabel:"More",
+      backLabel:"← Back",
+      pageAboutTitle:"About Us",
+      pageAboutP:"Future Dimensions for Consulting & Business Solutions operates as a strategic partner — not just a consultant — supporting leaders from diagnostics to implementation, with audit‑ready deliverables and measurable outcomes.",
+      pageAboutBullets:[
+        "Transformation — not temporary fixes",
+        "Clear methodology and practical execution",
+        "High standards with fast turnaround",
+        "ROI, efficiency, compliance, and sustainable growth"
+      ],
+      pageVisionTitle:"Vision & Mission",
+      pageMissionLabel:"Mission",
+      pageMissionLead:"Empower organizations through high‑quality professional services by:",
+      pageMissionBullets:[
+        "Delivering advanced consulting expertise tailored to complex challenges",
+        "Developing deep sector and market understanding",
+        "Designing customized strategies that generate measurable results",
+        "Ensuring effective solution implementation through ongoing support",
+        "Building strategic, trust‑based long‑term partnerships"
+      ],
+      pageVisionLabel2:"Vision",
+      pageVisionLead:"To be the trusted consulting partner in the region, recognized for:",
+      pageVisionBullets:[
+        "Excellence and innovation in solution delivery",
+        "Highest professional standards aligned with international best practices",
+        "Demonstrable positive impact on client growth and competitive position",
+        "Strategic relationships built on transparency and accountability",
+        "A culture that fosters creativity and continuous development"
+      ],
       servicesTitle:"Our Services",
       servicesHint:"Explore full details inside each service page.",
       finTitle:"Financial Dimension",
@@ -1416,6 +1462,9 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       navApproach:"منهجيتنا",
       navContact:"تواصل معنا",
       navCta:"اطلب عرضًا",
+
+      navTeam:"فريق العمل",
+      navCareers:"التوظيف",
 
       // Mobile
       mBrand:"Future Dimensions",
@@ -1465,6 +1514,48 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       aboutList:["الاستشارات المالية والحلول المتقدمة","تحسين الكفاءة الإدارية والتشغيلية","تطوير الأعمال واستراتيجيات النمو","تنفيذ مستدام بأثر قابل للقياس","خبرة إقليمية بالقطاعات الصناعية"],
       taglineLine:"نحن لا نقدم رأيًا فقط — نحن نبني أبعادًا تدوم.",
 
+
+      aboutH3:"من نحن",
+      aboutP:"تُعد Future Dimensions للاستشارات وحلول الأعمال شريكًا استراتيجيًا يجمع بين الخبرة المالية والتميز التشغيلي واستراتيجية النمو لتحقيق أثرٍ قابلٍ للقياس.",
+      aboutMoreLabel:"المزيد",
+      vmH3:"الرؤية والرسالة",
+      vmLead:"مستقبل تعمل فيه المؤسسات بكفاءة، وتتخذ قرارات واثقة، وتنمو بشكل مستدام—مدعومًا بالتميز والحوكمة والاستراتيجية القابلة للتنفيذ.",
+      vmMissionLabel:"الرسالة",
+      vmMissionText:"تمكين المؤسسات عبر خدمات احترافية عالية الجودة من خلال تقديم خبرات مخصصة، وتصميم استراتيجيات مناسبة، ودعم التنفيذ.",
+      vmVisionLabel:"الرؤية",
+      vmVisionText:"أن نكون الشريك الاستشاري الموثوق في المنطقة—معترفًا بنا للابتكار والمعايير الدولية والأثر الإيجابي القابل للقياس.",
+      vmMoreLabel:"المزيد",
+      finMoreLabel:"المزيد",
+      adMoreLabel:"المزيد",
+      grMoreLabel:"المزيد",
+      backLabel:"← رجوع",
+      pageAboutTitle:"من نحن",
+      pageAboutP:"تعمل Future Dimensions للاستشارات وحلول الأعمال كشريك استراتيجي — وليس مجرد مستشار — لدعم القيادات من التشخيص حتى التنفيذ، بمخرجات موثقة وجاهزة للمراجعة ونتائج قابلة للقياس.",
+      pageAboutBullets:[
+        "تحول حقيقي وليس حلولًا مؤقتة",
+        "منهجية واضحة وتنفيذ عملي",
+        "معايير عالية مع سرعة إنجاز",
+        "عائد استثمار وكفاءة وامتثال ونمو مستدام"
+      ],
+      pageVisionTitle:"الرؤية والرسالة",
+      pageMissionLabel:"الرسالة",
+      pageMissionLead:"تمكين المؤسسات عبر خدمات احترافية عالية الجودة من خلال:",
+      pageMissionBullets:[
+        "تقديم خبرات استشارية متقدمة تناسب التحديات المعقدة",
+        "بناء فهم عميق للقطاع والسوق",
+        "تصميم استراتيجيات مخصصة تحقق نتائج قابلة للقياس",
+        "ضمان تنفيذ الحلول بفعالية عبر دعم مستمر",
+        "بناء شراكات طويلة الأمد قائمة على الثقة"
+      ],
+      pageVisionLabel2:"الرؤية",
+      pageVisionLead:"أن نكون الشريك الاستشاري الموثوق في المنطقة، معترفًا بنا لـ:",
+      pageVisionBullets:[
+        "التميز والابتكار في تقديم الحلول",
+        "أعلى المعايير المهنية المتوافقة مع أفضل الممارسات الدولية",
+        "أثر إيجابي ملموس على نمو العملاء ومكانتهم التنافسية",
+        "علاقات استراتيجية قائمة على الشفافية والمسؤولية",
+        "ثقافة تعزز الإبداع والتطوير المستمر"
+      ],
       servicesTitle:"خدماتنا",
       servicesHint:"اطّلع على التفاصيل الكاملة داخل صفحات الخدمات.",
       finTitle:"البعد المالي",
@@ -1621,6 +1712,42 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
     setText("fTeam", c.fTeam);
     setText("fCareers", c.fCareers);
     setText("fContact", c.fContact);
+    // About & Vision cards (home page)
+    setText("aboutH3", c.aboutH3);
+    setText("aboutP", c.aboutP);
+    setText("vmH3", c.vmH3);
+    setText("vmLead", c.vmLead);
+    setText("vmMissionLabel", c.vmMissionLabel);
+    setText("vmMissionText", c.vmMissionText);
+    setText("vmVisionLabel", c.vmVisionLabel);
+    setText("vmVisionText", c.vmVisionText);
+
+    setText("aboutMoreLabel", c.aboutMoreLabel);
+    setText("vmMoreLabel", c.vmMoreLabel);
+    setText("finMoreLabel", c.finMoreLabel);
+    setText("adMoreLabel", c.adMoreLabel);
+    setText("grMoreLabel", c.grMoreLabel);
+
+    // Home page list
+    if(c.aboutList) setList("aboutBullets", c.aboutList);
+
+    // Internal pages (single-file routing)
+    setText("backLabelAbout", c.backLabel);
+    setText("backLabelVision", c.backLabel);
+    setText("pageAboutTitle", c.pageAboutTitle);
+    setText("pageAboutP", c.pageAboutP);
+    if(c.pageAboutBullets) setList("pageAboutBullets", c.pageAboutBullets);
+
+    setText("pageVisionTitle", c.pageVisionTitle);
+    setText("pageMissionLabel", c.pageMissionLabel);
+    setText("pageMissionLead", c.pageMissionLead);
+    if(c.pageMissionBullets) setList("pageMissionBullets", c.pageMissionBullets);
+
+    setText("pageVisionLabel2", c.pageVisionLabel2);
+    setText("pageVisionLead", c.pageVisionLead);
+    if(c.pageVisionBullets) setList("pageVisionBullets", c.pageVisionBullets);
+
+
 
     // bullets lists
     renderList("finBullets", bullets[lang].fin);
