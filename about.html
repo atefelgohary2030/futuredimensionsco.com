@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Future Dimensions | About</title>
+<link as="image" href="logo.png" rel="preload"/>
+<style>
+    :root{
+      --navy:#0d1830;
+      --navy2:#11213a;
+
+      --gold:#D4AF37;
+      --gold2:#B8962E;
+      --gold3:#F1D77A;
+
+      --teal:#2EC4B6;
+      --champ:#F5F1E6;
+
+      --onDark:#F6F7FB;
+      --ink:#000;
+
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1140px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Kufi Arabic","Noto Sans Arabic", sans-serif;
+      color: var(--onDark);
+      background:
+        radial-gradient(1100px 700px at 12% 0%, rgba(46,196,182,.18) 0%, rgba(46,196,182,0) 58%),
+        radial-gradient(900px 600px at 88% 12%, rgba(212,175,55,.14) 0%, rgba(212,175,55,0) 60%),
+        radial-gradient(800px 520px at 50% 105%, rgba(245,241,230,.09) 0%, rgba(245,241,230,0) 55%),
+        linear-gradient(180deg, #070b14 0%, var(--navy) 40%, var(--navy2) 100%);
+      overflow-x:hidden;
+    }
+
+
+    /* ✅ Subtle watermark in the navy background */
+    body::before{
+      content:"";
+      position:fixed;inset:0;
+      background-image:url('logo.png');
+      background-repeat:no-repeat;
+      background-position: 88% 18%;
+      background-size: 520px 520px;
+      opacity:.055;
+      filter: blur(.2px) drop-shadow(0 18px 28px rgba(0,0,0,.25));
+      pointer-events:none;
+      z-index:0;
+      mix-blend-mode: soft-light;
+    }
+    body::after{
+      content:"";
+      position:fixed;inset:0;
+      background-image:url('logo.png');
+      background-repeat:no-repeat;
+      background-position: 14% 74%;
+      background-size: 620px 620px;
+      opacity:.045;
+      filter: blur(.6px);
+      pointer-events:none;
+      z-index:0;
+      mix-blend-mode: overlay;
+    }
+    header, main, footer{position:relative; z-index:1;}
+
+    a{text-decoration:none;color:inherit}
+    .wrap{max-width:var(--max);margin:auto;padding:0 18px}
+
+    /* ===== Header ===== */
+    header{
+      position:sticky;top:0;z-index:100;
+      background:rgba(11,19,34,.82);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(212,175,55,.22);
+      transition:.25s ease;
+    }
+    header.scrolled{
+      background:rgba(11,19,34,.92);
+      border-bottom-color: rgba(212,175,55,.34);
+      box-shadow:0 10px 30px rgba(0,0,0,.28);
+    }
+    .nav{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:14px 0;gap:14px;flex-wrap:wrap
+    }
+
+    /* ✅ keep logo on LEFT of brand name even in RTL */
+    .brand{
+      display:flex;align-items:center;gap:14px;
+      min-width:260px;
+      direction:ltr;
+    }
+    [dir="rtl"] .brandText{direction:rtl;text-align:right;}
+    .logo{
+      width:52px;height:52px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(0,0,0,.92), rgba(0,0,0,.62));
+      border:1px solid rgba(212,175,55,.55);
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      display:flex;align-items:center;justify-content:center;
+      overflow:hidden;
+    }
+    .logo img{width:48px;height:48px;object-fit:contain}
+    .brandText b{display:block;font-weight:1000;letter-spacing:.5px;color:rgba(255,255,255,.92)}
+    .brandText small{font-weight:800;color:rgba(255,255,255,.68)}
+
+    /* Desktop Menu */
+    .menu{
+      display:flex;gap:10px;font-weight:950;flex-wrap:wrap;
+      color:rgba(255,255,255,.84);align-items:center
+    }
+    .menu a, .menu button{
+      padding:8px 10px;border-radius:10px;
+      background:transparent;border:0;color:inherit;
+      font:inherit;cursor:pointer;
+      display:inline-flex;align-items:center;gap:8px;
+    }
+    .menu a:hover, .menu button:hover{background:rgba(46,196,182,.10)}
+    .menu a.active{background:rgba(212,175,55,.14);border:1px solid rgba(212,175,55,.22)}
+
+    .navRight{display:flex;gap:10px;align-items:center}
+
+    .btn{
+      padding:10px 16px;border-radius:14px;
+      font-weight:950;border:none;cursor:pointer
+    }
+    .btn.gold{
+      background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2));
+      color:var(--ink);
+      box-shadow:var(--shadow)
+    }
+    .btn.gold:hover{filter:brightness(1.03)}
+    .btn.lang{
+      background:transparent;
+      border:1px solid rgba(255,255,255,.20);
+      color:rgba(255,255,255,.86);
+      box-shadow:none;
+    }
+    .btn.lang:hover{background:rgba(255,255,255,.08)}
+
+    /* Dropdown */
+    .dropdown{position:relative}
+    .dropMenu{
+      position:absolute;top:44px;left:0;
+      min-width:360px;
+      background:rgba(11,19,34,.96);
+      border:1px solid rgba(212,175,55,.25);
+      box-shadow:0 18px 45px rgba(0,0,0,.45);
+      border-radius:14px;
+      padding:8px;
+      display:none;
+      z-index:200;
+    }
+    .dropdown.open .dropMenu{display:block}
+    .dropMenu a{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:10px 10px;border-radius:12px;
+      color:rgba(255,255,255,.88);
+      font-weight:900;
+    }
+    .dropMenu a:hover{background:rgba(212,175,55,.14)}
+    .chip{
+      font-size:12px;font-weight:950;
+      padding:4px 8px;border-radius:999px;
+      border:1px solid rgba(11,22,36,.18);
+      color:#000;
+      background:rgba(255,255,255,.35);
+      white-space:nowrap;
+    }
+    /* keep chips readable inside the dark dropdown */
+    .dropMenu .chip{
+      border:1px solid rgba(46,196,182,.35);
+      color:rgba(255,255,255,.82);
+      background:rgba(46,196,182,.10);
+    }
+    [dir="rtl"] .dropMenu{left:auto;right:0}
+
+    /* Mobile Menu Button */
+    .burger{
+      display:none;
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.92);
+      cursor:pointer;
+      align-items:center;justify-content:center;
+      font-size:18px;font-weight:1000;
+    }
+    .burger:hover{background:rgba(255,255,255,.10)}
+
+    /* Mobile Panel */
+    .mobilePanel{
+      display:none;
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.55);
+      z-index:999;
+    }
+    .mobilePanel.open{display:block}
+    .mobileSheet{
+      position:absolute;
+      top:12px; left:12px; right:12px;
+      border-radius:22px;
+      background:rgba(11,19,34,.96);
+      border:1px solid rgba(212,175,55,.25);
+      box-shadow:0 20px 60px rgba(0,0,0,.55);
+      padding:14px;
+      backdrop-filter: blur(10px);
+    }
+    .mobileTop{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:4px 4px 10px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      margin-bottom:10px;
+    }
+    .mclose{
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.92);
+      cursor:pointer;
+      font-weight:1000;
+    }
+    .mclose:hover{background:rgba(255,255,255,.10)}
+    .mnav{
+      display:grid;
+      gap:8px;
+      padding:10px 0 0;
+    }
+    .mnav a, .mnav button{
+      width:100%;
+      text-align:left;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.90);
+      font-weight:950;
+      cursor:pointer;
+      font:inherit;
+    }
+    [dir="rtl"] .mnav a, [dir="rtl"] .mnav button{ text-align:right; }
+    .mnav a:hover, .mnav button:hover{background:rgba(255,255,255,.10)}
+    .mSub{
+      display:none;
+      padding:0 0 0;
+      margin-top:6px;
+      gap:8px;
+    }
+    .mSub.open{display:grid}
+    .mSub a{
+      background:rgba(212,175,55,.10);
+      border:1px solid rgba(212,175,55,.22);
+    }
+
+    /* ===== Hero ===== */
+    .hero{padding:64px 0 26px}
+    .heroGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+
+    .heroCard{
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(900px 480px at 10% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
+      border: 1px solid rgba(0,0,0,.14);
+      color: var(--ink);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .wm{
+      position:absolute;
+      right:-28px; bottom:-42px;
+      width:240px; height:240px;
+      opacity:.08;
+      transform:rotate(-10deg);
+      pointer-events:none;
+    }
+    [dir="rtl"] .wm{right:auto;left:-28px;transform:rotate(10deg);}
+
+    .heroTitle{margin:0 0 10px;font-size:clamp(28px, 3.4vw, 44px);line-height:1.05;font-weight:1000;color:var(--ink);letter-spacing:-.02em}
+
+
+    .heroKicker{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 14px;border-radius:999px;
+      background:rgba(212,175,55,.38);
+      border:1px solid rgba(212,175,55,.30);
+      color:#0b111a;
+      font-weight:900;
+      font-size:clamp(16px, 1.5vw, 18px);
+      letter-spacing:.02em;
+      margin:0 0 12px;
+      backdrop-filter: blur(6px);
+    }
+    .goldWord{
+      background: linear-gradient(135deg, #fff2bf 0%, var(--gold) 35%, var(--gold2) 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      text-shadow:0 10px 35px rgba(212,175,55,.18);
+    }
+    .heroSub{
+      display:inline-block;
+      font-size:clamp(18px, 2.2vw, 28px);
+      line-height:1.25;
+      font-weight:900;
+      color:rgba(255,255,255,.86);
+      letter-spacing:-.01em;
+      margin-top:8px;
+    }
+    .heroText{margin:0 0 18px;font-size:16px;color:rgba(11,19,34,.86);font-weight:850;position:relative;z-index:2}
+
+    .heroBadges{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 0;position:relative;z-index:2}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border-radius:999px;
+      background:rgba(11,19,34,.08);
+      border:1px solid rgba(11,19,34,.14);
+      font-weight:950;
+      color: rgba(11,19,34,.88);
+      font-size:13px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--teal), rgba(46,196,182,.65));
+      border:1px solid rgba(11,19,34,.22);
+    }
+
+    .ctaRowHero{
+      display:flex; gap:10px; flex-wrap:wrap;
+      position:relative; z-index:2;
+    }
+
+    .ctaBtn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 20px;
+      border-radius:16px;
+      background:linear-gradient(135deg, rgba(11,19,34,.95), rgba(19,38,66,.95));
+      color:var(--onDark);
+      font-weight:1000;
+      border:1px solid rgba(11,19,34,.18);
+      box-shadow: 0 14px 35px rgba(0,0,0,.26);
+    }
+    .ctaBtn:hover{filter:brightness(1.05)}
+    .ctaBtn .spark{
+      width:10px;height:10px;border-radius:999px;
+      background:linear-gradient(135deg,var(--gold3),var(--gold));
+      box-shadow:0 0 0 6px rgba(212,175,55,.18);
+    }
+
+    .ghostBtn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:14px 18px;
+      border-radius:16px;
+      background:rgba(11,19,34,.08);
+      border:1px solid rgba(11,19,34,.16);
+      color:#000;
+      font-weight:1000;
+    }
+    .ghostBtn:hover{background:rgba(11,19,34,.12)}
+    .ghostBtn .spark{
+      width:10px;height:10px;border-radius:999px;
+      background:linear-gradient(135deg,var(--teal), rgba(46,196,182,.65));
+      box-shadow:0 0 0 6px rgba(46,196,182,.14);
+    }
+
+    .sideCard{
+      border-radius: var(--radius);
+      border: 1px solid rgba(46,196,182,.22);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(700px 420px at 12% 0%, rgba(46,196,182,.20), rgba(46,196,182,0) 60%),
+        linear-gradient(135deg, #05070D 0%, #0B1322 60%, var(--navy2) 120%);
+      color: var(--onDark);
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .sideCard:before{
+      content:"";
+      position:absolute;inset:0;
+      background: radial-gradient(600px 300px at 20% 0%, rgba(212,175,55,.14), rgba(0,0,0,0) 60%);
+      pointer-events:none;
+    }
+    .sideCard h3{margin:0 0 10px;font-size:18px;position:relative;z-index:1}
+    .sideCard ul{margin:0;padding-left:18px;color:rgba(255,255,255,.82);font-weight:850;position:relative;z-index:1}
+    [dir="rtl"] .sideCard ul{padding-right:18px;padding-left:0}
+    .sideCard li{margin:8px 0}
+    .sideCard .mini{
+      margin-top:14px;
+      border-top:1px solid rgba(255,255,255,.12);
+      padding-top:12px;
+      color: rgba(255,255,255,.85);
+      font-weight:900;
+      font-size:13px;
+      position:relative;z-index:1
+    }
+
+    /* ===== Sections ===== */
+    section{padding:48px 0}
+    .sectionTitle{
+      display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+      margin-bottom:14px;
+    }
+    .sectionTitle h2{margin:0;font-size:26px;letter-spacing:.2px;color: rgba(255,255,255,.92);}
+    .sectionTitle p{margin:0;color:rgba(255,255,255,.68);font-weight:850;font-size:14px;}
+
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+
+    .grid2, .grid3{align-items:stretch}
+    .grid2 > .card, .grid3 > .card{display:flex;flex-direction:column}
+    .card .pushBottom{margin-top:auto}
+
+    .card{
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
+      border:1px solid rgba(0,0,0,.12);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      color: var(--ink);
+    }
+
+
+    /* ✅ Gold cards: 3D + watermark */
+    .card{
+      transform: translateZ(0);
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.30),
+        0 4px 0 rgba(255,255,255,.22) inset,
+        0 -10px 24px rgba(0,0,0,.10) inset;
+    }
+    .card:hover{
+      transform: translateY(-3px);
+      box-shadow:
+        0 26px 60px rgba(0,0,0,.34),
+        0 6px 0 rgba(255,255,255,.24) inset,
+        0 -12px 26px rgba(0,0,0,.11) inset;
+      filter:saturate(1.03);
+    }
+    .card::before{
+      content:"";
+      position:absolute;inset:-18px -18px -18px -18px;
+      background-image:url('logo.png');
+      background-repeat:no-repeat;
+      background-position: 88% 18%;
+      background-size: 220px 220px;
+      opacity:.10; /* subtle watermark */
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.20)) brightness(1.28) contrast(1.05);
+      transform: rotate(-10deg);
+      pointer-events:none;
+      mix-blend-mode: multiply;
+    }
+    .card::after{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        linear-gradient(120deg,
+          rgba(255,255,255,0) 0%,
+          rgba(255,255,255,.32) 35%,
+          rgba(255,255,255,0) 70%);
+      opacity:.18;
+      transform: translateX(-55%);
+      pointer-events:none;
+    }
+    .card:hover::after{animation: sheen 1.1s ease;}
+    @keyframes sheen{
+      from{transform: translateX(-55%);}
+      to{transform: translateX(55%);}
+    }
+
+
+    .aboutPills{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .aboutPills a{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:10px 12px;border-radius:999px;
+      font-weight:950;font-size:13px;
+      color:#000;
+      background:rgba(255,255,255,.45);
+      border:1px solid rgba(0,0,0,.10);
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+      text-decoration:none;
+    }
+    .aboutPills a:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(0,0,0,.18);background:rgba(255,255,255,.60)}
+    .aboutPills a.primary{
+      background:linear-gradient(135deg, #fff2bf 0%, var(--gold) 40%, var(--gold2) 110%);
+      border:1px solid rgba(0,0,0,.12);
+    }
+    .aboutPills a.accent{
+      background:rgba(46,196,182,.18);
+      border:1px solid rgba(46,196,182,.35);
+    }
+    .card h3{margin:0 0 10px;font-size:18px;color:#000;font-weight:1000;letter-spacing:.3px}
+    .card p{margin:0;color:#000;font-weight:850}
+    .card ul{margin:12px 0 0;padding-left:18px;color:#000;font-weight:900}
+    [dir="rtl"] .card ul{margin:12px 0 0;padding-left:18px;color:#000;font-weight:900}
+    .card li{margin:7px 0}
+
+    .serviceActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .slink{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 12px;border-radius:14px;
+      background:rgba(11,19,34,.08);
+      border:1px solid rgba(11,19,34,.14);
+      color:#000;
+      font-weight:950;
+    }
+    .slink:hover{background:rgba(11,19,34,.12)}
+    .slink .ic{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--teal),rgba(46,196,182,.65))}
+    .slink.primary{
+      background:linear-gradient(135deg, rgba(11,19,34,.95), rgba(19,38,66,.95));
+      color:var(--onDark);
+      border:1px solid rgba(11,19,34,.18);
+      box-shadow:0 14px 35px rgba(0,0,0,.22);
+    }
+    .slink.primary:hover{filter:brightness(1.06)}
+    .slink.primary .ic{background:linear-gradient(135deg,var(--gold3),var(--gold)); box-shadow:0 0 0 6px rgba(212,175,55,.18);}
+
+    .darkBand{
+      margin:22px 0 0;
+      border-radius: 22px;
+      padding:18px;
+      background:
+        radial-gradient(700px 320px at 12% 0%, rgba(245,241,230,.10), rgba(245,241,230,0) 60%),
+        linear-gradient(135deg, #05070D 0%, #0B1322 60%, var(--navy2) 120%);
+      border:1px solid rgba(212,175,55,.22);
+      box-shadow: var(--shadow);
+      color: var(--onDark);
+    }
+    .darkBand p{margin:0;color:rgba(255,255,255,.84);font-weight:850}
+
+    /* Contact */
+    .contactBox{display:grid;grid-template-columns:1.05fr .95fr;gap:14px;align-items:stretch}
+    .contactCard{
+      border-radius: var(--radius);box-shadow: var(--shadow);overflow:hidden;border:1px solid rgba(0,0,0,.12);
+      background:
+        radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, var(--champ) 0%, var(--gold3) 18%, var(--gold) 55%, var(--gold2) 125%);
+      color: var(--ink);
+    }
+    .contactInner{padding:18px}
+
+    /* Footer */
+    footer{
+      background:linear-gradient(135deg, #05070D 0%, #0B1322 60%, var(--navy2) 120%);
+      color:#ddd;
+      padding:26px 0;
+      border-top:1px solid rgba(212,175,55,.22);
+    }
+    .footerGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:start;
+    }
+    .footerBrand{display:flex;align-items:center;gap:12px}
+    .footerBrand img{
+      width:44px;height:44px;border-radius:12px;
+      border:1px solid rgba(212,175,55,.45);
+      background:#000;
+      object-fit:contain;
+    }
+    .footerBrand div b{display:block}
+    .footerBrand div small{display:block;color:rgba(255,255,255,.68);font-weight:800}
+
+    .footerLinks{
+      display:flex; gap:10px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    [dir="rtl"] .footerLinks{justify-content:flex-start}
+    .footerLinks a{
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.88);
+      font-weight:900;
+      font-size:13px;
+    }
+    .footerLinks a:hover{background:rgba(255,255,255,.10)}
+
+    .copy{
+      color:rgba(255,255,255,.65);
+      font-weight:800;
+      font-size:13px;
+      margin-top:10px;
+    }
+
+    a:focus-visible, button:focus-visible{
+      outline: 3px solid rgba(46,196,182,.70);
+      outline-offset: 3px;
+      border-radius: 14px;
+    }
+
+    @media(max-width:980px){
+      .heroGrid,.grid2,.contactBox{grid-template-columns:1fr}
+      .grid3{grid-template-columns:1fr}
+      .heroTitle{font-size:34px}
+      .brand{min-width:auto}
+      .dropMenu{min-width:280px}
+      .footerGrid{grid-template-columns:1fr}
+      .footerLinks{justify-content:flex-start}
+
+      /* Hide desktop menu on mobile, show burger */
+      .menu{display:none}
+      .burger{display:inline-flex}
+    }
+  
+    /* Services cards: keep CTA button at the bottom */
+    .servicesGrid .card{display:flex;flex-direction:column;}
+    .servicesGrid .serviceActions{margin-top:auto;padding-top:14px;}
+    /* Bottom CTA panel */
+    .ctaPanel{border-radius:var(--radius);box-shadow:var(--shadow);background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);padding:22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .ctaPanel h2{margin:0 0 6px;font-size:clamp(22px,2.1vw,30px)}
+    .ctaPanelBtns{display:flex;gap:10px;flex-wrap:wrap}
+    @media (max-width:900px){.ctaPanel{flex-direction:column;align-items:flex-start}}
+
+
+/* === Equal heights per row === */
+.equalCards{align-items:stretch;}
+.cardFlex{display:flex;flex-direction:column;}
+.cardActions{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
+.pStrong{color:#000;font-weight:900;line-height:1.55}
+.blackBullets li{color:#000}
+
+/* === Gold cards luxury + watermark === */
+.cardGold{
+  position:relative;
+  background: radial-gradient(120% 120% at 12% 10%, rgba(255,255,255,.85) 0%, rgba(255,255,255,.25) 18%, rgba(255,255,255,0) 38%),
+              linear-gradient(135deg, #f6e7a8 0%, #d8b24a 52%, #b98b1f 100%);
+  color:#000;
+  box-shadow: 0 18px 55px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.55), inset 0 -1px 0 rgba(0,0,0,.18);
+}
+.cardGold:before{
+  content:"";
+  position:absolute; inset:0;
+  background-image:url('logo.png');
+  background-repeat:no-repeat;
+  background-position: 85% 18%;
+  background-size: 320px;
+  opacity:.12;
+  filter: brightness(1.35) contrast(1.05) saturate(1.15);
+  pointer-events:none;
+}
+.cardGold:after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0) 40%, rgba(0,0,0,.10));
+  pointer-events:none;
+}
+.cardGold h3, .cardGold b{color:#000;}
+.cardGold p, .cardGold li{color:#000;}
+.vmMini{display:grid;gap:12px;margin-top:12px}
+.vmBlock b{display:block;margin-bottom:4px}
+.vmBlock p{margin:0;color:#000;font-weight:850}
+
+/* === Single-file pages routing === */
+.pageView{display:none;padding:70px 0 10px}
+body[data-page="home"] .pageView{display:none;}
+body[data-page]:not([data-page="home"]) main{display:block;}
+body[data-page]:not([data-page="home"]) main > section:not(.pageView){display:none;}
+body[data-page="about"] .pageView[data-page="about"]{display:block;}
+body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
+.pageTop{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.backHome{color:#fff;text-decoration:none;font-weight:900}
+.backHome:hover{text-decoration:underline}
+
+
+/* Layout polish: equal-height card pairs/rows */
+.grid2, .grid3 { align-items: stretch; }
+.grid2 > .card, .grid3 > .card { height: 100%; }
+
+/* Ensure gold-card text is true black (not muted/gray) */
+.cardGold, .cardGold h3, .cardGold h4, .cardGold p, .cardGold li { color: var(--ink); }
+
+</style>
+<meta content="Learn about Future Dimensions—an integrated consulting firm helping organizations improve financial performance, operations, and growth strategy." name="description"/><meta content="index, follow" name="robots"/><link href="https://www.futuredimensionsco.com/about.html" rel="canonical"/><link href="https://www.futuredimensionsco.com/" hreflang="x-default" rel="alternate"/><meta content="website" property="og:type"/><meta content="Future Dimensions" property="og:site_name"/><meta content="Future Dimensions | About" property="og:title"/><meta content="Learn about Future Dimensions—an integrated consulting firm helping organizations improve financial performance, operations, and growth strategy." property="og:description"/><meta content="https://www.futuredimensionsco.com/about.html" property="og:url"/><meta content="https://www.futuredimensionsco.com/logo.png" property="og:image"/><meta content="Future Dimensions logo" property="og:image:alt"/><meta content="summary" name="twitter:card"/><meta content="Future Dimensions | About" name="twitter:title"/><meta content="Learn about Future Dimensions—an integrated consulting firm helping organizations improve financial performance, operations, and growth strategy." name="twitter:description"/><meta content="https://www.futuredimensionsco.com/logo.png" name="twitter:image"/><script id="ld-org" type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Future Dimensions",
+  "url": "https://www.futuredimensionsco.com/",
+  "logo": "https://www.futuredimensionsco.com/logo.png"
+}</script><script id="ld-website" type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Future Dimensions",
+  "url": "https://www.futuredimensionsco.com/"
+}</script></head>
+<body>
+<header>
+<div class="wrap nav">
+<div class="brand">
+<div class="logo">
+<img alt="Future Dimensions Logo" src="logo.png"/>
+</div>
+<div class="brandText">
+<b id="brandName">FUTURE DIMENSIONS</b>
+<small id="brandSub">FOR CONSULTING &amp; BUSINESS SOLUTIONS</small>
+</div>
+</div>
+<!-- Desktop Menu -->
+<nav aria-label="Main navigation" class="menu">
+<a class="active" href="#home" id="navHome">Home</a>
+<a href="#about" id="navAbout">About</a>
+<!-- ✅ Services Dropdown -> Internal pages -->
+<div class="dropdown" id="servicesDropdown">
+<button aria-expanded="false" aria-haspopup="true" id="navServicesBtn" type="button">Services ▾</button>
+<div aria-label="Services menu" class="dropMenu" role="menu">
+<a href="financial.html" id="ddFinancial">Financial Dimension <span class="chip" id="chip1">Page</span></a>
+<a href="administrative.html" id="ddAdminOps">Administrative &amp; Operational <span class="chip" id="chip2">Page</span></a>
+<a href="growth.html" id="ddGrowth">Growth Strategy <span class="chip" id="chip3">Page</span></a>
+</div>
+</div>
+<!-- ✅ Additional pages (icons only) -->
+<a href="team.html" id="navTeam">Team</a>
+<a href="careers.html" id="navCareers">Careers</a>
+<a href="#approach" id="navApproach">Approach</a>
+<a href="#contact" id="navContact">Contact</a>
+</nav>
+<div class="navRight">
+<button aria-label="Open menu" class="burger" id="burgerBtn">☰</button>
+<button class="btn lang" id="langToggle">العربية</button>
+<a class="btn gold" href="#contact" id="navCta">Get a Proposal</a>
+</div>
+</div>
+</header>
+<div aria-hidden="true" class="mobilePanel" id="mobilePanel">
+<div class="mobileSheet">
+<div class="mobileTop">
+<div style="display:flex;align-items:center;gap:10px">
+<div class="logo" style="width:44px;height:44px;border-radius:14px">
+<img alt="Logo" src="logo.png"/>
+</div>
+<div style="line-height:1.1">
+<div id="mBrand" style="font-weight:1000;color:rgba(255,255,255,.92)">FUTURE DIMENSIONS</div>
+<div id="mSub" style="font-weight:800;color:rgba(255,255,255,.68);font-size:12px">CONSULTING</div>
+</div>
+</div>
+<button aria-label="Close menu" class="mclose" id="mCloseBtn">✕</button>
+</div>
+<div class="mnav">
+<a href="#home" id="mHome">Home</a>
+<a href="#about" id="mAbout">About</a>
+<button id="mServicesBtn" type="button">
+<span id="mServicesTxt">Services</span>
+<span>▾</span>
+</button>
+<div class="mSub" id="mServicesSub">
+<a href="financial.html" id="mFin">Financial Dimension</a>
+<a href="administrative.html" id="mAdm">Administrative &amp; Operational</a>
+<a href="growth.html" id="mGr">Growth Strategy</a>
+</div>
+<a href="team.html" id="mTeam">Team</a>
+<a href="careers.html" id="mCareers">Careers</a>
+<a href="#approach" id="mApproach">Approach</a>
+<a href="#contact" id="mContact">Contact</a>
+</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+<button class="btn lang" id="mLangToggle" style="padding:10px 14px">العربية</button>
+<a class="btn gold" href="#contact" id="mCta" style="padding:10px 14px;display:inline-flex;align-items:center">Get a Proposal</a>
+</div>
+</div>
+<main>
+<section class="pageView" data-page="about">
+<div class="wrap">
+<div class="pageTop">
+<a class="backHome" data-home="" href="index.html#home"><span id="backLabelAbout">← Back</span></a>
+<h2><span id="pageAboutTitle">About Us</span></h2>
+</div>
+<div class="card cardGold">
+<p class="pStrong" id="pageAboutP">
+          Future Dimensions for Consulting &amp; Business Solutions operates as a strategic partner — not just a consultant —
+          supporting leaders from diagnostics to implementation, with audit-ready deliverables and measurable outcomes.
+        </p>
+<ul class="bullets blackBullets" id="pageAboutBullets">
+<li>Transformation — not temporary fixes</li>
+<li>Clear methodology and practical execution</li>
+<li>High standards with fast turnaround</li>
+<li>ROI, efficiency, compliance, and sustainable growth</li>
+</ul>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="wrap">
+<div class="footerGrid">
+<div>
+<div class="footerBrand">
+<img alt="Future Dimensions Logo" src="logo.png"/>
+<div>
+<b id="footName">FUTURE DIMENSIONS</b>
+<small id="footSub">FOR CONSULTING &amp; BUSINESS SOLUTIONS</small>
+</div>
+</div>
+<div class="copy" id="copyText">© Future Dimensions — All rights reserved.</div>
+</div>
+<div>
+<div aria-label="Quick links" class="footerLinks">
+<a href="#home" id="fHome">Home</a>
+<a href="#about" id="fAbout">About</a>
+<a href="#services" id="fServices">Services</a>
+<a href="team.html" id="fTeam">Team</a>
+<a href="careers.html" id="fCareers">Careers</a>
+<a href="#contact" id="fContact">Contact</a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+
+(function(){
+  const STR = {
+    en:{
+      brandName:"FUTURE DIMENSIONS",
+      brandSub:"FOR CONSULTING & BUSINESS SOLUTIONS",
+      nav:{home:"Home",about:"About",services:"Services",team:"Team",careers:"Careers",approach:"Approach",contact:"Contact"},
+      dd:{fin:"Financial Dimension",adm:"Administrative & Operational",gr:"Growth Strategy"},
+      cta:"Get a Proposal",
+      langBtn:"العربية",
+      mBrand:"FUTURE DIMENSIONS",
+      mSub:"CONSULTING",
+      mNav:{home:"Home",about:"About",services:"Services",team:"Team",careers:"Careers",approach:"Approach",contact:"Contact"},
+      f:{home:"Home",about:"About",services:"Services",team:"Team",careers:"Careers",contact:"Contact"},
+      copy:"© Future Dimensions — All rights reserved.",
+      back:"← Back"
+    },
+    ar:{
+      brandName:"Future Dimensions",
+      brandSub:"للاستشارات وحلول الأعمال",
+      nav:{home:"الرئيسية",about:"من نحن",services:"الخدمات",team:"فريق العمل",careers:"التوظيف",approach:"منهجيتنا",contact:"تواصل معنا"},
+      dd:{fin:"البعد المالي",adm:"البعد الإداري والتشغيلي",gr:"استراتيجية النمو"},
+      cta:"اطلب عرضاً",
+      langBtn:"English",
+      mBrand:"Future Dimensions",
+      mSub:"للاستشارات",
+      mNav:{home:"الرئيسية",about:"من نحن",services:"الخدمات",team:"فريق العمل",careers:"التوظيف",approach:"منهجيتنا",contact:"تواصل معنا"},
+      f:{home:"الرئيسية",about:"من نحن",services:"الخدمات",team:"فريق العمل",careers:"التوظيف",contact:"تواصل معنا"},
+      copy:"© Future Dimensions — جميع الحقوق محفوظة.",
+      back:"عودة ←"
+    }
+  };
+
+  function getLang(){
+    return (localStorage.getItem("fd_lang") || "en") === "ar" ? "ar" : "en";
+  }
+
+  function setText(id, val){
+    const el=document.getElementById(id);
+    if(el) el.textContent = val;
+  }
+
+  function applyNav(lang){
+    const t=STR[lang];
+
+    // html dir/lang
+    document.documentElement.lang = (lang==="ar"?"ar":"en");
+    document.documentElement.dir  = (lang==="ar"?"rtl":"ltr");
+
+    setText("brandName", t.brandName);
+    setText("brandSub", t.brandSub);
+    setText("navHome", t.nav.home);
+    setText("navAbout", t.nav.about);
+    setText("navServicesBtn", t.nav.services + " ▾");
+    setText("ddFinancial", t.dd.fin);
+    setText("ddAdminOps", t.dd.adm);
+    setText("ddGrowth", t.dd.gr);
+    setText("navTeam", t.nav.team);
+    setText("navCareers", t.nav.careers);
+    setText("navApproach", t.nav.approach);
+    setText("navContact", t.nav.contact);
+    setText("navCta", t.cta);
+
+    const langBtn = document.getElementById("langToggle");
+    if(langBtn) langBtn.textContent = t.langBtn;
+
+    // mobile
+    setText("mBrand", t.mBrand);
+    setText("mSub", t.mSub);
+    setText("mHome", t.mNav.home);
+    setText("mAbout", t.mNav.about);
+    setText("mServicesTxt", t.mNav.services);
+    setText("mFin", t.dd.fin);
+    setText("mAdm", t.dd.adm);
+    setText("mGr", t.dd.gr);
+    setText("mTeam", t.mNav.team);
+    setText("mCareers", t.mNav.careers);
+    setText("mApproach", t.mNav.approach);
+    setText("mContact", t.mNav.contact);
+    setText("mCta", t.cta);
+    const mLang = document.getElementById("mLangToggle");
+    if(mLang) mLang.textContent = t.langBtn;
+
+    // footer
+    setText("footName", t.brandName);
+    setText("footSub", t.brandSub);
+    setText("copyText", t.copy);
+    setText("fHome", t.f.home);
+    setText("fAbout", t.f.about);
+    setText("fServices", t.f.services);
+    setText("fTeam", t.f.team);
+    setText("fCareers", t.f.careers);
+    setText("fContact", t.f.contact);
+
+    // back labels if present
+    const backIds = ["backLabelAbout","backLabelVision"];
+    backIds.forEach(id=>{ if(document.getElementById(id)) setText(id, t.back); });
+  }
+
+  function wireLangButtons(){
+    const btn=document.getElementById("langToggle");
+    const mbtn=document.getElementById("mLangToggle");
+    function toggle(){
+      const next = getLang()==="ar" ? "en" : "ar";
+      localStorage.setItem("fd_lang", next);
+      apply(); // apply to this page
+    }
+    if(btn) btn.addEventListener("click", toggle);
+    if(mbtn) mbtn.addEventListener("click", toggle);
+  }
+
+  function wireMobile(){
+    const mobilePanel = document.getElementById("mobilePanel");
+    const burgerBtn = document.getElementById("burgerBtn");
+    const mCloseBtn = document.getElementById("mCloseBtn");
+    function openMobile(){ if(mobilePanel){ mobilePanel.classList.add("open"); mobilePanel.setAttribute("aria-hidden","false"); } }
+    function closeMobile(){ if(mobilePanel){ mobilePanel.classList.remove("open"); mobilePanel.setAttribute("aria-hidden","true"); } }
+    if(burgerBtn) burgerBtn.addEventListener("click",(e)=>{e.stopPropagation(); openMobile();});
+    if(mCloseBtn) mCloseBtn.addEventListener("click",closeMobile);
+    if(mobilePanel) mobilePanel.addEventListener("click",(e)=>{ if(e.target === mobilePanel) closeMobile(); });
+
+    const mServicesBtn = document.getElementById("mServicesBtn");
+    const mServicesSub = document.getElementById("mServicesSub");
+    if(mServicesBtn && mServicesSub){
+      mServicesBtn.addEventListener("click",()=> mServicesSub.classList.toggle("open"));
+    }
+
+    // desktop dropdown
+    const dd = document.getElementById("servicesDropdown");
+    const ddBtn = document.getElementById("navServicesBtn");
+    if(dd && ddBtn){
+      ddBtn.addEventListener("click",(e)=>{
+        e.stopPropagation();
+        dd.classList.toggle("open");
+        ddBtn.setAttribute("aria-expanded", dd.classList.contains("open") ? "true" : "false");
+      });
+      document.addEventListener("click",()=> {
+        dd.classList.remove("open");
+        ddBtn.setAttribute("aria-expanded","false");
+      });
+    }
+  }
+
+  function apply(){
+    const lang=getLang();
+    applyNav(lang);
+    if(typeof window.applyPageContent === "function"){
+      window.applyPageContent(lang);
+    }
+  }
+
+  window.addEventListener("storage", apply);
+  wireLangButtons();
+  wireMobile();
+  apply();
+})();
+
+// About page content
+window.applyPageContent = function(lang){
+  const t = (lang==="ar") ? {
+    title:"من نحن",
+    p:"تعمل Future Dimensions للاستشارات وحلول الأعمال كشريك استراتيجي — وليس مجرد مستشار — لدعم القيادات من التشخيص وحتى التنفيذ، بمخرجات موثقة وجاهزة للمراجعة ونتائج قابلة للقياس.",
+    bullets:[
+      "تحول حقيقي — وليس حلولاً مؤقتة",
+      "منهجية واضحة وتنفيذ عملي",
+      "معايير عالية مع سرعة إنجاز",
+      "التركيز على العائد والكفاءة والحوكمة"
+    ]
+  } : {
+    title:"About Us",
+    p:"Future Dimensions for Consulting & Business Solutions operates as a strategic partner — not just a consultant — supporting leaders from diagnostics to implementation, with audit-ready deliverables and measurable outcomes.",
+    bullets:[
+      "Transformation — not temporary fixes",
+      "Clear methodology and practical execution",
+      "High standards with fast turnaround",
+      "ROI, efficiency, and governance focus"
+    ]
+  };
+
+  const pt=document.getElementById("pageAboutTitle");
+  const pp=document.getElementById("pageAboutP");
+  const ul=document.getElementById("pageAboutBullets");
+  if(pt) pt.textContent=t.title;
+  if(pp) pp.textContent=t.p;
+  if(ul) ul.innerHTML=t.bullets.map(x=>`<li>${x}</li>`).join("");
+};
+
+</script>
+</div></body>
+</html>
