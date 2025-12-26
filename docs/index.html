@@ -467,10 +467,8 @@
     .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 
-    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-
-    .grid2, .grid3, .grid4{align-items:stretch}
-    .grid2 > .card, .grid3 > .card, .grid4 > .card{display:flex;flex-direction:column}
+    .grid2, .grid3{align-items:stretch}
+    .grid2 > .card, .grid3 > .card{display:flex;flex-direction:column}
     .card .pushBottom{margin-top:auto}
 
     .card{
@@ -661,7 +659,6 @@
     @media(max-width:980px){
       .heroGrid,.grid2,.contactBox{grid-template-columns:1fr}
       .grid3{grid-template-columns:1fr}
-      .grid4{grid-template-columns:1fr}
       .heroTitle{font-size:34px}
       .brand{min-width:auto}
       .dropMenu{min-width:280px}
@@ -690,10 +687,6 @@
 .cardActions{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
 .pStrong{color:#000;font-weight:900;line-height:1.55}
 .blackBullets li{color:#000}
-
-/* Meta lines inside cards (deliverable / duration) */
-.metaLine{margin:10px 0 0;color:#000;font-weight:850;font-size:13px;line-height:1.45}
-.metaLine b{font-weight:950}
 
 /* === Gold cards luxury + watermark === */
 .cardGold{
@@ -734,18 +727,14 @@ body[data-page]:not([data-page="home"]) main{display:block;}
 body[data-page]:not([data-page="home"]) main > section:not(.pageView){display:none;}
 body[data-page="about"] .pageView[data-page="about"]{display:block;}
 body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
-
-body[data-page="financial"] .pageView[data-page="financial"]{display:block;}
-body[data-page="administrative"] .pageView[data-page="administrative"]{display:block;}
-body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
 .pageTop{display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .backHome{color:#fff;text-decoration:none;font-weight:900}
 .backHome:hover{text-decoration:underline}
 
 
 /* Layout polish: equal-height card pairs/rows */
-.grid2, .grid3, .grid4 { align-items: stretch; }
-.grid2 > .card, .grid3 > .card, .grid4 > .card { height: 100%; }
+.grid2, .grid3 { align-items: stretch; }
+.grid2 > .card, .grid3 > .card { height: 100%; }
 
 /* Ensure gold-card text is true black (not muted/gray) */
 .cardGold, .cardGold h3, .cardGold h4, .cardGold p, .cardGold li { color: var(--ink); }
@@ -775,9 +764,9 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
       <div class="dropdown" id="servicesDropdown">
         <button type="button" id="navServicesBtn" aria-haspopup="true" aria-expanded="false">Services ▾</button>
         <div class="dropMenu" role="menu" aria-label="Services menu">
-          <a href="?page=financial" id="ddFinancial">Financial Dimension <span class="chip" id="chip1">Page</span></a>
-          <a href="?page=administrative" id="ddAdminOps">Administrative & Operational <span class="chip" id="chip2">Page</span></a>
-          <a href="?page=growth" id="ddGrowth">Growth Strategy <span class="chip" id="chip3">Page</span></a>
+          <a href="financial.html" id="ddFinancial">Financial Dimension <span class="chip" id="chip1">Page</span></a>
+          <a href="administrative.html" id="ddAdminOps">Administrative & Operational <span class="chip" id="chip2">Page</span></a>
+          <a href="growth.html" id="ddGrowth">Growth Strategy <span class="chip" id="chip3">Page</span></a>
         </div>
       </div>
 
@@ -822,9 +811,9 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
         <span>▾</span>
       </button>
       <div class="mSub" id="mServicesSub">
-        <a href="?page=financial" id="mFin">Financial Dimension</a>
-        <a href="?page=administrative" id="mAdm">Administrative & Operational</a>
-        <a href="?page=growth" id="mGr">Growth Strategy</a>
+        <a href="financial.html" id="mFin">Financial Dimension</a>
+        <a href="administrative.html" id="mAdm">Administrative & Operational</a>
+        <a href="growth.html" id="mGr">Growth Strategy</a>
       </div>
 
       <a href="team.html" id="mTeam">Team</a>
@@ -958,12 +947,12 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
               <li>Comprehensive Financial Diagnostics &amp; Performance Analysis</li>
               <li>Profitability Improvement &amp; Cost Optimization</li>
               <li>ROI Enhancement &amp; Shareholder Value Maximization</li>
-              <li>Strategic Financial Planning &amp; Budgeting</li>
-              <li>Financial Restructuring &amp; Optimization</li>
+              <li>Internal Audit &amp; Risk Assessment</li>
+              <li>IFRS Advisory (IFRS 9, IAS 19) &amp; Financial Policies</li>
             </ul>
           </div>
           <div class="cardActions">
-            <a class="slink primary" href="?page=financial" id="finMoreBtn"><span class="ic"></span><span id="finMoreLabel">More</span></a>
+            <a class="slink primary" href="financial.html" id="finMoreBtn"><span class="ic"></span><span id="finMoreLabel">More</span></a>
           </div>
         </div>
 
@@ -975,14 +964,14 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
             </p>
             <ul class="bullets blackBullets" id="admBullets">
               <li>Business Strategy Development &amp; Execution</li>
-              <li>Strategic Planning &amp; Organizational Development</li>
               <li>Process Improvement &amp; Operational Efficiency</li>
               <li>Corporate Restructuring &amp; Organizational Optimization</li>
-              <li>Administrative Systems &amp; Procedures Development</li>
+              <li>Quality &amp; Risk Management Systems</li>
+              <li>Compliance with International Standards (ISO)</li>
             </ul>
           </div>
           <div class="cardActions">
-            <a class="slink primary" href="?page=administrative" id="adMoreBtn"><span class="ic"></span><span id="adMoreLabel">More</span></a>
+            <a class="slink primary" href="administrative.html" id="adMoreBtn"><span class="ic"></span><span id="adMoreLabel">More</span></a>
           </div>
         </div>
 
@@ -1001,7 +990,7 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
             </ul>
           </div>
           <div class="cardActions">
-            <a class="slink primary" href="?page=growth" id="grMoreBtn"><span class="ic"></span><span id="grMoreLabel">More</span></a>
+            <a class="slink primary" href="growth.html" id="grMoreBtn"><span class="ic"></span><span id="grMoreLabel">More</span></a>
           </div>
         </div>
       </div>
@@ -1016,31 +1005,22 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
         <p id="methHint">Our approach — practical, measurable, and execution-driven</p>
       </div>
 
-      <div class="grid4 equalCards">
+      <div class="grid3 equalCards">
         <div class="card cardGold">
-          <h3 id="step1Title">1) Challenge Diagnosis</h3>
-          <p class="pStrong" id="step1Desc">Comprehensive analysis of internal and external factors to identify root causes and opportunities.</p>
-          <div class="metaLine" id="step1Meta"><b>Deliverable:</b> Challenge Map Report<br><b>Duration:</b> 1 Week</div>
+          <h3 id="step1Title">1) Diagnose</h3>
+          <p class="pStrong" id="step1Desc">Structured assessment of current performance, risks, gaps, and root causes.</p>
         </div>
 
         <div class="card cardGold">
-          <h3 id="step2Title">2) Dimension Design</h3>
-          <p class="pStrong" id="step2Desc">Develop customized strategic solutions as a detailed blueprint for sustainable transformation and competitive advantage.</p>
-          <div class="metaLine" id="step2Meta"><b>Deliverable:</b> Dimension Design Blueprint<br><b>Duration:</b> 1–2 Weeks</div>
+          <h3 id="step2Title">2) Design</h3>
+          <p class="pStrong" id="step2Desc">Build a pragmatic roadmap, policies, tools, and governance aligned with goals.</p>
         </div>
 
         <div class="card cardGold">
-          <h3 id="step3Title">3) Guided Execution</h3>
-          <p class="pStrong" id="step3Desc">Implementation support with knowledge transfer and on‑the‑ground partnership to ensure practical, measurable impact.</p>
-          <div class="metaLine" id="step3Meta"><b>Deliverable:</b> Execution Implementation Plan<br><b>Duration:</b> 1–2 Weeks</div>
+          <h3 id="step3Title">3) Deliver</h3>
+          <p class="pStrong" id="step3Desc">Execute with disciplined follow-up, KPIs, and documentation to ensure adoption.</p>
         </div>
-
-        <div class="card cardGold">
-          <h3 id="step4Title">4) Transformation Confirmation</h3>
-          <p class="pStrong" id="step4Desc">Measure performance against KPIs and validate a sustainable growth trajectory aligned with strategic objectives.</p>
-          <div class="metaLine" id="step4Meta"><b>Deliverable:</b> Transformation KPI Dashboard<br><b>Duration:</b> 1 Week</div>
-        </div>
-</div>
+      </div>
     </div>
   </section>
 
@@ -1141,75 +1121,7 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
         </div>
       </div>
     </div>
-  
-  <section class="pageView" data-page="financial">
-    <div class="wrap">
-      <div class="pageTop">
-        <a class="backHome" href="./" data-home><span id="backLabelFinancial">← Back</span></a>
-        <h2><span id="pageFinancialTitle">Financial Dimension</span></h2>
-      </div>
-
-      <div class="card cardGold">
-        <p class="pStrong" id="pageFinancialLead">Financial diagnostics, profitability improvement, and IFRS‑focused advisory.</p>
-        <ul class="bullets blackBullets" id="pageFinancialBullets">
-          <li>Comprehensive Financial Diagnostics &amp; Performance Analysis</li>
-          <li>Profitability Improvement &amp; Cost Optimization</li>
-          <li>ROI Enhancement &amp; Shareholder Value Maximization</li>
-          <li>Strategic Financial Planning &amp; Budgeting</li>
-          <li>Financial Restructuring &amp; Optimization</li>
-          <li>Internal Audit &amp; Risk Assessment</li>
-          <li>End of Service Benefits Actuarial Valuation (IAS 19)</li>
-          <li>Expected Credit Loss Consultation (IFRS 9)</li>
-          <li>Financial Policies &amp; Procedures Development</li>
-        </ul>
-      </div>
-    </div>
   </section>
-
-  <section class="pageView" data-page="administrative">
-    <div class="wrap">
-      <div class="pageTop">
-        <a class="backHome" href="./" data-home><span id="backLabelAdministrative">← Back</span></a>
-        <h2><span id="pageAdministrativeTitle">Administrative &amp; Operational Dimension</span></h2>
-      </div>
-
-      <div class="card cardGold">
-        <p class="pStrong" id="pageAdministrativeLead">Operational excellence, governance frameworks, and compliance structures.</p>
-        <ul class="bullets blackBullets" id="pageAdministrativeBullets">
-          <li>Business Strategy Development &amp; Execution</li>
-          <li>Strategic Planning &amp; Organizational Development</li>
-          <li>Process Improvement &amp; Operational Efficiency</li>
-          <li>Corporate Restructuring &amp; Organizational Optimization</li>
-          <li>Administrative Systems &amp; Procedures Development</li>
-          <li>Quality &amp; Risk Management Systems</li>
-          <li>Effective Governance Structures &amp; Frameworks</li>
-          <li>Compliance with International Standards</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="pageView" data-page="growth">
-    <div class="wrap">
-      <div class="pageTop">
-        <a class="backHome" href="./" data-home><span id="backLabelGrowth">← Back</span></a>
-        <h2><span id="pageGrowthTitle">Growth Strategy Dimension</span></h2>
-      </div>
-
-      <div class="card cardGold">
-        <p class="pStrong" id="pageGrowthLead">Expansion planning and digital transformation roadmaps.</p>
-        <ul class="bullets blackBullets" id="pageGrowthBullets">
-          <li>Expansion Planning &amp; Market Entry Strategies</li>
-          <li>New Growth Opportunities Identification &amp; Validation</li>
-          <li>Digital Transformation Strategies &amp; Implementation Roadmaps</li>
-          <li>Technology Systems Assessment &amp; Optimization</li>
-          <li>Technology Project Management &amp; Execution</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-</section>
 <footer class="footer">
   <div class="wrap">
     <div class="footerGrid">
