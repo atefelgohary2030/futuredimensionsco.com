@@ -1596,6 +1596,31 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
       ],
       servicesTitle:"Our Services",
       servicesHint:"Explore full details inside each service page.",
+      // Methodology
+      methTitle:"Work Methodology",
+      methHint:"Our approach — practical, measurable, and execution-driven",
+      step1Title:"1) Challenge Diagnosis",
+      step1Desc:"Comprehensive analysis of current performance, risks, gaps, and external factors to identify root causes and opportunities.",
+      step1Meta:"<b>Deliverable:</b> Challenge Map Report<br><b>Duration:</b> 1 Week",
+      step2Title:"2) Dimension Design",
+      step2Desc:"Design an actionable roadmap, policies, tools, and governance aligned with goals.",
+      step2Meta:"<b>Deliverable:</b> Dimension Design Blueprint<br><b>Duration:</b> 1–2 Weeks",
+      step3Title:"3) Guided Execution",
+      step3Desc:"Disciplined execution with KPI follow-up and documentation to ensure adoption and sustainability.",
+      step3Meta:"<b>Deliverable:</b> Execution Implementation Plan<br><b>Duration:</b> 1–2 Weeks",
+      step4Title:"4) Transformation Confirmation",
+      step4Desc:"Measure performance against KPIs and validate a sustainable growth trajectory aligned with strategic objectives.",
+      step4Meta:"<b>Deliverable:</b> Transformation KPI Dashboard<br><b>Duration:</b> 1 Week",
+
+      // Service detail pages
+      backLabel:"← Back",
+      pageFinancialTitle:"Financial Dimension",
+      pageFinancialLead:"Financial diagnostics, profitability improvement, and IFRS-focused advisory.",
+      pageAdministrativeTitle:"Administrative & Operational Dimension",
+      pageAdministrativeLead:"Operational excellence, governance frameworks, and compliance structures.",
+      pageGrowthTitle:"Growth Strategy Dimension",
+      pageGrowthLead:"Expansion planning and digital transformation roadmaps.",
+
       finTitle:"Financial Dimension",
       finDesc:"Financial diagnostics, profitability improvement, and IFRS-focused advisory.",
       finPageBtnText:"Open Service Page",
@@ -1764,6 +1789,31 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
       ],
       servicesTitle:"خدماتنا",
       servicesHint:"اطّلع على التفاصيل الكاملة داخل صفحات الخدمات.",
+      // منهجية العمل
+      methTitle:"منهجية العمل",
+      methHint:"من التحدي → إلى أبعاد.",
+      step1Title:"(1) التشخيص",
+      step1Desc:"تقييم منظم للأداء الحالي، والمخاطر، والفجوات، والأسباب الجذرية.",
+      step1Meta:"<b>المخرجات:</b> تقرير خريطة التحديات<br><b>المدة:</b> أسبوع واحد",
+      step2Title:"(2) التصميم",
+      step2Desc:"تصميم خارطة طريق عملية، وسياسات وأدوات وحوكمة متوافقة مع الأهداف.",
+      step2Meta:"<b>المخرجات:</b> مخطط تصميم البعد<br><b>المدة:</b> 1–2 أسبوع",
+      step3Title:"(3) التنفيذ",
+      step3Desc:"تنفيذ منضبط مع متابعة مؤشرات أداء وتوثيق لضمان التطبيق والاستدامة.",
+      step3Meta:"<b>المخرجات:</b> خطة تنفيذ وتطبيق<br><b>المدة:</b> 1–2 أسبوع",
+      step4Title:"(4) التأكيد",
+      step4Desc:"قياس الأداء مقابل مؤشرات الأداء الرئيسية والتحقق من مسار نمو مستدام متماشيًا مع الأهداف الاستراتيجية.",
+      step4Meta:"<b>المخرجات:</b> لوحة مؤشرات التحول<br><b>المدة:</b> أسبوع واحد",
+
+      // صفحات تفاصيل الخدمات
+      backLabel:"رجوع ←",
+      pageFinancialTitle:"البعد المالي",
+      pageFinancialLead:"تشخيص مالي شامل وتحسين الربحية واستشارات تركز على المعايير الدولية للتقارير المالية (IFRS).",
+      pageAdministrativeTitle:"البعد الإداري والتشغيلي",
+      pageAdministrativeLead:"التميز التشغيلي وأطر الحوكمة وهياكل الامتثال.",
+      pageGrowthTitle:"بعد استراتيجية النمو",
+      pageGrowthLead:"التخطيط للتوسع وخارطة طريق للتحول الرقمي.",
+
       finTitle:"البعد المالي",
       finDesc:"تشخيص مالي شامل، تحسين ربحية، واستشارات متوافقة مع المعايير الدولية.",
       finPageBtnText:"افتح صفحة الخدمة",
@@ -1987,6 +2037,18 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
     setText("pageVisionLabel2", c.pageVisionLabel2);
     setText("pageVisionLead", c.pageVisionLead);
     renderList("pageVisionBullets", c.pageVisionBullets);
+    // Service detail pages
+    setText("backLabelFinancial", c.backLabel);
+    setText("backLabelAdministrative", c.backLabel);
+    setText("backLabelGrowth", c.backLabel);
+
+    setText("pageFinancialTitle", c.pageFinancialTitle);
+    setText("pageFinancialLead", c.pageFinancialLead);
+    setText("pageAdministrativeTitle", c.pageAdministrativeTitle);
+    setText("pageAdministrativeLead", c.pageAdministrativeLead);
+    setText("pageGrowthTitle", c.pageGrowthTitle);
+    setText("pageGrowthLead", c.pageGrowthLead);
+
     // Lists
     renderList("finBullets", bulletsShort[lang].fin);
     renderList("admBullets", bulletsShort[lang].adm);
