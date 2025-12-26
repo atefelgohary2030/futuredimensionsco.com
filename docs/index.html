@@ -1364,7 +1364,8 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
   }
 
   // ===== Service bullets (EN + AR) =====
-  const bullets = {
+  // ===== Service bullets (FULL for detail pages) =====
+  const bulletsFull = {
     en:{
       fin:[
         "Comprehensive Financial Diagnostics & Performance Analysis",
@@ -1399,33 +1400,83 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
       fin:[
         "تشخيص مالي شامل وتحليل الأداء",
         "تحسين الربحية وترشيد التكاليف",
-        "تعظيم العائد على الاستثمار وتعزيز قيمة المساهمين",
+        "تعظيم العائد على الاستثمار وقيمة المساهمين",
         "التخطيط المالي الاستراتيجي وإعداد الموازنات",
-        "إعادة هيكلة مالية وتحسين الكفاءة",
+        "إعادة الهيكلة المالية والتحسين",
         "المراجعة الداخلية وتقييم المخاطر",
-        "تقييم مكافآت نهاية الخدمة اكتواريًا (IAS 19)",
-        "استشارات الخسائر الائتمانية المتوقعة (IFRS 9)",
+        "تقييم مزايا نهاية الخدمة (IAS 19)",
+        "حساب خسائر الائتمان المتوقعة (IFRS 9)",
         "تطوير السياسات والإجراءات المالية"
       ],
       adm:[
-        "تطوير وتنفيذ الاستراتيجية المؤسسية",
-        "التخطيط الاستراتيجي والتطوير التنظيمي",
+        "تطوير وتنفيذ الاستراتيجية",
+        "التخطيط الاستراتيجي وتطوير الهيكل التنظيمي",
         "تحسين العمليات ورفع الكفاءة التشغيلية",
-        "إعادة الهيكلة المؤسسية وتحسين التنظيم",
-        "تطوير النظم والإجراءات الإدارية",
-        "نظم الجودة وإدارة المخاطر",
-        "بناء أطر الحوكمة والهياكل الفعالة",
-        "الامتثال للمعايير الدولية"
+        "إعادة هيكلة الشركة وتحسين التنظيم",
+        "تطوير الأنظمة والإجراءات الإدارية",
+        "أنظمة الجودة وإدارة المخاطر",
+        "هياكل وأطر الحوكمة الفعّالة",
+        "الالتزام بالمعايير الدولية"
       ],
       gr:[
-        "التوسع والدخول إلى أسواق جديدة",
+        "تخطيط التوسع واستراتيجيات دخول الأسواق",
         "تحديد فرص نمو جديدة والتحقق من جدواها",
-        "استراتيجيات التحول الرقمي وخارطة تنفيذ",
+        "استراتيجيات التحول الرقمي وخطط التنفيذ",
         "تقييم الأنظمة التقنية وتحسينها",
         "إدارة وتنفيذ المشاريع التقنية"
       ]
     }
   };
+
+  // ===== Service bullets (SHORT for home cards) =====
+  const bulletsShort = {
+    en:{
+      fin:[
+        "Comprehensive Financial Diagnostics & Performance Analysis",
+        "Profitability Improvement & Cost Optimization",
+        "ROI Enhancement & Shareholder Value Maximization",
+        "Strategic Financial Planning & Budgeting",
+        "Financial Restructuring & Optimization"
+      ],
+      adm:[
+        "Business Strategy Development & Execution",
+        "Strategic Planning & Organizational Development",
+        "Process Improvement & Operational Efficiency",
+        "Corporate Restructuring & Organizational Optimization",
+        "Administrative Systems & Procedures Development"
+      ],
+      gr:[
+        "Expansion Planning & Market Entry Strategies",
+        "New Growth Opportunities Identification & Validation",
+        "Digital Transformation Strategies & Implementation Roadmaps",
+        "Technology Systems Assessment & Optimization",
+        "Technology Project Management & Execution"
+      ]
+    },
+    ar:{
+      fin:[
+        "تشخيص مالي شامل وتحليل الأداء",
+        "تحسين الربحية وترشيد التكاليف",
+        "تعظيم العائد على الاستثمار وقيمة المساهمين",
+        "التخطيط المالي الاستراتيجي وإعداد الموازنات",
+        "إعادة الهيكلة المالية والتحسين"
+      ],
+      adm:[
+        "تطوير وتنفيذ الاستراتيجية",
+        "التخطيط الاستراتيجي وتطوير الهيكل التنظيمي",
+        "تحسين العمليات ورفع الكفاءة التشغيلية",
+        "إعادة هيكلة الشركة وتحسين التنظيم",
+        "تطوير الأنظمة والإجراءات الإدارية"
+      ],
+      gr:[
+        "تخطيط التوسع واستراتيجيات دخول الأسواق",
+        "تحديد فرص نمو جديدة والتحقق من جدواها",
+        "استراتيجيات التحول الرقمي وخطط التنفيذ",
+        "تقييم الأنظمة التقنية وتحسينها",
+        "إدارة وتنفيذ المشاريع التقنية"
+      ]
+    }
+  };;
 
   function renderList(ulId, items){
     const ul=document.getElementById(ulId);
@@ -1558,13 +1609,21 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
       approachTitle:"Our Methodology",
       approachHint:"From challenge → to dimensions.",
 
+      
       // Approach steps (cards)
       step1Title:"1) Diagnose",
       step1Desc:"Structured assessment of current performance, risks, gaps, and root causes.",
+      step1Meta:"<b>Deliverable:</b> Challenge Map Report<br><b>Duration:</b> 1 Week",
       step2Title:"2) Design",
       step2Desc:"Build a pragmatic roadmap, policies, tools, and governance aligned with goals.",
+      step2Meta:"<b>Deliverable:</b> Dimension Design Blueprint<br><b>Duration:</b> 1–2 Weeks",
       step3Title:"3) Deliver",
       step3Desc:"Execute with disciplined follow-up, KPIs, and documentation to ensure adoption.",
+      step3Meta:"<b>Deliverable:</b> Execution Implementation Plan<br><b>Duration:</b> 1–2 Weeks",
+      step4Title:"4) Transformation Confirmation",
+      step4Desc:"Measure performance against KPIs and validate a sustainable growth trajectory aligned with strategic objectives.",
+      step4Meta:"<b>Deliverable:</b> Transformation KPI Dashboard<br><b>Duration:</b> 1 Week",
+
 
       // Contact info card
       contactInfoTitle:"Contact Info",
@@ -1763,6 +1822,7 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
 
   // ===== helpers =====
   function setText(id, v){ const el=document.getElementById(id); if(el && typeof v==="string") el.textContent=v; }
+  function setHTML(id, v){ const el=document.getElementById(id); if(el && typeof v==="string") el.innerHTML=v; }
   function setList(id, items){
     const ul=document.getElementById(id); if(!ul) return;
     ul.innerHTML="";
@@ -1873,6 +1933,12 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
     setText("step2Desc", c.step2Desc);
     setText("step3Title", c.step3Title);
     setText("step3Desc", c.step3Desc);
+    setText("step4Title", c.step4Title);
+    setText("step4Desc", c.step4Desc);
+    setHTML("step1Meta", c.step1Meta);
+    setHTML("step2Meta", c.step2Meta);
+    setHTML("step3Meta", c.step3Meta);
+    setHTML("step4Meta", c.step4Meta);
 
     // Contact section
     setText("contactTitle", c.contactTitle);
@@ -1922,9 +1988,13 @@ body[data-page="growth"] .pageView[data-page="growth"]{display:block;}
     setText("pageVisionLead", c.pageVisionLead);
     renderList("pageVisionBullets", c.pageVisionBullets);
     // Lists
-    renderList("finBullets", bullets[lang].fin);
-    renderList("admBullets", bullets[lang].adm);
-    renderList("grBullets", bullets[lang].gr);
+    renderList("finBullets", bulletsShort[lang].fin);
+    renderList("admBullets", bulletsShort[lang].adm);
+    renderList("grBullets", bulletsShort[lang].gr);
+    // Full lists for service detail pages
+    renderList("pageFinancialBullets", bulletsFull[lang].fin);
+    renderList("pageAdministrativeBullets", bulletsFull[lang].adm);
+    renderList("pageGrowthBullets", bulletsFull[lang].gr);
     renderList("aboutBullets", seo[lang].aboutBullets);
     renderList("pageAboutBullets", seo[lang].pageAboutBullets);
 
