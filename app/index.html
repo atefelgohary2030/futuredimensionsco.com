@@ -81,16 +81,51 @@
     window.addEventListener("appinstalled", () => {
       setStatus("Installed successfully")
     })
-  </script const isIosStandalone = window.navigator.standalone === true
-const isStandalone = isIosStandalone || window.matchMedia("(display-mode: standalone)").matches
+ <script>
+  const isIosStandalone = window.navigator.standalone === true
+  const isStandalone = isIosStandalone || window.matchMedia("(display-mode: standalone)").matches
 
-if (isStandalone) {
-  location.replace("/")
-}
-if (window.navigator.standalone || window.matchMedia("(display-mode: standalone)").matches) {
-  location.replace("/")
-}
->
-}
+  if (isStandalone) {
+    location.replace("/")
+  }
+
+  const statusEl = document.getElementById("status")
+  const installBtn = document.getElementById("installBtn")
+  let deferredPrompt = null
+
+  function setStatus(msg) {
+    if (statusEl) statusEl.textContent = msg
+  }
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js", { scope: "/" })
+      .then(() => setStatus("Ready"))
+      .catch(() => setStatus("Service worker failed. You can still add to Home Screen on iPhone"))
+  } else {
+    setStatus("Install via Safari Share then Add to Home Screen")
+  }
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault()
+    deferredPrompt = e
+    if (installBtn) installBtn.disabled = false
+    setStatus("Install is available")
+  })
+
+  if (installBtn) {
+    installBtn.addEventListener("click", async () => {
+      if (!deferredPrompt) return
+      deferredPrompt.prompt()
+      await deferredPrompt.userChoice
+      deferredPrompt = null
+      installBtn.disabled = true
+      setStatus("Installed. Open from Home Screen")
+    })
+  }
+
+  window.addEventListener("appinstalled", () => {
+    setStatus("Installed successfully")
+  })
+</script>
 </body>
 </html>
