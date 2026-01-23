@@ -19,32 +19,68 @@
     body{font-family:system-ui,Arial,sans-serif;margin:0;padding:24px;background:#061427;color:#fff}
     .box{max-width:560px;margin:0 auto}
     .card{background:rgba(255,255,255,.08);padding:18px;border-radius:14px}
-    a.btn{display:inline-block;margin-top:14px;padding:12px 14px;border-radius:12px;background:#1ea7ff;color:#001018;text-decoration:none;font-weight:700}
+    .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+    a.btn,button.btn{display:inline-block;padding:12px 14px;border-radius:12px;background:#1ea7ff;color:#001018;text-decoration:none;font-weight:700;border:0;cursor:pointer}
+    button.btn[disabled]{opacity:.5;cursor:not-allowed}
     .hint{opacity:.85;font-size:14px;line-height:1.6}
+    .small{opacity:.75;font-size:13px;margin-top:10px}
   </style>
 </head>
 <body>
   <div class="box">
-    <h1>Install the app</h1>
+    <h1>Future Dimensions App</h1>
+
     <div class="card">
       <div class="hint">
-        Android: افتح الصفحة دي في Chrome ثم من القائمة اختار Install app أو Add to Home screen<br>
-        iPhone: افتح الصفحة دي في Safari ثم Share ثم Add to Home Screen
+        Android: افتح الصفحة دي في Chrome، لو زر Install ظهر اضغطه<br>
+        iPhone: لازم Safari ثم Share ثم Add to Home Screen
       </div>
-      <a class="btn" href="/">Open website</a>
+
+      <div class="row">
+        <button class="btn" id="installBtn" disabled>Install</button>
+        <a class="btn" href="/">Open website</a>
+      </div>
+
+      <div class="small" id="status">Preparing…</div>
     </div>
   </div>
 
   <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/sw.js", { scope: "/" })
-          .then(() => location.replace("/"))
-          .catch(() => location.replace("/"))
-      })
-    } else {
-      location.replace("/")
+    const statusEl = document.getElementById("status")
+    const installBtn = document.getElementById("installBtn")
+    let deferredPrompt = null
+
+    function setStatus(msg) {
+      statusEl.textContent = msg
     }
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js", { scope: "/" })
+        .then(() => setStatus("Ready. If Install does not appear, open Chrome menu and look for Install app"))
+        .catch(() => setStatus("Service worker failed. We will still open as a website"))
+    } else {
+      setStatus("This browser does not support install. Use Chrome on Android")
+    }
+
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault()
+      deferredPrompt = e
+      installBtn.disabled = false
+      setStatus("Install is available")
+    })
+
+    installBtn.addEventListener("click", async () => {
+      if (!deferredPrompt) return
+      deferredPrompt.prompt()
+      await deferredPrompt.userChoice
+      deferredPrompt = null
+      installBtn.disabled = true
+      setStatus("If installed, open it from your home screen")
+    })
+
+    window.addEventListener("appinstalled", () => {
+      setStatus("Installed successfully")
+    })
   </script>
 </body>
 </html>
