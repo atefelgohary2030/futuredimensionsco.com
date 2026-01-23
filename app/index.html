@@ -81,7 +81,13 @@
     window.addEventListener("appinstalled", () => {
       setStatus("Installed successfully")
     })
-  </scriptif (window.navigator.standalone || window.matchMedia("(display-mode: standalone)").matches) {
+  </script const isIosStandalone = window.navigator.standalone === true
+const isStandalone = isIosStandalone || window.matchMedia("(display-mode: standalone)").matches
+
+if (isStandalone) {
+  location.replace("/")
+}
+if (window.navigator.standalone || window.matchMedia("(display-mode: standalone)").matches) {
   location.replace("/")
 }
 >
