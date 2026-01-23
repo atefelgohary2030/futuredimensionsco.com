@@ -1,43 +1,44 @@
-const CACHE = "fd-app-shell-v1"
-
-const APP_ASSETS = [
+const CACHE_NAME = "fd-app-v1"
+const CORE_ASSETS = [
   "/app/",
   "/app/index.html",
   "/app/manifest.webmanifest",
   "/android-chrome-192x192.png",
   "/android-chrome-512x512.png",
-  "/apple-touch-icon.png",
-  "/sw.js"
+  "/apple-touch-icon.png"
 ]
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(APP_ASSETS))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS))
   )
+  self.skipWaiting()
 })
 
 self.addEventListener("activate", (event) => {
-  event.waitUntil(self.clients.claim())
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(keys.map((k) => (k === CACHE_NAME ? null : caches.delete(k))))
+    )
+  )
+  self.clients.claim()
 })
 
 self.addEventListener("fetch", (event) => {
-  const url = new URL(event.request.url)
-
-  if (url.origin !== location.origin) return
-
-  const isAppShell =
-    url.pathname.startsWith("/app/") ||
-    url.pathname === "/sw.js" ||
-    url.pathname === "/android-chrome-192x192.png" ||
-    url.pathname === "/android-chrome-512x512.png" ||
-    url.pathname === "/apple-touch-icon.png"
-
-  if (!isAppShell) {
-    event.respondWith(fetch(event.request))
-    return
-  }
+  const req = event.request
+  if (req.method !== "GET") return
 
   event.respondWith(
-    caches.match(event.request).then((cached) => cached || fetch(event.request))
+    caches.match(req).then((cached) => {
+      if (cached) return cached
+
+      return fetch(req).then((res) => {
+        const copy = res.clone()
+        if (req.url.startsWith(self.location.origin)) {
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy))
+        }
+        return res
+      }).catch(() => caches.match("/app/"))
+    })
   )
 })
