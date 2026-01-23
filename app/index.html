@@ -34,7 +34,7 @@
     <div class="card">
       <div class="hint">
         Android: افتح الصفحة دي في Chrome، لو ظهر زر Install اضغطه<br>
-        iPhone: لازم Safari ثم Share ثم Add to Home Screen
+        iPhone: افتح الموقع الرئيسي في Safari ثم Share ثم Add to Home Screen
       </div>
 
       <div class="row">
@@ -54,18 +54,11 @@
       if (statusEl) statusEl.textContent = msg
     }
 
-    // iPhone standalone check: if opened from Home Screen, jump to main site
-    const isIosStandalone = window.navigator.standalone === true
-    const isStandalone = isIosStandalone || window.matchMedia("(display-mode: standalone)").matches
-    if (isStandalone) {
-      location.replace("/")
-    }
-
     // Register service worker (mainly for Android install criteria)
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js", { scope: "/" })
         .then(() => setStatus("Ready"))
-        .catch(() => setStatus("Service worker failed. On iPhone you can still add to Home Screen"))
+        .catch(() => setStatus("Service worker failed. On iPhone use Safari Share then Add to Home Screen"))
     } else {
       setStatus("Use Safari Share then Add to Home Screen (iPhone) or Chrome Install (Android)")
     }
