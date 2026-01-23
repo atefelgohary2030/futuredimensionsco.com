@@ -82,5 +82,8 @@
       setStatus("Installed successfully")
     })
   </script>
+  if (window.navigator.standalone || window.matchMedia("(display-mode: standalone)").matches) {
+  location.replace("/")
+}
 </body>
 </html>
