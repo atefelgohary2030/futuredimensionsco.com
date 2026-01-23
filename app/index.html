@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061427">
+
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="/android-chrome-192x192.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Future Dimensions">
+
+  <title>Future Dimensions App</title>
+
+  <style>
+    body{font-family:system-ui,Arial,sans-serif;margin:0;padding:24px;background:#061427;color:#fff}
+    .box{max-width:560px;margin:0 auto}
+    .card{background:rgba(255,255,255,.08);padding:18px;border-radius:14px}
+    a.btn{display:inline-block;margin-top:14px;padding:12px 14px;border-radius:12px;background:#1ea7ff;color:#001018;text-decoration:none;font-weight:700}
+    .hint{opacity:.85;font-size:14px;line-height:1.6}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Install the app</h1>
+    <div class="card">
+      <div class="hint">
+        Android: افتح الصفحة دي في Chrome ثم من القائمة اختار Install app أو Add to Home screen<br>
+        iPhone: افتح الصفحة دي في Safari ثم Share ثم Add to Home Screen
+      </div>
+      <a class="btn" href="/">Open website</a>
+    </div>
+  </div>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js", { scope: "/" })
+          .then(() => location.replace("/"))
+          .catch(() => location.replace("/"))
+      })
+    } else {
+      location.replace("/")
+    }
+  </script>
+</body>
+</html>
