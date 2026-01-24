@@ -1890,20 +1890,32 @@ function toast(msg){
       return
     }
 
+    // Mobile browsers often block popups if window.open is called after an async await.
+    // So we open the tab NOW, then navigate it after we get the URL.
+    let w = null
+    try{ w = window.open("about:blank", "_blank") }catch(e){ w = null }
+
     const signed = await sb.storage.from("client-files").createSignedUrl(doc.storage_path, 60)
     if (signed && signed.data && signed.data.signedUrl){
-      window.open(signed.data.signedUrl, "_blank")
+      const url = signed.data.signedUrl
+      if (w){ try{ w.opener = null }catch(e){}; w.location.href = url }
+      else { window.location.href = url }
       return
     }
 
     const pub = sb.storage.from("client-files").getPublicUrl(doc.storage_path)
     if (pub && pub.data && pub.data.publicUrl){
-      window.open(pub.data.publicUrl, "_blank")
+      const url = pub.data.publicUrl
+      if (w){ try{ w.opener = null }catch(e){}; w.location.href = url }
+      else { window.location.href = url }
       return
     }
 
+    // If we opened a blank tab and failed to get a URL, close it to avoid confusion.
+    try{ if (w) w.close() }catch(e){}
     toast(sbText("مش قادر أفتح الملف. اتأكد من إعدادات Storage", "Could not open file. Check Storage settings"))
   }
+
 
   async function sbCreateTicketFromModal(){
     if (!state.authed || !state.user){
@@ -1974,19 +1986,30 @@ function toast(msg){
       return
     }
 
+    // Same mobile popup rule as documents
+    let w = null
+    try{ w = window.open("about:blank", "_blank") }catch(e){ w = null }
+
     const signed = await sb.storage.from("client-files").createSignedUrl(inv.storage_path, 60)
     if (signed && signed.data && signed.data.signedUrl){
-      window.open(signed.data.signedUrl, "_blank")
+      const url = signed.data.signedUrl
+      if (w){ try{ w.opener = null }catch(e){}; w.location.href = url }
+      else { window.location.href = url }
       return
     }
 
     const pub = sb.storage.from("client-files").getPublicUrl(inv.storage_path)
     if (pub && pub.data && pub.data.publicUrl){
-      window.open(pub.data.publicUrl, "_blank")
+      const url = pub.data.publicUrl
+      if (w){ try{ w.opener = null }catch(e){}; w.location.href = url }
+      else { window.location.href = url }
       return
     }
+
+    try{ if (w) w.close() }catch(e){}
     toast(sbText("مش قادر أفتح الفاتورة", "Could not open invoice"))
   }
+
 
 
   function render(){
