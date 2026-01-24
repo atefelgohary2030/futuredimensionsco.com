@@ -481,19 +481,7 @@ l2:#0E274A;
 
     .rtl{ direction: rtl; }
     .rtl .subbrand{ direction: rtl; }
-  
-/* Company logo */
-#brandLogo{
-  width:34px;
-  height:34px;
-  object-fit:contain;
-  border-radius:10px;
-  flex:0 0 auto;
-}
-@media (max-width:480px){
-  #brandLogo{ width:28px; height:28px; }
-}
-</style>
+  </style>
 <script>
 (function () {
   const cdns = [
@@ -529,7 +517,7 @@ l2:#0E274A;
 <div class="topbar">
 <div class="topbar-inner">
 <div class="logo">
-<div class="mark" id="mark"><img id="logoImg" src="../android-chrome-192x192.png" alt="Future Dimensions logo" onerror="this.style.display='none'; document.getElementById('logoFallbackText').style.display='inline-flex';" /><span aria-hidden="true" id="logoFallbackText" style="display:none">FD</span></div>
+<div class="mark" id="mark"><img alt="Future Dimensions logo" id="brandLogo"/><span aria-hidden="true" id="logoFallbackText">FD</span></div>
 <div style="min-width:0">
 <div class="brand" id="brand">Future Dimensions</div>
 <div class="subbrand" id="subbrand">Consulting &amp; Business Solutions</div>
@@ -2310,29 +2298,11 @@ l2:#0E274A;
 })();
 </script>
 <script>
-  // Mobile cache fix: disable and clear any existing Service Worker + caches once, then reload
-  (async () => {
-    try {
-      if (!("serviceWorker" in navigator)) return;
-      if (sessionStorage.getItem("__sw_cleared") === "1") return;
-      sessionStorage.setItem("__sw_cleared", "1");
-
-      const regs = await navigator.serviceWorker.getRegistrations();
-      await Promise.all(regs.map(r => r.unregister()));
-
-      if (window.caches && caches.keys) {
-        const keys = await caches.keys();
-        await Promise.all(keys.map(k => caches.delete(k)));
-      }
-
-      // Reload once to ensure latest index.html is fetched
-      location.reload();
-    } catch (e) {
-      // If anything fails, just continue without breaking the UI
-      console.warn("SW clear failed", e);
-    }
-  })();
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/app/sw.js", { scope: "/app/" }).catch(() => {})
+    })
+  }
 </script>
-
 </body>
 </html>
