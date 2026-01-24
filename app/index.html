@@ -507,8 +507,15 @@
   </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
+
+  // Supabase connection (paste your values)
+  const SUPABASE_URL = "PASTE_SUPABASE_PROJECT_URL_HERE"
+  const SUPABASE_ANON_KEY = "PASTE_SUPABASE_ANON_PUBLIC_KEY_HERE"
+  const sb = (window.supabase && SUPABASE_URL.startsWith("http") && SUPABASE_ANON_KEY.length > 20)
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null
+
     // Brand logo loader (works in restricted file:// WebViews)
     (function(){
       const img = document.getElementById('brandLogo');
@@ -574,319 +581,6 @@
     del(k){
       try{ localStorage.removeItem(k) }catch(e){}
     }
-  }
-
-  // Backend connection (Supabase)
-  // 1) Create a Supabase project
-  // 2) Paste your Project URL and Anon key below
-  const SUPABASE_URL = "https://mifottrhqimqzojiyytq.supabase.co"
-  const SUPABASE_ANON_KEY = "sb_publishable_nJKPr9Lk-SppxXMAwLG79g_cz2d5rir"
-  const SUPABASE_BUCKET = "client-files"
-
-  let supabaseClient = null
-  let currentUser = null
-
-  function hasSupabase(){
-    return typeof window.supabase !== "undefined"
-      && SUPABASE_URL
-      && SUPABASE_ANON_KEY
-      && !SUPABASE_URL.includes("PASTE_")
-      && !SUPABASE_ANON_KEY.includes("PASTE_")
-  }
-
-  function isLikelyPhone(v){
-    const s = (v || "").trim()
-    if (!s) return false
-    if (!/^[+]?[\d\s()\-]{7,}$/.test(s)) return false
-    const digits = s.replace(/\D/g, "")
-    return digits.length >= 7
-  }
-
-  function normalizeIdentity(input){
-    const raw = (input || "").trim()
-    if (isLikelyPhone(raw)){
-      const digits = raw.replace(/\D/g, "")
-      return { email: `phone_${digits}@fd.local`, phone: raw }
-    }
-    return { email: raw.toLowerCase(), phone: "" }
-  }
-
-  function ui(tAr, tEn){
-    return state.lang === "ar" ? tAr : tEn
-  }
-
-  async function initAuth(){
-    if (!hasSupabase()) return
-
-    try{
-      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-
-      const res = await supabaseClient.auth.getSession()
-      const session = res && res.data ? res.data.session : null
-
-      if (session && session.user){
-        currentUser = session.user
-        store.set("fd_authed", "1")
-        state.authed = true
-        await refreshAllData()
-      } else {
-        currentUser = null
-        store.set("fd_authed", "0")
-        state.authed = false
-      }
-
-      supabaseClient.auth.onAuthStateChange(async (_event, session2)=>{
-        currentUser = session2 ? session2.user : null
-        state.authed = !!currentUser
-        store.set("fd_authed", currentUser ? "1" : "0")
-        if (currentUser) await refreshAllData()
-        render()
-      })
-    }catch(_e){
-      supabaseClient = null
-      currentUser = null
-    }
-  }
-
-  async function ensureProfile(extra){
-    if (!hasSupabase() || !supabaseClient || !currentUser) return
-
-    const payload = {
-      id: currentUser.id,
-      email: currentUser.email || (extra ? extra.email : null),
-      phone: extra ? (extra.phone || null) : null,
-      updated_at: new Date().toISOString()
-    }
-
-    try{
-      await supabaseClient.from("profiles").upsert(payload, { onConflict: "id" })
-    }catch(_e){}
-  }
-
-  async function authSignIn(){
-    const user = (el("lUser").value || "").trim()
-    const pass = (el("lPass").value || "").trim()
-
-    if (!user || !pass){
-      toast(ui("من فضلك أدخل البيانات", "Please enter your details"))
-      return
-    }
-
-    if (!hasSupabase()){
-      toast(ui("الربط غير مُعد بعد, ضع بيانات Supabase داخل الكود", "Backend not configured yet, paste Supabase keys"))
-      return
-    }
-
-    const ident = normalizeIdentity(user)
-
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-      email: ident.email,
-      password: pass
-    })
-
-    if (error){
-      toast(ui("بيانات الدخول غير صحيحة", "Invalid credentials"))
-      return
-    }
-
-    currentUser = data.user
-    await ensureProfile(ident)
-    closeModal()
-    toast(tr("common.ok"))
-    setAuthed(true)
-    setPortalTab("overview")
-  }
-
-  async function authSignUp(){
-    const user = (el("lUser").value || "").trim()
-    const pass = (el("lPass").value || "").trim()
-
-    if (!user || !pass){
-      toast(ui("من فضلك أدخل البيانات", "Please enter your details"))
-      return
-    }
-
-    if (!hasSupabase()){
-      toast(ui("الربط غير مُعد بعد, ضع بيانات Supabase داخل الكود", "Backend not configured yet, paste Supabase keys"))
-      return
-    }
-
-    if (pass.length < 6){
-      toast(ui("كلمة المرور يجب أن تكون 6 أحرف على الأقل", "Password must be at least 6 characters"))
-      return
-    }
-
-    const ident = normalizeIdentity(user)
-
-    const { data, error } = await supabaseClient.auth.signUp({
-      email: ident.email,
-      password: pass
-    })
-
-    if (error){
-      toast(ui("فشل إنشاء الحساب", "Sign up failed"))
-      return
-    }
-
-    if (data && data.user){
-      currentUser = data.user
-      await ensureProfile(ident)
-    }
-
-    if (data && data.session){
-      closeModal()
-      toast(ui("تم إنشاء الحساب", "Account created"))
-      setAuthed(true)
-      setPortalTab("overview")
-      await refreshAllData()
-      render()
-      return
-    }
-
-    toast(ui("تم إنشاء الحساب, راجع الإيميل للتفعيل إن لزم", "Account created, check email if confirmation is required"))
-  }
-
-  async function authSignOut(){
-    try{
-      if (hasSupabase() && supabaseClient){
-        await supabaseClient.auth.signOut()
-      }
-    }catch(_e){}
-    currentUser = null
-    setAuthed(false)
-  }
-
-  function safeName(s){
-    return (s || "").toString().replace(/[^a-zA-Z0-9._-]/g, "_")
-  }
-
-  function isoDate(v){
-    try{
-      return new Date(v).toISOString().slice(0, 10)
-    }catch(_e){
-      return ""
-    }
-  }
-
-  async function refreshDocs(){
-    if (!hasSupabase() || !supabaseClient || !currentUser) return
-    const res = await supabaseClient
-      .from("documents")
-      .select("id,type,name_en,name_ar,created_at,storage_path")
-      .eq("user_id", currentUser.id)
-      .order("created_at", { ascending: false })
-
-    const rows = res && res.data ? res.data : []
-
-    demo.docs = rows.map(r => ({
-      id: r.id,
-      type: r.type || "other",
-      name: { en: r.name_en || "Document", ar: r.name_ar || "مستند" },
-      date: isoDate(r.created_at),
-      storage_path: r.storage_path
-    }))
-  }
-
-  async function refreshTickets(){
-    if (!hasSupabase() || !supabaseClient || !currentUser) return
-    const res = await supabaseClient
-      .from("tickets")
-      .select("id,subject,details,status,created_at,category")
-      .eq("user_id", currentUser.id)
-      .order("created_at", { ascending: false })
-
-    const rows = res && res.data ? res.data : []
-
-    demo.tickets = rows.map(r => ({
-      id: r.id,
-      subject: r.subject,
-      cat: r.category || "",
-      status: r.status || "open",
-      date: isoDate(r.created_at),
-      details: r.details || ""
-    }))
-  }
-
-  async function refreshInvoices(){
-    if (!hasSupabase() || !supabaseClient || !currentUser) return
-    const res = await supabaseClient
-      .from("invoices")
-      .select("id,amount,status,due_date,storage_path")
-      .eq("user_id", currentUser.id)
-      .order("due_date", { ascending: false })
-
-    const rows = res && res.data ? res.data : []
-
-    demo.invoices = rows.map(r => ({
-      id: r.id,
-      amount: r.amount,
-      status: r.status || "unpaid",
-      due: r.due_date || "",
-      storage_path: r.storage_path
-    }))
-  }
-
-  async function refreshAllData(){
-    await refreshDocs()
-    await refreshTickets()
-    await refreshInvoices()
-  }
-
-  async function uploadDocument(file){
-    if (!hasSupabase() || !supabaseClient || !currentUser) return { ok: false }
-
-    const path = `${currentUser.id}/${Date.now()}_${safeName(file.name)}`
-    const up = await supabaseClient.storage.from(SUPABASE_BUCKET).upload(path, file, { upsert: false })
-
-    if (up && up.error) return { ok: false, error: up.error }
-
-    const row = {
-      user_id: currentUser.id,
-      type: "other",
-      name_en: file.name,
-      name_ar: file.name,
-      storage_path: path,
-      created_at: new Date().toISOString()
-    }
-
-    const ins = await supabaseClient.from("documents").insert(row)
-    if (ins && ins.error) return { ok: false, error: ins.error }
-
-    return { ok: true }
-  }
-
-  async function openStoredFile(storagePath){
-    if (!hasSupabase() || !supabaseClient || !storagePath){
-      toast(tr("common.demo"))
-      return
-    }
-
-    const signed = await supabaseClient.storage.from(SUPABASE_BUCKET).createSignedUrl(storagePath, 60)
-
-    if (signed && signed.data && signed.data.signedUrl){
-      window.open(signed.data.signedUrl, "_blank")
-      return
-    }
-
-    toast(ui("لا يمكن تحميل الملف حاليا", "Unable to download right now"))
-  }
-
-  async function createTicket(subject, category, details){
-    if (!hasSupabase() || !supabaseClient || !currentUser) return { ok: false }
-
-    const row = {
-      user_id: currentUser.id,
-      subject,
-      category,
-      details,
-      status: "open",
-      created_at: new Date().toISOString()
-    }
-
-    const ins = await supabaseClient.from("tickets").insert(row)
-    if (ins && ins.error) return { ok: false, error: ins.error }
-
-    return { ok: true }
   }
 
   const dict = {
@@ -1192,17 +886,22 @@
         ok:"حسنا",
         close:"إغلاق",
         back:"رجوع",
-        demo:"إجراء تجريبي، اربطه لاحقا بالنظام الخلفي."
+        demo:"لا توجد بيانات بعد."
       }
     }
   }
 
   const state = {
     lang: store.get("fd_lang", "ar"),
-    authed: store.get("fd_authed", "0") === "1",
+    authed: false,
     publicTab: store.get("fd_public_tab", "home"),
     portalTab: store.get("fd_portal_tab", "overview"),
-    notifRead: store.get("fd_notif_read", "0") === "1"
+    notifRead: store.get("fd_notif_read", "0") === "1",
+    user: null,
+    docs: [],
+    tickets: [],
+    invoices: [],
+    sbReady: false
   }
 
   const demo = {
@@ -1576,7 +1275,9 @@ function toast(msg){
     c.innerHTML = card("404", "", "")
   }
 
+  
   function openAuth(){
+    const signUpLabel = state.lang === "ar" ? "إنشاء حساب" : "Create account"
     openModal(tr("auth.title"), `
       <div class="desc">${tr("auth.desc")}</div>
       <div class="form">
@@ -1591,11 +1292,12 @@ function toast(msg){
         <div class="desc">${tr("auth.note")}</div>
       </div>
     `, [
-      { label: tr("auth.btn"), primary:true, close:false, onClick: ()=> authSignIn() },
-      { label: ui("إنشاء حساب", "Create account"), close:false, onClick: ()=> authSignUp() },
+      { label: tr("auth.btn"), primary:true, close:false, onClick: async ()=>{ await sbAuthLogin() } },
+      { label: signUpLabel, close:false, onClick: async ()=>{ await sbAuthSignup() } },
       { label: tr("common.close"), onClick: ()=>{} }
     ])
   }
+
 
   function openMeeting(){
     openModal(tr("meet.title"), `
@@ -1628,7 +1330,7 @@ function toast(msg){
       const hello = `${tr("portal.hello")}`
       const activeProjects = demo.projects.filter(p => p.status === "active")
       const pHTML = activeProjects.slice(0,2).map(p => projectItem(p)).join("")
-      const dHTML = demo.docs.slice(0,3).map(d => docItem(d)).join("")
+      const dHTML = state.docs.slice(0,3).map(d => docItem(d)).join("")
 
       const quick = tr("portal.qa").map((x, i) => `
         <div class="btn ${i===0 ? "primary" : ""}" data-qa="${i}">${x}</div>
@@ -1644,7 +1346,7 @@ function toast(msg){
             </div>
             <div class="kpi">
               <div class="k">${tr("portal.sections.1")}</div>
-              <div class="v">${demo.docs.length}</div>
+              <div class="v">${state.docs.length}</div>
               <div class="s">${tr("docs.title")}</div>
             </div>
           </div>
@@ -1666,7 +1368,7 @@ function toast(msg){
           if (i === 0) setPortalTab("support")
           if (i === 1) setPortalTab("docs")
           if (i === 2) openMeeting()
-          if (i === 3) { authSignOut(); setPublicTab("quote") }
+          if (i === 3) { setAuthed(false); setPublicTab("quote") }
         }
       })
 
@@ -1685,7 +1387,7 @@ function toast(msg){
     }
 
     if (tab === "docs"){
-      const items = demo.docs.map(d => docItem(d)).join("")
+      const items = state.docs.map(d => docItem(d)).join("")
       c.innerHTML = card(tr("docs.title"), "", `
         <div class="row" style="align-items:flex-end">
           <div style="flex:1; min-width:220px">
@@ -1701,19 +1403,13 @@ function toast(msg){
       el("upBtn").onclick = async ()=>{
         const f = el("upFile").files && el("upFile").files[0]
         if (!f){ toast(tr("common.ok")); return }
-        if (!hasSupabase() || !currentUser){ toast(ui("يرجى تسجيل الدخول أولا", "Please sign in first")); return }
-        toast(ui("جاري رفع الملف", "Uploading"))
-        const res = await uploadDocument(f)
-        if (!res.ok){ toast(ui("فشل رفع الملف", "Upload failed")); return }
-        await refreshDocs()
-        toast(ui("تم رفع الملف", "Uploaded"))
-        render()
+        await sbUploadDocumentFile(f)
       }
       return
     }
 
     if (tab === "support"){
-      const items = demo.tickets.map(t => ticketItem(t)).join("")
+      const items = state.tickets.map(t => ticketItem(t)).join("")
       c.innerHTML = card(tr("support.title"), "", `
         <div class="btn primary" id="tCreate">${tr("support.create")}</div>
         <div style="height:10px"></div>
@@ -1724,7 +1420,7 @@ function toast(msg){
     }
 
     if (tab === "billing"){
-      const items = demo.invoices.map(inv => invoiceItem(inv)).join("")
+      const items = state.invoices.map(inv => invoiceItem(inv)).join("")
       c.innerHTML = card(tr("billing.title"), "", `<div class="list">${items}</div>`)
       return
     }
@@ -1858,20 +1554,7 @@ function toast(msg){
         </div>
       </div>
     `, [
-      { label: tr("support.submit"), primary:true, close:false, onClick: async ()=>{
-        const sub = (el("tSub").value || "").trim()
-        const cat = (el("tCat").value || "").trim()
-        const det = (el("tDet").value || "").trim()
-        if (!sub){ toast(ui("اكتب عنوان التذكرة", "Enter a subject")); return }
-        if (!hasSupabase() || !currentUser){ toast(ui("يرجى تسجيل الدخول أولا", "Please sign in first")); return }
-        toast(ui("جاري الإرسال", "Submitting"))
-        const r = await createTicket(sub, cat, det)
-        if (!r.ok){ toast(ui("فشل إرسال التذكرة", "Failed to submit")); return }
-        await refreshTickets()
-        closeModal()
-        toast(ui("تم إرسال التذكرة", "Ticket submitted"))
-        render()
-      } },
+      { label: tr("support.submit"), primary:true, close:false, onClick: async ()=>{ await sbCreateTicketFromModal() } },
       { label: tr("common.close"), onClick: ()=>{} }
     ])
   }
@@ -1904,8 +1587,8 @@ function toast(msg){
     setTimeout(()=>{
       const so = document.getElementById("signOut")
       const tp = document.getElementById("toPublic")
-      if (so) so.onclick = async ()=> { closeModal(); await authSignOut(); toast(tr("common.ok")) }
-      if (tp) tp.onclick = async ()=> { closeModal(); await authSignOut(); setPublicTab("home") }
+      if (so) so.onclick = async ()=> { await sbSignOut(); closeModal(); toast(tr("common.ok")) }
+      if (tp) tp.onclick = ()=> { closeModal(); setAuthed(false); setPublicTab("home") }
     }, 0)
   }
 
@@ -1963,35 +1646,348 @@ function toast(msg){
 
       if (d){
         const id = d.getAttribute("data-doc")
-        const doc = demo.docs.find(x => x.id === id)
-        if (doc && doc.storage_path) openStoredFile(doc.storage_path)
-        else toast(tr("common.demo"))
+        if (id) sbOpenDoc(id)
       }
 
       if (t){
         const id = t.getAttribute("data-ticket")
-        const tk = demo.tickets.find(x => x.id === id)
-        if (!tk){ toast(tr("common.demo")); return }
-        openModal(tk.subject || id, `
-          <div class="desc">${ui("الحالة", "Status")}: ${tk.status}</div>
-          <div class="divider"></div>
-          <div class="desc">${tk.details || ""}</div>
-        `, [
-          { label: tr("common.close"), onClick: ()=>{} }
-        ])
+        if (id) sbOpenTicket(id)
       }
 
       if (inv){
         const id = inv.getAttribute("data-inv")
-        const iv = demo.invoices.find(x => x.id === id)
-        if (iv && iv.storage_path){
-          openStoredFile(iv.storage_path)
-        } else {
-          toast(tr("common.demo"))
-        }
+        if (id) sbOpenInvoice(id)
       }
     })
   }
+
+
+  function sbText(ar, en){
+    return state.lang === "ar" ? ar : en
+  }
+
+  function sbHasKeys(){
+    return !!sb
+  }
+
+  async function sbInit(){
+    if (!sbHasKeys()){
+      state.sbReady = false
+      state.authed = false
+      state.user = null
+      render()
+      return
+    }
+
+    state.sbReady = true
+
+    try{
+      const res = await sb.auth.getSession()
+      const session = res && res.data ? res.data.session : null
+      state.user = session ? session.user : null
+      state.authed = !!session
+      if (state.authed) await sbLoadAll()
+    }catch(e){
+      state.authed = false
+      state.user = null
+    }
+
+    sb.auth.onAuthStateChange(async (event, session)=>{
+      state.user = session ? session.user : null
+      state.authed = !!session
+      if (state.authed){
+        await sbLoadAll()
+      }else{
+        state.docs = []
+        state.tickets = []
+        state.invoices = []
+      }
+      render()
+    })
+
+    render()
+  }
+
+  async function sbLoadAll(){
+    await Promise.all([sbLoadDocs(), sbLoadTickets(), sbLoadInvoices()])
+  }
+
+  async function sbLoadDocs(){
+    try{
+      const res = await sb.from("documents")
+        .select("id,type,name_en,name_ar,storage_path,created_at")
+        .order("created_at", { ascending:false })
+      const rows = (res && res.data) ? res.data : []
+      state.docs = rows.map(r=>({
+        id: r.id,
+        type: r.type || "report",
+        name: { en: r.name_en || "Document", ar: r.name_ar || "مستند" },
+        date: (r.created_at || "").split("T")[0] || "",
+        storage_path: r.storage_path || ""
+      }))
+    }catch(e){
+      state.docs = []
+    }
+  }
+
+  async function sbLoadTickets(){
+    try{
+      const res = await sb.from("tickets")
+        .select("id,subject_en,subject_ar,status,details,created_at,category")
+        .order("created_at", { ascending:false })
+      const rows = (res && res.data) ? res.data : []
+      state.tickets = rows.map(r=>({
+        id: r.id,
+        subject: { en: r.subject_en || "Support ticket", ar: r.subject_ar || "تذكرة دعم" },
+        status: r.status || "open",
+        date: (r.created_at || "").split("T")[0] || "",
+        details: r.details || "",
+        category: r.category || ""
+      }))
+    }catch(e){
+      state.tickets = []
+    }
+  }
+
+  async function sbLoadInvoices(){
+    try{
+      const res = await sb.from("invoices")
+        .select("id,amount,due,status,storage_path,created_at")
+        .order("created_at", { ascending:false })
+      const rows = (res && res.data) ? res.data : []
+      state.invoices = rows.map(r=>({
+        id: r.id,
+        amount: r.amount || "",
+        due: r.due || ((r.created_at || "").split("T")[0] || ""),
+        status: r.status || "due",
+        storage_path: r.storage_path || ""
+      }))
+    }catch(e){
+      state.invoices = []
+    }
+  }
+
+  async function sbAuthLogin(){
+    if (!sbHasKeys()){
+      toast(sbText("لازم تحط بيانات Supabase داخل ملف index.html", "Paste Supabase keys in index.html"))
+      return
+    }
+
+    const user = (el("lUser").value || "").trim()
+    const pass = (el("lPass").value || "").trim()
+
+    if (!user || !pass){
+      toast(sbText("اكتب الإيميل وكلمة المرور", "Enter email and password"))
+      return
+    }
+
+    if (user.indexOf("@") === -1){
+      toast(sbText("دلوقتي الدخول بالإيميل فقط", "Email login only for now"))
+      return
+    }
+
+    const res = await sb.auth.signInWithPassword({ email:user, password:pass })
+    if (res && res.error){
+      toast(sbText("بيانات الدخول غير صحيحة", "Invalid email or password"))
+      return
+    }
+
+    closeModal()
+    toast(tr("common.ok"))
+    state.user = res.data ? res.data.user : null
+    state.authed = true
+    setPortalTab("overview")
+    await sbLoadAll()
+    render()
+  }
+
+  async function sbAuthSignup(){
+    if (!sbHasKeys()){
+      toast(sbText("لازم تحط بيانات Supabase داخل ملف index.html", "Paste Supabase keys in index.html"))
+      return
+    }
+
+    const user = (el("lUser").value || "").trim()
+    const pass = (el("lPass").value || "").trim()
+
+    if (!user || !pass){
+      toast(sbText("اكتب الإيميل وكلمة المرور", "Enter email and password"))
+      return
+    }
+
+    if (user.indexOf("@") === -1){
+      toast(sbText("اكتب إيميل صحيح لإنشاء حساب", "Use a valid email to create an account"))
+      return
+    }
+
+    const res = await sb.auth.signUp({ email:user, password:pass })
+    if (res && res.error){
+      toast(sbText("مش قادر أنشئ الحساب", "Could not create account"))
+      return
+    }
+
+    toast(sbText("تم إنشاء الحساب. لو طلب تأكيد ايميل راجع بريدك", "Account created. Check email if confirmation is required"))
+  }
+
+  async function sbSignOut(){
+    if (sbHasKeys()){
+      try{ await sb.auth.signOut() }catch(e){}
+    }
+    state.authed = false
+    state.user = null
+    state.docs = []
+    state.tickets = []
+    state.invoices = []
+    setPublicTab("home")
+    render()
+  }
+
+  async function sbUploadDocumentFile(file){
+    if (!state.authed || !state.user){
+      toast(sbText("سجل دخول الأول", "Please sign in first"))
+      return
+    }
+    if (!sbHasKeys()){
+      toast(sbText("لازم تحط بيانات Supabase داخل ملف index.html", "Paste Supabase keys in index.html"))
+      return
+    }
+
+    const safe = (file.name || "file").replace(/[^a-zA-Z0-9.\-_]+/g, "_")
+    const path = `${state.user.id}/${Date.now()}_${safe}`
+
+    const up = await sb.storage.from("client-files").upload(path, file, { upsert:false })
+    if (up && up.error){
+      toast(sbText("مش قادر أرفع الملف. اتأكد إن Bucket اسمها client-files موجودة", "Upload failed. Create a bucket named client-files"))
+      return
+    }
+
+    const ins = await sb.from("documents").insert([{
+      type: "report",
+      name_en: file.name,
+      name_ar: file.name,
+      storage_path: path
+    }])
+
+    if (ins && ins.error){
+      toast(sbText("الملف اترفَع بس تسجيله في الجدول فشل", "Uploaded but insert failed"))
+      return
+    }
+
+    toast(tr("common.ok"))
+    await sbLoadDocs()
+    setPortalTab("docs")
+    render()
+  }
+
+  async function sbOpenDoc(id){
+    const doc = state.docs.find(x => String(x.id) === String(id))
+    if (!doc){
+      toast(tr("common.ok"))
+      return
+    }
+    if (!sbHasKeys() || !doc.storage_path){
+      toast(tr("common.ok"))
+      return
+    }
+
+    const signed = await sb.storage.from("client-files").createSignedUrl(doc.storage_path, 60)
+    if (signed && signed.data && signed.data.signedUrl){
+      window.open(signed.data.signedUrl, "_blank")
+      return
+    }
+
+    const pub = sb.storage.from("client-files").getPublicUrl(doc.storage_path)
+    if (pub && pub.data && pub.data.publicUrl){
+      window.open(pub.data.publicUrl, "_blank")
+      return
+    }
+
+    toast(sbText("مش قادر أفتح الملف. اتأكد من إعدادات Storage", "Could not open file. Check Storage settings"))
+  }
+
+  async function sbCreateTicketFromModal(){
+    if (!state.authed || !state.user){
+      toast(sbText("سجل دخول الأول", "Please sign in first"))
+      return
+    }
+    if (!sbHasKeys()){
+      toast(sbText("لازم تحط بيانات Supabase داخل ملف index.html", "Paste Supabase keys in index.html"))
+      return
+    }
+
+    const sub = (el("tSub").value || "").trim()
+    const cat = (el("tCat").value || "").trim()
+    const det = (el("tDet").value || "").trim()
+
+    if (!sub){
+      toast(sbText("اكتب عنوان للتذكرة", "Enter a subject"))
+      return
+    }
+
+    const res = await sb.from("tickets").insert([{
+      subject_en: sub,
+      subject_ar: sub,
+      category: cat,
+      details: det,
+      status: "open"
+    }])
+
+    if (res && res.error){
+      toast(sbText("مش قادر أحفظ التذكرة. اتأكد إن جدول tickets موجود", "Could not save ticket. Create a tickets table"))
+      return
+    }
+
+    closeModal()
+    toast(tr("common.ok"))
+    await sbLoadTickets()
+    setPortalTab("support")
+    render()
+  }
+
+  function sbOpenTicket(id){
+    const t = state.tickets.find(x => String(x.id) === String(id))
+    if (!t){
+      toast(tr("common.ok"))
+      return
+    }
+
+    const body = `
+      <div class="desc" style="font-weight:900; color:var(--text)">${t.subject[state.lang]}</div>
+      <div class="divider"></div>
+      <div class="it-sub">${t.category || ""}</div>
+      <div style="height:8px"></div>
+      <div class="desc">${t.details || ""}</div>
+    `
+    openModal("🎫 " + id, body, [
+      { label: tr("common.close"), onClick: ()=>{} }
+    ])
+  }
+
+  async function sbOpenInvoice(id){
+    const inv = state.invoices.find(x => String(x.id) === String(id))
+    if (!inv){
+      toast(tr("common.ok"))
+      return
+    }
+    if (!sbHasKeys() || !inv.storage_path){
+      toast(sbText("ارفع ملف الفاتورة الأول", "Upload invoice file first"))
+      return
+    }
+
+    const signed = await sb.storage.from("client-files").createSignedUrl(inv.storage_path, 60)
+    if (signed && signed.data && signed.data.signedUrl){
+      window.open(signed.data.signedUrl, "_blank")
+      return
+    }
+
+    const pub = sb.storage.from("client-files").getPublicUrl(inv.storage_path)
+    if (pub && pub.data && pub.data.publicUrl){
+      window.open(pub.data.publicUrl, "_blank")
+      return
+    }
+    toast(sbText("مش قادر أفتح الفاتورة", "Could not open invoice"))
+  }
+
 
   function render(){
     applyRTL()
@@ -2006,9 +2002,7 @@ function toast(msg){
   }
 
   bindClicks()
-  initAuth().finally(()=>{
-    render()
-  })
+  sbInit()
 </script>
 
 
