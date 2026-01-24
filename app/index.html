@@ -481,7 +481,19 @@ l2:#0E274A;
 
     .rtl{ direction: rtl; }
     .rtl .subbrand{ direction: rtl; }
-  </style>
+  
+/* Company logo */
+#brandLogo{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+  border-radius:10px;
+  flex:0 0 auto;
+}
+@media (max-width:480px){
+  #brandLogo{ width:28px; height:28px; }
+}
+</style>
 <script>
 (function () {
   const cdns = [
@@ -517,7 +529,7 @@ l2:#0E274A;
 <div class="topbar">
 <div class="topbar-inner">
 <div class="logo">
-<div class="mark" id="mark"><img alt="Future Dimensions logo" id="brandLogo"/><span aria-hidden="true" id="logoFallbackText">FD</span></div>
+<div class="mark" id="mark"><img src="https://www.futuredimensionsco.com/logo.png" alt="Future Dimensions logo" id="brandLogo" loading="eager" decoding="async" /><span aria-hidden="true" id="logoFallbackText">FD</span></div>
 <div style="min-width:0">
 <div class="brand" id="brand">Future Dimensions</div>
 <div class="subbrand" id="subbrand">Consulting &amp; Business Solutions</div>
