@@ -2310,11 +2310,29 @@ l2:#0E274A;
 })();
 </script>
 <script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/app/sw.js", { scope: "/app/" }).catch(() => {})
-    })
-  }
+  // Mobile cache fix: disable and clear any existing Service Worker + caches once, then reload
+  (async () => {
+    try {
+      if (!("serviceWorker" in navigator)) return;
+      if (sessionStorage.getItem("__sw_cleared") === "1") return;
+      sessionStorage.setItem("__sw_cleared", "1");
+
+      const regs = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(r => r.unregister()));
+
+      if (window.caches && caches.keys) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+      }
+
+      // Reload once to ensure latest index.html is fetched
+      location.reload();
+    } catch (e) {
+      // If anything fails, just continue without breaking the UI
+      console.warn("SW clear failed", e);
+    }
+  })();
 </script>
+
 </body>
 </html>
