@@ -15,7 +15,28 @@
     :root{
       --bg: #061427;
       --panel: #0A1C38;
-      --panel2:#0E274A;
+      --pane
+
+  
+  function openProjectRequest(){
+    openModal(tr("projects.add"), `
+      <div class="form">
+        <div>
+          <label>${state.lang === "ar" ? "عنوان الطلب" : "Request title"}</label>
+          <input id="prTitle" placeholder="${state.lang === "ar" ? "مثال: مشروع إدارة مالية" : "e.g., New project request"}" />
+        </div>
+        <div>
+          <label>${state.lang === "ar" ? "تفاصيل الطلب" : "Details"}</label>
+          <textarea id="prDetails" placeholder="${state.lang === "ar" ? "اكتب تفاصيل واحتياجاتك" : "Describe what you need"}"></textarea>
+        </div>
+      </div>
+    `, [
+      { label: state.lang === "ar" ? "إرسال" : "Send", primary:true, close:false, onClick: async ()=>{ await sbCreateProjectRequestFromModal() } },
+      { label: tr("common.close"), onClick: ()=>{} }
+    ])
+  }
+
+l2:#0E274A;
       --text: #F7F0E1;
       --muted: #D8CDB6;
       --muted2:#BCAF8F;
@@ -901,6 +922,10 @@
     docs: [],
     tickets: [],
     invoices: [],
+    projects: [],
+    meetingRequests: [],
+    projectRequests: [],
+    quoteRequests: [],
     sbReady: false
   }
 
@@ -1192,7 +1217,12 @@ function toast(msg){
         </div>
       `)
 
-      el("qSend").onclick = ()=>{
+      el("qSend").onclick = async ()=>{
+        // Try to send to Supabase first (real request)
+        const r = await sbCreateQuoteRequest()
+        if (r && r.ok) return
+
+        // Fallback: open email draft (in case database is not ready)
         const to = tr("contact.email") || "info@futuredimensionsco.com"
         const name = (el("qName").value || "").trim()
         const company = (el("qCompany").value || "").trim()
@@ -1317,7 +1347,7 @@ function toast(msg){
         <div class="desc">${tr("meet.note")}</div>
       </div>
     `, [
-      { label: tr("meet.btn"), primary:true, onClick: ()=> toast(tr("common.demo")) },
+      { label: tr("meet.btn"), primary:true, close:false, onClick: async ()=>{ await sbCreateMeetingFromModal() } },
       { label: tr("common.close"), onClick: ()=>{} }
     ])
   }
@@ -1328,7 +1358,8 @@ function toast(msg){
 
     if (tab === "overview"){
       const hello = `${tr("portal.hello")}`
-      const activeProjects = demo.projects.filter(p => p.status === "active")
+      const srcProjects = (state.projects && state.projects.length) ? state.projects : demo.projects
+      const activeProjects = srcProjects.filter(p => p.status === "active")
       const pHTML = activeProjects.slice(0,2).map(p => projectItem(p)).join("")
       const dHTML = state.docs.slice(0,3).map(d => docItem(d)).join("")
 
@@ -1342,7 +1373,7 @@ function toast(msg){
             <div class="kpi">
               <div class="k">${tr("portal.sections.0")}</div>
               <div class="v">${activeProjects.length}</div>
-              <div class="s">${demo.projects.length} total</div>
+              <div class="s">${srcProjects.length} total</div>
             </div>
             <div class="kpi">
               <div class="k">${tr("portal.sections.1")}</div>
@@ -1376,13 +1407,14 @@ function toast(msg){
     }
 
     if (tab === "projects"){
-      const items = demo.projects.map(p => projectItem(p)).join("")
+      const list = (state.projects && state.projects.length) ? state.projects : []
+      const items = list.map(p => projectItem(p)).join("")
       c.innerHTML = card(tr("projects.title"), "", `
         <div class="btn primary" id="pNew">${tr("projects.add")}</div>
         <div style="height:10px"></div>
-        <div class="list">${items}</div>
+        <div class="list">${items || emptyState("🗂️")}</div>
       `)
-      el("pNew").onclick = ()=> { toast(tr("common.demo")) }
+      el("pNew").onclick = ()=> { openProjectRequest() }
       return
     }
 
@@ -1709,7 +1741,7 @@ function toast(msg){
   }
 
   async function sbLoadAll(){
-    await Promise.all([sbLoadDocs(), sbLoadTickets(), sbLoadInvoices()])
+    await Promise.all([sbLoadDocs(), sbLoadTickets(), sbLoadInvoices(), sbLoadProjects()])
   }
 
   async function sbLoadDocs(){
@@ -1829,7 +1861,157 @@ function toast(msg){
     toast(sbText("تم إنشاء الحساب. لو طلب تأكيد ايميل راجع بريدك", "Account created. Check email if confirmation is required"))
   }
 
-  async function sbSignOut(){
+  async 
+  async function sbCreateMeetingFromModal(){
+    if (!state.authed || !state.user){
+      toast(sbText("سجل دخول الأول", "Please sign in first"))
+      return
+    }
+    const d = (el("mDate") ? el("mDate").value : "").trim()
+    const t = (el("mTime") ? el("mTime").value : "").trim()
+    const note = (el("mNote") ? el("mNote").value : "").trim()
+
+    if (!d || !t){
+      toast(sbText("اختار التاريخ والوقت", "Please choose date and time"))
+      return
+    }
+
+    try{
+      const payload = {
+        user_id: state.user.id,
+        preferred_date: d,
+        preferred_time: t,
+        note: note || null,
+        status: "requested"
+      }
+      const res = await sb.from("meeting_requests").insert(payload).select("id").single()
+      if (res && res.error){
+        toast(sbText("تعذر إرسال طلب الاجتماع", "Could not send meeting request"))
+        return
+      }
+      closeModal()
+      toast(sbText("تم إرسال طلب الاجتماع", "Meeting request sent"))
+    }catch(e){
+      toast(sbText("تعذر إرسال طلب الاجتماع", "Could not send meeting request"))
+    }
+  }
+
+  async function sbCreateProjectRequestFromModal(){
+    if (!state.authed || !state.user){
+      toast(sbText("سجل دخول الأول", "Please sign in first"))
+      return
+    }
+    const title = (el("prTitle") ? el("prTitle").value : "").trim()
+    const details = (el("prDetails") ? el("prDetails").value : "").trim()
+
+    if (!title){
+      toast(sbText("اكتب عنوان الطلب", "Please enter a title"))
+      return
+    }
+    if (!details){
+      toast(sbText("اكتب تفاصيل الطلب", "Please enter details"))
+      return
+    }
+
+    try{
+      const payload = {
+        user_id: state.user.id,
+        title: title,
+        details: details,
+        status: "new"
+      }
+      const res = await sb.from("project_requests").insert(payload).select("id").single()
+      if (res && res.error){
+        toast(sbText("تعذر إرسال طلب المشروع", "Could not send project request"))
+        return
+      }
+      closeModal()
+      toast(sbText("تم إرسال طلب المشروع", "Project request sent"))
+    }catch(e){
+      toast(sbText("تعذر إرسال طلب المشروع", "Could not send project request"))
+    }
+  }
+
+  async function sbCreateQuoteRequest(){
+    const name = (el("qName") ? el("qName").value : "").trim()
+    const company = (el("qCompany") ? el("qCompany").value : "").trim()
+    const email = (el("qEmail") ? el("qEmail").value : "").trim()
+    const phone = (el("qPhone") ? el("qPhone").value : "").trim()
+    const service = (el("qService") ? el("qService").value : "").trim()
+    const challenge = (el("qChallenge") ? el("qChallenge").value : "").trim()
+
+    if (!name || !email){
+      toast(sbText("اكتب الاسم والإيميل", "Please enter name and email"))
+      return { ok:false }
+    }
+
+    try{
+      const payload = {
+        user_id: (state.authed && state.user) ? state.user.id : null,
+        name: name,
+        company: company || null,
+        email: email,
+        phone: phone || null,
+        service: service || null,
+        challenge: challenge || null,
+        source: "app"
+      }
+      const res = await sb.from("quote_requests").insert(payload).select("id").single()
+      if (res && res.error){
+        return { ok:false, error: res.error }
+      }
+      toast(sbText("تم إرسال طلب العرض", "Quote request sent"))
+      // clear
+      if (el("qChallenge")) el("qChallenge").value = ""
+      return { ok:true }
+    }catch(e){
+      return { ok:false, error: e }
+    }
+  }
+
+  function sbDaysAgoLabel(updatedAt){
+    if (!updatedAt) return { ar:"", en:"" }
+    const d = new Date(updatedAt)
+    const now = new Date()
+    const diff = Math.max(0, Math.floor((now - d) / (1000*60*60*24)))
+    if (diff === 0) return { ar:"تم التحديث اليوم", en:"Updated today" }
+    if (diff === 1) return { ar:"آخر تحديث منذ يوم", en:"Updated 1 day ago" }
+    return { ar:`آخر تحديث منذ ${diff} أيام`, en:`Updated ${diff} days ago` }
+  }
+
+  async function sbLoadProjects(){
+    if (!state.authed || !state.user){
+      state.projects = []
+      return
+    }
+    try{
+      const res = await sb.from("projects")
+        .select("id,code,title_en,title_ar,status,progress,steps,updated_at")
+        .order("updated_at", { ascending:false })
+      const rows = (res && res.data) ? res.data : []
+      state.projects = rows.map(r=>{
+        let steps = []
+        try{ steps = Array.isArray(r.steps) ? r.steps : (r.steps ? JSON.parse(r.steps) : []) }catch(e){ steps = [] }
+        const upd = sbDaysAgoLabel(r.updated_at)
+        return {
+          id: r.code || String(r.id).slice(0,8),
+          title: { en: r.title_en || "Project", ar: r.title_ar || "مشروع" },
+          status: r.status || "active",
+          progress: Number(r.progress || 0),
+          updated: upd,
+          steps: (Array.isArray(steps) ? steps : []).map(s=>({
+            en: s.en || s.title_en || "",
+            ar: s.ar || s.title_ar || "",
+            done: !!(s.done || s.completed)
+          }))
+        }
+      })
+    }catch(e){
+      state.projects = []
+    }
+  }
+
+  function sbSignOut(){
     if (sbHasKeys()){
       try{ await sb.auth.signOut() }catch(e){}
     }
@@ -1916,6 +2098,41 @@ function toast(msg){
       toast(sbText("سجل دخول الأول", "Please sign in first"))
       return
     }
+    const sub = (el("tSub") ? el("tSub").value : "").trim()
+    const cat = (el("tCat") ? el("tCat").value : "").trim()
+    const det = (el("tDet") ? el("tDet").value : "").trim()
+
+    if (!sub){
+      toast(sbText("اكتب عنوان التذكرة", "Please enter a ticket subject"))
+      return
+    }
+    if (!det){
+      toast(sbText("اكتب تفاصيل المشكلة", "Please enter details"))
+      return
+    }
+
+    try{
+      const payload = {
+        subject_en: sub,
+        subject_ar: sub,
+        category: cat || null,
+        details: det,
+        status: "open",
+        user_id: state.user.id
+      }
+      const res = await sb.from("tickets").insert(payload).select("id").single()
+      if (res && res.error){
+        toast(sbText("تعذر إنشاء التذكرة", "Could not create ticket"))
+        return
+      }
+      closeModal()
+      toast(sbText("تم إنشاء التذكرة", "Ticket created"))
+      await sbLoadTickets()
+      renderPortal()
+    }catch(e){
+      toast(sbText("تعذر إنشاء التذكرة", "Could not create ticket"))
+    }
+  }
     if (!sbHasKeys()){
       toast(sbText("لازم تحط بيانات Supabase داخل ملف index.html", "Paste Supabase keys in index.html"))
       return
