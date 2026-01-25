@@ -345,7 +345,17 @@
         authed: false,
         user: null,
         sb: null,
-        notifs: []
+        notifs: [],
+        invoices: [],
+        documents: [],
+        tickets: [],
+        meetings: [],
+        loading: {
+          invoices: false,
+          documents: false,
+          tickets: false,
+          meetings: false
+        }
       }
 
       const strings = {
@@ -375,6 +385,32 @@
           status: "Status",
           created_at: "Created",
           no_file: "No file",
+        upload_new: "Upload new file",
+        choose_file: "Choose file",
+        title: "Title",
+        description: "Description",
+        uploading: "Uploading",
+        upload_success: "Uploaded",
+        upload_failed: "Upload failed",
+        no_documents: "No documents yet.",
+        document: "Document",
+        new_ticket: "New ticket",
+        subject: "Subject",
+        message: "Message",
+        send_ticket: "Send ticket",
+        no_tickets: "No tickets yet.",
+        ticket: "Ticket",
+        new_meeting: "Request a meeting",
+        meeting_title: "Meeting title",
+        meeting_date: "Date",
+        meeting_time: "Time",
+        notes: "Notes",
+        send_request: "Send request",
+        no_meetings: "No meeting requests yet.",
+        meeting: "Meeting",
+        missing_table: "Missing table",
+        setup_help: "Open SQL Editor and run the setup SQL below",
+        copy_sql: "Copy SQL",
           error: "Error"
         },
         ar: {
@@ -406,6 +442,32 @@
           status: "الحالة",
           created_at: "التاريخ",
           no_file: "لا يوجد ملف",
+        upload_new: "رفع ملف جديد",
+        choose_file: "اختر ملف",
+        title: "العنوان",
+        description: "الوصف",
+        uploading: "جاري الرفع",
+        upload_success: "تم الرفع",
+        upload_failed: "فشل الرفع",
+        no_documents: "لا توجد مستندات حتى الآن.",
+        document: "مستند",
+        new_ticket: "تذكرة جديدة",
+        subject: "الموضوع",
+        message: "الرسالة",
+        send_ticket: "إرسال التذكرة",
+        no_tickets: "لا توجد تذاكر حتى الآن.",
+        ticket: "تذكرة",
+        new_meeting: "طلب اجتماع",
+        meeting_title: "عنوان الاجتماع",
+        meeting_date: "التاريخ",
+        meeting_time: "الوقت",
+        notes: "ملاحظات",
+        send_request: "إرسال الطلب",
+        no_meetings: "لا توجد طلبات اجتماعات حتى الآن.",
+        meeting: "اجتماع",
+        missing_table: "الجدول غير موجود",
+        setup_help: "افتح SQL Editor وشغل أوامر الإعداد بالأسفل",
+        copy_sql: "نسخ SQL",
           error: "خطأ"
         }
       }
@@ -670,13 +732,463 @@ async function clearCachesAndUnregister() {
         }
       }
 
-function renderStubPage(title) {
+      function safeFilename(name) {
+        const base = String(name || "file")
+        const cleaned = base
+          .replace(/\s+/g, "_")
+          .replace(/[^a-zA-Z0-9._-]/g, "_")
+          .replace(/_+/g, "_")
+        return cleaned.slice(0, 140)
+      }
+
+      async function downloadFromStorage(bucket, rawPath) {
+        const path0 = String(rawPath || "").trim()
+        if (!path0) {
+          toast(tr("download_unavailable"), "warn")
+          return
+        }
+
+        if (path0.startsWith("http://") || path0.startsWith("https://")) {
+          window.open(path0, "_blank", "noopener,noreferrer")
+          return
+        }
+
+        const bucketPrefix = bucket + "/"
+        const path = path0.startsWith(bucketPrefix) ? path0.slice(bucketPrefix.length) : path0
+
+        try {
+          const { data, error } = await state.sb.storage.from(bucket).createSignedUrl(path, 60)
+          if (!error && data && data.signedUrl) {
+            window.open(data.signedUrl, "_blank", "noopener,noreferrer")
+            return
+          }
+
+          const pub = state.sb.storage.from(bucket).getPublicUrl(path)
+          const url = pub?.data?.publicUrl
+          if (url) {
+            window.open(url, "_blank", "noopener,noreferrer")
+            return
+          }
+
+          toast(tr("download_failed"), "warn")
+        } catch (e) {
+          toast(tr("download_failed"), "warn")
+        }
+      }
+
+      async function insertWithFallback(table, variants) {
+        let lastErr = null
+        for (const row of variants) {
+          const { error } = await state.sb.from(table).insert(row)
+          if (!error) return { ok: true }
+          lastErr = error
+
+          const msg = String(error.message || "")
+          if (msg.includes("does not exist") || msg.includes("column") || msg.includes("schema")) {
+            continue
+          }
+
+          return { ok: false, error }
+        }
+        return { ok: false, error: lastErr }
+      }
+
+      async function selectAllSafe(table, orderColumn) {
+        try {
+          const first = orderColumn
+            ? await state.sb.from(table).select("*").order(orderColumn, { ascending: false })
+            : await state.sb.from(table).select("*")
+
+          if (!first.error) return first
+
+          const msg = String(first.error.message || "")
+          if (orderColumn && msg.includes(orderColumn)) {
+            return await state.sb.from(table).select("*")
+          }
+
+          return first
+        } catch (e) {
+          return { data: null, error: e }
+        }
+      }
+
+      function renderDocuments() {
         el("content").innerHTML = `
           <div class="card">
-            <div class="title">${title}</div>
-            <div class="muted" style="margin-top:8px">${tr("need_setup")}</div>
+            <div class="row" style="justify-content:space-between;align-items:center;gap:12px">
+              <div class="title">${tr("documents")}</div>
+              <button class="btn" id="btnDocRefresh">${tr("refresh")}</button>
+            </div>
+            <div class="hr"></div>
+
+            <div class="sub" style="margin-bottom:10px">${tr("upload_new")}</div>
+            <div class="row" style="gap:10px;flex-wrap:wrap;align-items:center">
+              <input class="input" id="docTitle" placeholder="${tr("title")}" style="flex:1;min-width:220px" />
+              <input type="file" id="docFile" style="display:none" />
+              <button class="btn" id="btnChooseDoc">${tr("choose_file")}</button>
+              <button class="btn" id="btnUploadDoc">${tr("upload")}</button>
+            </div>
+            <div class="muted" id="docChosen" style="margin-top:8px">${tr("no_file")}</div>
+            <div class="hr"></div>
+            <div id="docList" class="muted">${tr("loading")}...</div>
           </div>
         `
+
+        const inp = el("docFile")
+        const chosen = el("docChosen")
+
+        el("btnChooseDoc").onclick = () => inp.click()
+        inp.onchange = () => {
+          const f = inp.files && inp.files[0]
+          chosen.textContent = f ? f.name : tr("no_file")
+        }
+
+        el("btnUploadDoc").onclick = async () => {
+          const f = inp.files && inp.files[0]
+          const title = (el("docTitle").value || "").trim()
+          await uploadDocument(f, title)
+          inp.value = ""
+          el("docTitle").value = ""
+          chosen.textContent = tr("no_file")
+        }
+
+        el("btnDocRefresh").onclick = () => loadDocuments()
+        loadDocuments()
+      }
+
+      async function uploadDocument(file, title) {
+        if (!file) {
+          toast(tr("choose_file"), "warn")
+          return
+        }
+
+        const bucket = "client-files"
+        const uid = state.user?.id
+        const filename = safeFilename(file.name)
+        const path = `${uid}/${Date.now()}_${filename}`
+        const displayTitle = title || file.name
+
+        toast(tr("uploading"), "")
+
+        const { error: upErr } = await state.sb.storage
+          .from(bucket)
+          .upload(path, file, { upsert: true, contentType: file.type || undefined })
+
+        if (upErr) {
+          toast(tr("upload_failed"), "warn")
+          return
+        }
+
+        const variants = [
+          { user_id: uid, title: displayTitle, storage_path: path, original_name: file.name, mime: file.type, size: file.size },
+          { user_id: uid, title: displayTitle, storage_path: path },
+          { title: displayTitle, storage_path: path, original_name: file.name },
+          { title: displayTitle, storage_path: path }
+        ]
+        const ins = await insertWithFallback("documents", variants)
+        if (!ins.ok) {
+          toast(tr("upload_failed"), "warn")
+          return
+        }
+
+        toast(tr("upload_success"), "")
+        loadDocuments()
+      }
+
+      async function loadDocuments() {
+        const host = el("docList")
+        host.innerHTML = `${tr("loading")}...`
+
+        const res = await selectAllSafe("documents", "created_at")
+        if (res.error) {
+          host.innerHTML = `<div class="warn">${tr("error")}: ${escapeHtml(res.error.message || res.error)}</div>`
+          return
+        }
+
+        const data = res.data || []
+        if (data.length === 0) {
+          host.innerHTML = `<div class="muted">${tr("no_documents")}</div>`
+          return
+        }
+
+        const items = data.map((it) => {
+          const p = it.storage_path || it.path || it.file_path || ""
+          const t = it.title || it.name || it.original_name || p.split("/").pop() || tr("document")
+          const created = it.created_at || it.createdAt || it.inserted_at
+          return { id: it.id || p, title: t, path: p, created }
+        })
+
+        host.innerHTML = `
+          <div class="list">
+            ${items.map((it) => `
+              <div class="item">
+                <div class="ico">📎</div>
+                <div class="it-main">
+                  <div class="it-title">${escapeHtml(it.title)}</div>
+                  <div class="it-sub">
+                    <span>${tr("created_at")}: <b>${fmtDate(it.created)}</b></span>
+                    ${it.path ? " • <b>" + tr("file_attached") + "</b>" : ""}
+                  </div>
+                </div>
+                <div class="iconbtn docdl" title="${tr("download")}" data-path="${encodeURIComponent(it.path || "")}" style="${it.path ? "" : "opacity:.35;pointer-events:none;"}">📄</div>
+              </div>
+            `).join("")}
+          </div>
+        `
+
+        host.querySelectorAll(".docdl").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const p = decodeURIComponent(btn.getAttribute("data-path") || "")
+            await downloadFromStorage("client-files", p)
+          })
+        })
+      }
+
+      function renderSupport() {
+        el("content").innerHTML = `
+          <div class="card">
+            <div class="row" style="justify-content:space-between;align-items:center;gap:12px">
+              <div class="title">${tr("support")}</div>
+              <button class="btn" id="btnTkRefresh">${tr("refresh")}</button>
+            </div>
+            <div class="hr"></div>
+
+            <div class="sub" style="margin-bottom:10px">${tr("new_ticket")}</div>
+            <div class="row" style="gap:10px;flex-wrap:wrap;align-items:center">
+              <input class="input" id="tkSubject" placeholder="${tr("subject")}" style="flex:1;min-width:220px" />
+              <button class="btn" id="btnSendTicket">${tr("send")}</button>
+            </div>
+            <textarea class="input" id="tkMessage" placeholder="${tr("message")}" style="margin-top:10px;min-height:110px"></textarea>
+            <div class="hr"></div>
+            <div id="tkList" class="muted">${tr("loading")}...</div>
+          </div>
+        `
+
+        el("btnSendTicket").onclick = () => createTicket()
+        el("btnTkRefresh").onclick = () => loadTickets()
+        loadTickets()
+      }
+
+      async function createTicket() {
+        const subject = (el("tkSubject").value || "").trim()
+        const message = (el("tkMessage").value || "").trim()
+        if (!subject && !message) {
+          toast(tr("subject"), "warn")
+          return
+        }
+
+        const uid = state.user?.id
+        const base = {
+          user_id: uid,
+          subject,
+          title: subject,
+          message,
+          body: message,
+          status: "Open"
+        }
+
+        const variants = [
+          { user_id: base.user_id, subject: base.subject, message: base.message, status: base.status },
+          { user_id: base.user_id, title: base.title, body: base.body, status: base.status },
+          { subject: base.subject, message: base.message, status: base.status },
+          { title: base.title, body: base.body, status: base.status }
+        ]
+
+        const ins = await insertWithFallback("tickets", variants)
+        if (!ins.ok) {
+          toast(tr("upload_failed"), "warn")
+          return
+        }
+
+        el("tkSubject").value = ""
+        el("tkMessage").value = ""
+        toast(tr("upload_success"), "")
+        loadTickets()
+      }
+
+      async function loadTickets() {
+        const host = el("tkList")
+        host.innerHTML = `${tr("loading")}...`
+
+        const res = await selectAllSafe("tickets", "created_at")
+        if (res.error) {
+          host.innerHTML = `<div class="warn">${tr("error")}: ${escapeHtml(res.error.message || res.error)}</div>`
+          return
+        }
+
+        const data = res.data || []
+        if (data.length === 0) {
+          host.innerHTML = `<div class="muted">${tr("no_tickets")}</div>`
+          return
+        }
+
+        const items = data.map((it) => {
+          const subj = it.subject || it.title || tr("ticket")
+          const msg = it.message || it.body || ""
+          const st = it.status || it.state || "-"
+          const created = it.created_at || it.createdAt || it.inserted_at
+          return { id: it.id || "", subject: subj, message: msg, status: st, created }
+        })
+
+        host.innerHTML = `
+          <div class="list">
+            ${items.map((it) => `
+              <div class="item">
+                <div class="ico">🎫</div>
+                <div class="it-main">
+                  <div class="it-title">${escapeHtml(it.subject)}</div>
+                  <div class="it-sub">
+                    <span>${tr("status")}: <b>${escapeHtml(it.status)}</b></span>
+                     • 
+                    <span>${tr("created_at")}: <b>${fmtDate(it.created)}</b></span>
+                  </div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `
+      }
+
+      function renderMeetings() {
+        el("content").innerHTML = `
+          <div class="card">
+            <div class="row" style="justify-content:space-between;align-items:center;gap:12px">
+              <div class="title">${tr("meetings")}</div>
+              <button class="btn" id="btnMtRefresh">${tr("refresh")}</button>
+            </div>
+            <div class="hr"></div>
+
+            <div class="sub" style="margin-bottom:10px">${tr("request_meeting")}</div>
+            <div class="row" style="gap:10px;flex-wrap:wrap;align-items:center">
+              <input class="input" id="mtTitle" placeholder="${tr("title")}" style="flex:1;min-width:220px" />
+              <input class="input" id="mtDate" type="date" style="max-width:190px" />
+              <input class="input" id="mtTime" type="time" style="max-width:160px" />
+              <button class="btn" id="btnSendMeeting">${tr("send")}</button>
+            </div>
+            <textarea class="input" id="mtNotes" placeholder="${tr("notes")}" style="margin-top:10px;min-height:110px"></textarea>
+            <div class="hr"></div>
+            <div id="mtList" class="muted">${tr("loading")}...</div>
+          </div>
+        `
+
+        el("btnSendMeeting").onclick = () => createMeetingRequest()
+        el("btnMtRefresh").onclick = () => loadMeetings()
+        loadMeetings()
+      }
+
+      async function createMeetingRequest() {
+        const title = (el("mtTitle").value || "").trim()
+        const date = el("mtDate").value
+        const time = el("mtTime").value
+        const notes = (el("mtNotes").value || "").trim()
+        if (!title && !notes) {
+          toast(tr("title"), "warn")
+          return
+        }
+
+        const uid = state.user?.id
+        const dt = date ? `${date}${time ? "T" + time : ""}` : null
+        const variants = [
+          { user_id: uid, title, notes, scheduled_at: dt, status: "Requested" },
+          { user_id: uid, subject: title, message: notes, meeting_at: dt, status: "Requested" },
+          { title, notes, scheduled_at: dt, status: "Requested" },
+          { subject: title, message: notes, meeting_at: dt, status: "Requested" }
+        ]
+
+        const ins = await insertWithFallback("meetings", variants)
+        if (!ins.ok) {
+          const msg = String(ins.error?.message || "")
+          if (msg.includes("does not exist") || msg.includes("relation")) {
+            toast(tr("missing_table"), "warn")
+            loadMeetings(true)
+            return
+          }
+          toast(tr("upload_failed"), "warn")
+          return
+        }
+
+        el("mtTitle").value = ""
+        el("mtDate").value = ""
+        el("mtTime").value = ""
+        el("mtNotes").value = ""
+        toast(tr("upload_success"), "")
+        loadMeetings()
+      }
+
+      async function loadMeetings(forceShowHelp) {
+        const host = el("mtList")
+        host.innerHTML = `${tr("loading")}...`
+
+        const res = await selectAllSafe("meetings", "created_at")
+        if (res.error) {
+          const msg = String(res.error.message || res.error)
+          if (msg.includes("does not exist") || msg.includes("relation") || forceShowHelp) {
+            host.innerHTML = `
+              <div class="warn">${tr("missing_table")}</div>
+              <div class="muted" style="margin-top:10px">${tr("setup_help")}</div>
+              <pre style="white-space:pre-wrap;word-break:break-word;margin-top:10px">${escapeHtml(getMeetingsSetupSql())}</pre>
+            `
+            return
+          }
+          host.innerHTML = `<div class="warn">${tr("error")}: ${escapeHtml(msg)}</div>`
+          return
+        }
+
+        const data = res.data || []
+        if (data.length === 0) {
+          host.innerHTML = `<div class="muted">${tr("no_meetings")}</div>`
+          return
+        }
+
+        const items = data.map((it) => {
+          const t = it.title || it.subject || tr("meeting")
+          const st = it.status || "-"
+          const when = it.scheduled_at || it.meeting_at || it.datetime || it.date
+          const created = it.created_at || it.createdAt
+          return { id: it.id || "", title: t, status: st, when, created }
+        })
+
+        host.innerHTML = `
+          <div class="list">
+            ${items.map((it) => `
+              <div class="item">
+                <div class="ico">📅</div>
+                <div class="it-main">
+                  <div class="it-title">${escapeHtml(it.title)}</div>
+                  <div class="it-sub">
+                    <span>${tr("status")}: <b>${escapeHtml(it.status)}</b></span>
+                    ${it.when ? " • <span>" + tr("date") + ": <b>" + fmtDate(it.when) + "</b></span>" : ""}
+                    ${it.created ? " • <span>" + tr("created_at") + ": <b>" + fmtDate(it.created) + "</b></span>" : ""}
+                  </div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `
+      }
+
+      function getMeetingsSetupSql() {
+        return `create table if not exists public.meetings (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid null,
+  title text null,
+  notes text null,
+  scheduled_at timestamptz null,
+  status text null default 'Requested',
+  created_at timestamptz not null default now()
+);
+
+alter table public.meetings enable row level security;
+
+drop policy if exists "meetings_select_own" on public.meetings;
+create policy "meetings_select_own" on public.meetings
+for select to authenticated
+using (user_id is null or user_id = auth.uid());
+
+drop policy if exists "meetings_insert_own" on public.meetings;
+create policy "meetings_insert_own" on public.meetings
+for insert to authenticated
+with check (user_id is null or user_id = auth.uid());`
       }
 
       function render() {
@@ -690,9 +1202,9 @@ function renderStubPage(title) {
 
         if (state.page === "dashboard") renderDashboard()
         else if (state.page === "invoices") renderInvoices()
-        else if (state.page === "documents") renderStubPage(tr("documents"))
-        else if (state.page === "support") renderStubPage(tr("support"))
-        else if (state.page === "meetings") renderStubPage(tr("meetings"))
+        else if (state.page === "documents") renderDocuments()
+        else if (state.page === "support") renderSupport()
+        else if (state.page === "meetings") renderMeetings()
         else renderDashboard()
       }
 
