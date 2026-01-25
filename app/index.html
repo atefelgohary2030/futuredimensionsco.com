@@ -100,7 +100,7 @@
     }
     .content{
       width:min(980px, calc(100vw - 20px));
-      margin:10px auto 86px;
+      margin:10px auto calc(86px + env(safe-area-inset-bottom));
       padding:2px 2px 20px;
       min-height: calc(100vh - 170px);
     }
@@ -154,7 +154,7 @@
       left:0; right:0; bottom:0;
       display:flex;
       justify-content:center;
-      padding:10px 10px 14px;
+      padding:10px 10px calc(14px + env(safe-area-inset-bottom));
       pointer-events:none;
     }
     .bottomnav-inner{
@@ -643,16 +643,37 @@ async function clearCachesAndUnregister() {
         el("btnSignUp").onclick = () => openAuth("up")
       }
 
-      function renderDashboard() {
+            function renderDashboard() {
         el("content").innerHTML = `
-          <div class="card">
-            <div class="title">${tr("dashboard")}</div>
-            <div class="muted" style="margin-top:6px">${state.user ? state.user.email : ""}</div>
-            <div class="hr"></div>
-            <div class="muted">${tr("need_setup")}</div>
+          <div class="grid cols2">
+            <div class="card">
+              <div class="title">${tr("dashboard")}</div>
+              <div class="muted" style="margin-top:6px">${state.user ? state.user.email : ""}</div>
+              <div class="hr"></div>
+              <div class="muted">${tr("need_setup")}</div>
+            </div>
+
+            <div class="card">
+              <div class="title">${state.lang === "ar" ? "اختصارات" : "Shortcuts"}</div>
+              <div class="muted" style="margin-top:6px">${state.lang === "ar" ? "ادخل بسرعة على المزايا" : "Jump quickly to the features"}</div>
+              <div class="hr"></div>
+              <div class="grid cols2">
+                <button class="btn" data-goto="documents">📁 ${tr("documents")}</button>
+                <button class="btn" data-goto="invoices">📄 ${tr("invoices")}</button>
+                <button class="btn" data-goto="support">🧾 ${tr("support")}</button>
+                <button class="btn" data-goto="meetings">📅 ${tr("meetings")}</button>
+              </div>
+            </div>
           </div>
         `
+        document.querySelectorAll("[data-goto]").forEach((b) => {
+          b.addEventListener("click", () => {
+            state.page = b.dataset.goto
+            render()
+          })
+        })
       }
+
 
       
       function fmtDate(ts) {
@@ -864,8 +885,9 @@ async function clearCachesAndUnregister() {
 
         const bucket = "client-files"
         const uid = state.user?.id
+        let path = \"\"
         const filename = safeFilename(file.name)
-        const path = `${uid}/${Date.now()}_${filename}`
+        path = `${uid}/${Date.now()}_${filename}`
         const displayTitle = title || file.name
 
         toast(tr("uploading"), "")
@@ -880,13 +902,21 @@ async function clearCachesAndUnregister() {
         }
 
         const variants = [
-          { user_id: uid, title: displayTitle, storage_path: path, original_name: file.name, mime: file.type, size: file.size },
-          { user_id: uid, title: displayTitle, storage_path: path },
-          { title: displayTitle, storage_path: path, original_name: file.name },
-          { title: displayTitle, storage_path: path }
+                    { user_id: uid, title: displayTitle, storage_path: path, original_name: file.name, mime: file.type, size: file.size },
+          { user_id: uid, name_en: displayTitle, name_ar: displayTitle, type: 'report', storage_path: path },
+          { user_id: uid, name_ar: displayTitle, type: 'report', storage_path: path },
+          { user_id: uid, name_en: displayTitle, type: 'report', storage_path: path },
+          { user_id: uid, name: displayTitle, storage_path: path },
+          { user_id: uid, storage_path: path },
+          { title: displayTitle, storage_path: path },
+          { name_en: displayTitle, name_ar: displayTitle, type: 'report', storage_path: path },
+          { storage_path: path }
         ]
         const ins = await insertWithFallback("documents", variants)
         if (!ins.ok) {
+          try {
+            await state.sb.storage.from(bucket).remove([path])
+          } catch (_) {}
           toast(tr("upload_failed"), "warn")
           return
         }
@@ -913,7 +943,7 @@ async function clearCachesAndUnregister() {
 
         const items = data.map((it) => {
           const p = it.storage_path || it.path || it.file_path || ""
-          const t = it.title || it.name || it.original_name || p.split("/").pop() || tr("document")
+          const t = (state.lang==='ar' ? (it.name_ar || it.title || it.name || it.original_name) : (it.name_en || it.title || it.name || it.original_name)) || p.split("/").pop() || tr("document")
           const created = it.created_at || it.createdAt || it.inserted_at
           return { id: it.id || p, title: t, path: p, created }
         })
