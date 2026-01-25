@@ -1,44 +1,47 @@
-const CACHE_NAME = "fd-app-v2"
-const CORE_ASSETS = [
+const CACHE_NAME = "fd-app-v4"
+const CORE = [
   "/app/",
   "/app/index.html",
   "/app/manifest.webmanifest",
-  "/android-chrome-192x192.png",
-  "/android-chrome-512x512.png",
-  "/apple-touch-icon.png"
+  "/app/logo.png",
+  "/app/android-chrome-192x192.png",
+  "/app/android-chrome-512x512.png",
+  "/app/apple-touch-icon.png"
 ]
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS))
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(CORE))
+      .then(() => self.skipWaiting())
   )
-  self.skipWaiting()
 })
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.map((k) => (k === CACHE_NAME ? null : caches.delete(k))))
-    )
+    caches.keys()
+      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim())
   )
-  self.clients.claim()
 })
 
 self.addEventListener("fetch", (event) => {
   const req = event.request
-  if (req.method !== "GET") return
+  const url = new URL(req.url)
 
-  event.respondWith(
-    caches.match(req).then((cached) => {
-      if (cached) return cached
+  if (url.origin !== location.origin) return
 
-      return fetch(req).then((res) => {
-        const copy = res.clone()
-        if (req.url.startsWith(self.location.origin)) {
-          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy))
-        }
-        return res
-      }).catch(() => caches.match("/app/"))
-    })
-  )
+  if (url.pathname.startsWith("/app/")) {
+    event.respondWith(
+      caches.match(req).then((cached) => {
+        const fetchAndCache = fetch(req).then((res) => {
+          const copy = res.clone()
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy)).catch(() => {})
+          return res
+        }).catch(() => cached || Response.error())
+
+        return cached || fetchAndCache
+      })
+    )
+  }
 })
