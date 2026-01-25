@@ -1,12 +1,9 @@
-const CACHE_NAME = "fd-app-v4"
+const CACHE_NAME = "fd-app-v7"
 const CORE = [
   "/app/",
   "/app/index.html",
   "/app/manifest.webmanifest",
-  "/app/logo.png",
-  "/app/android-chrome-192x192.png",
-  "/app/android-chrome-512x512.png",
-  "/app/apple-touch-icon.png"
+  "/app/logo.png"
 ]
 
 self.addEventListener("install", (event) => {
@@ -26,22 +23,37 @@ self.addEventListener("activate", (event) => {
 })
 
 self.addEventListener("fetch", (event) => {
-  const req = event.request
-  const url = new URL(req.url)
+  const req = event.request;
+  const url = new URL(req.url);
 
-  if (url.origin !== location.origin) return
+  // Only handle same-origin /app requests
+  if (url.origin !== self.location.origin) return;
+  if (!url.pathname.startsWith("/app/")) return;
 
-  if (url.pathname.startsWith("/app/")) {
+  // Network-first for navigations so updates always show up
+  const isNav = req.mode === "navigate" || url.pathname === "/app/" || url.pathname === "/app/index.html";
+  if (isNav) {
     event.respondWith(
-      caches.match(req).then((cached) => {
-        const fetchAndCache = fetch(req).then((res) => {
-          const copy = res.clone()
-          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy)).catch(() => {})
-          return res
-        }).catch(() => cached || Response.error())
-
-        return cached || fetchAndCache
-      })
-    )
+      fetch(req)
+        .then((res) => {
+          const copy = res.clone();
+          caches.open(CACHE_NAME).then((c) => c.put(req, copy));
+          return res;
+        })
+        .catch(() => caches.match(req).then((r) => r || caches.match("/app/index.html")))
+    );
+    return;
   }
-})
+
+  // Cache-first for other app assets
+  event.respondWith(
+    caches.match(req).then((cached) => {
+      if (cached) return cached;
+      return fetch(req).then((res) => {
+        const copy = res.clone();
+        caches.open(CACHE_NAME).then((c) => c.put(req, copy));
+        return res;
+      });
+    })
+  );
+});
