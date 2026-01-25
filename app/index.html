@@ -28,7 +28,7 @@
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       color:var(--text);
-      background: radial-gradient(1100px 520px at 50% -140px, rgba(182,140,56,0.16), transparent 60%),
+      background: radial-gradient(1100px 520px at 50% -140px, rgba(182,140,56,0.22), transparent 60%),
                   linear-gradient(180deg, var(--bg1), var(--bg2));
     }
     .app{min-height:100vh; display:flex; flex-direction:column}
@@ -243,7 +243,9 @@
     label{display:block; font-size:12px; color:var(--muted); margin:10px 0 6px}
     .hr{height:1px; background:rgba(255,255,255,0.10); margin:12px 0}
     [dir="rtl"] .row{justify-content:flex-start}
-  </style>
+  
+    .warn{color:rgba(255,180,170,0.95); font-weight:800}
+</style>
 </head>
 <body>
   <div class="app" id="app">
@@ -364,7 +366,16 @@
           loading: "Loading",
           ok: "OK",
           close: "Close",
-          need_setup: "This feature needs Supabase tables to be created. Next step: we will create them together."
+          need_setup: "This feature needs Supabase tables to be created. Next step: we will create them together.",
+          file_attached: "File attached",
+          refresh: "Refresh",
+          no_invoices: "No invoices yet.",
+          invoice: "Invoice",
+          amount: "Amount",
+          status: "Status",
+          created_at: "Created",
+          no_file: "No file",
+          error: "Error"
         },
         ar: {
           home_title: "بوابة العميل",
@@ -383,7 +394,16 @@
           loading: "جاري التحميل",
           ok: "موافق",
           close: "إغلاق",
-          need_setup: "الميزة تحتاج إعداد جداول Supabase. الخطوة القادمة هنجهزها سوا."
+          need_setup: "الميزة تحتاج إعداد جداول Supabase. الخطوة القادمة هنجهزها سوا.",
+          file_attached: "يوجد ملف مرفق",
+          refresh: "تحديث",
+          no_invoices: "لا توجد فواتير حتى الآن.",
+          invoice: "فاتورة",
+          amount: "المبلغ",
+          status: "الحالة",
+          created_at: "التاريخ",
+          no_file: "لا يوجد ملف",
+          error: "خطأ"
         }
       }
 
@@ -394,6 +414,17 @@
       function el(id) {
         return document.getElementById(id)
       }
+
+      function escapeHtml(s) {
+        return String(s ?? "").replace(/[&<>"']/g, (c) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        }[c]))
+      }
+
 
       function toast(msg) {
         const t = el("toast")
@@ -537,7 +568,77 @@
         `
       }
 
-      function renderStubPage(title) {
+      
+      function fmtDate(ts) {
+        if (!ts) return ""
+        try {
+          const d = new Date(ts)
+          return d.toLocaleDateString(state.lang === "ar" ? "ar-EG" : "en-US", { year: "numeric", month: "short", day: "2-digit" })
+        } catch (e) {
+          return ""
+        }
+      }
+
+      function renderInvoices() {
+        el("content").innerHTML = `
+          <div class="card">
+            <div class="row" style="justify-content:space-between; align-items:center">
+              <div class="title">${tr("invoices")}</div>
+              <button class="btn" id="btnInvRefresh">${tr("refresh")}</button>
+            </div>
+            <div class="hr"></div>
+            <div id="invList" class="muted">${tr("loading")}...</div>
+          </div>
+        `
+        el("btnInvRefresh").onclick = () => loadInvoices()
+        loadInvoices()
+      }
+
+      async function loadInvoices() {
+        const host = el("invList")
+        host.innerHTML = `${tr("loading")}...`
+        try {
+          const { data, error } = await state.sb
+            .from("invoices")
+            .select("id, amount, status, storage_path, created_at")
+            .order("created_at", { ascending: false })
+
+          if (error) {
+            host.innerHTML = `<div class="warn">${tr("error")}: ${escapeHtml(error.message || error)}</div>`
+            return
+          }
+
+          if (!data || data.length === 0) {
+            host.innerHTML = `<div class="muted">${tr("no_invoices")}</div>`
+            return
+          }
+
+          host.innerHTML = `
+            <div class="list">
+              ${data.map((it) => `
+                <div class="item">
+                  <div class="ico">🧾</div>
+                  <div class="it-main">
+                    <div class="it-title">${tr("invoice")} #${(it.id || "").slice(0, 8)}</div>
+                    <div class="it-sub">
+                      <span>${tr("amount")}: <b>${it.amount ?? "-"}</b></span>
+                       • 
+                      <span>${tr("status")}: <b>${escapeHtml(it.status || "-")}</b></span>
+                       • 
+                      <span>${tr("created_at")}: <b>${fmtDate(it.created_at)}</b></span>
+                      ${it.storage_path ? " • <b>" + tr("file_attached") + "</b>" : ""}
+                    </div>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          `
+        } catch (e) {
+          host.innerHTML = `<div class="warn">${tr("error")}</div>`
+        }
+      }
+
+function renderStubPage(title) {
         el("content").innerHTML = `
           <div class="card">
             <div class="title">${title}</div>
@@ -556,7 +657,7 @@
         }
 
         if (state.page === "dashboard") renderDashboard()
-        else if (state.page === "invoices") renderStubPage(tr("invoices"))
+        else if (state.page === "invoices") renderInvoices()
         else if (state.page === "documents") renderStubPage(tr("documents"))
         else if (state.page === "support") renderStubPage(tr("support"))
         else if (state.page === "meetings") renderStubPage(tr("meetings"))
