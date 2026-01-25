@@ -654,7 +654,7 @@ function clearCachesAndUnregister() {
                       ${it.storage_path ? " • <b>" + tr("file_attached") + "</b>" : ""}
                     </div>
                   </div>
-                  <div class="iconbtn dlbtn" title="${tr(\"download\")}" data-path="${encodeURIComponent(it.storage_path || \"\")}" style="${it.storage_path ? \"\" : \"opacity:.35;pointer-events:none;\"}">📄</div>
+                  <div class="iconbtn dlbtn" title="${tr('download')}" data-path="${it.storage_path || ''}" style="${it.storage_path ? '' : 'opacity:.35;pointer-events:none;'}">📄</div>
                 </div>
               `).join("")}
             </div>
