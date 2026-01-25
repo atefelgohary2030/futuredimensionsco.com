@@ -396,6 +396,9 @@
           close: "إغلاق",
           need_setup: "الميزة تحتاج إعداد جداول Supabase. الخطوة القادمة هنجهزها سوا.",
           file_attached: "يوجد ملف مرفق",
+          download: "تحميل",
+          download_failed: "فشل التحميل",
+          opening_file: "جاري فتح الملف",
           refresh: "تحديث",
           no_invoices: "لا توجد فواتير حتى الآن.",
           invoice: "فاتورة",
@@ -479,7 +482,29 @@
         if (r) r.onclick = () => location.reload()
       }
 
-      async function clearCachesAndUnregister() {
+      async 
+
+      async function downloadInvoiceFile(storagePath) {
+        try {
+          if (!storagePath) {
+            toast(tr("no_file"))
+            return
+          }
+          toast(tr("opening_file"))
+          const bucket = "Invoices"
+          let objectPath = storagePath
+          if (objectPath.toLowerCase().startsWith("invoices/")) objectPath = objectPath.slice(9)
+          const { data, error } = await state.sb.storage.from(bucket).createSignedUrl(objectPath, 60 * 10)
+          if (error) throw error
+          const url = data && (data.signedUrl || data.signedURL)
+          if (!url) throw new Error("No signed URL returned")
+          window.open(url, "_blank", "noopener")
+        } catch (e) {
+          console.error(e)
+          alert(tr("download_failed") + (e && e.message ? ": " + e.message : ""))
+        }
+      }
+function clearCachesAndUnregister() {
         try {
           if ("caches" in window) {
             const keys = await caches.keys()
@@ -629,10 +654,18 @@
                       ${it.storage_path ? " • <b>" + tr("file_attached") + "</b>" : ""}
                     </div>
                   </div>
+                  <div class="iconbtn dlbtn" title="${tr(\"download\")}" data-path="${encodeURIComponent(it.storage_path || \"\")}" style="${it.storage_path ? \"\" : \"opacity:.35;pointer-events:none;\"}">📄</div>
                 </div>
               `).join("")}
             </div>
           `
+
+          host.querySelectorAll(".dlbtn").forEach((btn) => {
+            btn.addEventListener("click", async () => {
+              const p = decodeURIComponent(btn.getAttribute("data-path") || "")
+              await downloadInvoiceFile(p)
+            })
+          })
         } catch (e) {
           host.innerHTML = `<div class="warn">${tr("error")}</div>`
         }
