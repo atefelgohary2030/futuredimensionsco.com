@@ -1078,6 +1078,50 @@ with check (
       a.remove()
     }
 
+    async function downloadDocument(doc) {
+      var bucket = state.cfg.buckets.documents
+      var key = doc && doc.storage_path ? String(doc.storage_path) : ""
+      var baseName = (doc && (doc.name_en || doc.name_ar)) ? String(doc.name_en || doc.name_ar) : ""
+      var userFolder = doc && doc.user_id ? String(doc.user_id) : ""
+
+      var candidates = []
+      if (key) candidates.push(key)
+      if (userFolder && baseName) candidates.push(userFolder + "/" + baseName)
+
+      // try direct candidates
+      for (var i = 0; i < candidates.length; i++) {
+        try {
+          await downloadFromBucket(bucket, candidates[i])
+          return
+        } catch (e) {
+          // continue
+        }
+      }
+
+      // fallback: list user folder and try to locate matching object name
+      if (userFolder) {
+        var listRes = await state.sb.storage.from(bucket).list(userFolder, { limit: 100 })
+        if (!listRes.error && listRes.data && listRes.data.length) {
+          var wanted = baseName.toLowerCase()
+          var pick = null
+          if (wanted) {
+            for (var j = 0; j < listRes.data.length; j++) {
+              var n = String(listRes.data[j].name || "").toLowerCase()
+              if (n.indexOf(wanted) !== -1) { pick = listRes.data[j]; break }
+            }
+          }
+          if (!pick) pick = listRes.data[0]
+          if (pick && pick.name) {
+            await downloadFromBucket(bucket, userFolder + "/" + pick.name)
+            return
+          }
+        }
+      }
+
+      throw new Error(state.lang === "en" ? "File not found in storage. Please re-upload it." : "الملف غير موجود في التخزين. من فضلك ارفعه من جديد")
+    }
+
+
     function renderInvoices() {
       var main = document.getElementById("main")
       var gate = authGate()
@@ -1313,16 +1357,32 @@ with check (
 
     async function createTicket(subject, message) {
       var user = requireUser()
-      if (!subject) throw new Error(state.lang==="en" ? "Subject is required" : "الموضوع مطلوب")
+      if (!subject) throw new Error(state.lang === "en" ? "Subject is required" : "الموضوع مطلوب")
+      if (!message) throw new Error(state.lang === "en" ? "Message is required" : "الرسالة مطلوبة")
+
       var tbl = state.cfg.tables.tickets
-      var ins = await state.sb.from(tbl).insert({
-        user_id: user.id,
-        subject: subject,
-        message: message || "",
-        status: "open"
-      }).select("*").single()
-      if (ins.error) throw ins.error
-      return ins.data
+      var payloads = [
+        { user_id: user.id, subject: subject, message: message, status: "open" },
+        { user_id: user.id, title: subject, message: message, status: "open" },
+        { user_id: user.id, subject: subject, notes: message, status: "open" },
+        { user_id: user.id, title: subject, notes: message, status: "open" },
+        { user_id: user.id, subject: subject, description: message, status: "open" },
+        { user_id: user.id, title: subject, description: message, status: "open" },
+        { user_id: user.id, topic: subject, message: message, status: "open" },
+        { user_id: user.id, topic: subject, content: message, status: "open" }
+      ]
+
+      var lastErr = null
+      for (var i = 0; i < payloads.length; i++) {
+        var res = await state.sb.from(tbl).insert(payloads[i]).select("*").single()
+        if (!res.error) return res.data
+        lastErr = res.error
+        var msg = String(res.error.message || "")
+        if (msg.indexOf("Could not find") === -1 && msg.indexOf("schema cache") === -1 && msg.indexOf("column") === -1) {
+          break
+        }
+      }
+      throw lastErr || new Error(state.lang === "en" ? "Failed to create ticket" : "فشل إنشاء التذكرة")
     }
 
     async function loadTickets(listEl) {
@@ -1358,7 +1418,7 @@ with check (
 
       var titleInput = el("input", { class:"input", type:"text", placeholder: tx("subject") })
       var dateInput = el("input", { class:"input", type:"date" })
-      var timeInput = el("input", { class:"input", type:"time" })
+      var timeInput = el("input", { class:"input", type:"time", required:true, value:"10:00" })
       var notesInput = el("textarea", { class:"ta", placeholder: tx("message") })
 
       var sendBtn = el("button", {
@@ -1408,19 +1468,31 @@ with check (
 
     async function createMeeting(title, date, time, notes) {
       var user = requireUser()
-      if (!title) throw new Error(state.lang==="en" ? "Subject is required" : "العنوان مطلوب")
-      if (!date) throw new Error(state.lang==="en" ? "Date is required" : "التاريخ مطلوب")
+      if (!title) throw new Error(state.lang === "en" ? "Title is required" : "العنوان مطلوب")
+      if (!date) throw new Error(state.lang === "en" ? "Date is required" : "التاريخ مطلوب")
+
+      var timeVal = time || "10:00"
       var tbl = state.cfg.tables.meetings
-      var ins = await state.sb.from(tbl).insert({
-        user_id: user.id,
-        title: title,
-        meeting_date: date,
-        meeting_time: time || null,
-        notes: notes || "",
-        status: "open"
-      }).select("*").single()
-      if (ins.error) throw ins.error
-      return ins.data
+
+      var payloads = [
+        { user_id: user.id, title: title, meeting_date: date, meeting_time: timeVal, notes: notes || "" },
+        { user_id: user.id, subject: title, meeting_date: date, meeting_time: timeVal, notes: notes || "" },
+        { user_id: user.id, title: title, date: date, time: timeVal, notes: notes || "" },
+        { user_id: user.id, title: title, meeting_date: date, meeting_time: timeVal, message: notes || "" },
+        { user_id: user.id, subject: title, date: date, time: timeVal, message: notes || "" }
+      ]
+
+      var lastErr = null
+      for (var i = 0; i < payloads.length; i++) {
+        var res = await state.sb.from(tbl).insert(payloads[i]).select("*").single()
+        if (!res.error) return res.data
+        lastErr = res.error
+        var msg = String(res.error.message || "")
+        if (msg.indexOf("Could not find") === -1 && msg.indexOf("schema cache") === -1 && msg.indexOf("column") === -1 && msg.indexOf("violates") === -1) {
+          break
+        }
+      }
+      throw lastErr || new Error(state.lang === "en" ? "Failed to create meeting" : "فشل إنشاء الاجتماع")
     }
 
     async function loadMeetings(listEl) {
