@@ -412,6 +412,7 @@
       page: "home",
       lang: localStorage.getItem("fd_lang") || "ar",
       cfg: null,
+      warnedNoCfg: false,
       supabase: null,
       session: null,
       user: null,
@@ -494,7 +495,37 @@
       loadCfg()
     }
 
-    const clearCfg = () => {
+    
+  const loadCfgFromUrl = () => {
+    try {
+      const u = new URL(location.href)
+      const sp = u.searchParams
+      const supabaseUrl = (sp.get("supabaseUrl") || sp.get("sbUrl") || sp.get("SUPABASE_URL") || "").trim()
+      const anonKey = (sp.get("anonKey") || sp.get("sbKey") || sp.get("SUPABASE_ANON_KEY") || "").trim()
+      if (!supabaseUrl && !anonKey) return null
+      return { supabaseUrl, anonKey }
+    } catch {
+      return null
+    }
+  }
+
+  const applyCfgFromUrl = () => {
+    const c = loadCfgFromUrl()
+    if (!c || !c.supabaseUrl || !c.anonKey) return false
+    try {
+      localStorage.setItem("fd_supabaseUrl", c.supabaseUrl)
+      localStorage.setItem("fd_anonKey", c.anonKey)
+    } catch {}
+    state.cfg = c
+    // remove secrets from URL
+    try {
+      const u = new URL(location.href)
+      ;["supabaseUrl","sbUrl","SUPABASE_URL","anonKey","sbKey","SUPABASE_ANON_KEY"].forEach((k) => u.searchParams.delete(k))
+      history.replaceState({}, "", u.pathname + u.search + u.hash)
+    } catch {}
+    return true
+  }
+const clearCfg = () => {
       localStorage.removeItem("fd_supabaseUrl")
       localStorage.removeItem("fd_anonKey")
       state.cfg = null
@@ -1398,4 +1429,25 @@
     window.addEventListener("load", boot)
   </script>
 </body>
-</html>
+</html>const mustCfg = () => {
+    if (!state.cfg) {
+      // allow config via URL query one time
+      if (!applyCfgFromUrl()) loadCfg()
+    }
+
+    const ok = !!(state.cfg && state.cfg.supabaseUrl && state.cfg.anonKey)
+    if (!ok) {
+      if (!state.warnedNoCfg) {
+        toast("يرجى ضبط Supabase URL و Anon Key")
+        state.warnedNoCfg = true
+        // help the user immediately
+        openSettings()
+      }
+      return false
+    }
+
+    if (!state.supabase) initSupabase()
+    return true
+  }
+
+  
