@@ -271,19 +271,7 @@
     .hide{display:none !important}
     .rtl{direction:rtl}
     .ltr{direction:ltr}
-  
-
-/* Mobile tweaks */
-body{overflow-x:hidden}
-.grid > *{min-width:0}
-@media (max-width: 540px){
-  .shell{width:calc(100% - 16px);margin:10px auto}
-  .card{padding:14px}
-  .nav{width:calc(100% - 16px)}
-  .btn, .chip, .pill{font-size:12px}
-  .nav button{padding:10px 8px}
-}
-</style>
+  </style>
 </head>
 <body>
   <div class="topbar">
@@ -369,7 +357,6 @@ body{overflow-x:hidden}
         </div>
         <div class="row">
           <button class="btn ok" id="saveCfgBtn">حفظ</button>
-            <button class="btn secondary" id="shareCfgBtn">نسخ رابط للموبايل</button>
           <button class="btn secondary" id="clearCfgBtn">مسح</button>
           <div class="hint" id="cfgHint">سيتم حفظ البيانات داخل المتصفح فقط</div>
         </div>
@@ -479,9 +466,7 @@ body{overflow-x:hidden}
       $("settingsTitle").textContent = txt("الإعدادات","Settings")
       $("settingsClose").textContent = txt("إغلاق","Close")
       $("saveCfgBtn").textContent = txt("حفظ","Save")
-      
-      if ($("shareCfgBtn")) $("shareCfgBtn").textContent = txt("نسخ رابط للموبايل", "Copy mobile link")
-$("clearCfgBtn").textContent = txt("مسح","Clear")
+      $("clearCfgBtn").textContent = txt("مسح","Clear")
       $("cfgHint").textContent = txt("سيتم حفظ البيانات داخل المتصفح فقط","Saved in this browser only")
 
       $("authTitle").textContent = txt("تسجيل الدخول","Sign in")
@@ -500,7 +485,8 @@ $("clearCfgBtn").textContent = txt("مسح","Clear")
     const loadCfg = () => {
       const url = localStorage.getItem("fd_supabaseUrl") || ""
       const key = localStorage.getItem("fd_anonKey") || ""
-      if (url && key) state.cfg = { supabaseUrl: (url||"").trim(), anonKey: (key||"").trim() }else state.cfg = null
+      if (url && key) state.cfg = { url, key }
+      else state.cfg = null
     }
 
     const saveCfg = (url, key) => {
@@ -513,34 +499,6 @@ $("clearCfgBtn").textContent = txt("مسح","Clear")
   const loadCfgFromUrl = () => {
     try {
       const u = new URL(location.href)
-
-        // also support a single packed config in URL (for sharing to mobile)
-        const decodePacked = (packed) => {
-          try {
-            const s = (packed || "").trim()
-            if (!s) return null
-            const b64 = s.replace(/-/g, "+").replace(/_/g, "/")
-            const pad = b64 + "===".slice((b64.length + 3) % 4)
-            const json = JSON.parse(atob(pad))
-            const supabaseUrl = String(json.supabaseUrl || json.sb || "").trim()
-            const anonKey = String(json.anonKey || json.ak || "").trim()
-            if (!supabaseUrl || !anonKey) return null
-            return { supabaseUrl, anonKey }
-          } catch (e) {
-            return null
-          }
-        }
-        const hash = (u.hash || "").replace(/^#/, "")
-        if (hash.startsWith("cfg=") || hash.startsWith("c=")) {
-          const packed = decodeURIComponent(hash.split("=").slice(1).join("=") || "")
-          const decoded = decodePacked(packed)
-          if (decoded) return decoded
-        }
-        const cfgParam = u.searchParams.get("cfg") || u.searchParams.get("c")
-        if (cfgParam) {
-          const decoded = decodePacked(cfgParam)
-          if (decoded) return decoded
-        }
       const sp = u.searchParams
       const supabaseUrl = (sp.get("supabaseUrl") || sp.get("sbUrl") || sp.get("SUPABASE_URL") || "").trim()
       const anonKey = (sp.get("anonKey") || sp.get("sbKey") || sp.get("SUPABASE_ANON_KEY") || "").trim()
@@ -563,8 +521,7 @@ $("clearCfgBtn").textContent = txt("مسح","Clear")
     try {
       const u = new URL(location.href)
       ;["supabaseUrl","sbUrl","SUPABASE_URL","anonKey","sbKey","SUPABASE_ANON_KEY"].forEach((k) => u.searchParams.delete(k))
-      u.hash = ""
-      history.replaceState({}, "", u.pathname + u.search)
+      history.replaceState({}, "", u.pathname + u.search + u.hash)
     } catch {}
     return true
   }
@@ -582,13 +539,13 @@ const clearCfg = () => {
 
     const initSupabase = async () => {
       try{
-        if (!state.cfg || !state.cfg.supabaseUrl || !state.cfg.anonKey) return false
+        if (!state.cfg || !state.cfg.url || !state.cfg.key) return false
         if (!window.supabase || !window.supabase.createClient) {
           showToast(txt("فشل تحميل مكتبة Supabase","Supabase library failed to load"))
           return false
         }
 
-        state.supabase = window.supabase.createClient(state.cfg.supabaseUrl, state.cfg.anonKey, {
+        state.supabase = window.supabase.createClient(state.cfg.url, state.cfg.key, {
           auth: {
             persistSession: true,
             autoRefreshToken: true,
@@ -680,7 +637,7 @@ const clearCfg = () => {
       if (!el) return
 
       const email = state.user && state.user.email ? state.user.email : txt("غير مسجل","Not signed in")
-      const cfgOk = !!(state.cfg && state.cfg.supabaseUrl && state.cfg.anonKey)
+      const cfgOk = !!(state.cfg && state.cfg.url && state.cfg.key)
       const conn = state.supabase ? txt("متصل","Online") : txt("غير متصل","Offline")
 
       el.innerHTML = `
@@ -714,7 +671,7 @@ const clearCfg = () => {
       $("pageTitle").textContent = txt("الرئيسية","Home")
       $("pageSub").textContent = txt("واجهة التطبيق ولوحة تحكم سريعة","App dashboard and quick actions")
 
-      const cfgOk = !!(state.cfg && state.cfg.supabaseUrl && state.cfg.anonKey)
+      const cfgOk = !!(state.cfg && state.cfg.url && state.cfg.key)
       const signed = !!state.user
       const warn = !cfgOk ? txt("لازم تضيف Supabase URL و Anon Key من الإعدادات","Add Supabase URL and Anon Key from Settings") :
                    !signed ? txt("سجل دخول عشان RLS تشتغل صح","Sign in so RLS works") :
@@ -1348,37 +1305,6 @@ const clearCfg = () => {
         if (ok) showToast(txt("تم الحفظ والاتصال","Saved and connected"), true)
         render()
       }
-
-      if ($("shareCfgBtn")) $("shareCfgBtn").onclick = async () => {
-        const cfg = state.cfg || {}
-        const supabaseUrl = String(cfg.supabaseUrl || "").trim()
-        const anonKey = String(cfg.anonKey || "").trim()
-        if (!supabaseUrl || !anonKey) {
-          showToast(txt("اضبط البيانات أولا","Set config first"), false)
-          return
-        }
-        const payload = JSON.stringify({ supabaseUrl, anonKey })
-        const b64 = btoa(payload).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")
-        const shareUrl = `${location.origin}${location.pathname}${location.search}#cfg=${encodeURIComponent(b64)}`
-        try {
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            await navigator.clipboard.writeText(shareUrl)
-          } else {
-            const ta = document.createElement("textarea")
-            ta.value = shareUrl
-            ta.style.position = "fixed"
-            ta.style.left = "-9999px"
-            document.body.appendChild(ta)
-            ta.select()
-            document.execCommand("copy")
-            ta.remove()
-          }
-          showToast(txt("تم نسخ رابط للموبايل","Mobile link copied"), true)
-        } catch (e) {
-          showToast(txt("لم أستطع نسخ الرابط","Could not copy link"), false)
-        }
-      }
-
 
       $("userBtn").onclick = () => openModal("authModal")
       $("authClose").onclick = () => closeModal("authModal")
