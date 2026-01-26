@@ -1,4 +1,4 @@
-const CACHE_NAME = "fd-app-v9"
+const CACHE_NAME = "fd-app-v11"
 const CORE = [
   "/app/",
   "/app/index.html",
