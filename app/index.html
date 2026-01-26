@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <meta name="theme-color" content="#061427" />
-  <title>أبعاد المستقبل للاستشارات وحلول الأعمال</title>
+  <title>Future Dimensions - أبعاد المستقبل</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -12,200 +12,183 @@
 
   <style>
     :root {
-      /* لوحة الألوان الذهبية والملكية */
+      /* الألوان الرسمية لشركة أبعاد المستقبل مع زيادة اللون الذهبي */
       --bg: #061427;
       --panel: #0A1C38;
       --panel2: #0E274A;
       --text: #F7F0E1;
-      --brand: #D2AC52; /* الذهبي الأساسي */
-      --brand-bright: #F7E69B; /* ذهبي لامع */
-      --brand-dark: #B68C38; /* ذهبي غامق */
-      --gold-grad: linear-gradient(135deg, #B68C38 0%, #F7E69B 50%, #D2AC52 100%);
-      --line: rgba(210,172,82,.25);
-      --error: #ff4d4d;
+      --brand: #D2AC52; /* لون ذهبي ملكي */
+      --brand-light: #F7E69B; /* ذهبي فاتح للمعان */
+      --brand-dark: #B68C38;
+      --line: rgba(210,172,82,0.3); /* خطوط ذهبية شفافة */
+      --gold-gradient: linear-gradient(135deg, #B68C38 0%, #F7E69B 50%, #D2AC52 100%);
     }
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body {
       margin: 0; padding: 0;
       background-color: var(--bg);
       color: var(--text);
       font-family: 'Cairo', sans-serif;
+      direction: rtl; /* التلقائي عربي */
       overflow-x: hidden;
     }
 
-    /* الترويسة (Top Bar) */
-    .topbar {
+    /* البار العلوي مع اللوجو */
+    .header {
       background: var(--panel);
-      padding: 15px 20px;
+      padding: 15px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 2px solid var(--brand);
-      position: sticky;
-      top: 0; z-index: 1000;
+      position: sticky; top: 0; z-index: 1000;
     }
 
-    .logo-area { display: flex; align-items: center; gap: 10px; }
-    .logo-img { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--brand); }
-    .brand-title { font-weight: 700; font-size: 1.1rem; color: var(--brand-bright); }
+    .logo-box { display: flex; align-items: center; gap: 10px; }
+    .logo-img { width: 45px; height: 45px; border-radius: 8px; border: 1px solid var(--brand); background: #fff; }
+    .company-name { font-weight: 700; color: var(--brand-light); font-size: 1rem; }
 
-    /* البطاقات والحاويات */
+    /* تنسيق البطاقات */
     .card {
       background: var(--panel2);
       border: 1px solid var(--line);
       border-radius: 15px;
       padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      margin: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     }
 
-    .btn-gold {
-      background: var(--gold-grad);
+    /* أزرار ذهبية قوية */
+    .btn-action {
+      background: var(--gold-gradient);
       color: #061427;
       border: none;
-      padding: 12px 25px;
+      padding: 12px;
       border-radius: 10px;
-      font-weight: 700;
-      cursor: pointer;
+      font-weight: bold;
       width: 100%;
-      transition: transform 0.2s;
+      margin-top: 10px;
+      cursor: pointer;
     }
-    .btn-gold:active { transform: scale(0.98); }
 
-    /* القائمة السفلية (Bottom Nav) */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0; width: 100%;
+    /* القائمة السفلية */
+    .nav-bottom {
+      position: fixed; bottom: 0; width: 100%;
       background: var(--panel);
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-      border-top: 1px solid var(--brand);
-    }
-    .nav-item { color: var(--brand); text-align: center; font-size: 0.8rem; text-decoration: none; }
-    .nav-item i { display: block; margin-bottom: 4px; }
-
-    /* صفحة الفواتير */
-    .invoice-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; justify-content: space-around;
       padding: 12px 0;
-      border-bottom: 1px solid var(--line);
+      border-top: 2px solid var(--brand);
     }
-    .status-paid { color: #4ade80; font-size: 0.9rem; }
+    .nav-item { color: var(--brand); text-align: center; font-size: 0.75rem; text-decoration: none; }
+
+    /* جداول الفواتير */
+    .inv-item {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 0;
+      display: flex; justify-content: space-between;
+    }
   </style>
 </head>
 <body>
 
-  <div class="topbar">
-    <div class="logo-area">
-      <img src="https://www.futuredimensionsco.com/wp-content/uploads/2023/05/cropped-Future-Dimensions-Logo-1-192x192.png" alt="Logo" class="logo-img">
-      <span class="brand-title">أبعاد المستقبل</span>
+  <div class="header">
+    <div class="logo-box">
+      <img src="https://www.futuredimensionsco.com/wp-content/uploads/2023/05/cropped-Future-Dimensions-Logo-1-192x192.png" class="logo-img" alt="لوجو">
+      <span class="company-name">أبعاد المستقبل</span>
     </div>
-    <div id="lang-switch" style="cursor:pointer; color:var(--brand)">EN</div>
+    <button onclick="toggleLang()" id="langBtn" style="background:none; border:1px solid var(--brand); color:var(--brand); border-radius:5px; padding:2px 8px;">EN</button>
   </div>
 
-  <div id="main-app" style="padding: 20px; padding-bottom: 80px;">
-    <div id="screen-home">
-        <div class="card">
-            <h3 id="txt-welcome">مرحباً بك في لوحة التحكم</h3>
-            <p id="txt-status">مشروعك الحالي: قيد التنفيذ</p>
-            <button class="btn-gold" onclick="openScreen('invoices')">عرض الفواتير</button>
-        </div>
+  <div id="content">
+    <div id="home-screen">
+      <div class="card">
+        <h2 id="welcome-msg">أهلاً بك في أبعاد المستقبل</h2>
+        <p style="opacity:0.8">تابع مشروعك وفواتيرك بكل سهولة.</p>
+      </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-            <div class="card" onclick="alert('جاري فتح التذكرة...')" style="text-align:center">
-                <i data-lucide="message-square" style="color:var(--brand)"></i>
-                <p>فتح تذكرة</p>
-            </div>
-            <div class="card" onclick="alert('جاري طلب اجتماع...')" style="text-align:center">
-                <i data-lucide="calendar" style="color:var(--brand)"></i>
-                <p>طلب اجتماع</p>
-            </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px;">
+        <div class="card" style="margin:0; text-align:center;" onclick="showInvoices()">
+          <i data-lucide="file-text" style="color:var(--brand)"></i>
+          <p>الفواتير</p>
         </div>
+        <div class="card" style="margin:0; text-align:center;" onclick="alert('سيتم فتح نظام التذاكر قريباً')">
+          <i data-lucide="message-circle" style="color:var(--brand)"></i>
+          <p>تذكرة دعم</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <button class="btn-action" onclick="alert('جاري التحويل لطلب اجتماع...')">طلب اجتماع مجدول</button>
+        <button class="btn-action" style="background:none; border:1px solid var(--brand); color:var(--brand); margin-top:15px;" onclick="window.location.href='https://www.futuredimensionsco.com/'">الموقع الرسمي</button>
+      </div>
     </div>
 
-    <div id="screen-invoices" style="display:none;">
-        <button onclick="openScreen('home')" style="color:var(--brand); background:none; border:none; margin-bottom:15px;">← العودة</button>
-        <h3>فواتيري</h3>
-        <div id="invoices-list">
-            <p style="text-align:center; opacity:0.6;">جاري تحميل الفواتير...</p>
+    <div id="invoice-screen" style="display:none; padding:15px;">
+        <h3 style="color:var(--brand-light)">قائمة الفواتير</h3>
+        <div class="card" id="invoice-list">
+            <p style="text-align:center">جاري تحميل البيانات من Supabase...</p>
         </div>
+        <button class="btn-action" onclick="showHome()">العودة للرئيسية</button>
     </div>
   </div>
 
-  <nav class="bottom-nav">
-    <a href="#" class="nav-item" onclick="openScreen('home')"><i data-lucide="home"></i>الرئيسية</a>
-    <a href="#" class="nav-item" onclick="openScreen('invoices')"><i data-lucide="file-text"></i>الفواتير</a>
-    <a href="#" class="nav-item"><i data-lucide="user"></i>حسابي</a>
+  <nav class="nav-bottom">
+    <a href="javascript:void(0)" class="nav-item" onclick="showHome()"><i data-lucide="home"></i><div>الرئيسية</div></a>
+    <a href="javascript:void(0)" class="nav-item" onclick="showInvoices()"><i data-lucide="receipt"></i><div>الفواتير</div></a>
+    <a href="javascript:void(0)" class="nav-item"><i data-lucide="settings"></i><div>الإعدادات</div></a>
   </nav>
 
   <script>
-    // إعدادات Supabase - ضع مفاتيحك هنا ليعمل التطبيق
-    const SUPABASE_URL = 'https://mifottrhqimqzojiyytq.supabase.co';
-    const SUPABASE_KEY = 'ضع_هنا_مفتاح_API_الخاص_بك'; 
-    const supabase = typeof supabase !== 'undefined' ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+    // --- إعدادات Supabase الخاصة بك ---
+    const SB_URL = "https://mifottrhqimqzojiyytq.supabase.co";
+    const SB_KEY = "ضع_هنا_مفتاح_API_الخاص_بك"; // قم بلصق مفتاح Anon Key هنا
+    const supabase = (typeof supabase !== 'undefined') ? supabase.createClient(SB_URL, SB_KEY) : null;
 
-    // تفعيل أيقونات Lucide
+    // تفعيل الأيقونات
     lucide.createIcons();
 
-    // التنقل بين الصفحات
-    function openScreen(screenId) {
-      document.getElementById('screen-home').style.display = 'none';
-      document.getElementById('screen-invoices').style.display = 'none';
-      document.getElementById('screen-' + screenId).style.display = 'block';
-      
-      if(screenId === 'invoices') fetchInvoices();
+    // وظائف التنقل
+    function showHome() {
+        document.getElementById('home-screen').style.display = 'block';
+        document.getElementById('invoice-screen').style.display = 'none';
     }
 
-    // جلب الفواتير من Supabase
-    async function fetchInvoices() {
-      const listDiv = document.getElementById('invoices-list');
-      if(!supabase) {
-        listDiv.innerHTML = '<p style="color:var(--error)">يرجى ربط Supabase Key أولاً</p>';
-        return;
-      }
-
-      const { data, error } = await supabase.from('invoices').select('*');
-      
-      if (error) {
-        listDiv.innerHTML = '<p>لا توجد فواتير حالياً</p>';
-      } else {
-        listDiv.innerHTML = '';
-        data.forEach(inv => {
-          listDiv.innerHTML += `
-            <div class="invoice-row">
-              <div>
-                <div style="font-weight:bold">فاتورة #${inv.id}</div>
-                <div style="font-size:0.8rem; opacity:0.7">${inv.date || '2024-01-01'}</div>
-              </div>
-              <div class="status-paid">${inv.amount} SAR</div>
-              <i data-lucide="download" style="width:18px; color:var(--brand); cursor:pointer"></i>
-            </div>
-          `;
-        });
-        lucide.createIcons();
-      }
+    async function showInvoices() {
+        document.getElementById('home-screen').style.display = 'none';
+        document.getElementById('invoice-screen').style.display = 'block';
+        
+        const listContainer = document.getElementById('invoice-list');
+        
+        // محاكاة جلب البيانات (أو جلبها فعلياً إذا وضعت المفتاح)
+        try {
+            if(SB_KEY === "ضع_هنا_مفتاح_API_الخاص_بك") {
+                listContainer.innerHTML = "<p style='color:orange'>يجب وضع مفتاح API Key في الكود لتظهر الفواتير</p>";
+                return;
+            }
+            const { data, error } = await supabase.from('invoices').select('*');
+            if (data && data.length > 0) {
+                listContainer.innerHTML = data.map(inv => `
+                    <div class="inv-item">
+                        <span>فاتورة #${inv.id}</span>
+                        <span style="color:var(--brand)">${inv.amount} ريال</span>
+                    </div>
+                `).join('');
+            } else {
+                listContainer.innerHTML = "لا توجد فواتير حالياً.";
+            }
+        } catch (e) {
+            listContainer.innerHTML = "خطأ في الاتصال بقاعدة البيانات.";
+        }
     }
 
-    // تبديل اللغة (بشكل مبسط)
-    let currentLang = 'ar';
-    document.getElementById('lang-switch').onclick = function() {
-      if(currentLang === 'ar') {
-        document.documentElement.dir = 'ltr';
-        document.documentElement.lang = 'en';
-        this.innerText = 'AR';
-        currentLang = 'en';
-        // هنا يمكنك تغيير النصوص للإنجليزية
-      } else {
-        document.documentElement.dir = 'rtl';
-        document.documentElement.lang = 'ar';
-        this.innerText = 'EN';
-        currentLang = 'ar';
-      }
-    };
+    // تبديل اللغة
+    let lang = 'ar';
+    function toggleLang() {
+        lang = lang === 'ar' ? 'en' : 'ar';
+        document.body.style.direction = lang === 'ar' ? 'rtl' : 'ltr';
+        document.getElementById('langBtn').innerText = lang === 'ar' ? 'EN' : 'AR';
+        // هنا يتم تحديث باقي النصوص برمجياً
+    }
   </script>
 </body>
 </html>
