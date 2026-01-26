@@ -1,1366 +1,1637 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#b68c38">
-  <title>Future Dimensions</title>
-  <link rel="manifest" href="/app/manifest.webmanifest">
-  <link rel="icon" href="/app/logo.png">
-  <link rel="apple-touch-icon" href="/app/apple-touch-icon.png">
-  <style>
-    :root{
-      --bg1:#0b0f14;
-      --bg2:#061b33;
-      --panel:rgba(16,20,26,0.78);
-      --panel2:rgba(10,13,18,0.72);
-      --border:rgba(255,255,255,0.08);
-      --text:rgba(255,255,255,0.92);
-      --muted:rgba(255,255,255,0.66);
-      --gold:#b68c38;
-      --gold2:#f7e69b;
-      --shadow:0 16px 40px rgba(0,0,0,0.35);
-      --r:18px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      color:var(--text);
-      background: radial-gradient(1100px 520px at 50% -140px, rgba(182,140,56,0.22), transparent 60%),
-                  linear-gradient(180deg, var(--bg1), var(--bg2));
-    }
-    .app{min-height:100vh; display:flex; flex-direction:column}
-    .topbar{padding:12px 14px 8px; display:flex; justify-content:center}
-    .topbar-inner{
-      width:min(980px, calc(100vw - 20px));
-      background:var(--panel);
-      border:1px solid rgba(182,140,56,0.20);
-      box-shadow:var(--shadow);
-      border-radius:22px;
-      padding:10px 12px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      backdrop-filter: blur(10px);
-    }
-    .logo{display:flex; align-items:center; gap:10px; min-width:0}
-    .mark{
-      width:38px; height:38px;
-      border-radius:12px;
-      background:linear-gradient(135deg, rgba(182,140,56,0.25), rgba(247,230,155,0.10));
-      border:1px solid rgba(182,140,56,0.35);
-      display:flex; align-items:center; justify-content:center;
-      overflow:hidden;
-      flex:0 0 auto;
-    }
-    .mark img{width:34px; height:34px; border-radius:10px; display:block}
-    #logoFallbackText{display:none; font-weight:900; color:var(--gold2); letter-spacing:0.5px}
-    .brand{font-weight:900; font-size:15px; line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-    .subbrand{font-size:11px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-    .controls{display:flex; align-items:center; gap:8px; flex:0 0 auto}
-    .chip{
-      border:1px solid rgba(255,255,255,0.12);
-      background:rgba(0,0,0,0.22);
-      padding:6px 10px;
-      border-radius:999px;
-      cursor:pointer;
-      user-select:none;
-      font-weight:800;
-      font-size:12px;
-      color:var(--text);
-    }
-    .chip.active{
-      border-color:rgba(182,140,56,0.55);
-      background:linear-gradient(135deg, rgba(182,140,56,0.26), rgba(247,230,155,0.10));
-    }
-    .iconbtn{
-      width:34px; height:34px;
-      display:flex; align-items:center; justify-content:center;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.12);
-      background:rgba(0,0,0,0.22);
-      cursor:pointer;
-      user-select:none;
-      position:relative;
-    }
-    .badge-dot{
-      position:absolute;
-      top:5px; right:6px;
-      min-width:16px; height:16px;
-      border-radius:999px;
-      background:rgba(182,140,56,0.95);
-      color:#111;
-      font-weight:900;
-      font-size:10px;
-      display:flex; align-items:center; justify-content:center;
-      border:1px solid rgba(0,0,0,0.25);
-    }
-    .content{
-      width:min(980px, calc(100vw - 20px));
-      margin:10px auto calc(86px + env(safe-area-inset-bottom));
-      padding:2px 2px 20px;
-      min-height: calc(100vh - 170px);
-    }
-    .card{
-      background:var(--panel2);
-      border:1px solid var(--border);
-      border-radius:var(--r);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      padding:14px;
-    }
-    .grid{display:grid; gap:10px}
-    @media (min-width:720px){ .grid.cols2{grid-template-columns:1fr 1fr} }
-    .title{font-weight:950; font-size:16px}
-    .muted{color:var(--muted); font-size:13px}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(182,140,56,0.40);
-      background:linear-gradient(135deg, rgba(182,140,56,0.28), rgba(247,230,155,0.08));
-      color:var(--text);
-      cursor:pointer;
-      font-weight:900;
-      text-decoration:none;
-      user-select:none;
-    }
-    .btn.secondary{
-      border-color:rgba(255,255,255,0.14);
-      background:rgba(0,0,0,0.22);
-      font-weight:800;
-    }
-    .row{display:flex; gap:10px; flex-wrap:wrap}
-    .list{margin-top:10px}
-    .item{
-      display:flex; gap:10px;
-      padding:12px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,0.10);
-      background:rgba(0,0,0,0.16);
-      margin-bottom:10px;
-    }
-    .ico{width:38px; height:38px; border-radius:14px; display:flex; align-items:center; justify-content:center;
-      background:rgba(182,140,56,0.14); border:1px solid rgba(182,140,56,0.22)
-    }
-    .it-main{min-width:0; flex:1}
-    .it-title{margin:0; font-weight:950}
-    .it-sub{margin:4px 0 0; color:var(--muted); font-size:13px}
-    .bottomnav{
-      position:fixed;
-      left:0; right:0; bottom:0;
-      display:flex;
-      justify-content:center;
-      padding:10px 10px calc(14px + env(safe-area-inset-bottom));
-      pointer-events:none;
-    }
-    .bottomnav-inner{
-      width:min(980px, calc(100vw - 20px));
-      background:rgba(0,0,0,0.32);
-      border:1px solid rgba(182,140,56,0.22);
-      box-shadow:var(--shadow);
-      border-radius:22px;
-      padding:10px;
-      display:flex;
-      justify-content:space-between;
-      gap:8px;
-      pointer-events:auto;
-      backdrop-filter: blur(10px);
-    }
-    .navbtn{
-      flex:1;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,0.10);
-      background:rgba(0,0,0,0.18);
-      padding:10px 8px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      cursor:pointer;
-      font-weight:900;
-      color:var(--text);
-      user-select:none;
-      min-width:0;
-    }
-    .navbtn.active{
-      border-color:rgba(182,140,56,0.55);
-      background:linear-gradient(135deg, rgba(182,140,56,0.26), rgba(247,230,155,0.10));
-    }
-    .navlbl{font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-    .toast{
-      position:fixed;
-      left:50%;
-      transform:translateX(-50%);
-      bottom:100px;
-      background:rgba(0,0,0,0.55);
-      border:1px solid rgba(255,255,255,0.12);
-      padding:10px 12px;
-      border-radius:14px;
-      display:none;
-      box-shadow:var(--shadow);
-      max-width: min(680px, calc(100vw - 20px));
-      text-align:center;
-      backdrop-filter: blur(8px);
-    }
-    .modal-wrap{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      background:rgba(0,0,0,0.45);
-      padding:16px;
-      z-index:99;
-    }
-    .modal{
-      width:min(560px, calc(100vw - 20px));
-      background:rgba(10,12,16,0.86);
-      border:1px solid rgba(182,140,56,0.25);
-      border-radius:22px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      backdrop-filter: blur(12px);
-    }
-    .modal-head{display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,0.10)}
-    .modal-title{font-weight:950}
-    .closex{cursor:pointer; padding:6px 10px; border-radius:12px; border:1px solid rgba(255,255,255,0.12); background:rgba(0,0,0,0.22)}
-    .modal-body{padding:14px}
-    .modal-actions{padding:12px 14px; border-top:1px solid rgba(255,255,255,0.10); display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap}
-    input,select,textarea{
-      width:100%;
-      background:rgba(0,0,0,0.25);
-      color:var(--text);
-      border:1px solid rgba(255,255,255,0.14);
-      border-radius:14px;
-      padding:10px 12px;
-      outline:none;
-      font-weight:700;
-    }
-    label{display:block; font-size:12px; color:var(--muted); margin:10px 0 6px}
-    .hr{height:1px; background:rgba(255,255,255,0.10); margin:12px 0}
-    [dir="rtl"] .row{justify-content:flex-start}
-  
-    .warn{color:rgba(255,180,170,0.95); font-weight:800}
-</style>
-</head>
-<body>
-  <div class="app" id="app">
-    <div class="topbar">
-      <div class="topbar-inner">
-        <div class="logo">
-          <div class="mark" id="mark">
-            <img id="brandLogo" alt="Future Dimensions logo" src="/app/logo.png">
-            <span aria-hidden="true" id="logoFallbackText">FD</span>
-          </div>
-          <div style="min-width:0">
-            <div class="brand" id="brand">Future Dimensions</div>
-            <div class="subbrand" id="subbrand">Consulting &amp; Business Solutions</div>
-          </div>
-        </div>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<title>Future Dimensions App</title>
+<style>
+  :root {
+    --bg0:#070b12;
+    --bg1:#0b1220;
+    --card:rgba(255,255,255,.04);
+    --card2:rgba(255,255,255,.06);
+    --stroke:rgba(255,255,255,.10);
+    --text:#e7edf6;
+    --muted:#aeb8c8;
+    --gold:#c7a357;
+    --gold2:#e4c77a;
+    --danger:#ff6b6b;
+    --ok:#46d39a;
+    --shadow: 0 20px 80px rgba(0,0,0,.45);
+    --radius: 18px;
+    --radius2: 26px;
+    --pad: 16px;
+    --safe-b: env(safe-area-inset-bottom);
+    --safe-t: env(safe-area-inset-top);
+  }
 
-        <div class="controls">
-          <div class="chip active" id="enBtn">EN</div>
-          <div class="chip" id="arBtn">عربي</div>
-          <div class="iconbtn" id="notifBtn" title="Notifications">
-            🔔
-            <div class="badge-dot" id="notifCount" style="display:none">0</div>
-          </div>
-          <div class="iconbtn" id="profileBtn" title="Profile">👤</div>
-        </div>
+  * { box-sizing:border-box }
+  html, body { height:100% }
+  body {
+    margin:0;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Arabic", "Noto Sans", Arial, sans-serif;
+    background: radial-gradient(1200px 700px at 20% 0%, rgba(199,163,87,.18), transparent 60%),
+                radial-gradient(900px 600px at 80% 20%, rgba(103,157,255,.12), transparent 55%),
+                linear-gradient(180deg, var(--bg0), var(--bg1));
+    color: var(--text);
+    overflow-x:hidden;
+  }
+
+  a { color:inherit }
+  button, input, textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  .wrap {
+    min-height: 100%;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .topbar {
+    padding: calc(14px + var(--safe-t)) 16px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+  }
+
+  .brand {
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .logo {
+    width:42px;
+    height:42px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(199,163,87,.25), rgba(255,255,255,.04));
+    border:1px solid rgba(199,163,87,.35);
+    display:grid;
+    place-items:center;
+    box-shadow: var(--shadow);
+    flex: 0 0 auto;
+  }
+
+  .logo svg { width:22px; height:22px; fill: var(--gold2) }
+
+  .brandtext {
+    display:flex;
+    flex-direction:column;
+    line-height:1.1;
+    min-width: 0;
+  }
+  .brandtext .t1 {
+    font-weight: 700;
+    letter-spacing:.2px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .brandtext .t2 {
+    color: var(--muted);
+    font-size: 12px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .actions {
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    flex: 0 0 auto;
+  }
+
+  .pill {
+    border: 1px solid rgba(199,163,87,.35);
+    background: rgba(255,255,255,.03);
+    color: var(--text);
+    padding: 8px 12px;
+    border-radius: 999px;
+    cursor:pointer;
+    transition: transform .08s ease, background .15s ease, border .15s ease;
+    display:flex;
+    align-items:center;
+    gap: 8px;
+  }
+  .pill:active { transform: scale(.98) }
+  .pill:hover { background: rgba(255,255,255,.05) }
+
+  .main {
+    flex: 1 1 auto;
+    padding: 0 16px 86px;
+    max-width: 1050px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--stroke);
+    border-radius: var(--radius2);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+  }
+
+  .card + .card { margin-top: 14px }
+
+  .cardhd {
+    padding: 14px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .cardhd h2 {
+    margin: 0;
+    font-size: 16px;
+    letter-spacing:.2px;
+  }
+  .sub {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+    line-height: 1.35;
+  }
+
+  .cardbd { padding: 14px 16px }
+
+  .row {
+    display:flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .row > * { flex: 1 1 220px }
+
+  .field {
+    display:flex;
+    flex-direction:column;
+    gap: 8px;
+  }
+  .label {
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .input, .ta {
+    width:100%;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(0,0,0,.18);
+    padding: 12px 12px;
+    outline:none;
+  }
+  .ta { min-height: 96px; resize: vertical }
+
+  .btn {
+    border: 1px solid rgba(199,163,87,.35);
+    background: rgba(199,163,87,.14);
+    color: var(--text);
+    padding: 11px 14px;
+    border-radius: 14px;
+    cursor:pointer;
+    transition: transform .08s ease, background .15s ease, border .15s ease;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    min-height: 42px;
+    user-select:none;
+  }
+  .btn:hover { background: rgba(199,163,87,.20) }
+  .btn:active { transform: scale(.98) }
+  .btn.secondary {
+    border-color: rgba(255,255,255,.16);
+    background: rgba(255,255,255,.06);
+  }
+  .btn.danger {
+    border-color: rgba(255,107,107,.35);
+    background: rgba(255,107,107,.12);
+  }
+  .btn.block { width: 100% }
+
+  .hint {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .msg {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(0,0,0,.18);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .msg.ok { border-color: rgba(70,211,154,.35); background: rgba(70,211,154,.08) }
+  .msg.bad { border-color: rgba(255,107,107,.35); background: rgba(255,107,107,.08) }
+
+  .list {
+    display:flex;
+    flex-direction:column;
+    gap: 10px;
+  }
+
+  .item {
+    display:flex;
+    gap: 12px;
+    align-items:flex-start;
+    padding: 12px 12px;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.03);
+  }
+
+  .icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+    display:grid;
+    place-items:center;
+    background: rgba(199,163,87,.12);
+    border: 1px solid rgba(199,163,87,.25);
+    flex: 0 0 auto;
+  }
+  .icon svg { width: 18px; height: 18px; fill: var(--gold2) }
+
+  .itxt {
+    flex: 1 1 auto;
+    min-width:0;
+  }
+  .itxt .t {
+    font-weight: 700;
+    font-size: 14px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .itxt .m {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .itag {
+    border:1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.04);
+    color: var(--muted);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12px;
+    white-space:nowrap;
+  }
+  .itag.ok { border-color: rgba(70,211,154,.35); color: #bff3dc; background: rgba(70,211,154,.08) }
+  .itag.bad { border-color: rgba(255,107,107,.35); color: #ffd2d2; background: rgba(255,107,107,.08) }
+
+  .bottomnav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 12px 14px calc(12px + var(--safe-b));
+    backdrop-filter: blur(14px);
+    background: linear-gradient(180deg, rgba(7,11,18,0), rgba(7,11,18,.75) 25%, rgba(7,11,18,.92));
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+
+  .nav {
+    max-width: 1050px;
+    margin: 0 auto;
+    display:flex;
+    gap: 10px;
+  }
+  .navbtn {
+    flex: 1 1 0;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.03);
+    padding: 10px 10px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    min-height: 48px;
+    transition: transform .08s ease, background .15s ease, border .15s ease;
+  }
+  .navbtn:active { transform: scale(.98) }
+  .navbtn.active {
+    border-color: rgba(199,163,87,.40);
+    background: rgba(199,163,87,.14);
+  }
+  .navbtn span {
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .grid2 {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 760px) {
+    .grid2 { grid-template-columns: 1fr }
+    .brandtext .t2 { display:none }
+  }
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    background: rgba(0,0,0,.55);
+    padding: 14px 14px calc(14px + var(--safe-b));
+    z-index: 50;
+  }
+  .modal.show { display:flex }
+
+  .sheet {
+    width: min(720px, 100%);
+    border-radius: 24px;
+    background: rgba(10,16,28,.96);
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+  }
+  .sheet .hd {
+    padding: 14px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .sheet .hd .x {
+    border: 1px solid rgba(255,255,255,.16);
+    background: rgba(255,255,255,.06);
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+  }
+  .sheet .bd { padding: 14px 16px }
+
+  .code {
+    background: rgba(0,0,0,.22);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 16px;
+    padding: 12px;
+    white-space: pre-wrap;
+    font-size: 12px;
+    line-height: 1.5;
+    overflow:auto;
+  }
+
+  .skeleton {
+    height: 14px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,.09), rgba(255,255,255,.05));
+    background-size: 240% 100%;
+    animation: sk 1.2s ease infinite;
+  }
+  @keyframes sk {
+    0% { background-position: 0% 0% }
+    100% { background-position: 100% 0% }
+  }
+</style>
+
+<script>
+  ;(function() {
+    try {
+      var needsReload = false
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(regs) {
+          regs.forEach(function(r) { r.unregister(); needsReload = true })
+        }).catch(function(){})
+      }
+      if (window.caches && caches.keys) {
+        caches.keys().then(function(keys) {
+          keys.forEach(function(k) { caches.delete(k); needsReload = true })
+        }).catch(function(){})
+      }
+      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        needsReload = true
+      }
+      if (needsReload && !sessionStorage.getItem("fd_sw_cleaned")) {
+        sessionStorage.setItem("fd_sw_cleaned","1")
+        setTimeout(function(){ location.reload() }, 350)
+      }
+    } catch (e) {}
+  })()
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
+<script>
+  if (!window.supabase) {
+    var s=document.createElement("script")
+    s.src="https://unpkg.com/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"
+    document.head.appendChild(s)
+  }
+</script>
+</head>
+
+<body>
+<div class="wrap" id="app">
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Zm0 2.3L5 7.8v8.4l7 3.9 7-3.9V7.8l-7-3.5Zm0 3.7 5 2.8v5.7l-5 2.8-5-2.8V10.8l5-2.8Z"/></svg>
+      </div>
+      <div class="brandtext">
+        <div class="t1" id="brandTitle">Future Dimensions</div>
+        <div class="t2" id="brandSub">Consulting & Business Solutions</div>
       </div>
     </div>
-
-    <div class="content" id="content"></div>
-    <div class="bottomnav" id="bottomnav"></div>
-    <div class="toast" id="toast"></div>
-
-    <div class="modal-wrap" id="modalWrap">
-      <div class="modal">
-        <div class="modal-head">
-          <div class="modal-title" id="modalTitle">Details</div>
-          <div class="closex" id="modalClose">✕</div>
-        </div>
-        <div class="modal-body" id="modalBody"></div>
-        <div class="modal-actions" id="modalActions"></div>
-      </div>
+    <div class="actions">
+      <button class="pill" id="btnLang">EN</button>
+      <button class="pill" id="btnSettings">⚙️</button>
+      <button class="pill" id="btnUser">👤</button>
     </div>
   </div>
 
-  <script>
-    (function () {
-      const img = document.getElementById("brandLogo")
-      img.onerror = () => {
-        img.style.display = "none"
-        const t = document.getElementById("logoFallbackText")
-        if (t) t.style.display = "block"
+  <main class="main" id="main">
+    <div class="card">
+      <div class="cardhd">
+        <div>
+          <h2 id="loadingTitle">جاري تشغيل التطبيق</h2>
+          <div class="sub" id="loadingSub">لو الصفحة بتظهر فاضية، اضغط على الإعدادات واعمل تحديث</div>
+        </div>
+        <div class="itag" id="loadingTag">...</div>
+      </div>
+      <div class="cardbd">
+        <div class="skeleton" style="width:60%"></div>
+        <div style="height:10px"></div>
+        <div class="skeleton" style="width:92%"></div>
+        <div style="height:10px"></div>
+        <div class="skeleton" style="width:78%"></div>
+      </div>
+    </div>
+  </main>
+
+  <div class="bottomnav">
+    <div class="nav" id="nav"></div>
+  </div>
+</div>
+
+<div class="modal" id="modalUser" role="dialog" aria-modal="true">
+  <div class="sheet">
+    <div class="hd">
+      <div id="userTitle" style="font-weight:800">الحساب</div>
+      <button class="x" id="closeUser">✕</button>
+    </div>
+    <div class="bd" id="userBody"></div>
+  </div>
+</div>
+
+<div class="modal" id="modalSettings" role="dialog" aria-modal="true">
+  <div class="sheet">
+    <div class="hd">
+      <div id="settingsTitle" style="font-weight:800">الإعدادات</div>
+      <button class="x" id="closeSettings">✕</button>
+    </div>
+    <div class="bd" id="settingsBody"></div>
+  </div>
+</div>
+
+<script>
+  ;(function() {
+    var defaults = {
+      supabaseUrl: "https://mifottrhqimqzojiyytq.supabase.co",
+      supabaseKey: "sb_publishable_nJKPr9Lk-SppxXMAwLG79g_cz2d5rir",
+      buckets: {
+        invoices: "Invoices",
+        documents: "Documents"
+      },
+      tables: {
+        invoices: "invoices",
+        documents: "documents",
+        tickets: "tickets",
+        meetings: "meetings"
       }
-    })()
-  </script>
+    }
 
-  <script>
-    (function () {
-      const cdns = [
-        "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js",
-        "https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"
-      ]
-
-      function loadScript(url) {
-        return new Promise((resolve, reject) => {
-          const s = document.createElement("script")
-          s.src = url
-          s.async = true
-          s.onload = () => resolve(url)
-          s.onerror = () => reject(new Error("Failed to load " + url))
-          document.head.appendChild(s)
-        })
+    function readStore(key, fallback) {
+      try {
+        var v = localStorage.getItem(key)
+        if (!v) return fallback
+        return JSON.parse(v)
+      } catch (e) {
+        return fallback
       }
+    }
 
-      async function ensureSupabase() {
-        if (window.supabase && typeof window.supabase.createClient === "function") return
-        for (const url of cdns) {
-          try {
-            await loadScript(url)
-            if (window.supabase && typeof window.supabase.createClient === "function") return
-          } catch (e) {}
-        }
-        throw new Error("Supabase library did not load")
-      }
+    function writeStore(key, value) {
+      try { localStorage.setItem(key, JSON.stringify(value)) } catch (e) {}
+    }
 
-      window.__ensureSupabase = ensureSupabase
-    })()
-  </script>
+    var cfg = readStore("fd_cfg_v1", defaults)
 
-  <script>
-    (async function () {
-      const SUPABASE_URL = "https://mifottrhqimqzojiyytq.supabase.co"
-      const SUPABASE_ANON_KEY = "sb_publishable_nJKPr9Lk-SppxXMAwLG79g_cz2d5rir"
-
-      const state = {
-        lang: "en",
-        page: "home",
-        authed: false,
-        user: null,
-        sb: null,
-        notifs: [],
-        invoices: [],
-        documents: [],
-        tickets: [],
-        meetings: [],
-        loading: {
-          invoices: false,
-          documents: false,
-          tickets: false,
-          meetings: false
-        }
-      }
-
-      const strings = {
-        en: {
-          home_title: "Client Portal",
-          home_desc: "Sign in to view projects, invoices, documents, support tickets, and meeting requests.",
-          sign_in: "Sign in",
-          sign_up: "Create account",
-          sign_out: "Sign out",
-          dashboard: "Dashboard",
-          invoices: "Invoices",
-          documents: "Documents",
-          support: "Support",
-          meetings: "Meetings",
-          profile: "Profile",
-          email: "Email",
-          password: "Password",
-          loading: "Loading",
-          ok: "OK",
-          close: "Close",
-          need_setup: "This feature needs Supabase tables to be created. Next step: we will create them together.",
-          file_attached: "File attached",
-          refresh: "Refresh",
-          no_invoices: "No invoices yet.",
-          invoice: "Invoice",
-          amount: "Amount",
-          status: "Status",
-          created_at: "Created",
-          no_file: "No file",
-        upload_new: "Upload new file",
-        choose_file: "Choose file",
-        title: "Title",
-        description: "Description",
-        uploading: "Uploading",
-        upload_success: "Uploaded",
-        upload_failed: "Upload failed",
-        no_documents: "No documents yet.",
-        document: "Document",
-        new_ticket: "New ticket",
-        subject: "Subject",
-        message: "Message",
-        send_ticket: "Send ticket",
-        no_tickets: "No tickets yet.",
-        ticket: "Ticket",
-        new_meeting: "Request a meeting",
-        meeting_title: "Meeting title",
-        meeting_date: "Date",
-        meeting_time: "Time",
-        notes: "Notes",
-        send_request: "Send request",
-        no_meetings: "No meeting requests yet.",
-        meeting: "Meeting",
-        missing_table: "Missing table",
-        setup_help: "Open SQL Editor and run the setup SQL below",
-        copy_sql: "Copy SQL",
-          error: "Error"
-        },
+    function i18nPack() {
+      return {
         ar: {
-          home_title: "بوابة العميل",
-          home_desc: "سجل دخولك للاطلاع على المشاريع والفواتير والمستندات وتذاكر الدعم وطلبات الاجتماع.",
-          sign_in: "تسجيل دخول",
-          sign_up: "إنشاء حساب",
-          sign_out: "تسجيل خروج",
-          dashboard: "الرئيسية",
+          dir: "rtl",
+          langBtn: "EN",
+          home: "الرئيسية",
           invoices: "الفواتير",
           documents: "المستندات",
           support: "الدعم",
           meetings: "الاجتماعات",
-          profile: "الحساب",
+          refresh: "تحديث",
+          signIn: "تسجيل دخول",
+          signUp: "إنشاء حساب",
+          signOut: "تسجيل خروج",
           email: "البريد الإلكتروني",
           password: "كلمة المرور",
-          loading: "جاري التحميل",
-          ok: "موافق",
+          save: "حفظ",
           close: "إغلاق",
-          need_setup: "الميزة تحتاج إعداد جداول Supabase. الخطوة القادمة هنجهزها سوا.",
-          file_attached: "يوجد ملف مرفق",
-          download: "تحميل",
-          download_failed: "فشل التحميل",
-          opening_file: "جاري فتح الملف",
-          refresh: "تحديث",
-          no_invoices: "لا توجد فواتير حتى الآن.",
-          invoice: "فاتورة",
+          setup: "إعداد Supabase",
+          setupHint: "لو في مزايا مش شغالة، السبب غالبا جداول أو سياسات RLS",
+          statusOk: "جاهز",
+          statusWarn: "محتاج إعداد",
+          upload: "رفع",
+          chooseFile: "اختر ملف",
+          title: "العنوان",
+          message: "ملاحظات",
+          subject: "الموضوع",
+          date: "التاريخ",
+          time: "الوقت",
           amount: "المبلغ",
-          status: "الحالة",
-          created_at: "التاريخ",
-          no_file: "لا يوجد ملف",
-        upload_new: "رفع ملف جديد",
-        choose_file: "اختر ملف",
-        title: "العنوان",
-        description: "الوصف",
-        uploading: "جاري الرفع",
-        upload_success: "تم الرفع",
-        upload_failed: "فشل الرفع",
-        no_documents: "لا توجد مستندات حتى الآن.",
-        document: "مستند",
-        new_ticket: "تذكرة جديدة",
-        subject: "الموضوع",
-        message: "الرسالة",
-        send_ticket: "إرسال التذكرة",
-        no_tickets: "لا توجد تذاكر حتى الآن.",
-        ticket: "تذكرة",
-        new_meeting: "طلب اجتماع",
-        meeting_title: "عنوان الاجتماع",
-        meeting_date: "التاريخ",
-        meeting_time: "الوقت",
-        notes: "ملاحظات",
-        send_request: "إرسال الطلب",
-        no_meetings: "لا توجد طلبات اجتماعات حتى الآن.",
-        meeting: "اجتماع",
-        missing_table: "الجدول غير موجود",
-        setup_help: "افتح SQL Editor وشغل أوامر الإعداد بالأسفل",
-        copy_sql: "نسخ SQL",
-          error: "خطأ"
+          state: "الحالة",
+          created: "التاريخ",
+          download: "تحميل",
+          noFile: "لا يوجد ملف",
+          send: "إرسال",
+          loading: "جاري التحميل",
+          done: "تم",
+          failed: "فشل",
+          open: "فتح"
+        },
+        en: {
+          dir: "ltr",
+          langBtn: "عربي",
+          home: "Home",
+          invoices: "Invoices",
+          documents: "Documents",
+          support: "Support",
+          meetings: "Meetings",
+          refresh: "Refresh",
+          signIn: "Sign in",
+          signUp: "Create account",
+          signOut: "Sign out",
+          email: "Email",
+          password: "Password",
+          save: "Save",
+          close: "Close",
+          setup: "Supabase setup",
+          setupHint: "If something fails, it is usually missing tables or RLS policies",
+          statusOk: "Ready",
+          statusWarn: "Needs setup",
+          upload: "Upload",
+          chooseFile: "Choose file",
+          title: "Title",
+          message: "Notes",
+          subject: "Subject",
+          date: "Date",
+          time: "Time",
+          amount: "Amount",
+          state: "Status",
+          created: "Created",
+          download: "Download",
+          noFile: "No file",
+          send: "Send",
+          loading: "Loading",
+          done: "Done",
+          failed: "Failed",
+          open: "Open"
         }
       }
+    }
 
-      function tr(k) {
-        return (strings[state.lang] && strings[state.lang][k]) || k
-      }
+    var state = {
+      lang: readStore("fd_lang_v1", "ar"),
+      cfg: cfg,
+      sb: null,
+      user: null,
+      session: null,
+      tab: "home"
+    }
 
-      function el(id) {
-        return document.getElementById(id)
-      }
+    var t = i18nPack()
 
-      function escapeHtml(s) {
-        return String(s ?? "").replace(/[&<>"']/g, (c) => ({
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;"
-        }[c]))
-      }
+    function tx(key) {
+      var pack = state.lang === "en" ? t.en : t.ar
+      return pack[key] || key
+    }
 
+    function setLang(newLang) {
+      state.lang = newLang
+      writeStore("fd_lang_v1", newLang)
+      document.documentElement.lang = newLang === "en" ? "en" : "ar"
+      document.documentElement.dir = (newLang === "en" ? t.en.dir : t.ar.dir)
+      document.getElementById("btnLang").textContent = tx("langBtn")
+      renderNav()
+      renderCurrent()
+    }
 
-      function toast(msg) {
-        const t = el("toast")
-        if (!t) return
-        t.textContent = msg
-        t.style.display = "block"
-        clearTimeout(toast._t)
-        toast._t = setTimeout(() => (t.style.display = "none"), 2400)
-      }
-
-      function setLang(l) {
-        state.lang = l
-        localStorage.setItem("fd_lang", l)
-        document.documentElement.lang = l
-        document.documentElement.dir = l === "ar" ? "rtl" : "ltr"
-        el("enBtn").classList.toggle("active", l === "en")
-        el("arBtn").classList.toggle("active", l === "ar")
-        render()
-      }
-
-      function openModal(title, bodyHTML, actions) {
-        el("modalTitle").textContent = title
-        el("modalBody").innerHTML = bodyHTML
-        const a = el("modalActions")
-        a.innerHTML = ""
-        actions.forEach((x) => {
-          const b = document.createElement("button")
-          b.className = "btn" + (x.secondary ? " secondary" : "")
-          b.textContent = x.label
-          b.onclick = x.onClick
-          a.appendChild(b)
-        })
-        el("modalWrap").style.display = "flex"
-      }
-
-      function closeModal() {
-        el("modalWrap").style.display = "none"
-        el("modalBody").innerHTML = ""
-      }
-
-      function showFatal(title, details) {
-        el("content").innerHTML = `
-          <div class="card">
-            <div class="title">${title}</div>
-            <div class="muted" style="margin-top:6px">${details}</div>
-            <div class="row" style="margin-top:12px">
-              <div class="btn secondary" id="reloadBtn">${state.lang === "ar" ? "إعادة تحميل" : "Reload"}</div>
-            </div>
-          </div>
-        `
-        const r = el("reloadBtn")
-        if (r) r.onclick = () => location.reload()
-      }
-
-
-      async function downloadInvoiceFile(storagePath) {
-        try {
-          if (!storagePath) {
-            toast(tr("no_file"))
-            return
-          }
-          toast(tr("opening_file"))
-          const bucket = "Invoices"
-          let objectPath = storagePath
-          if (objectPath.toLowerCase().startsWith("invoices/")) objectPath = objectPath.slice(9)
-          const { data, error } = await state.sb.storage.from(bucket).createSignedUrl(objectPath, 60 * 10)
-          if (error) throw error
-          const url = data && (data.signedUrl || data.signedURL)
-          if (!url) throw new Error("No signed URL returned")
-          window.open(url, "_blank", "noopener")
-        } catch (e) {
-          console.error(e)
-          alert(tr("download_failed") + (e && e.message ? ": " + e.message : ""))
-        }
-      }
-async function clearCachesAndUnregister() {
-        try {
-          if ("caches" in window) {
-            const keys = await caches.keys()
-            await Promise.all(keys.map((k) => caches.delete(k)))
-          }
-        } catch (e) {}
-        try {
-          if ("serviceWorker" in navigator) {
-            const regs = await navigator.serviceWorker.getRegistrations()
-            await Promise.all(regs.map((r) => r.unregister()))
-          }
-        } catch (e) {}
-      }
-
-      function renderBottomNav() {
-        const host = el("bottomnav")
-        if (!host) return
-
-        if (!state.authed) {
-          host.innerHTML = ""
-          return
-        }
-
-        const items = [
-          { id: "dashboard", label: tr("dashboard"), icon: "🏠" },
-          { id: "invoices", label: tr("invoices"), icon: "🧾" },
-          { id: "documents", label: tr("documents"), icon: "📁" },
-          { id: "support", label: tr("support"), icon: "🎫" },
-          { id: "meetings", label: tr("meetings"), icon: "📅" }
-        ]
-
-        host.innerHTML = `
-          <div class="bottomnav-inner">
-            ${items.map((it) => `
-              <div class="navbtn ${state.page === it.id ? "active" : ""}" data-nav="${it.id}">
-                <span>${it.icon}</span>
-                <span class="navlbl">${it.label}</span>
-              </div>
-            `).join("")}
-          </div>
-        `
-
-        host.querySelectorAll("[data-nav]").forEach((b) => {
-          b.onclick = () => {
-            state.page = b.getAttribute("data-nav")
-            render()
-          }
+    function el(tag, attrs, children) {
+      var e = document.createElement(tag)
+      if (attrs) {
+        Object.keys(attrs).forEach(function(k) {
+          if (k === "class") e.className = attrs[k]
+          else if (k === "html") e.innerHTML = attrs[k]
+          else if (k.indexOf("on") === 0 && typeof attrs[k] === "function") e.addEventListener(k.slice(2), attrs[k])
+          else e.setAttribute(k, attrs[k])
         })
       }
-
-      function renderHome() {
-        el("content").innerHTML = `
-          <div class="grid cols2">
-            <div class="card">
-              <div class="title">${tr("home_title")}</div>
-              <div class="muted" style="margin-top:8px">${tr("home_desc")}</div>
-              <div class="row" style="margin-top:12px">
-                <div class="btn" id="btnSignIn">${tr("sign_in")}</div>
-                <div class="btn secondary" id="btnSignUp">${tr("sign_up")}</div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="title">${state.lang === "ar" ? "ملاحظات مهمة" : "Notes"}</div>
-              <div class="muted" style="margin-top:8px">
-                ${state.lang === "ar"
-                  ? "لو شايف الصفحة واقفة على شاشة فاضية، هنطلع الأخطاء من Console في خطوة واحدة."
-                  : "If you see a blank screen, we will grab Console errors in one step."}
-              </div>
-            </div>
-          </div>
-        `
-
-        el("btnSignIn").onclick = () => openAuth("in")
-        el("btnSignUp").onclick = () => openAuth("up")
-      }
-
-            function renderDashboard() {
-        el("content").innerHTML = `
-          <div class="grid cols2">
-            <div class="card">
-              <div class="title">${tr("dashboard")}</div>
-              <div class="muted" style="margin-top:6px">${state.user ? state.user.email : ""}</div>
-              <div class="hr"></div>
-              <div class="muted">${tr("need_setup")}</div>
-            </div>
-
-            <div class="card">
-              <div class="title">${state.lang === "ar" ? "اختصارات" : "Shortcuts"}</div>
-              <div class="muted" style="margin-top:6px">${state.lang === "ar" ? "ادخل بسرعة على المزايا" : "Jump quickly to the features"}</div>
-              <div class="hr"></div>
-              <div class="grid cols2">
-                <button class="btn" data-goto="documents">📁 ${tr("documents")}</button>
-                <button class="btn" data-goto="invoices">📄 ${tr("invoices")}</button>
-                <button class="btn" data-goto="support">🧾 ${tr("support")}</button>
-                <button class="btn" data-goto="meetings">📅 ${tr("meetings")}</button>
-              </div>
-            </div>
-          </div>
-        `
-        document.querySelectorAll("[data-goto]").forEach((b) => {
-          b.addEventListener("click", () => {
-            state.page = b.dataset.goto
-            render()
-          })
+      if (children) {
+        children.forEach(function(c) {
+          if (c === null || c === undefined) return
+          if (typeof c === "string") e.appendChild(document.createTextNode(c))
+          else e.appendChild(c)
         })
       }
+      return e
+    }
 
+    function toast(kind, text) {
+      var main = document.getElementById("main")
+      var box = el("div", { class: "msg " + (kind === "ok" ? "ok" : kind === "bad" ? "bad" : "") }, [text])
+      main.prepend(box)
+      setTimeout(function() {
+        try { box.remove() } catch(e) {}
+      }, 4200)
+    }
 
-      
-      function fmtDate(ts) {
-        if (!ts) return ""
-        try {
-          const d = new Date(ts)
-          return d.toLocaleDateString(state.lang === "ar" ? "ar-EG" : "en-US", { year: "numeric", month: "short", day: "2-digit" })
-        } catch (e) {
-          return ""
-        }
+    function showModal(id, show) {
+      var m = document.getElementById(id)
+      if (!m) return
+      if (show) m.classList.add("show")
+      else m.classList.remove("show")
+    }
+
+    function safeStr(v) {
+      if (v === null || v === undefined) return ""
+      return String(v)
+    }
+
+    function fmtDate(ts) {
+      try {
+        var d = new Date(ts)
+        if (isNaN(d.getTime())) return safeStr(ts)
+        return d.toLocaleString(state.lang === "en" ? "en-US" : "ar-EG")
+      } catch (e) {
+        return safeStr(ts)
       }
+    }
 
-      function renderInvoices() {
-        el("content").innerHTML = `
-          <div class="card">
-            <div class="row" style="justify-content:space-between; align-items:center">
-              <div class="title">${tr("invoices")}</div>
-              <button class="btn" id="btnInvRefresh">${tr("refresh")}</button>
-            </div>
-            <div class="hr"></div>
-            <div id="invList" class="muted">${tr("loading")}...</div>
-          </div>
-        `
-        el("btnInvRefresh").onclick = () => loadInvoices()
-        loadInvoices()
-      }
-
-      async function loadInvoices() {
-        const host = el("invList")
-        host.innerHTML = `${tr("loading")}...`
-        try {
-          const { data, error } = await state.sb
-            .from("invoices")
-            .select("id, amount, status, storage_path, created_at")
-            .order("created_at", { ascending: false })
-
-          if (error) {
-            host.innerHTML = `<div class="warn">${tr("error")}: ${escapeHtml(error.message || error)}</div>`
-            return
-          }
-
-          if (!data || data.length === 0) {
-            host.innerHTML = `<div class="muted">${tr("no_invoices")}</div>`
-            return
-          }
-
-          host.innerHTML = `
-            <div class="list">
-              ${data.map((it) => `
-                <div class="item">
-                  <div class="ico">🧾</div>
-                  <div class="it-main">
-                    <div class="it-title">${tr("invoice")} #${(it.id || "").slice(0, 8)}</div>
-                    <div class="it-sub">
-                      <span>${tr("amount")}: <b>${it.amount ?? "-"}</b></span>
-                       • 
-                      <span>${tr("status")}: <b>${escapeHtml(it.status || "-")}</b></span>
-                       • 
-                      <span>${tr("created_at")}: <b>${fmtDate(it.created_at)}</b></span>
-                      ${it.storage_path ? " • <b>" + tr("file_attached") + "</b>" : ""}
-                    </div>
-                  </div>
-                  <div class="iconbtn dlbtn" title="${tr('download')}" data-path="${it.storage_path || ''}" style="${it.storage_path ? '' : 'opacity:.35;pointer-events:none;'}">📄</div>
-                </div>
-              `).join("")}
-            </div>
-          `
-
-          host.querySelectorAll(".dlbtn").forEach((btn) => {
-            btn.addEventListener("click", async () => {
-              const p = decodeURIComponent(btn.getAttribute("data-path") || "")
-              await downloadInvoiceFile(p)
-            })
-          })
-        } catch (e) {
-          host.innerHTML = `<div class="warn">${tr("error")}</div>`
+    function ensureSupabaseReady() {
+      return new Promise(function(resolve, reject) {
+        var tries = 0
+        function tick() {
+          tries += 1
+          if (window.supabase && window.supabase.createClient) return resolve()
+          if (tries > 40) return reject(new Error("Supabase library not loaded"))
+          setTimeout(tick, 120)
         }
-      }
-
-      function safeFilename(name) {
-        const base = String(name || "file")
-        const cleaned = base
-          .replace(/\s+/g, "_")
-          .replace(/[^a-zA-Z0-9._-]/g, "_")
-          .replace(/_+/g, "_")
-        return cleaned.slice(0, 140)
-      }
-
-      async function downloadFromStorage(bucket, rawPath) {
-        const path0 = String(rawPath || "").trim()
-        if (!path0) {
-          toast(tr("download_unavailable"), "warn")
-          return
-        }
-
-        if (path0.startsWith("http://") || path0.startsWith("https://")) {
-          window.open(path0, "_blank", "noopener,noreferrer")
-          return
-        }
-
-        const bucketPrefix = bucket + "/"
-        const path = path0.startsWith(bucketPrefix) ? path0.slice(bucketPrefix.length) : path0
-
-        try {
-          const { data, error } = await state.sb.storage.from(bucket).createSignedUrl(path, 60)
-          if (!error && data && data.signedUrl) {
-            window.open(data.signedUrl, "_blank", "noopener,noreferrer")
-            return
-          }
-
-          const pub = state.sb.storage.from(bucket).getPublicUrl(path)
-          const url = pub?.data?.publicUrl
-          if (url) {
-            window.open(url, "_blank", "noopener,noreferrer")
-            return
-          }
-
-          toast(tr("download_failed"), "warn")
-        } catch (e) {
-          toast(tr("download_failed"), "warn")
-        }
-      }
-
-      async function insertWithFallback(table, variants) {
-        let lastErr = null
-        for (const row of variants) {
-          const { error } = await state.sb.from(table).insert(row)
-          if (!error) return { ok: true }
-          lastErr = error
-
-          const msg = String(error.message || "")
-          if (msg.includes("does not exist") || msg.includes("column") || msg.includes("schema")) {
-            continue
-          }
-
-          return { ok: false, error }
-        }
-        return { ok: false, error: lastErr }
-      }
-
-      async function selectAllSafe(table, orderColumn) {
-        try {
-          const first = orderColumn
-            ? await state.sb.from(table).select("*").order(orderColumn, { ascending: false })
-            : await state.sb.from(table).select("*")
-
-          if (!first.error) return first
-
-          const msg = String(first.error.message || "")
-          if (orderColumn && msg.includes(orderColumn)) {
-            return await state.sb.from(table).select("*")
-          }
-
-          return first
-        } catch (e) {
-          return { data: null, error: e }
-        }
-      }
-
-      function renderDocuments() {
-        el("content").innerHTML = `
-          <div class="card">
-            <div class="row" style="justify-content:space-between;align-items:center;gap:12px">
-              <div class="title">${tr("documents")}</div>
-              <button class="btn" id="btnDocRefresh">${tr("refresh")}</button>
-            </div>
-            <div class="hr"></div>
-
-            <div class="sub" style="margin-bottom:10px">${tr("upload_new")}</div>
-            <div class="row" style="gap:10px;flex-wrap:wrap;align-items:center">
-              <input class="input" id="docTitle" placeholder="${tr("title")}" style="flex:1;min-width:220px" />
-              <input type="file" id="docFile" style="display:none" />
-              <button class="btn" id="btnChooseDoc">${tr("choose_file")}</button>
-              <button class="btn" id="btnUploadDoc">${tr("upload")}</button>
-            </div>
-            <div class="muted" id="docChosen" style="margin-top:8px">${tr("no_file")}</div>
-            <div class="hr"></div>
-            <div id="docList" class="muted">${tr("loading")}...</div>
-          </div>
-        `
-
-        const inp = el("docFile")
-        const chosen = el("docChosen")
-
-        el("btnChooseDoc").onclick = () => inp.click()
-        inp.onchange = () => {
-          const f = inp.files && inp.files[0]
-          chosen.textContent = f ? f.name : tr("no_file")
-        }
-
-        el("btnUploadDoc").onclick = async () => {
-          const f = inp.files && inp.files[0]
-          const title = (el("docTitle").value || "").trim()
-          await uploadDocument(f, title)
-          inp.value = ""
-          el("docTitle").value = ""
-          chosen.textContent = tr("no_file")
-        }
-
-        el("btnDocRefresh").onclick = () => loadDocuments()
-        loadDocuments()
-      }
-
-      async function uploadDocument(file, title) {
-        if (!file) {
-          toast(tr("choose_file"), "warn")
-          return
-        }
-
-        const bucket = "client-files"
-        const uid = state.user?.id
-        let path = \"\"
-        const filename = safeFilename(file.name)
-        path = `${uid}/${Date.now()}_${filename}`
-        const displayTitle = title || file.name
-
-        toast(tr("uploading"), "")
-
-        const { error: upErr } = await state.sb.storage
-          .from(bucket)
-          .upload(path, file, { upsert: true, contentType: file.type || undefined })
-
-        if (upErr) {
-          toast(tr("upload_failed"), "warn")
-          return
-        }
-
-        const variants = [
-                    { user_id: uid, title: displayTitle, storage_path: path, original_name: file.name, mime: file.type, size: file.size },
-          { user_id: uid, name_en: displayTitle, name_ar: displayTitle, type: 'report', storage_path: path },
-          { user_id: uid, name_ar: displayTitle, type: 'report', storage_path: path },
-          { user_id: uid, name_en: displayTitle, type: 'report', storage_path: path },
-          { user_id: uid, name: displayTitle, storage_path: path },
-          { user_id: uid, storage_path: path },
-          { title: displayTitle, storage_path: path },
-          { name_en: displayTitle, name_ar: displayTitle, type: 'report', storage_path: path },
-          { storage_path: path }
-        ]
-        const ins = await insertWithFallback("documents", variants)
-        if (!ins.ok) {
-          try {
-            await state.sb.storage.from(bucket).remove([path])
-          } catch (_) {}
-          toast(tr("upload_failed"), "warn")
-          return
-        }
-
-        toast(tr("upload_success"), "")
-        loadDocuments()
-      }
-
-      async function loadDocuments() {
-        const host = el("docList")
-        host.innerHTML = `${tr("loading")}...`
-
-        const res = await selectAllSafe("documents", "created_at")
-        if (res.error) {
-          host.innerHTML = `<div class="warn">${tr("error")}: ${escapeHtml(res.error.message || res.error)}</div>`
-          return
-        }
-
-        const data = res.data || []
-        if (data.length === 0) {
-          host.innerHTML = `<div class="muted">${tr("no_documents")}</div>`
-          return
-        }
-
-        const items = data.map((it) => {
-          const p = it.storage_path || it.path || it.file_path || ""
-          const t = (state.lang==='ar' ? (it.name_ar || it.title || it.name || it.original_name) : (it.name_en || it.title || it.name || it.original_name)) || p.split("/").pop() || tr("document")
-          const created = it.created_at || it.createdAt || it.inserted_at
-          return { id: it.id || p, title: t, path: p, created }
-        })
-
-        host.innerHTML = `
-          <div class="list">
-            ${items.map((it) => `
-              <div class="item">
-                <div class="ico">📎</div>
-                <div class="it-main">
-                  <div class="it-title">${escapeHtml(it.title)}</div>
-                  <div class="it-sub">
-                    <span>${tr("created_at")}: <b>${fmtDate(it.created)}</b></span>
-                    ${it.path ? " • <b>" + tr("file_attached") + "</b>" : ""}
-                  </div>
-                </div>
-                <div class="iconbtn docdl" title="${tr("download")}" data-path="${encodeURIComponent(it.path || "")}" style="${it.path ? "" : "opacity:.35;pointer-events:none;"}">📄</div>
-              </div>
-            `).join("")}
-          </div>
-        `
-
-        host.querySelectorAll(".docdl").forEach((btn) => {
-          btn.addEventListener("click", async () => {
-            const p = decodeURIComponent(btn.getAttribute("data-path") || "")
-            await downloadFromStorage("client-files", p)
-          })
-        })
-      }
-
-      function renderSupport() {
-        el("content").innerHTML = `
-          <div class="card">
-            <div class="row" style="justify-content:space-between;align-items:center;gap:12px">
-              <div class="title">${tr("support")}</div>
-              <button class="btn" id="btnTkRefresh">${tr("refresh")}</button>
-            </div>
-            <div class="hr"></div>
-
-            <div class="sub" style="margin-bottom:10px">${tr("new_ticket")}</div>
-            <div class="row" style="gap:10px;flex-wrap:wrap;align-items:center">
-              <input class="input" id="tkSubject" placeholder="${tr("subject")}" style="flex:1;min-width:220px" />
-              <button class="btn" id="btnSendTicket">${tr("send")}</button>
-            </div>
-            <textarea class="input" id="tkMessage" placeholder="${tr("message")}" style="margin-top:10px;min-height:110px"></textarea>
-            <div class="hr"></div>
-            <div id="tkList" class="muted">${tr("loading")}...</div>
-          </div>
-        `
-
-        el("btnSendTicket").onclick = () => createTicket()
-        el("btnTkRefresh").onclick = () => loadTickets()
-        loadTickets()
-      }
-
-      async function createTicket() {
-        const subject = (el("tkSubject").value || "").trim()
-        const message = (el("tkMessage").value || "").trim()
-        if (!subject && !message) {
-          toast(tr("subject"), "warn")
-          return
-        }
-
-        const uid = state.user?.id
-        const base = {
-          user_id: uid,
-          subject,
-          title: subject,
-          message,
-          body: message,
-          status: "Open"
-        }
-
-        const variants = [
-          { user_id: base.user_id, subject: base.subject, message: base.message, status: base.status },
-          { user_id: base.user_id, title: base.title, body: base.body, status: base.status },
-          { subject: base.subject, message: base.message, status: base.status },
-          { title: base.title, body: base.body, status: base.status }
-        ]
-
-        const ins = await insertWithFallback("tickets", variants)
-        if (!ins.ok) {
-          toast(tr("upload_failed"), "warn")
-          return
-        }
-
-        el("tkSubject").value = ""
-        el("tkMessage").value = ""
-        toast(tr("upload_success"), "")
-        loadTickets()
-      }
-
-      async function loadTickets() {
-        const host = el("tkList")
-        host.innerHTML = `${tr("loading")}...`
-
-        const res = await selectAllSafe("tickets", "created_at")
-        if (res.error) {
-          host.innerHTML = `<div class="warn">${tr("error")}: ${escapeHtml(res.error.message || res.error)}</div>`
-          return
-        }
-
-        const data = res.data || []
-        if (data.length === 0) {
-          host.innerHTML = `<div class="muted">${tr("no_tickets")}</div>`
-          return
-        }
-
-        const items = data.map((it) => {
-          const subj = it.subject || it.title || tr("ticket")
-          const msg = it.message || it.body || ""
-          const st = it.status || it.state || "-"
-          const created = it.created_at || it.createdAt || it.inserted_at
-          return { id: it.id || "", subject: subj, message: msg, status: st, created }
-        })
-
-        host.innerHTML = `
-          <div class="list">
-            ${items.map((it) => `
-              <div class="item">
-                <div class="ico">🎫</div>
-                <div class="it-main">
-                  <div class="it-title">${escapeHtml(it.subject)}</div>
-                  <div class="it-sub">
-                    <span>${tr("status")}: <b>${escapeHtml(it.status)}</b></span>
-                     • 
-                    <span>${tr("created_at")}: <b>${fmtDate(it.created)}</b></span>
-                  </div>
-                </div>
-              </div>
-            `).join("")}
-          </div>
-        `
-      }
-
-      function renderMeetings() {
-        el("content").innerHTML = `
-          <div class="card">
-            <div class="row" style="justify-content:space-between;align-items:center;gap:12px">
-              <div class="title">${tr("meetings")}</div>
-              <button class="btn" id="btnMtRefresh">${tr("refresh")}</button>
-            </div>
-            <div class="hr"></div>
-
-            <div class="sub" style="margin-bottom:10px">${tr("request_meeting")}</div>
-            <div class="row" style="gap:10px;flex-wrap:wrap;align-items:center">
-              <input class="input" id="mtTitle" placeholder="${tr("title")}" style="flex:1;min-width:220px" />
-              <input class="input" id="mtDate" type="date" style="max-width:190px" />
-              <input class="input" id="mtTime" type="time" style="max-width:160px" />
-              <button class="btn" id="btnSendMeeting">${tr("send")}</button>
-            </div>
-            <textarea class="input" id="mtNotes" placeholder="${tr("notes")}" style="margin-top:10px;min-height:110px"></textarea>
-            <div class="hr"></div>
-            <div id="mtList" class="muted">${tr("loading")}...</div>
-          </div>
-        `
-
-        el("btnSendMeeting").onclick = () => createMeetingRequest()
-        el("btnMtRefresh").onclick = () => loadMeetings()
-        loadMeetings()
-      }
-
-      async function createMeetingRequest() {
-        const title = (el("mtTitle").value || "").trim()
-        const date = el("mtDate").value
-        const time = el("mtTime").value
-        const notes = (el("mtNotes").value || "").trim()
-        if (!title && !notes) {
-          toast(tr("title"), "warn")
-          return
-        }
-
-        const uid = state.user?.id
-        const dt = date ? `${date}${time ? "T" + time : ""}` : null
-        const variants = [
-          { user_id: uid, title, notes, scheduled_at: dt, status: "Requested" },
-          { user_id: uid, subject: title, message: notes, meeting_at: dt, status: "Requested" },
-          { title, notes, scheduled_at: dt, status: "Requested" },
-          { subject: title, message: notes, meeting_at: dt, status: "Requested" }
-        ]
-
-        const ins = await insertWithFallback("meetings", variants)
-        if (!ins.ok) {
-          const msg = String(ins.error?.message || "")
-          if (msg.includes("does not exist") || msg.includes("relation")) {
-            toast(tr("missing_table"), "warn")
-            loadMeetings(true)
-            return
-          }
-          toast(tr("upload_failed"), "warn")
-          return
-        }
-
-        el("mtTitle").value = ""
-        el("mtDate").value = ""
-        el("mtTime").value = ""
-        el("mtNotes").value = ""
-        toast(tr("upload_success"), "")
-        loadMeetings()
-      }
-
-      async function loadMeetings(forceShowHelp) {
-        const host = el("mtList")
-        host.innerHTML = `${tr("loading")}...`
-
-        const res = await selectAllSafe("meetings", "created_at")
-        if (res.error) {
-          const msg = String(res.error.message || res.error)
-          if (msg.includes("does not exist") || msg.includes("relation") || forceShowHelp) {
-            host.innerHTML = `
-              <div class="warn">${tr("missing_table")}</div>
-              <div class="muted" style="margin-top:10px">${tr("setup_help")}</div>
-              <pre style="white-space:pre-wrap;word-break:break-word;margin-top:10px">${escapeHtml(getMeetingsSetupSql())}</pre>
-            `
-            return
-          }
-          host.innerHTML = `<div class="warn">${tr("error")}: ${escapeHtml(msg)}</div>`
-          return
-        }
-
-        const data = res.data || []
-        if (data.length === 0) {
-          host.innerHTML = `<div class="muted">${tr("no_meetings")}</div>`
-          return
-        }
-
-        const items = data.map((it) => {
-          const t = it.title || it.subject || tr("meeting")
-          const st = it.status || "-"
-          const when = it.scheduled_at || it.meeting_at || it.datetime || it.date
-          const created = it.created_at || it.createdAt
-          return { id: it.id || "", title: t, status: st, when, created }
-        })
-
-        host.innerHTML = `
-          <div class="list">
-            ${items.map((it) => `
-              <div class="item">
-                <div class="ico">📅</div>
-                <div class="it-main">
-                  <div class="it-title">${escapeHtml(it.title)}</div>
-                  <div class="it-sub">
-                    <span>${tr("status")}: <b>${escapeHtml(it.status)}</b></span>
-                    ${it.when ? " • <span>" + tr("date") + ": <b>" + fmtDate(it.when) + "</b></span>" : ""}
-                    ${it.created ? " • <span>" + tr("created_at") + ": <b>" + fmtDate(it.created) + "</b></span>" : ""}
-                  </div>
-                </div>
-              </div>
-            `).join("")}
-          </div>
-        `
-      }
-
-      function getMeetingsSetupSql() {
-        return `create table if not exists public.meetings (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid null,
-  title text null,
-  notes text null,
-  scheduled_at timestamptz null,
-  status text null default 'Requested',
-  created_at timestamptz not null default now()
-);
-
-alter table public.meetings enable row level security;
-
-drop policy if exists "meetings_select_own" on public.meetings;
-create policy "meetings_select_own" on public.meetings
-for select to authenticated
-using (user_id is null or user_id = auth.uid());
-
-drop policy if exists "meetings_insert_own" on public.meetings;
-create policy "meetings_insert_own" on public.meetings
-for insert to authenticated
-with check (user_id is null or user_id = auth.uid());`
-      }
-
-      function render() {
-        renderBottomNav()
-
-        if (!state.authed) {
-          state.page = "home"
-          renderHome()
-          return
-        }
-
-        if (state.page === "dashboard") renderDashboard()
-        else if (state.page === "invoices") renderInvoices()
-        else if (state.page === "documents") renderDocuments()
-        else if (state.page === "support") renderSupport()
-        else if (state.page === "meetings") renderMeetings()
-        else renderDashboard()
-      }
-
-      function openAuth(mode) {
-        const isUp = mode === "up"
-        openModal(
-          isUp ? tr("sign_up") : tr("sign_in"),
-          `
-            <label>${tr("email")}</label>
-            <input id="authEmail" type="email" placeholder="name@example.com">
-            <label>${tr("password")}</label>
-            <input id="authPass" type="password" placeholder="********">
-          `,
-          [
-            {
-              label: isUp ? tr("sign_up") : tr("sign_in"),
-              onClick: async () => {
-                const email = (el("authEmail").value || "").trim()
-                const password = (el("authPass").value || "").trim()
-                if (!email || !password) return toast(tr("ok"))
-
-                try {
-                  if (isUp) {
-                    const res = await state.sb.auth.signUp({ email, password })
-                    if (res.error) return toast(res.error.message)
-                    toast(tr("ok"))
-                  } else {
-                    const res = await state.sb.auth.signInWithPassword({ email, password })
-                    if (res.error) return toast(res.error.message)
-                    toast(tr("ok"))
-                  }
-                  closeModal()
-                } catch (e) {
-                  toast("Error")
-                }
-              }
-            },
-            { label: tr("close"), secondary: true, onClick: closeModal }
-          ]
-        )
-      }
-
-      async function boot() {
-        const saved = localStorage.getItem("fd_lang")
-        if (saved === "ar" || saved === "en") state.lang = saved
-        setLang(state.lang)
-
-        const url = new URL(location.href)
-        if (url.searchParams.get("reset") === "1") {
-          await clearCachesAndUnregister()
-          url.searchParams.delete("reset")
-          location.replace(url.toString())
-          return
-        }
-
-        try {
-          await window.__ensureSupabase()
-        } catch (e) {
-          showFatal(state.lang === "ar" ? "مشكلة في التحميل" : "Load problem",
-            state.lang === "ar"
-              ? "مكتبة Supabase لم تحمل. جرب شبكة مختلفة أو افتح Console وابعتهولي."
-              : "Supabase library did not load. Try another network or send Console errors.")
-          return
-        }
-
-        try {
-          state.sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-        } catch (e) {
-          showFatal("Error", "Supabase init failed")
-          return
-        }
-
-        const session = await state.sb.auth.getSession()
-        state.authed = !!(session && session.data && session.data.session)
-        state.user = session && session.data && session.data.session ? session.data.session.user : null
-
-        state.sb.auth.onAuthStateChange((event, s) => {
-          state.authed = !!s
-          state.user = s ? s.user : null
-          if (!state.authed) state.page = "home"
-          if (state.authed && state.page === "home") state.page = "dashboard"
-          render()
-        })
-
-        if (state.authed) state.page = "dashboard"
-        render()
-      }
-
-      function bindTopbar() {
-        el("enBtn").onclick = () => setLang("en")
-        el("arBtn").onclick = () => setLang("ar")
-        el("modalClose").onclick = closeModal
-        el("modalWrap").onclick = (e) => { if (e.target === el("modalWrap")) closeModal() }
-
-        el("profileBtn").onclick = async () => {
-          if (!state.authed) return openAuth("in")
-          openModal(
-            tr("profile"),
-            `<div class="muted">${state.user ? state.user.email : ""}</div>`,
-            [
-              {
-                label: tr("sign_out"),
-                onClick: async () => {
-                  try { await state.sb.auth.signOut() } catch (e) {}
-                  closeModal()
-                }
-              },
-              { label: tr("close"), secondary: true, onClick: closeModal }
-            ]
-          )
-        }
-
-        el("notifBtn").onclick = () => toast(tr("ok"))
-      }
-
-      bindTopbar()
-      boot()
-    })()
-  </script>
-
-  <script>
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/app/sw.js", { scope: "/app/" }).catch(() => {})
+        tick()
       })
     }
-  </script>
+
+    function buildClient() {
+      state.sb = window.supabase.createClient(state.cfg.supabaseUrl, state.cfg.supabaseKey, {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true
+        }
+      })
+    }
+
+    async function loadSession() {
+      var r = await state.sb.auth.getSession()
+      state.session = r.data.session || null
+      state.user = state.session ? state.session.user : null
+    }
+
+    async function signIn(email, password) {
+      var r = await state.sb.auth.signInWithPassword({ email: email, password: password })
+      if (r.error) throw r.error
+      await loadSession()
+    }
+
+    async function signUp(email, password) {
+      var r = await state.sb.auth.signUp({ email: email, password: password })
+      if (r.error) throw r.error
+      await loadSession()
+    }
+
+    async function signOut() {
+      await state.sb.auth.signOut()
+      await loadSession()
+    }
+
+    function navItems() {
+      return [
+        { id: "home", label: tx("home") },
+        { id: "invoices", label: tx("invoices") },
+        { id: "documents", label: tx("documents") },
+        { id: "support", label: tx("support") },
+        { id: "meetings", label: tx("meetings") }
+      ]
+    }
+
+    function renderNav() {
+      var nav = document.getElementById("nav")
+      nav.innerHTML = ""
+      navItems().forEach(function(it) {
+        var b = el("button", {
+          class: "navbtn" + (state.tab === it.id ? " active" : ""),
+          onclick: function() { state.tab = it.id; renderNav(); renderCurrent() }
+        }, [el("span", null, [it.label])])
+        nav.appendChild(b)
+      })
+    }
+
+    function authGate() {
+      if (state.user) return null
+      return el("div", { class: "msg bad" }, [
+        state.lang === "en"
+          ? "Please sign in to use the app"
+          : "لازم تسجل دخول عشان تستخدم التطبيق"
+      ])
+    }
+
+    function requireUser() {
+      if (!state.user) throw new Error(state.lang === "en" ? "Not signed in" : "غير مسجل دخول")
+      return state.user
+    }
+
+    async function checkTable(tableName) {
+      try {
+        var r = await state.sb.from(tableName).select("*").limit(1)
+        if (r.error) return { ok: false, error: r.error.message }
+        return { ok: true }
+      } catch (e) {
+        return { ok: false, error: e.message || String(e) }
+      }
+    }
+
+    function sqlSetupText() {
+      var docsTable = state.cfg.tables.documents
+      var ticketsTable = state.cfg.tables.tickets
+      var meetingsTable = state.cfg.tables.meetings
+      var docsBucket = state.cfg.buckets.documents
+      var invBucket = state.cfg.buckets.invoices
+
+      return `-- 1) Meetings table
+create table if not exists public.${meetingsTable} (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  title text not null,
+  meeting_date date not null,
+  meeting_time text,
+  notes text,
+  status text default 'open',
+  created_at timestamptz default now()
+)
+
+alter table public.${meetingsTable} enable row level security
+
+drop policy if exists "meetings_select_own" on public.${meetingsTable}
+create policy "meetings_select_own" on public.${meetingsTable}
+for select to authenticated
+using (user_id = auth.uid())
+
+drop policy if exists "meetings_insert_own" on public.${meetingsTable}
+create policy "meetings_insert_own" on public.${meetingsTable}
+for insert to authenticated
+with check (user_id = auth.uid())
+
+-- 2) Documents table RLS
+alter table public.${docsTable} enable row level security
+
+drop policy if exists "documents_select_own" on public.${docsTable}
+create policy "documents_select_own" on public.${docsTable}
+for select to authenticated
+using (user_id = auth.uid())
+
+drop policy if exists "documents_insert_own" on public.${docsTable}
+create policy "documents_insert_own" on public.${docsTable}
+for insert to authenticated
+with check (user_id = auth.uid())
+
+-- 3) Tickets table RLS
+alter table public.${ticketsTable} enable row level security
+
+drop policy if exists "tickets_select_own" on public.${ticketsTable}
+create policy "tickets_select_own" on public.${ticketsTable}
+for select to authenticated
+using (user_id = auth.uid())
+
+drop policy if exists "tickets_insert_own" on public.${ticketsTable}
+create policy "tickets_insert_own" on public.${ticketsTable}
+for insert to authenticated
+with check (user_id = auth.uid())
+
+-- 4) Storage policies for Documents bucket
+drop policy if exists "documents_read_own" on storage.objects
+create policy "documents_read_own"
+on storage.objects
+for select
+to authenticated
+using (
+  bucket_id = '${docsBucket}'
+  and (storage.foldername(name))[1] = auth.uid()::text
+)
+
+drop policy if exists "documents_upload_own" on storage.objects
+create policy "documents_upload_own"
+on storage.objects
+for insert
+to authenticated
+with check (
+  bucket_id = '${docsBucket}'
+  and (storage.foldername(name))[1] = auth.uid()::text
+)
+
+-- 5) Storage policies for Invoices bucket
+drop policy if exists "invoices_read_own" on storage.objects
+create policy "invoices_read_own"
+on storage.objects
+for select
+to authenticated
+using (
+  bucket_id = '${invBucket}'
+  and (storage.foldername(name))[1] = auth.uid()::text
+)
+
+drop policy if exists "invoices_upload_own" on storage.objects
+create policy "invoices_upload_own"
+on storage.objects
+for insert
+to authenticated
+with check (
+  bucket_id = '${invBucket}'
+  and (storage.foldername(name))[1] = auth.uid()::text
+)`
+    }
+
+    function iconShield() {
+      var s = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      s.setAttribute("viewBox","0 0 24 24")
+      s.innerHTML = '<path d="M12 2 20 6v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
+      s.style.color = "var(--gold2)"
+      return s
+    }
+
+    function iconDoc() {
+      var s = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      s.setAttribute("viewBox","0 0 24 24")
+      s.innerHTML = '<path d="M7 2h7l5 5v15a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm7 1.5V8h4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+      s.style.color="var(--gold2)"
+      return s
+    }
+
+    function iconFolder() {
+      var s = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      s.setAttribute("viewBox","0 0 24 24")
+      s.innerHTML = '<path d="M3 6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
+      s.style.color="var(--gold2)"
+      return s
+    }
+
+    function iconTicket() {
+      var s = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      s.setAttribute("viewBox","0 0 24 24")
+      s.innerHTML = '<path d="M4 9V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
+      s.style.color="var(--gold2)"
+      return s
+    }
+
+    function iconCalendar() {
+      var s = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+      s.setAttribute("viewBox","0 0 24 24")
+      s.innerHTML = '<path d="M7 2v3M17 2v3M4 7h16M5 5h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+      s.style.color="var(--gold2)"
+      return s
+    }
+
+    function quickTile(label, emoji, onTap) {
+      return el("div", { class:"card", style:"box-shadow:none" }, [
+        el("div", { class:"cardbd", style:"display:flex; align-items:center; justify-content:space-between; gap:12px" }, [
+          el("div", null, [
+            el("div", { style:"font-size:12px; color:var(--muted)" }, [emoji]),
+            el("div", { style:"margin-top:6px; font-weight:800" }, [label])
+          ]),
+          el("button", { class:"btn", onclick: onTap }, [tx("open")])
+        ])
+      ])
+    }
+
+    async function renderSetupStatus() {
+      var main = document.getElementById("main")
+      var statusCard = el("div", { class:"card" }, [
+        el("div", { class:"cardhd" }, [
+          el("div", null, [
+            el("h2", null, [state.lang==="en" ? "Database status" : "حالة الجداول"]),
+            el("div", { class:"sub" }, [state.lang==="en" ? "Checks required tables" : "فحص الجداول المطلوبة"])
+          ]),
+          el("div", { class:"itag" }, [tx("loading")])
+        ]),
+        el("div", { class:"cardbd" }, [
+          el("div", { class:"list", id:"statusList" }, [])
+        ])
+      ])
+      main.appendChild(statusCard)
+
+      var items = [
+        state.cfg.tables.invoices,
+        state.cfg.tables.documents,
+        state.cfg.tables.tickets,
+        state.cfg.tables.meetings
+      ]
+
+      var list = statusCard.querySelector("#statusList")
+      list.innerHTML = ""
+      items.forEach(function(name) {
+        list.appendChild(el("div", { class:"item" }, [
+          el("div", { class:"icon" }, [iconShield()]),
+          el("div", { class:"itxt" }, [el("div", { class:"t" }, [name]), el("div", { class:"m" }, ["..."])]),
+          el("div", { class:"itag" }, [tx("loading")])
+        ]))
+      })
+
+      var results = []
+      for (var i=0;i<items.length;i++) results.push(await checkTable(items[i]))
+
+      list.innerHTML = ""
+      results.forEach(function(r, idx) {
+        var ok = r.ok
+        list.appendChild(el("div", { class:"item" }, [
+          el("div", { class:"icon" }, [iconShield()]),
+          el("div", { class:"itxt" }, [
+            el("div", { class:"t" }, [items[idx]]),
+            el("div", { class:"m" }, [r.error ? safeStr(r.error) : ""])
+          ]),
+          el("div", { class:"itag " + (ok ? "ok" : "bad") }, [ok ? tx("statusOk") : tx("statusWarn")])
+        ]))
+      })
+
+      var allOk = results.every(function(x) { return x.ok })
+      var tag = statusCard.querySelector(".itag")
+      tag.textContent = allOk ? tx("statusOk") : tx("statusWarn")
+      tag.className = "itag " + (allOk ? "ok" : "bad")
+    }
+
+    function renderHome() {
+      var main = document.getElementById("main")
+      var gate = authGate()
+
+      var c = el("div", { class: "card" }, [
+        el("div", { class: "cardhd" }, [
+          el("div", null, [
+            el("h2", null, [tx("home")]),
+            el("div", { class:"sub" }, [
+              state.user ? safeStr(state.user.email) : (state.lang === "en" ? "Not signed in" : "غير مسجل دخول")
+            ])
+          ]),
+          el("button", { class:"btn secondary", onclick: function() { renderCurrent(true) } }, [tx("refresh")])
+        ]),
+        el("div", { class:"cardbd" }, [
+          gate,
+          el("div", { class:"grid2", style:"margin-top:12px" }, [
+            quickTile(tx("invoices"), "📄", function() { state.tab="invoices"; renderNav(); renderCurrent() }),
+            quickTile(tx("documents"), "📁", function() { state.tab="documents"; renderNav(); renderCurrent() }),
+            quickTile(tx("support"), "🎫", function() { state.tab="support"; renderNav(); renderCurrent() }),
+            quickTile(tx("meetings"), "📅", function() { state.tab="meetings"; renderNav(); renderCurrent() })
+          ]),
+          el("div", { class:"msg", style:"margin-top:12px" }, [
+            state.lang === "en"
+              ? "If any section shows a blank screen, open Settings and press Save, then Refresh"
+              : "لو أي صفحة بتظهر فاضية، افتح الإعدادات واضغط حفظ ثم تحديث"
+          ])
+        ])
+      ])
+
+      var setup = el("div", { class:"card" }, [
+        el("div", { class:"cardhd" }, [
+          el("div", null, [
+            el("h2", null, [tx("setup")]),
+            el("div", { class:"sub" }, [tx("setupHint")])
+          ]),
+          el("div", { class:"itag" }, ["SQL"])
+        ]),
+        el("div", { class:"cardbd" }, [
+          el("div", { class:"hint" }, [
+            state.lang === "en"
+              ? "Paste this SQL in Supabase SQL Editor once"
+              : "انسخ الكود ده في Supabase SQL Editor مرة واحدة"
+          ]),
+          el("div", { class:"code", id:"setupSql" }, [sqlSetupText()]),
+          el("div", { style:"height:10px" }),
+          el("button", {
+            class:"btn block secondary",
+            onclick: function() {
+              try {
+                var ta = document.createElement("textarea")
+                ta.value = document.getElementById("setupSql").innerText
+                document.body.appendChild(ta)
+                ta.select()
+                document.execCommand("copy")
+                ta.remove()
+                toast("ok", state.lang==="en" ? "Copied" : "تم النسخ")
+              } catch (e) {
+                toast("bad", state.lang==="en" ? "Copy failed" : "فشل النسخ")
+              }
+            }
+          }, [state.lang==="en" ? "Copy SQL" : "نسخ SQL"])
+        ])
+      ])
+
+      main.innerHTML = ""
+      main.appendChild(c)
+      main.appendChild(setup)
+
+      if (state.user) renderSetupStatus()
+    }
+
+    async function downloadFromBucket(bucket, path) {
+      requireUser()
+      var r = await state.sb.storage.from(bucket).createSignedUrl(path, 120)
+      if (r.error) throw r.error
+      var url = r.data.signedUrl
+      var a = document.createElement("a")
+      a.href = url
+      a.target = "_blank"
+      a.rel = "noopener"
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+    }
+
+    function renderInvoices() {
+      var main = document.getElementById("main")
+      var gate = authGate()
+
+      var list = el("div", { class:"list", id:"invList" }, [
+        el("div", { class:"item" }, [
+          el("div", { class:"itxt" }, [
+            el("div", { class:"t" }, [tx("loading")]),
+            el("div", { class:"m" }, ["..."])
+          ])
+        ])
+      ])
+
+      var card = el("div", { class:"card" }, [
+        el("div", { class:"cardhd" }, [
+          el("div", null, [
+            el("h2", null, [tx("invoices")]),
+            el("div", { class:"sub" }, [
+              state.lang==="en" ? "Your invoices and attachments" : "فواتيرك والملفات المرفقة"
+            ])
+          ]),
+          el("button", { class:"btn secondary", onclick: function() { renderCurrent(true) } }, [tx("refresh")])
+        ]),
+        el("div", { class:"cardbd" }, [gate, list])
+      ])
+
+      main.innerHTML = ""
+      main.appendChild(card)
+
+      if (state.user) loadInvoices(list).catch(function(e) { toast("bad", e.message || String(e)) })
+    }
+
+    async function loadInvoices(listEl) {
+      requireUser()
+      var table = state.cfg.tables.invoices
+      var r = await state.sb.from(table).select("*").order("created_at", { ascending: false }).limit(50)
+      if (r.error) throw r.error
+      var rows = r.data || []
+      listEl.innerHTML = ""
+      if (!rows.length) {
+        listEl.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "No invoices yet" : "لا توجد فواتير"]))
+        return
+      }
+
+      rows.forEach(function(row) {
+        var hasFile = !!row.storage_path
+        var meta = []
+        if (row.amount !== undefined && row.amount !== null) meta.push(tx("amount")+": "+row.amount)
+        if (row.status) meta.push(tx("state")+": "+row.status)
+        if (row.created_at) meta.push(tx("created")+": "+fmtDate(row.created_at))
+
+        listEl.appendChild(el("div", { class:"item" }, [
+          el("div", { class:"icon" }, [iconDoc()]),
+          el("div", { class:"itxt" }, [
+            el("div", { class:"t" }, ["#"+safeStr(row.id).slice(0,8)]),
+            el("div", { class:"m" }, [meta.join(" • ")])
+          ]),
+          el("button", {
+            class:"btn " + (hasFile ? "" : "secondary"),
+            onclick: function() {
+              if (!hasFile) return toast("bad", state.lang==="en" ? "No attachment" : "لا يوجد ملف")
+              downloadFromBucket(state.cfg.buckets.invoices, row.storage_path).catch(function(e) {
+                toast("bad", e.message || String(e))
+              })
+            }
+          }, [tx("download")])
+        ]))
+      })
+    }
+
+    function renderDocuments() {
+      var main = document.getElementById("main")
+      var gate = authGate()
+
+      var fileInput = el("input", { class:"input", type:"file" })
+      var titleInput = el("input", { class:"input", type:"text", placeholder: tx("title") })
+
+      var uploadBtn = el("button", {
+        class:"btn",
+        onclick: function() {
+          uploadDocument(fileInput.files[0], titleInput.value).then(function() {
+            titleInput.value = ""
+            fileInput.value = ""
+            toast("ok", tx("done"))
+            renderCurrent(true)
+          }).catch(function(e) {
+            toast("bad", tx("failed") + ": " + (e.message || String(e)))
+          })
+        }
+      }, [tx("upload")])
+
+      var list = el("div", { class:"list", id:"docList" }, [
+        el("div", { class:"item" }, [
+          el("div", { class:"itxt" }, [
+            el("div", { class:"t" }, [tx("loading")]),
+            el("div", { class:"m" }, ["..."])
+          ])
+        ])
+      ])
+
+      var card = el("div", { class:"card" }, [
+        el("div", { class:"cardhd" }, [
+          el("div", null, [
+            el("h2", null, [tx("documents")]),
+            el("div", { class:"sub" }, [state.lang==="en" ? "Upload and manage your documents" : "رفع وإدارة المستندات الخاصة بك"])
+          ]),
+          el("button", { class:"btn secondary", onclick: function() { renderCurrent(true) } }, [tx("refresh")])
+        ]),
+        el("div", { class:"cardbd" }, [
+          gate,
+          el("div", { class:"row", style:"margin-top:10px" }, [
+            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("chooseFile")]), fileInput]),
+            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("title")]), titleInput]),
+            el("div", { class:"field" }, [el("div", { class:"label" }, [" "]), uploadBtn])
+          ]),
+          el("div", { style:"height:10px" }),
+          list
+        ])
+      ])
+
+      main.innerHTML = ""
+      main.appendChild(card)
+
+      if (state.user) loadDocuments(list).catch(function(e) { toast("bad", e.message || String(e)) })
+    }
+
+    async function uploadDocument(file, title) {
+      var user = requireUser()
+      if (!file) throw new Error(state.lang==="en" ? "Choose a file" : "اختر ملف")
+
+      var tbl = state.cfg.tables.documents
+      var bucket = state.cfg.buckets.documents
+
+      var cleanName = file.name.replace(/[^a-zA-Z0-9._-]+/g, "_")
+      var path = user.id + "/" + Date.now() + "_" + cleanName
+
+      var up = await state.sb.storage.from(bucket).upload(path, file, { cacheControl: "3600", upsert: false })
+      if (up.error) throw up.error
+
+      var ins = await state.sb.from(tbl).insert({
+        user_id: user.id,
+        type: "report",
+        name_en: title || cleanName,
+        name_ar: title || cleanName,
+        storage_path: path
+      }).select("*").single()
+      if (ins.error) throw ins.error
+      return ins.data
+    }
+
+    async function loadDocuments(listEl) {
+      requireUser()
+      var tbl = state.cfg.tables.documents
+      var r = await state.sb.from(tbl).select("*").order("created_at", { ascending: false }).limit(80)
+      if (r.error) throw r.error
+      var rows = r.data || []
+      listEl.innerHTML = ""
+      if (!rows.length) {
+        listEl.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "No documents yet" : "لا توجد مستندات"]))
+        return
+      }
+
+      rows.forEach(function(row) {
+        var hasFile = !!row.storage_path
+        var meta = []
+        if (row.type) meta.push(row.type)
+        if (row.created_at) meta.push(fmtDate(row.created_at))
+        var title = row.name_ar || row.name_en || ("#"+safeStr(row.id).slice(0,8))
+
+        listEl.appendChild(el("div", { class:"item" }, [
+          el("div", { class:"icon" }, [iconFolder()]),
+          el("div", { class:"itxt" }, [el("div", { class:"t" }, [safeStr(title)]), el("div", { class:"m" }, [meta.join(" • ")])]),
+          el("button", {
+            class:"btn " + (hasFile ? "" : "secondary"),
+            onclick: function() {
+              if (!hasFile) return toast("bad", state.lang==="en" ? "No file path" : "لا يوجد مسار ملف")
+              downloadFromBucket(state.cfg.buckets.documents, row.storage_path).catch(function(e) { toast("bad", e.message || String(e)) })
+            }
+          }, [tx("download")])
+        ]))
+      })
+    }
+
+    function renderSupport() {
+      var main = document.getElementById("main")
+      var gate = authGate()
+
+      var subjectInput = el("input", { class:"input", type:"text", placeholder: tx("subject") })
+      var messageInput = el("textarea", { class:"ta", placeholder: tx("message") })
+
+      var sendBtn = el("button", {
+        class:"btn",
+        onclick: function() {
+          createTicket(subjectInput.value, messageInput.value).then(function() {
+            subjectInput.value = ""
+            messageInput.value = ""
+            toast("ok", tx("done"))
+            renderCurrent(true)
+          }).catch(function(e) {
+            toast("bad", tx("failed") + ": " + (e.message || String(e)))
+          })
+        }
+      }, [tx("send")])
+
+      var list = el("div", { class:"list", id:"ticketList" }, [])
+
+      var card = el("div", { class:"card" }, [
+        el("div", { class:"cardhd" }, [
+          el("div", null, [
+            el("h2", null, [tx("support")]),
+            el("div", { class:"sub" }, [state.lang==="en" ? "Create and track support tickets" : "إنشاء ومتابعة تذاكر الدعم"])
+          ]),
+          el("button", { class:"btn secondary", onclick: function() { renderCurrent(true) } }, [tx("refresh")])
+        ]),
+        el("div", { class:"cardbd" }, [
+          gate,
+          el("div", { class:"row", style:"margin-top:10px" }, [
+            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("subject")]), subjectInput]),
+            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("message")]), messageInput]),
+            el("div", { class:"field" }, [el("div", { class:"label" }, [" "]), sendBtn])
+          ]),
+          el("div", { style:"height:10px" }),
+          list
+        ])
+      ])
+
+      main.innerHTML = ""
+      main.appendChild(card)
+
+      if (state.user) loadTickets(list).catch(function(e) { toast("bad", e.message || String(e)) })
+      else list.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "Sign in to view tickets" : "سجل دخول لعرض التذاكر"]))
+    }
+
+    async function createTicket(subject, message) {
+      var user = requireUser()
+      if (!subject) throw new Error(state.lang==="en" ? "Subject is required" : "الموضوع مطلوب")
+      var tbl = state.cfg.tables.tickets
+      var ins = await state.sb.from(tbl).insert({
+        user_id: user.id,
+        subject: subject,
+        message: message || "",
+        status: "open"
+      }).select("*").single()
+      if (ins.error) throw ins.error
+      return ins.data
+    }
+
+    async function loadTickets(listEl) {
+      requireUser()
+      var tbl = state.cfg.tables.tickets
+      var r = await state.sb.from(tbl).select("*").order("created_at", { ascending: false }).limit(80)
+      if (r.error) throw r.error
+      var rows = r.data || []
+      listEl.innerHTML = ""
+      if (!rows.length) {
+        listEl.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "No tickets yet" : "لا توجد تذاكر"]))
+        return
+      }
+
+      rows.forEach(function(row) {
+        var meta = []
+        if (row.status) meta.push(tx("state")+": "+row.status)
+        if (row.created_at) meta.push(fmtDate(row.created_at))
+        listEl.appendChild(el("div", { class:"item" }, [
+          el("div", { class:"icon" }, [iconTicket()]),
+          el("div", { class:"itxt" }, [
+            el("div", { class:"t" }, [safeStr(row.subject || ("#"+safeStr(row.id).slice(0,8)))]),
+            el("div", { class:"m" }, [meta.join(" • ") + (row.message ? " • " + safeStr(row.message) : "")])
+          ]),
+          el("div", { class:"itag ok" }, [safeStr(row.status || "open")])
+        ]))
+      })
+    }
+
+    function renderMeetings() {
+      var main = document.getElementById("main")
+      var gate = authGate()
+
+      var titleInput = el("input", { class:"input", type:"text", placeholder: tx("subject") })
+      var dateInput = el("input", { class:"input", type:"date" })
+      var timeInput = el("input", { class:"input", type:"time" })
+      var notesInput = el("textarea", { class:"ta", placeholder: tx("message") })
+
+      var sendBtn = el("button", {
+        class:"btn",
+        onclick: function() {
+          createMeeting(titleInput.value, dateInput.value, timeInput.value, notesInput.value).then(function() {
+            titleInput.value=""
+            notesInput.value=""
+            toast("ok", tx("done"))
+            renderCurrent(true)
+          }).catch(function(e) {
+            toast("bad", tx("failed") + ": " + (e.message || String(e)))
+          })
+        }
+      }, [tx("send")])
+
+      var list = el("div", { class:"list", id:"meetList" }, [])
+
+      var card = el("div", { class:"card" }, [
+        el("div", { class:"cardhd" }, [
+          el("div", null, [
+            el("h2", null, [tx("meetings")]),
+            el("div", { class:"sub" }, [state.lang==="en" ? "Request a meeting and track status" : "طلب اجتماع ومتابعة الحالة"])
+          ]),
+          el("button", { class:"btn secondary", onclick: function() { renderCurrent(true) } }, [tx("refresh")])
+        ]),
+        el("div", { class:"cardbd" }, [
+          gate,
+          el("div", { class:"row", style:"margin-top:10px" }, [
+            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("subject")]), titleInput]),
+            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("date")]), dateInput]),
+            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("time")]), timeInput]),
+            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("message")]), notesInput]),
+            el("div", { class:"field" }, [el("div", { class:"label" }, [" "]), sendBtn])
+          ]),
+          el("div", { style:"height:10px" }),
+          list
+        ])
+      ])
+
+      main.innerHTML = ""
+      main.appendChild(card)
+
+      if (state.user) loadMeetings(list).catch(function(e) { toast("bad", e.message || String(e)) })
+      else list.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "Sign in to view meetings" : "سجل دخول لعرض الاجتماعات"]))
+    }
+
+    async function createMeeting(title, date, time, notes) {
+      var user = requireUser()
+      if (!title) throw new Error(state.lang==="en" ? "Subject is required" : "العنوان مطلوب")
+      if (!date) throw new Error(state.lang==="en" ? "Date is required" : "التاريخ مطلوب")
+      var tbl = state.cfg.tables.meetings
+      var ins = await state.sb.from(tbl).insert({
+        user_id: user.id,
+        title: title,
+        meeting_date: date,
+        meeting_time: time || null,
+        notes: notes || "",
+        status: "open"
+      }).select("*").single()
+      if (ins.error) throw ins.error
+      return ins.data
+    }
+
+    async function loadMeetings(listEl) {
+      requireUser()
+      var tbl = state.cfg.tables.meetings
+      var r = await state.sb.from(tbl).select("*").order("created_at", { ascending: false }).limit(80)
+      if (r.error) throw r.error
+      var rows = r.data || []
+      listEl.innerHTML = ""
+      if (!rows.length) {
+        listEl.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "No meetings yet" : "لا توجد اجتماعات"]))
+        return
+      }
+
+      rows.forEach(function(row) {
+        var meta = []
+        if (row.status) meta.push(tx("state")+": "+row.status)
+        if (row.meeting_date) meta.push(tx("date")+": "+row.meeting_date)
+        if (row.meeting_time) meta.push(tx("time")+": "+row.meeting_time)
+        if (row.created_at) meta.push(fmtDate(row.created_at))
+        listEl.appendChild(el("div", { class:"item" }, [
+          el("div", { class:"icon" }, [iconCalendar()]),
+          el("div", { class:"itxt" }, [
+            el("div", { class:"t" }, [safeStr(row.title)]),
+            el("div", { class:"m" }, [meta.join(" • ") + (row.notes ? " • " + safeStr(row.notes) : "")])
+          ]),
+          el("div", { class:"itag ok" }, [safeStr(row.status || "open")])
+        ]))
+      })
+    }
+
+    function renderSettings() {
+      var body = document.getElementById("settingsBody")
+      body.innerHTML = ""
+
+      var sbUrl = el("input", { class:"input", value: state.cfg.supabaseUrl })
+      var sbKey = el("input", { class:"input", value: state.cfg.supabaseKey })
+      var bInv = el("input", { class:"input", value: state.cfg.buckets.invoices })
+      var bDoc = el("input", { class:"input", value: state.cfg.buckets.documents })
+      var tInv = el("input", { class:"input", value: state.cfg.tables.invoices })
+      var tDoc = el("input", { class:"input", value: state.cfg.tables.documents })
+      var tTick = el("input", { class:"input", value: state.cfg.tables.tickets })
+      var tMeet = el("input", { class:"input", value: state.cfg.tables.meetings })
+
+      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, ["Supabase URL"]), sbUrl]))
+      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, ["Supabase Key"]), sbKey]))
+      body.appendChild(el("div", { style:"height:10px" }))
+      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [state.lang==="en" ? "Invoices bucket" : "Bucket الفواتير"]), bInv]))
+      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [state.lang==="en" ? "Documents bucket" : "Bucket المستندات"]), bDoc]))
+      body.appendChild(el("div", { style:"height:10px" }))
+      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [state.lang==="en" ? "Invoices table" : "جدول الفواتير"]), tInv]))
+      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [state.lang==="en" ? "Documents table" : "جدول المستندات"]), tDoc]))
+      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [state.lang==="en" ? "Tickets table" : "جدول التذاكر"]), tTick]))
+      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [state.lang==="en" ? "Meetings table" : "جدول الاجتماعات"]), tMeet]))
+      body.appendChild(el("div", { style:"height:12px" }))
+
+      body.appendChild(el("button", {
+        class:"btn block",
+        onclick: async function() {
+          state.cfg.supabaseUrl = sbUrl.value.trim()
+          state.cfg.supabaseKey = sbKey.value.trim()
+          state.cfg.buckets.invoices = bInv.value.trim() || "Invoices"
+          state.cfg.buckets.documents = bDoc.value.trim() || "Documents"
+          state.cfg.tables.invoices = tInv.value.trim() || "invoices"
+          state.cfg.tables.documents = tDoc.value.trim() || "documents"
+          state.cfg.tables.tickets = tTick.value.trim() || "tickets"
+          state.cfg.tables.meetings = tMeet.value.trim() || "meetings"
+          writeStore("fd_cfg_v1", state.cfg)
+
+          try {
+            await ensureSupabaseReady()
+            buildClient()
+            await loadSession()
+            renderNav()
+            renderCurrent(true)
+            toast("ok", tx("done"))
+            showModal("modalSettings", false)
+          } catch (e) {
+            toast("bad", e.message || String(e))
+          }
+        }
+      }, [tx("save")]))
+
+      body.appendChild(el("div", { style:"height:10px" }))
+      body.appendChild(el("button", {
+        class:"btn block danger",
+        onclick: function() {
+          try {
+            localStorage.removeItem("fd_cfg_v1")
+            localStorage.removeItem("fd_lang_v1")
+            toast("ok", state.lang==="en" ? "Reset done" : "تمت إعادة الضبط")
+            location.reload()
+          } catch (e) {
+            toast("bad", e.message || String(e))
+          }
+        }
+      }, [state.lang==="en" ? "Reset app" : "إعادة ضبط التطبيق"]))
+    }
+
+    function renderUserModal() {
+      var body = document.getElementById("userBody")
+      body.innerHTML = ""
+
+      if (state.user) {
+        body.appendChild(el("div", { class:"msg ok" }, [
+          (state.lang==="en" ? "Signed in as " : "تم تسجيل الدخول: ") + safeStr(state.user.email)
+        ]))
+        body.appendChild(el("button", {
+          class:"btn block danger",
+          onclick: function() {
+            signOut().then(function() {
+              toast("ok", tx("done"))
+              showModal("modalUser", false)
+              renderCurrent(true)
+            }).catch(function(e) {
+              toast("bad", e.message || String(e))
+            })
+          }
+        }, [tx("signOut")]))
+        return
+      }
+
+      var email = el("input", { class:"input", type:"email", placeholder: tx("email") })
+      var pass = el("input", { class:"input", type:"password", placeholder: tx("password") })
+
+      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [tx("email")]), email]))
+      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [tx("password")]), pass]))
+      body.appendChild(el("div", { style:"height:10px" }))
+
+      body.appendChild(el("div", { class:"row" }, [
+        el("button", {
+          class:"btn",
+          onclick: function() {
+            signIn(email.value.trim(), pass.value).then(function() {
+              toast("ok", tx("done"))
+              showModal("modalUser", false)
+              renderCurrent(true)
+            }).catch(function(e) {
+              toast("bad", e.message || String(e))
+            })
+          }
+        }, [tx("signIn")]),
+        el("button", {
+          class:"btn secondary",
+          onclick: function() {
+            signUp(email.value.trim(), pass.value).then(function() {
+              toast("ok", state.lang==="en" ? "Check your email if confirmation is enabled" : "راجع بريدك لو التفعيل مفعل")
+              showModal("modalUser", false)
+              renderCurrent(true)
+            }).catch(function(e) {
+              toast("bad", e.message || String(e))
+            })
+          }
+        }, [tx("signUp")])
+      ]))
+    }
+
+    function renderCurrent() {
+      if (!state.sb) return
+      if (state.tab === "home") return renderHome()
+      if (state.tab === "invoices") return renderInvoices()
+      if (state.tab === "documents") return renderDocuments()
+      if (state.tab === "support") return renderSupport()
+      if (state.tab === "meetings") return renderMeetings()
+      return renderHome()
+    }
+
+    function wireUI() {
+      document.getElementById("btnLang").addEventListener("click", function() {
+        setLang(state.lang === "en" ? "ar" : "en")
+      })
+      document.getElementById("btnSettings").addEventListener("click", function() {
+        renderSettings()
+        showModal("modalSettings", true)
+      })
+      document.getElementById("btnUser").addEventListener("click", function() {
+        renderUserModal()
+        showModal("modalUser", true)
+      })
+      document.getElementById("closeUser").addEventListener("click", function() { showModal("modalUser", false) })
+      document.getElementById("closeSettings").addEventListener("click", function() { showModal("modalSettings", false) })
+      document.getElementById("modalUser").addEventListener("click", function(e) { if (e.target && e.target.id === "modalUser") showModal("modalUser", false) })
+      document.getElementById("modalSettings").addEventListener("click", function(e) { if (e.target && e.target.id === "modalSettings") showModal("modalSettings", false) })
+    }
+
+    async function boot() {
+      try {
+        setLang(state.lang)
+        wireUI()
+        renderNav()
+
+        await ensureSupabaseReady()
+        buildClient()
+        await loadSession()
+
+        state.sb.auth.onAuthStateChange(function() {
+          loadSession().then(function() { renderCurrent() })
+        })
+
+        renderCurrent()
+
+      } catch (e) {
+        document.getElementById("loadingTitle").textContent = state.lang==="en" ? "App failed to start" : "فشل تشغيل التطبيق"
+        document.getElementById("loadingSub").textContent = e.message || String(e)
+        document.getElementById("loadingTag").textContent = tx("failed")
+        toast("bad", e.message || String(e))
+      }
+    }
+
+    boot()
+  })()
+</script>
 </body>
 </html>
