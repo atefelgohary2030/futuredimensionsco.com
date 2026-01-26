@@ -644,7 +644,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
-    const $ = (id) => document.getElementById(id)
+const $ = (id) => document.getElementById(id)
 
     
     // FD v3 config
@@ -913,12 +913,6 @@ const clearCfg = () => {
       }
       return true
     }
-      if (!state.supabase) {
-        const ok = await initSupabase()
-        if (!ok) return false
-      }
-      return true
-    }
 
     const renderSide = () => {
       const el = $("sideBody")
@@ -963,7 +957,7 @@ const clearCfg = () => {
       return `
         <div class="brandIntro">
           <div class="tag">${txt("ادخل بتحديات واخرج بأبعاد جديدة","Enter with Challenges – Exit with New Dimensions")}</div>
-          <div class="desc">${txt("شريك استشاري يدمج البعد المالي والتشغيلي واستراتيجية النمو بأثر قابل للقياس","An integrated consulting partner across finance, operations, and growth with measurable impact")}</div>
+          <div class="desc">${txt("استشارات مالية وتشغيلية واستراتيجية نمو","Finance, operations, growth strategy")}</div>
         </div>
         <div class="cards">
           <div class="card" data-go="documents">
@@ -1629,14 +1623,6 @@ const clearCfg = () => {
         state.lang = state.lang === "ar" ? "en" : "ar"
         localStorage.setItem("fd_lang", state.lang)
         applyLang()
-
-      // network indicator
-      window.addEventListener("online", () => {
-        setConn(!!state.supabase, txt("متصل","Online"))
-      })
-      window.addEventListener("offline", () => {
-        setConn(false, txt("غير متصل","Offline"))
-      })
       }
 
       $("refreshBtn").onclick = () => render()
