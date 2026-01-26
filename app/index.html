@@ -749,7 +749,25 @@
       ]
     }
 
-    function renderNav() {
+    
+    function openSettingsModal() {
+      renderSettings()
+      showModal("modalSettings", true)
+    }
+
+    function gotoTab(id) {
+      if (id !== "home" && !state.sb) {
+        toast("warn", "لازم تضيف Supabase URL و Anon Key من الإعدادات الأول")
+        openSettingsModal()
+        state.tab = "home"
+      } else {
+        state.tab = id
+      }
+      renderNav()
+      renderCurrent()
+    }
+
+function renderNav() {
       var nav = document.getElementById("nav")
       nav.innerHTML = ""
       navItems().forEach(function(it) {
@@ -992,7 +1010,7 @@ with check (
       tag.className = "itag " + (allOk ? "ok" : "bad")
     }
 
-    function renderHome() {
+    function renderHome(noBackend) {
       var main = document.getElementById("main")
       var gate = authGate()
 
@@ -1022,49 +1040,21 @@ with check (
         ])
       ])
 
-      var setup = el("div", { class:"card" }, [
-        el("div", { class:"cardhd" }, [
-          el("div", null, [
-            el("h2", null, [tx("setup")]),
-            el("div", { class:"sub" }, [tx("setupHint")])
-          ]),
-          el("div", { class:"itag" }, ["SQL"])
-        ]),
-        el("div", { class:"cardbd" }, [
-          el("div", { class:"hint" }, [
-            state.lang === "en"
-              ? "Paste this SQL in Supabase SQL Editor once"
-              : "انسخ الكود ده في Supabase SQL Editor مرة واحدة"
-          ]),
-          el("div", { class:"code", id:"setupSql" }, [sqlSetupText()]),
-          el("div", { style:"height:10px" }),
-          el("button", {
-            class:"btn block secondary",
-            onclick: function() {
-              try {
-                var ta = document.createElement("textarea")
-                ta.value = document.getElementById("setupSql").innerText
-                document.body.appendChild(ta)
-                ta.select()
-                document.execCommand("copy")
-                ta.remove()
-                toast("ok", state.lang==="en" ? "Copied" : "تم النسخ")
-              } catch (e) {
-                toast("bad", state.lang==="en" ? "Copy failed" : "فشل النسخ")
-              }
-            }
-          }, [state.lang==="en" ? "Copy SQL" : "نسخ SQL"])
-        ])
-      ])
+      
+      var needSetup = !state.cfg.supabaseUrl || !state.cfg.supabaseKey
 
-      main.innerHTML = ""
-      main.appendChild(c)
-      // Show setup helper only when config is missing (or explicitly enabled)
-      if (!state.cfg.supabaseUrl || !state.cfg.supabaseKey || state.cfg.showSetupOnHome) {
-        main.appendChild(setup)
+      if (needSetup) {
+        main.appendChild(el("div", { class:"card" }, [
+          el("div", { class:"card-title" }, [tx("setup")]),
+          el("div", { class:"muted", style:"margin-top:6px" }, [tx("setupHint")]),
+          el("div", { style:"margin-top:12px;display:flex;gap:10px;flex-wrap:wrap" }, [
+            el("button", { class:"btn primary", onclick: function() { openSettingsModal() } }, ["فتح الإعدادات"]),
+            el("button", { class:"btn", onclick: function() { toast("info", "بعد ما تضيف البيانات اعمل Refresh للصفحة") } }, ["إرشاد سريع"])
+          ])
+        ]))
       }
 
-      if (state.user) renderSetupStatus()
+if (state.user) renderSetupStatus()
     }
 
     async function downloadFromBucket(bucket, path) {
@@ -1497,8 +1487,23 @@ with check (
 
           try {
             await ensureSupabaseReady()
-            buildClient()
-            await loadSession()
+        loadCfg()
+
+        if (!state.cfg.supabaseUrl || !state.cfg.supabaseKey) {
+          document.getElementById("loading").hidden = true
+          document.getElementById("app").hidden = false
+          state.sb = null
+          state.session = null
+          state.user = null
+          state.tab = "home"
+          renderNav()
+          renderCurrent()
+          openSettingsModal()
+          return
+        }
+
+        buildClient()
+        await loadSession()
             renderNav()
             renderCurrent(true)
             toast("ok", tx("done"))
@@ -1584,7 +1589,11 @@ with check (
     }
 
     function renderCurrent() {
-      if (!state.sb) return
+      if (!state.sb) {
+        state.tab = "home"
+        return renderHome(true)
+      }
+
       if (state.tab === "home") return renderHome()
       if (state.tab === "invoices") return renderInvoices()
       if (state.tab === "documents") return renderDocuments()
@@ -1593,7 +1602,7 @@ with check (
       return renderHome()
     }
 
-    function wireUI() {
+function wireUI() {
       document.getElementById("btnLang").addEventListener("click", function() {
         setLang(state.lang === "en" ? "ar" : "en")
       })
@@ -1618,6 +1627,21 @@ with check (
         renderNav()
 
         await ensureSupabaseReady()
+        loadCfg()
+
+        if (!state.cfg.supabaseUrl || !state.cfg.supabaseKey) {
+          document.getElementById("loading").hidden = true
+          document.getElementById("app").hidden = false
+          state.sb = null
+          state.session = null
+          state.user = null
+          state.tab = "home"
+          renderNav()
+          renderCurrent()
+          openSettingsModal()
+          return
+        }
+
         buildClient()
         await loadSession()
 
