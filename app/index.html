@@ -1,1666 +1,211 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0b1220">
-<title>Future Dimensions App</title>
-<style>
-  :root {
-    --bg0:#070b12;
-    --bg1:#0b1220;
-    --card:rgba(255,255,255,.04);
-    --card2:rgba(255,255,255,.06);
-    --stroke:rgba(255,255,255,.10);
-    --text:#e7edf6;
-    --muted:#aeb8c8;
-    --gold:#c7a357;
-    --gold2:#e4c77a;
-    --danger:#ff6b6b;
-    --ok:#46d39a;
-    --shadow: 0 20px 80px rgba(0,0,0,.45);
-    --radius: 18px;
-    --radius2: 26px;
-    --pad: 16px;
-    --safe-b: env(safe-area-inset-bottom);
-    --safe-t: env(safe-area-inset-top);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#061427" />
+  <title>أبعاد المستقبل للاستشارات وحلول الأعمال</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.284.0/dist/umd/lucide.min.js"></script>
 
-  * { box-sizing:border-box }
-  html, body { height:100% }
-  body {
-    margin:0;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Arabic", "Noto Sans", Arial, sans-serif;
-    background: radial-gradient(1200px 700px at 20% 0%, rgba(199,163,87,.18), transparent 60%),
-                radial-gradient(900px 600px at 80% 20%, rgba(103,157,255,.12), transparent 55%),
-                linear-gradient(180deg, var(--bg0), var(--bg1));
-    color: var(--text);
-    overflow-x:hidden;
-  }
+  <style>
+    :root {
+      /* لوحة الألوان الذهبية والملكية */
+      --bg: #061427;
+      --panel: #0A1C38;
+      --panel2: #0E274A;
+      --text: #F7F0E1;
+      --brand: #D2AC52; /* الذهبي الأساسي */
+      --brand-bright: #F7E69B; /* ذهبي لامع */
+      --brand-dark: #B68C38; /* ذهبي غامق */
+      --gold-grad: linear-gradient(135deg, #B68C38 0%, #F7E69B 50%, #D2AC52 100%);
+      --line: rgba(210,172,82,.25);
+      --error: #ff4d4d;
+    }
 
-  a { color:inherit }
-  button, input, textarea {
-    font: inherit;
-    color: inherit;
-  }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body {
+      margin: 0; padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Cairo', sans-serif;
+      overflow-x: hidden;
+    }
 
-  .wrap {
-    min-height: 100%;
-    display:flex;
-    flex-direction:column;
-  }
+    /* الترويسة (Top Bar) */
+    .topbar {
+      background: var(--panel);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--brand);
+      position: sticky;
+      top: 0; z-index: 1000;
+    }
 
-  .topbar {
-    padding: calc(14px + var(--safe-t)) 16px 14px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: 12px;
-  }
+    .logo-area { display: flex; align-items: center; gap: 10px; }
+    .logo-img { width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--brand); }
+    .brand-title { font-weight: 700; font-size: 1.1rem; color: var(--brand-bright); }
 
-  .brand {
-    display:flex;
-    align-items:center;
-    gap: 12px;
-    min-width: 0;
-  }
+    /* البطاقات والحاويات */
+    .card {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
 
-  .logo {
-    width:42px;
-    height:42px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, rgba(199,163,87,.25), rgba(255,255,255,.04));
-    border:1px solid rgba(199,163,87,.35);
-    display:grid;
-    place-items:center;
-    box-shadow: var(--shadow);
-    flex: 0 0 auto;
-  }
+    .btn-gold {
+      background: var(--gold-grad);
+      color: #061427;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: transform 0.2s;
+    }
+    .btn-gold:active { transform: scale(0.98); }
 
-  .logo svg { width:22px; height:22px; fill: var(--gold2) }
+    /* القائمة السفلية (Bottom Nav) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0; width: 100%;
+      background: var(--panel);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid var(--brand);
+    }
+    .nav-item { color: var(--brand); text-align: center; font-size: 0.8rem; text-decoration: none; }
+    .nav-item i { display: block; margin-bottom: 4px; }
 
-  .brandtext {
-    display:flex;
-    flex-direction:column;
-    line-height:1.1;
-    min-width: 0;
-  }
-  .brandtext .t1 {
-    font-weight: 700;
-    letter-spacing:.2px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  .brandtext .t2 {
-    color: var(--muted);
-    font-size: 12px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-
-  .actions {
-    display:flex;
-    align-items:center;
-    gap: 8px;
-    flex: 0 0 auto;
-  }
-
-  .pill {
-    border: 1px solid rgba(199,163,87,.35);
-    background: rgba(255,255,255,.03);
-    color: var(--text);
-    padding: 8px 12px;
-    border-radius: 999px;
-    cursor:pointer;
-    transition: transform .08s ease, background .15s ease, border .15s ease;
-    display:flex;
-    align-items:center;
-    gap: 8px;
-  }
-  .pill:active { transform: scale(.98) }
-  .pill:hover { background: rgba(255,255,255,.05) }
-
-  .main {
-    flex: 1 1 auto;
-    padding: 0 16px 86px;
-    max-width: 1050px;
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  .card {
-    background: var(--card);
-    border: 1px solid var(--stroke);
-    border-radius: var(--radius2);
-    box-shadow: var(--shadow);
-    overflow:hidden;
-  }
-
-  .card + .card { margin-top: 14px }
-
-  .cardhd {
-    padding: 14px 16px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: 12px;
-    border-bottom: 1px solid rgba(255,255,255,.06);
-  }
-  .cardhd h2 {
-    margin: 0;
-    font-size: 16px;
-    letter-spacing:.2px;
-  }
-  .sub {
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 4px;
-    line-height: 1.35;
-  }
-
-  .cardbd { padding: 14px 16px }
-
-  .row {
-    display:flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .row > * { flex: 1 1 220px }
-
-  .field {
-    display:flex;
-    flex-direction:column;
-    gap: 8px;
-  }
-  .label {
-    color: var(--muted);
-    font-size: 12px;
-  }
-  .input, .ta {
-    width:100%;
-    border-radius: 14px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(0,0,0,.18);
-    padding: 12px 12px;
-    outline:none;
-  }
-  .ta { min-height: 96px; resize: vertical }
-
-  .btn {
-    border: 1px solid rgba(199,163,87,.35);
-    background: rgba(199,163,87,.14);
-    color: var(--text);
-    padding: 11px 14px;
-    border-radius: 14px;
-    cursor:pointer;
-    transition: transform .08s ease, background .15s ease, border .15s ease;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap: 10px;
-    min-height: 42px;
-    user-select:none;
-  }
-  .btn:hover { background: rgba(199,163,87,.20) }
-  .btn:active { transform: scale(.98) }
-  .btn.secondary {
-    border-color: rgba(255,255,255,.16);
-    background: rgba(255,255,255,.06);
-  }
-  .btn.danger {
-    border-color: rgba(255,107,107,.35);
-    background: rgba(255,107,107,.12);
-  }
-  .btn.block { width: 100% }
-
-  .hint {
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.4;
-  }
-  .msg {
-    margin-top: 10px;
-    padding: 10px 12px;
-    border-radius: 14px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(0,0,0,.18);
-    font-size: 13px;
-    line-height: 1.4;
-  }
-  .msg.ok { border-color: rgba(70,211,154,.35); background: rgba(70,211,154,.08) }
-  .msg.bad { border-color: rgba(255,107,107,.35); background: rgba(255,107,107,.08) }
-
-  .list {
-    display:flex;
-    flex-direction:column;
-    gap: 10px;
-  }
-
-  .item {
-    display:flex;
-    gap: 12px;
-    align-items:flex-start;
-    padding: 12px 12px;
-    border-radius: var(--radius);
-    border: 1px solid rgba(255,255,255,.10);
-    background: rgba(255,255,255,.03);
-  }
-
-  .icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 14px;
-    display:grid;
-    place-items:center;
-    background: rgba(199,163,87,.12);
-    border: 1px solid rgba(199,163,87,.25);
-    flex: 0 0 auto;
-  }
-  .icon svg { width: 18px; height: 18px; fill: var(--gold2) }
-
-  .itxt {
-    flex: 1 1 auto;
-    min-width:0;
-  }
-  .itxt .t {
-    font-weight: 700;
-    font-size: 14px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  .itxt .m {
-    margin-top: 4px;
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.35;
-  }
-
-  .itag {
-    border:1px solid rgba(255,255,255,.10);
-    background: rgba(255,255,255,.04);
-    color: var(--muted);
-    border-radius: 999px;
-    padding: 6px 10px;
-    font-size: 12px;
-    white-space:nowrap;
-  }
-  .itag.ok { border-color: rgba(70,211,154,.35); color: #bff3dc; background: rgba(70,211,154,.08) }
-  .itag.bad { border-color: rgba(255,107,107,.35); color: #ffd2d2; background: rgba(255,107,107,.08) }
-
-  .bottomnav {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 12px 14px calc(12px + var(--safe-b));
-    backdrop-filter: blur(14px);
-    background: linear-gradient(180deg, rgba(7,11,18,0), rgba(7,11,18,.75) 25%, rgba(7,11,18,.92));
-    border-top: 1px solid rgba(255,255,255,.08);
-  }
-
-  .nav {
-    max-width: 1050px;
-    margin: 0 auto;
-    display:flex;
-    gap: 10px;
-  }
-  .navbtn {
-    flex: 1 1 0;
-    border-radius: 18px;
-    border: 1px solid rgba(255,255,255,.12);
-    background: rgba(255,255,255,.03);
-    padding: 10px 10px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap: 10px;
-    min-height: 48px;
-    transition: transform .08s ease, background .15s ease, border .15s ease;
-  }
-  .navbtn:active { transform: scale(.98) }
-  .navbtn.active {
-    border-color: rgba(199,163,87,.40);
-    background: rgba(199,163,87,.14);
-  }
-  .navbtn span {
-    font-weight: 700;
-    font-size: 13px;
-  }
-
-  .grid2 {
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  @media (max-width: 760px) {
-    .grid2 { grid-template-columns: 1fr }
-    .brandtext .t2 { display:none }
-  }
-
-  .modal {
-    position: fixed;
-    inset: 0;
-    display:none;
-    align-items:flex-end;
-    justify-content:center;
-    background: rgba(0,0,0,.55);
-    padding: 14px 14px calc(14px + var(--safe-b));
-    z-index: 50;
-  }
-  .modal.show { display:flex }
-
-  .sheet {
-    width: min(720px, 100%);
-    border-radius: 24px;
-    background: rgba(10,16,28,.96);
-    border: 1px solid rgba(255,255,255,.12);
-    box-shadow: var(--shadow);
-    overflow:hidden;
-  }
-  .sheet .hd {
-    padding: 14px 16px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom: 1px solid rgba(255,255,255,.08);
-  }
-  .sheet .hd .x {
-    border: 1px solid rgba(255,255,255,.16);
-    background: rgba(255,255,255,.06);
-    width: 40px;
-    height: 40px;
-    border-radius: 14px;
-    cursor:pointer;
-    display:grid;
-    place-items:center;
-  }
-  .sheet .bd { padding: 14px 16px }
-
-  .code {
-    background: rgba(0,0,0,.22);
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 16px;
-    padding: 12px;
-    white-space: pre-wrap;
-    font-size: 12px;
-    line-height: 1.5;
-    overflow:auto;
-  }
-
-  .skeleton {
-    height: 14px;
-    border-radius: 10px;
-    background: linear-gradient(90deg, rgba(255,255,255,.05), rgba(255,255,255,.09), rgba(255,255,255,.05));
-    background-size: 240% 100%;
-    animation: sk 1.2s ease infinite;
-  }
-  @keyframes sk {
-    0% { background-position: 0% 0% }
-    100% { background-position: 100% 0% }
-  }
-</style>
-
-<script>
-  ;(function() {
-    try {
-      var needsReload = false
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.getRegistrations().then(function(regs) {
-          regs.forEach(function(r) { r.unregister(); needsReload = true })
-        }).catch(function(){})
-      }
-      if (window.caches && caches.keys) {
-        caches.keys().then(function(keys) {
-          keys.forEach(function(k) { caches.delete(k); needsReload = true })
-        }).catch(function(){})
-      }
-      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-        needsReload = true
-      }
-      if (needsReload && !sessionStorage.getItem("fd_sw_cleaned")) {
-        sessionStorage.setItem("fd_sw_cleaned","1")
-        setTimeout(function(){ location.reload() }, 350)
-      }
-    } catch (e) {}
-  })()
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
-<script>
-  if (!window.supabase) {
-    var s=document.createElement("script")
-    s.src="https://unpkg.com/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"
-    document.head.appendChild(s)
-  }
-</script>
+    /* صفحة الفواتير */
+    .invoice-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .status-paid { color: #4ade80; font-size: 0.9rem; }
+  </style>
 </head>
-
 <body>
-<div class="wrap" id="app">
+
   <div class="topbar">
-    <div class="brand">
-      <div class="logo" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Zm0 2.3L5 7.8v8.4l7 3.9 7-3.9V7.8l-7-3.5Zm0 3.7 5 2.8v5.7l-5 2.8-5-2.8V10.8l5-2.8Z"/></svg>
-      </div>
-      <div class="brandtext">
-        <div class="t1" id="brandTitle">Future Dimensions</div>
-        <div class="t2" id="brandSub">Consulting & Business Solutions</div>
-      </div>
+    <div class="logo-area">
+      <img src="https://www.futuredimensionsco.com/wp-content/uploads/2023/05/cropped-Future-Dimensions-Logo-1-192x192.png" alt="Logo" class="logo-img">
+      <span class="brand-title">أبعاد المستقبل</span>
     </div>
-    <div class="actions">
-      <button class="pill" id="btnLang">EN</button>
-      <button class="pill" id="btnSettings">⚙️</button>
-      <button class="pill" id="btnUser">👤</button>
-    </div>
+    <div id="lang-switch" style="cursor:pointer; color:var(--brand)">EN</div>
   </div>
 
-  <main class="main" id="main">
-    <div class="card">
-      <div class="cardhd">
-        <div>
-          <h2 id="loadingTitle">جاري تشغيل التطبيق</h2>
-          <div class="sub" id="loadingSub">لو الصفحة بتظهر فاضية، اضغط على الإعدادات واعمل تحديث</div>
+  <div id="main-app" style="padding: 20px; padding-bottom: 80px;">
+    <div id="screen-home">
+        <div class="card">
+            <h3 id="txt-welcome">مرحباً بك في لوحة التحكم</h3>
+            <p id="txt-status">مشروعك الحالي: قيد التنفيذ</p>
+            <button class="btn-gold" onclick="openScreen('invoices')">عرض الفواتير</button>
         </div>
-        <div class="itag" id="loadingTag">...</div>
-      </div>
-      <div class="cardbd">
-        <div class="skeleton" style="width:60%"></div>
-        <div style="height:10px"></div>
-        <div class="skeleton" style="width:92%"></div>
-        <div style="height:10px"></div>
-        <div class="skeleton" style="width:78%"></div>
-      </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="card" onclick="alert('جاري فتح التذكرة...')" style="text-align:center">
+                <i data-lucide="message-square" style="color:var(--brand)"></i>
+                <p>فتح تذكرة</p>
+            </div>
+            <div class="card" onclick="alert('جاري طلب اجتماع...')" style="text-align:center">
+                <i data-lucide="calendar" style="color:var(--brand)"></i>
+                <p>طلب اجتماع</p>
+            </div>
+        </div>
     </div>
-  </main>
 
-  <div class="bottomnav">
-    <div class="nav" id="nav"></div>
-  </div>
-</div>
-
-<div class="modal" id="modalUser" role="dialog" aria-modal="true">
-  <div class="sheet">
-    <div class="hd">
-      <div id="userTitle" style="font-weight:800">الحساب</div>
-      <button class="x" id="closeUser">✕</button>
+    <div id="screen-invoices" style="display:none;">
+        <button onclick="openScreen('home')" style="color:var(--brand); background:none; border:none; margin-bottom:15px;">← العودة</button>
+        <h3>فواتيري</h3>
+        <div id="invoices-list">
+            <p style="text-align:center; opacity:0.6;">جاري تحميل الفواتير...</p>
+        </div>
     </div>
-    <div class="bd" id="userBody"></div>
   </div>
-</div>
 
-<div class="modal" id="modalSettings" role="dialog" aria-modal="true">
-  <div class="sheet">
-    <div class="hd">
-      <div id="settingsTitle" style="font-weight:800">الإعدادات</div>
-      <button class="x" id="closeSettings">✕</button>
-    </div>
-    <div class="bd" id="settingsBody"></div>
-  </div>
-</div>
+  <nav class="bottom-nav">
+    <a href="#" class="nav-item" onclick="openScreen('home')"><i data-lucide="home"></i>الرئيسية</a>
+    <a href="#" class="nav-item" onclick="openScreen('invoices')"><i data-lucide="file-text"></i>الفواتير</a>
+    <a href="#" class="nav-item"><i data-lucide="user"></i>حسابي</a>
+  </nav>
 
-<script>
-  ;(function() {
-    var defaults = {
-      supabaseUrl: "",
-      supabaseKey: "",
-      buckets: {
-        invoices: "Invoices",
-        documents: "Documents"
-      },
-      tables: {
-        invoices: "invoices",
-        documents: "documents",
-        tickets: "tickets",
-        meetings: "meetings"
-      }
-    }
+  <script>
+    // إعدادات Supabase - ضع مفاتيحك هنا ليعمل التطبيق
+    const SUPABASE_URL = 'https://mifottrhqimqzojiyytq.supabase.co';
+    const SUPABASE_KEY = 'ضع_هنا_مفتاح_API_الخاص_بك'; 
+    const supabase = typeof supabase !== 'undefined' ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
-    function readStore(key, fallback) {
-      try {
-        var v = localStorage.getItem(key)
-        if (!v) return fallback
-        return JSON.parse(v)
-      } catch (e) {
-        return fallback
-      }
-    }
+    // تفعيل أيقونات Lucide
+    lucide.createIcons();
 
-    function writeStore(key, value) {
-      try { localStorage.setItem(key, JSON.stringify(value)) } catch (e) {}
-    }
-
-    var cfg = readStore("fd_cfg_v1", defaults)
-
-    function i18nPack() {
-      return {
-        ar: {
-          dir: "rtl",
-          langBtn: "EN",
-          home: "الرئيسية",
-          invoices: "الفواتير",
-          documents: "المستندات",
-          support: "الدعم",
-          meetings: "الاجتماعات",
-          refresh: "تحديث",
-          signIn: "تسجيل دخول",
-          signUp: "إنشاء حساب",
-          signOut: "تسجيل خروج",
-          email: "البريد الإلكتروني",
-          password: "كلمة المرور",
-          save: "حفظ",
-          close: "إغلاق",
-          setup: "إعداد Supabase",
-          setupHint: "لو في مزايا مش شغالة، السبب غالبا جداول أو سياسات RLS",
-          statusOk: "جاهز",
-          statusWarn: "محتاج إعداد",
-          upload: "رفع",
-          chooseFile: "اختر ملف",
-          title: "العنوان",
-          message: "ملاحظات",
-          subject: "الموضوع",
-          date: "التاريخ",
-          time: "الوقت",
-          amount: "المبلغ",
-          state: "الحالة",
-          created: "التاريخ",
-          download: "تحميل",
-          noFile: "لا يوجد ملف",
-          send: "إرسال",
-          loading: "جاري التحميل",
-          done: "تم",
-          failed: "فشل",
-          open: "فتح"
-        },
-        en: {
-          dir: "ltr",
-          langBtn: "عربي",
-          home: "Home",
-          invoices: "Invoices",
-          documents: "Documents",
-          support: "Support",
-          meetings: "Meetings",
-          refresh: "Refresh",
-          signIn: "Sign in",
-          signUp: "Create account",
-          signOut: "Sign out",
-          email: "Email",
-          password: "Password",
-          save: "Save",
-          close: "Close",
-          setup: "Supabase setup",
-          setupHint: "If something fails, it is usually missing tables or RLS policies",
-          statusOk: "Ready",
-          statusWarn: "Needs setup",
-          upload: "Upload",
-          chooseFile: "Choose file",
-          title: "Title",
-          message: "Notes",
-          subject: "Subject",
-          date: "Date",
-          time: "Time",
-          amount: "Amount",
-          state: "Status",
-          created: "Created",
-          download: "Download",
-          noFile: "No file",
-          send: "Send",
-          loading: "Loading",
-          done: "Done",
-          failed: "Failed",
-          open: "Open"
-        }
-      }
-    }
-
-    var state = {
-      lang: readStore("fd_lang_v1", "ar"),
-      cfg: cfg,
-      sb: null,
-      user: null,
-      session: null,
-      tab: "home"
-    }
-
-    var t = i18nPack()
-
-    function tx(key) {
-      var pack = state.lang === "en" ? t.en : t.ar
-      return pack[key] || key
-    }
-
-    function setLang(newLang) {
-      state.lang = newLang
-      writeStore("fd_lang_v1", newLang)
-      document.documentElement.lang = newLang === "en" ? "en" : "ar"
-      document.documentElement.dir = (newLang === "en" ? t.en.dir : t.ar.dir)
-      document.getElementById("btnLang").textContent = tx("langBtn")
-      renderNav()
-      renderCurrent()
-    }
-
-    function el(tag, attrs, children) {
-      var e = document.createElement(tag)
-      if (attrs) {
-        Object.keys(attrs).forEach(function(k) {
-          if (k === "class") e.className = attrs[k]
-          else if (k === "html") e.innerHTML = attrs[k]
-          else if (k.indexOf("on") === 0 && typeof attrs[k] === "function") e.addEventListener(k.slice(2), attrs[k])
-          else e.setAttribute(k, attrs[k])
-        })
-      }
-      if (children) {
-        children.forEach(function(c) {
-          if (c === null || c === undefined) return
-          if (typeof c === "string") e.appendChild(document.createTextNode(c))
-          else e.appendChild(c)
-        })
-      }
-      return e
-    }
-
-    function toast(kind, text) {
-      var main = document.getElementById("main")
-      var box = el("div", { class: "msg " + (kind === "ok" ? "ok" : kind === "bad" ? "bad" : "") }, [text])
-      main.prepend(box)
-      setTimeout(function() {
-        try { box.remove() } catch(e) {}
-      }, 4200)
-    }
-
-    function showModal(id, show) {
-      var m = document.getElementById(id)
-      if (!m) return
-      if (show) m.classList.add("show")
-      else m.classList.remove("show")
-    }
-
-    function safeStr(v) {
-      if (v === null || v === undefined) return ""
-      return String(v)
-    }
-
-    function fmtDate(ts) {
-      try {
-        var d = new Date(ts)
-        if (isNaN(d.getTime())) return safeStr(ts)
-        return d.toLocaleString(state.lang === "en" ? "en-US" : "ar-EG")
-      } catch (e) {
-        return safeStr(ts)
-      }
-    }
-
-    function ensureSupabaseReady() {
-      return new Promise(function(resolve, reject) {
-        var tries = 0
-        function tick() {
-          tries += 1
-          if (window.supabase && window.supabase.createClient) return resolve()
-          if (tries > 40) return reject(new Error("Supabase library not loaded"))
-          setTimeout(tick, 120)
-        }
-        tick()
-      })
-    }
-
-    function buildClient() {
-      state.sb = window.supabase.createClient(state.cfg.supabaseUrl, state.cfg.supabaseKey, {
-        auth: {
-          persistSession: true,
-          autoRefreshToken: true,
-          detectSessionInUrl: true
-        }
-      })
-    }
-
-    async function loadSession() {
-      var r = await state.sb.auth.getSession()
-      state.session = r.data.session || null
-      state.user = state.session ? state.session.user : null
-    }
-
-    async function signIn(email, password) {
-      var r = await state.sb.auth.signInWithPassword({ email: email, password: password })
-      if (r.error) throw r.error
-      await loadSession()
-    }
-
-    async function signUp(email, password) {
-      var r = await state.sb.auth.signUp({ email: email, password: password })
-      if (r.error) throw r.error
-      await loadSession()
-    }
-
-    async function signOut() {
-      await state.sb.auth.signOut()
-      await loadSession()
-    }
-
-    function navItems() {
-      return [
-        { id: "home", label: tx("home") },
-        { id: "invoices", label: tx("invoices") },
-        { id: "documents", label: tx("documents") },
-        { id: "support", label: tx("support") },
-        { id: "meetings", label: tx("meetings") }
-      ]
-    }
-
-    
-    function openSettingsModal() {
-      renderSettings()
-      showModal("modalSettings", true)
-    }
-
-    function gotoTab(id) {
-      if (id !== "home" && !state.sb) {
-        toast("warn", "لازم تضيف Supabase URL و Anon Key من الإعدادات الأول")
-        openSettingsModal()
-        state.tab = "home"
-      } else {
-        state.tab = id
-      }
-      renderNav()
-      renderCurrent()
-    }
-
-function renderNav() {
-      var nav = document.getElementById("nav")
-      nav.innerHTML = ""
-      navItems().forEach(function(it) {
-        var b = el("button", {
-          class: "navbtn" + (state.tab === it.id ? " active" : ""),
-          onclick: function() { state.tab = it.id; renderNav(); renderCurrent() }
-        }, [el("span", null, [it.label])])
-        nav.appendChild(b)
-      })
-    }
-
-    function authGate() {
-      if (state.user) return null
-      return el("div", { class: "msg bad" }, [
-        state.lang === "en"
-          ? "Please sign in to use the app"
-          : "لازم تسجل دخول عشان تستخدم التطبيق"
-      ])
-    }
-
-    function requireUser() {
-      if (!state.user) throw new Error(state.lang === "en" ? "Not signed in" : "غير مسجل دخول")
-      return state.user
-    }
-
-    async function checkTable(tableName) {
-      try {
-        var r = await state.sb.from(tableName).select("*").limit(1)
-        if (r.error) return { ok: false, error: r.error.message }
-        return { ok: true }
-      } catch (e) {
-        return { ok: false, error: e.message || String(e) }
-      }
-    }
-
-    function sqlSetupText() {
-      var docsTable = state.cfg.tables.documents
-      var ticketsTable = state.cfg.tables.tickets
-      var meetingsTable = state.cfg.tables.meetings
-      var docsBucket = state.cfg.buckets.documents
-      var invBucket = state.cfg.buckets.invoices
-
-      return `-- 1) Meetings table
-create table if not exists public.${meetingsTable} (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references auth.users(id) on delete cascade,
-  title text not null,
-  meeting_date date not null,
-  meeting_time text,
-  notes text,
-  status text default 'open',
-  created_at timestamptz default now()
-)
-
-alter table public.${meetingsTable} enable row level security
-
-drop policy if exists "meetings_select_own" on public.${meetingsTable}
-create policy "meetings_select_own" on public.${meetingsTable}
-for select to authenticated
-using (user_id = auth.uid())
-
-drop policy if exists "meetings_insert_own" on public.${meetingsTable}
-create policy "meetings_insert_own" on public.${meetingsTable}
-for insert to authenticated
-with check (user_id = auth.uid())
-
--- 2) Documents table RLS
-alter table public.${docsTable} enable row level security
-
-drop policy if exists "documents_select_own" on public.${docsTable}
-create policy "documents_select_own" on public.${docsTable}
-for select to authenticated
-using (user_id = auth.uid())
-
-drop policy if exists "documents_insert_own" on public.${docsTable}
-create policy "documents_insert_own" on public.${docsTable}
-for insert to authenticated
-with check (user_id = auth.uid())
-
--- 3) Tickets table RLS
-alter table public.${ticketsTable} enable row level security
-
-drop policy if exists "tickets_select_own" on public.${ticketsTable}
-create policy "tickets_select_own" on public.${ticketsTable}
-for select to authenticated
-using (user_id = auth.uid())
-
-drop policy if exists "tickets_insert_own" on public.${ticketsTable}
-create policy "tickets_insert_own" on public.${ticketsTable}
-for insert to authenticated
-with check (user_id = auth.uid())
-
--- 4) Storage policies for Documents bucket
-drop policy if exists "documents_read_own" on storage.objects
-create policy "documents_read_own"
-on storage.objects
-for select
-to authenticated
-using (
-  bucket_id = '${docsBucket}'
-  and (storage.foldername(name))[1] = auth.uid()::text
-)
-
-drop policy if exists "documents_upload_own" on storage.objects
-create policy "documents_upload_own"
-on storage.objects
-for insert
-to authenticated
-with check (
-  bucket_id = '${docsBucket}'
-  and (storage.foldername(name))[1] = auth.uid()::text
-)
-
--- 5) Storage policies for Invoices bucket
-drop policy if exists "invoices_read_own" on storage.objects
-create policy "invoices_read_own"
-on storage.objects
-for select
-to authenticated
-using (
-  bucket_id = '${invBucket}'
-  and (storage.foldername(name))[1] = auth.uid()::text
-)
-
-drop policy if exists "invoices_upload_own" on storage.objects
-create policy "invoices_upload_own"
-on storage.objects
-for insert
-to authenticated
-with check (
-  bucket_id = '${invBucket}'
-  and (storage.foldername(name))[1] = auth.uid()::text
-)`
-    }
-
-    function iconShield() {
-      var s = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-      s.setAttribute("viewBox","0 0 24 24")
-      s.innerHTML = '<path d="M12 2 20 6v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
-      s.style.color = "var(--gold2)"
-      return s
-    }
-
-    function iconDoc() {
-      var s = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-      s.setAttribute("viewBox","0 0 24 24")
-      s.innerHTML = '<path d="M7 2h7l5 5v15a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm7 1.5V8h4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
-      s.style.color="var(--gold2)"
-      return s
-    }
-
-    function iconFolder() {
-      var s = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-      s.setAttribute("viewBox","0 0 24 24")
-      s.innerHTML = '<path d="M3 6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
-      s.style.color="var(--gold2)"
-      return s
-    }
-
-    function iconTicket() {
-      var s = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-      s.setAttribute("viewBox","0 0 24 24")
-      s.innerHTML = '<path d="M4 9V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
-      s.style.color="var(--gold2)"
-      return s
-    }
-
-    function iconCalendar() {
-      var s = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-      s.setAttribute("viewBox","0 0 24 24")
-      s.innerHTML = '<path d="M7 2v3M17 2v3M4 7h16M5 5h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
-      s.style.color="var(--gold2)"
-      return s
-    }
-
-    function quickTile(label, emoji, onTap) {
-      return el("div", { class:"card", style:"box-shadow:none" }, [
-        el("div", { class:"cardbd", style:"display:flex; align-items:center; justify-content:space-between; gap:12px" }, [
-          el("div", null, [
-            el("div", { style:"font-size:12px; color:var(--muted)" }, [emoji]),
-            el("div", { style:"margin-top:6px; font-weight:800" }, [label])
-          ]),
-          el("button", { class:"btn", onclick: onTap }, [tx("open")])
-        ])
-      ])
-    }
-
-    async function renderSetupStatus() {
-      var main = document.getElementById("main")
-      var statusCard = el("div", { class:"card" }, [
-        el("div", { class:"cardhd" }, [
-          el("div", null, [
-            el("h2", null, [state.lang==="en" ? "Database status" : "حالة الجداول"]),
-            el("div", { class:"sub" }, [state.lang==="en" ? "Checks required tables" : "فحص الجداول المطلوبة"])
-          ]),
-          el("div", { class:"itag" }, [tx("loading")])
-        ]),
-        el("div", { class:"cardbd" }, [
-          el("div", { class:"list", id:"statusList" }, [])
-        ])
-      ])
-      main.appendChild(statusCard)
-
-      var items = [
-        state.cfg.tables.invoices,
-        state.cfg.tables.documents,
-        state.cfg.tables.tickets,
-        state.cfg.tables.meetings
-      ]
-
-      var list = statusCard.querySelector("#statusList")
-      list.innerHTML = ""
-      items.forEach(function(name) {
-        list.appendChild(el("div", { class:"item" }, [
-          el("div", { class:"icon" }, [iconShield()]),
-          el("div", { class:"itxt" }, [el("div", { class:"t" }, [name]), el("div", { class:"m" }, ["..."])]),
-          el("div", { class:"itag" }, [tx("loading")])
-        ]))
-      })
-
-      var results = []
-      for (var i=0;i<items.length;i++) results.push(await checkTable(items[i]))
-
-      list.innerHTML = ""
-      results.forEach(function(r, idx) {
-        var ok = r.ok
-        list.appendChild(el("div", { class:"item" }, [
-          el("div", { class:"icon" }, [iconShield()]),
-          el("div", { class:"itxt" }, [
-            el("div", { class:"t" }, [items[idx]]),
-            el("div", { class:"m" }, [r.error ? safeStr(r.error) : ""])
-          ]),
-          el("div", { class:"itag " + (ok ? "ok" : "bad") }, [ok ? tx("statusOk") : tx("statusWarn")])
-        ]))
-      })
-
-      var allOk = results.every(function(x) { return x.ok })
-      var tag = statusCard.querySelector(".itag")
-      tag.textContent = allOk ? tx("statusOk") : tx("statusWarn")
-      tag.className = "itag " + (allOk ? "ok" : "bad")
-    }
-
-    function renderHome(noBackend) {
-      var main = document.getElementById("main")
-      var gate = authGate()
-
-      var c = el("div", { class: "card" }, [
-        el("div", { class: "cardhd" }, [
-          el("div", null, [
-            el("h2", null, [tx("home")]),
-            el("div", { class:"sub" }, [
-              state.user ? safeStr(state.user.email) : (state.lang === "en" ? "Not signed in" : "غير مسجل دخول")
-            ])
-          ]),
-          el("button", { class:"btn secondary", onclick: function() { renderCurrent(true) } }, [tx("refresh")])
-        ]),
-        el("div", { class:"cardbd" }, [
-          gate,
-          el("div", { class:"grid2", style:"margin-top:12px" }, [
-            quickTile(tx("invoices"), "📄", function() { state.tab="invoices"; renderNav(); renderCurrent() }),
-            quickTile(tx("documents"), "📁", function() { state.tab="documents"; renderNav(); renderCurrent() }),
-            quickTile(tx("support"), "🎫", function() { state.tab="support"; renderNav(); renderCurrent() }),
-            quickTile(tx("meetings"), "📅", function() { state.tab="meetings"; renderNav(); renderCurrent() })
-          ]),
-          el("div", { class:"msg", style:"margin-top:12px" }, [
-            state.lang === "en"
-              ? "If any section shows a blank screen, open Settings and press Save, then Refresh"
-              : "لو أي صفحة بتظهر فاضية، افتح الإعدادات واضغط حفظ ثم تحديث"
-          ])
-        ])
-      ])
-
+    // التنقل بين الصفحات
+    function openScreen(screenId) {
+      document.getElementById('screen-home').style.display = 'none';
+      document.getElementById('screen-invoices').style.display = 'none';
+      document.getElementById('screen-' + screenId).style.display = 'block';
       
-      var needSetup = !state.cfg.supabaseUrl || !state.cfg.supabaseKey
+      if(screenId === 'invoices') fetchInvoices();
+    }
 
-      if (needSetup) {
-        main.appendChild(el("div", { class:"card" }, [
-          el("div", { class:"card-title" }, [tx("setup")]),
-          el("div", { class:"muted", style:"margin-top:6px" }, [tx("setupHint")]),
-          el("div", { style:"margin-top:12px;display:flex;gap:10px;flex-wrap:wrap" }, [
-            el("button", { class:"btn primary", onclick: function() { openSettingsModal() } }, ["فتح الإعدادات"]),
-            el("button", { class:"btn", onclick: function() { toast("info", "بعد ما تضيف البيانات اعمل Refresh للصفحة") } }, ["إرشاد سريع"])
-          ])
-        ]))
+    // جلب الفواتير من Supabase
+    async function fetchInvoices() {
+      const listDiv = document.getElementById('invoices-list');
+      if(!supabase) {
+        listDiv.innerHTML = '<p style="color:var(--error)">يرجى ربط Supabase Key أولاً</p>';
+        return;
       }
 
-if (state.user) renderSetupStatus()
-    }
-
-    async function downloadFromBucket(bucket, path) {
-      requireUser()
-      var r = await state.sb.storage.from(bucket).createSignedUrl(path, 120)
-      if (r.error) throw r.error
-      var url = r.data.signedUrl
-      var a = document.createElement("a")
-      a.href = url
-      a.target = "_blank"
-      a.rel = "noopener"
-      document.body.appendChild(a)
-      a.click()
-      a.remove()
-    }
-
-    async function downloadDocument(doc) {
-      var bucket = state.cfg.buckets.documents
-      var key = doc && doc.storage_path ? String(doc.storage_path) : ""
-      var baseName = (doc && (doc.name_en || doc.name_ar)) ? String(doc.name_en || doc.name_ar) : ""
-      var userFolder = doc && doc.user_id ? String(doc.user_id) : ""
-
-      var candidates = []
-      if (key) candidates.push(key)
-      if (userFolder && baseName) candidates.push(userFolder + "/" + baseName)
-
-      // try direct candidates
-      for (var i = 0; i < candidates.length; i++) {
-        try {
-          await downloadFromBucket(bucket, candidates[i])
-          return
-        } catch (e) {
-          // continue
-        }
-      }
-
-      // fallback: list user folder and try to locate matching object name
-      if (userFolder) {
-        var listRes = await state.sb.storage.from(bucket).list(userFolder, { limit: 100 })
-        if (!listRes.error && listRes.data && listRes.data.length) {
-          var wanted = baseName.toLowerCase()
-          var pick = null
-          if (wanted) {
-            for (var j = 0; j < listRes.data.length; j++) {
-              var n = String(listRes.data[j].name || "").toLowerCase()
-              if (n.indexOf(wanted) !== -1) { pick = listRes.data[j]; break }
-            }
-          }
-          if (!pick) pick = listRes.data[0]
-          if (pick && pick.name) {
-            await downloadFromBucket(bucket, userFolder + "/" + pick.name)
-            return
-          }
-        }
-      }
-
-      throw new Error(state.lang === "en" ? "File not found in storage. Please re-upload it." : "الملف غير موجود في التخزين. من فضلك ارفعه من جديد")
-    }
-
-
-    function renderInvoices() {
-      var main = document.getElementById("main")
-      var gate = authGate()
-
-      var list = el("div", { class:"list", id:"invList" }, [
-        el("div", { class:"item" }, [
-          el("div", { class:"itxt" }, [
-            el("div", { class:"t" }, [tx("loading")]),
-            el("div", { class:"m" }, ["..."])
-          ])
-        ])
-      ])
-
-      var card = el("div", { class:"card" }, [
-        el("div", { class:"cardhd" }, [
-          el("div", null, [
-            el("h2", null, [tx("invoices")]),
-            el("div", { class:"sub" }, [
-              state.lang==="en" ? "Your invoices and attachments" : "فواتيرك والملفات المرفقة"
-            ])
-          ]),
-          el("button", { class:"btn secondary", onclick: function() { renderCurrent(true) } }, [tx("refresh")])
-        ]),
-        el("div", { class:"cardbd" }, [gate, list])
-      ])
-
-      main.innerHTML = ""
-      main.appendChild(card)
-
-      if (state.user) loadInvoices(list).catch(function(e) { toast("bad", e.message || String(e)) })
-    }
-
-    async function loadInvoices(listEl) {
-      requireUser()
-      var table = state.cfg.tables.invoices
-      var r = await state.sb.from(table).select("*").order("created_at", { ascending: false }).limit(50)
-      if (r.error) throw r.error
-      var rows = r.data || []
-      listEl.innerHTML = ""
-      if (!rows.length) {
-        listEl.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "No invoices yet" : "لا توجد فواتير"]))
-        return
-      }
-
-      rows.forEach(function(row) {
-        var hasFile = !!row.storage_path
-        var meta = []
-        if (row.amount !== undefined && row.amount !== null) meta.push(tx("amount")+": "+row.amount)
-        if (row.status) meta.push(tx("state")+": "+row.status)
-        if (row.created_at) meta.push(tx("created")+": "+fmtDate(row.created_at))
-
-        listEl.appendChild(el("div", { class:"item" }, [
-          el("div", { class:"icon" }, [iconDoc()]),
-          el("div", { class:"itxt" }, [
-            el("div", { class:"t" }, ["#"+safeStr(row.id).slice(0,8)]),
-            el("div", { class:"m" }, [meta.join(" • ")])
-          ]),
-          el("button", {
-            class:"btn " + (hasFile ? "" : "secondary"),
-            onclick: function() {
-              if (!hasFile) return toast("bad", state.lang==="en" ? "No attachment" : "لا يوجد ملف")
-              downloadFromBucket(state.cfg.buckets.invoices, row.storage_path).catch(function(e) {
-                toast("bad", e.message || String(e))
-              })
-            }
-          }, [tx("download")])
-        ]))
-      })
-    }
-
-    function renderDocuments() {
-      var main = document.getElementById("main")
-      var gate = authGate()
-
-      var fileInput = el("input", { class:"input", type:"file" })
-      var titleInput = el("input", { class:"input", type:"text", placeholder: tx("title") })
-
-      var uploadBtn = el("button", {
-        class:"btn",
-        onclick: function() {
-          uploadDocument(fileInput.files[0], titleInput.value).then(function() {
-            titleInput.value = ""
-            fileInput.value = ""
-            toast("ok", tx("done"))
-            renderCurrent(true)
-          }).catch(function(e) {
-            toast("bad", tx("failed") + ": " + (e.message || String(e)))
-          })
-        }
-      }, [tx("upload")])
-
-      var list = el("div", { class:"list", id:"docList" }, [
-        el("div", { class:"item" }, [
-          el("div", { class:"itxt" }, [
-            el("div", { class:"t" }, [tx("loading")]),
-            el("div", { class:"m" }, ["..."])
-          ])
-        ])
-      ])
-
-      var card = el("div", { class:"card" }, [
-        el("div", { class:"cardhd" }, [
-          el("div", null, [
-            el("h2", null, [tx("documents")]),
-            el("div", { class:"sub" }, [state.lang==="en" ? "Upload and manage your documents" : "رفع وإدارة المستندات الخاصة بك"])
-          ]),
-          el("button", { class:"btn secondary", onclick: function() { renderCurrent(true) } }, [tx("refresh")])
-        ]),
-        el("div", { class:"cardbd" }, [
-          gate,
-          el("div", { class:"row", style:"margin-top:10px" }, [
-            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("chooseFile")]), fileInput]),
-            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("title")]), titleInput]),
-            el("div", { class:"field" }, [el("div", { class:"label" }, [" "]), uploadBtn])
-          ]),
-          el("div", { style:"height:10px" }),
-          list
-        ])
-      ])
-
-      main.innerHTML = ""
-      main.appendChild(card)
-
-      if (state.user) loadDocuments(list).catch(function(e) { toast("bad", e.message || String(e)) })
-    }
-
-    async function uploadDocument(file, title) {
-      var user = requireUser()
-      if (!file) throw new Error(state.lang==="en" ? "Choose a file" : "اختر ملف")
-
-      var tbl = state.cfg.tables.documents
-      var bucket = state.cfg.buckets.documents
-
-      var cleanName = file.name.replace(/[^a-zA-Z0-9._-]+/g, "_")
-      var path = user.id + "/" + Date.now() + "_" + cleanName
-
-      var up = await state.sb.storage.from(bucket).upload(path, file, { cacheControl: "3600", upsert: false })
-      if (up.error) throw up.error
-
-      var ins = await state.sb.from(tbl).insert({
-        user_id: user.id,
-        type: "report",
-        name_en: title || cleanName,
-        name_ar: title || cleanName,
-        storage_path: path
-      }).select("*").single()
-      if (ins.error) throw ins.error
-      return ins.data
-    }
-
-    async function loadDocuments(listEl) {
-      requireUser()
-      var tbl = state.cfg.tables.documents
-      var r = await state.sb.from(tbl).select("*").order("created_at", { ascending: false }).limit(80)
-      if (r.error) throw r.error
-      var rows = r.data || []
-      listEl.innerHTML = ""
-      if (!rows.length) {
-        listEl.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "No documents yet" : "لا توجد مستندات"]))
-        return
-      }
-
-      rows.forEach(function(row) {
-        var hasFile = !!row.storage_path
-        var meta = []
-        if (row.type) meta.push(row.type)
-        if (row.created_at) meta.push(fmtDate(row.created_at))
-        var title = row.name_ar || row.name_en || ("#"+safeStr(row.id).slice(0,8))
-
-        listEl.appendChild(el("div", { class:"item" }, [
-          el("div", { class:"icon" }, [iconFolder()]),
-          el("div", { class:"itxt" }, [el("div", { class:"t" }, [safeStr(title)]), el("div", { class:"m" }, [meta.join(" • ")])]),
-          el("button", {
-            class:"btn " + (hasFile ? "" : "secondary"),
-            onclick: function() {
-              if (!hasFile) return toast("bad", state.lang==="en" ? "No file path" : "لا يوجد مسار ملف")
-              downloadFromBucket(state.cfg.buckets.documents, row.storage_path).catch(function(e) { toast("bad", e.message || String(e)) })
-            }
-          }, [tx("download")])
-        ]))
-      })
-    }
-
-    function renderSupport() {
-      var main = document.getElementById("main")
-      var gate = authGate()
-
-      var subjectInput = el("input", { class:"input", type:"text", placeholder: tx("subject") })
-      var messageInput = el("textarea", { class:"ta", placeholder: tx("message") })
-
-      var sendBtn = el("button", {
-        class:"btn",
-        onclick: function() {
-          createTicket(subjectInput.value, messageInput.value).then(function() {
-            subjectInput.value = ""
-            messageInput.value = ""
-            toast("ok", tx("done"))
-            renderCurrent(true)
-          }).catch(function(e) {
-            toast("bad", tx("failed") + ": " + (e.message || String(e)))
-          })
-        }
-      }, [tx("send")])
-
-      var list = el("div", { class:"list", id:"ticketList" }, [])
-
-      var card = el("div", { class:"card" }, [
-        el("div", { class:"cardhd" }, [
-          el("div", null, [
-            el("h2", null, [tx("support")]),
-            el("div", { class:"sub" }, [state.lang==="en" ? "Create and track support tickets" : "إنشاء ومتابعة تذاكر الدعم"])
-          ]),
-          el("button", { class:"btn secondary", onclick: function() { renderCurrent(true) } }, [tx("refresh")])
-        ]),
-        el("div", { class:"cardbd" }, [
-          gate,
-          el("div", { class:"row", style:"margin-top:10px" }, [
-            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("subject")]), subjectInput]),
-            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("message")]), messageInput]),
-            el("div", { class:"field" }, [el("div", { class:"label" }, [" "]), sendBtn])
-          ]),
-          el("div", { style:"height:10px" }),
-          list
-        ])
-      ])
-
-      main.innerHTML = ""
-      main.appendChild(card)
-
-      if (state.user) loadTickets(list).catch(function(e) { toast("bad", e.message || String(e)) })
-      else list.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "Sign in to view tickets" : "سجل دخول لعرض التذاكر"]))
-    }
-
-    async function createTicket(subject, details) {
-    const user = state.user
-    if (!user) return
-    const sub = (subject || '').toString().trim()
-    const det = (details || '').toString().trim()
-
-    // Match current DB schema: tickets(subject_en, subject_ar, category, details, status, message?)
-    const base = {
-      user_id: user.id,
-      subject_en: sub,
-      subject_ar: sub,
-      category: 'Support',
-      details: det,
-      status: 'open'
-    }
-
-    // Try with optional "message" column first, then without it
-    let { error } = await supa().from(state.cfg.tables.tickets).insert({ ...base, message: det })
-    if (error) {
-      const r2 = await supa().from(state.cfg.tables.tickets).insert(base)
-      if (r2.error) throw r2.error
-    }
-  }
-
-  async function loadTickets() {
-    if (!state.user) return []
-    const cols = 'id,subject_en,subject_ar,category,details,status,created_at'
-    const { data, error } = await supa()
-      .from(state.cfg.tables.tickets)
-      .select(cols)
-      .eq('user_id', state.user.id)
-      .order('created_at', { ascending: false })
-
-    if (error) throw error
-    return data || []
-  }
-
-  async function createMeeting(title, date, time, notes) {
-    const user = state.user
-    if (!user) return
-    const t = (title || '').toString().trim()
-    const d = (date || '').toString().trim()
-    let tm = (time || '').toString().trim()
-    const n = (notes || '').toString().trim()
-
-    // Default and validate time to avoid NULL inserts (DB may enforce NOT NULL)
-    if (!tm) tm = '10:00'
-    if (!/^\d{2}:\d{2}$/.test(tm)) {
-      throw new Error(lang() === 'ar' ? 'صيغة الوقت غير صحيحة' : 'Invalid time format')
-    }
-    if (!d) {
-      throw new Error(lang() === 'ar' ? 'اختر التاريخ' : 'Please choose a date')
-    }
-    if (!t) {
-      throw new Error(lang() === 'ar' ? 'اكتب عنوان الاجتماع' : 'Please enter a title')
-    }
-
-    const payload = {
-      user_id: user.id,
-      title: t,
-      meeting_date: d,
-      meeting_time: tm,
-      notes: n,
-      status: 'open'
-    }
-
-    const { error } = await supa().from(state.cfg.tables.meetings).insert(payload)
-    if (error) throw error
-  }
-
-  async function loadMeetings(listEl) {
-      requireUser()
-      var tbl = state.cfg.tables.meetings
-      var r = await state.sb.from(tbl).select("*").order("created_at", { ascending: false }).limit(80)
-      if (r.error) throw r.error
-      var rows = r.data || []
-      listEl.innerHTML = ""
-      if (!rows.length) {
-        listEl.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "No meetings yet" : "لا توجد اجتماعات"]))
-        return
-      }
-
-      rows.forEach(function(row) {
-        var meta = []
-        if (row.status) meta.push(tx("state")+": "+row.status)
-        if (row.meeting_date) meta.push(tx("date")+": "+row.meeting_date)
-        if (row.meeting_time) meta.push(tx("time")+": "+row.meeting_time)
-        if (row.created_at) meta.push(fmtDate(row.created_at))
-        listEl.appendChild(el("div", { class:"item" }, [
-          el("div", { class:"icon" }, [iconCalendar()]),
-          el("div", { class:"itxt" }, [
-            el("div", { class:"t" }, [safeStr(row.title)]),
-            el("div", { class:"m" }, [meta.join(" • ") + (row.notes ? " • " + safeStr(row.notes) : "")])
-          ]),
-          el("div", { class:"itag ok" }, [safeStr(row.status || "open")])
-        ]))
-      })
-    }
-
-    function renderSettings() {
-      var body = document.getElementById("settingsBody")
-      body.innerHTML = ""
-
-      var sbUrl = el("input", { class:"input", value: state.cfg.supabaseUrl })
-      var sbKey = el("input", { class:"input", value: state.cfg.supabaseKey })
-      var bInv = el("input", { class:"input", value: state.cfg.buckets.invoices })
-      var bDoc = el("input", { class:"input", value: state.cfg.buckets.documents })
-      var tInv = el("input", { class:"input", value: state.cfg.tables.invoices })
-      var tDoc = el("input", { class:"input", value: state.cfg.tables.documents })
-      var tTick = el("input", { class:"input", value: state.cfg.tables.tickets })
-      var tMeet = el("input", { class:"input", value: state.cfg.tables.meetings })
-
-      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, ["Supabase URL"]), sbUrl]))
-      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, ["Supabase Key"]), sbKey]))
-      body.appendChild(el("div", { style:"height:10px" }))
-      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [state.lang==="en" ? "Invoices bucket" : "Bucket الفواتير"]), bInv]))
-      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [state.lang==="en" ? "Documents bucket" : "Bucket المستندات"]), bDoc]))
-      body.appendChild(el("div", { style:"height:10px" }))
-      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [state.lang==="en" ? "Invoices table" : "جدول الفواتير"]), tInv]))
-      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [state.lang==="en" ? "Documents table" : "جدول المستندات"]), tDoc]))
-      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [state.lang==="en" ? "Tickets table" : "جدول التذاكر"]), tTick]))
-      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [state.lang==="en" ? "Meetings table" : "جدول الاجتماعات"]), tMeet]))
-      body.appendChild(el("div", { style:"height:12px" }))
-
-      body.appendChild(el("button", {
-        class:"btn block",
-        onclick: async function() {
-          state.cfg.supabaseUrl = sbUrl.value.trim()
-          state.cfg.supabaseKey = sbKey.value.trim()
-          state.cfg.buckets.invoices = bInv.value.trim() || "Invoices"
-          state.cfg.buckets.documents = bDoc.value.trim() || "Documents"
-          state.cfg.tables.invoices = tInv.value.trim() || "invoices"
-          state.cfg.tables.documents = tDoc.value.trim() || "documents"
-          state.cfg.tables.tickets = tTick.value.trim() || "tickets"
-          state.cfg.tables.meetings = tMeet.value.trim() || "meetings"
-          writeStore("fd_cfg_v1", state.cfg)
-
-          try {
-            await ensureSupabaseReady()
-        loadCfg()
-
-        if (!state.cfg.supabaseUrl || !state.cfg.supabaseKey) {
-          document.getElementById("loading").hidden = true
-          document.getElementById("app").hidden = false
-          state.sb = null
-          state.session = null
-          state.user = null
-          state.tab = "home"
-          renderNav()
-          renderCurrent()
-          openSettingsModal()
-          return
-        }
-
-        buildClient()
-        await loadSession()
-            renderNav()
-            renderCurrent(true)
-            toast("ok", tx("done"))
-            showModal("modalSettings", false)
-          } catch (e) {
-            toast("bad", e.message || String(e))
-          }
-        }
-      }, [tx("save")]))
-
-      body.appendChild(el("div", { style:"height:10px" }))
-      body.appendChild(el("button", {
-        class:"btn block danger",
-        onclick: function() {
-          try {
-            localStorage.removeItem("fd_cfg_v1")
-            localStorage.removeItem("fd_lang_v1")
-            toast("ok", state.lang==="en" ? "Reset done" : "تمت إعادة الضبط")
-            location.reload()
-          } catch (e) {
-            toast("bad", e.message || String(e))
-          }
-        }
-      }, [state.lang==="en" ? "Reset app" : "إعادة ضبط التطبيق"]))
-    }
-
-    function renderUserModal() {
-      var body = document.getElementById("userBody")
-      body.innerHTML = ""
-
-      if (state.user) {
-        body.appendChild(el("div", { class:"msg ok" }, [
-          (state.lang==="en" ? "Signed in as " : "تم تسجيل الدخول: ") + safeStr(state.user.email)
-        ]))
-        body.appendChild(el("button", {
-          class:"btn block danger",
-          onclick: function() {
-            signOut().then(function() {
-              toast("ok", tx("done"))
-              showModal("modalUser", false)
-              renderCurrent(true)
-            }).catch(function(e) {
-              toast("bad", e.message || String(e))
-            })
-          }
-        }, [tx("signOut")]))
-        return
-      }
-
-      var email = el("input", { class:"input", type:"email", placeholder: tx("email") })
-      var pass = el("input", { class:"input", type:"password", placeholder: tx("password") })
-
-      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [tx("email")]), email]))
-      body.appendChild(el("div", { class:"field" }, [el("div", { class:"label" }, [tx("password")]), pass]))
-      body.appendChild(el("div", { style:"height:10px" }))
-
-      body.appendChild(el("div", { class:"row" }, [
-        el("button", {
-          class:"btn",
-          onclick: function() {
-            signIn(email.value.trim(), pass.value).then(function() {
-              toast("ok", tx("done"))
-              showModal("modalUser", false)
-              renderCurrent(true)
-            }).catch(function(e) {
-              toast("bad", e.message || String(e))
-            })
-          }
-        }, [tx("signIn")]),
-        el("button", {
-          class:"btn secondary",
-          onclick: function() {
-            signUp(email.value.trim(), pass.value).then(function() {
-              toast("ok", state.lang==="en" ? "Check your email if confirmation is enabled" : "راجع بريدك لو التفعيل مفعل")
-              showModal("modalUser", false)
-              renderCurrent(true)
-            }).catch(function(e) {
-              toast("bad", e.message || String(e))
-            })
-          }
-        }, [tx("signUp")])
-      ]))
-    }
-
-    function renderCurrent() {
-      if (!state.sb) {
-        state.tab = "home"
-        return renderHome(true)
-      }
-
-      if (state.tab === "home") return renderHome()
-      if (state.tab === "invoices") return renderInvoices()
-      if (state.tab === "documents") return renderDocuments()
-      if (state.tab === "support") return renderSupport()
-      if (state.tab === "meetings") return renderMeetings()
-      return renderHome()
-    }
-
-function wireUI() {
-      document.getElementById("btnLang").addEventListener("click", function() {
-        setLang(state.lang === "en" ? "ar" : "en")
-      })
-      document.getElementById("btnSettings").addEventListener("click", function() {
-        renderSettings()
-        showModal("modalSettings", true)
-      })
-      document.getElementById("btnUser").addEventListener("click", function() {
-        renderUserModal()
-        showModal("modalUser", true)
-      })
-      document.getElementById("closeUser").addEventListener("click", function() { showModal("modalUser", false) })
-      document.getElementById("closeSettings").addEventListener("click", function() { showModal("modalSettings", false) })
-      document.getElementById("modalUser").addEventListener("click", function(e) { if (e.target && e.target.id === "modalUser") showModal("modalUser", false) })
-      document.getElementById("modalSettings").addEventListener("click", function(e) { if (e.target && e.target.id === "modalSettings") showModal("modalSettings", false) })
-    }
-
-    async function boot() {
-      try {
-        setLang(state.lang)
-        wireUI()
-        renderNav()
-
-        await ensureSupabaseReady()
-        loadCfg()
-
-        if (!state.cfg.supabaseUrl || !state.cfg.supabaseKey) {
-          document.getElementById("loading").hidden = true
-          document.getElementById("app").hidden = false
-          state.sb = null
-          state.session = null
-          state.user = null
-          state.tab = "home"
-          renderNav()
-          renderCurrent()
-          openSettingsModal()
-          return
-        }
-
-        buildClient()
-        await loadSession()
-
-        state.sb.auth.onAuthStateChange(function() {
-          loadSession().then(function() { renderCurrent() })
-        })
-
-        renderCurrent()
-
-      } catch (e) {
-        document.getElementById("loadingTitle").textContent = state.lang==="en" ? "App failed to start" : "فشل تشغيل التطبيق"
-        document.getElementById("loadingSub").textContent = e.message || String(e)
-        document.getElementById("loadingTag").textContent = tx("failed")
-        toast("bad", e.message || String(e))
+      const { data, error } = await supabase.from('invoices').select('*');
+      
+      if (error) {
+        listDiv.innerHTML = '<p>لا توجد فواتير حالياً</p>';
+      } else {
+        listDiv.innerHTML = '';
+        data.forEach(inv => {
+          listDiv.innerHTML += `
+            <div class="invoice-row">
+              <div>
+                <div style="font-weight:bold">فاتورة #${inv.id}</div>
+                <div style="font-size:0.8rem; opacity:0.7">${inv.date || '2024-01-01'}</div>
+              </div>
+              <div class="status-paid">${inv.amount} SAR</div>
+              <i data-lucide="download" style="width:18px; color:var(--brand); cursor:pointer"></i>
+            </div>
+          `;
+        });
+        lucide.createIcons();
       }
     }
 
-    boot()
-  })()
-</script>
+    // تبديل اللغة (بشكل مبسط)
+    let currentLang = 'ar';
+    document.getElementById('lang-switch').onclick = function() {
+      if(currentLang === 'ar') {
+        document.documentElement.dir = 'ltr';
+        document.documentElement.lang = 'en';
+        this.innerText = 'AR';
+        currentLang = 'en';
+        // هنا يمكنك تغيير النصوص للإنجليزية
+      } else {
+        document.documentElement.dir = 'rtl';
+        document.documentElement.lang = 'ar';
+        this.innerText = 'EN';
+        currentLang = 'ar';
+      }
+    };
+  </script>
 </body>
 </html>
