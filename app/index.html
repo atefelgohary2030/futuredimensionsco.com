@@ -1429,25 +1429,4 @@ const clearCfg = () => {
     window.addEventListener("load", boot)
   </script>
 </body>
-</html>const mustCfg = () => {
-    if (!state.cfg) {
-      // allow config via URL query one time
-      if (!applyCfgFromUrl()) loadCfg()
-    }
-
-    const ok = !!(state.cfg && state.cfg.supabaseUrl && state.cfg.anonKey)
-    if (!ok) {
-      if (!state.warnedNoCfg) {
-        toast("يرجى ضبط Supabase URL و Anon Key")
-        state.warnedNoCfg = true
-        // help the user immediately
-        openSettings()
-      }
-      return false
-    }
-
-    if (!state.supabase) initSupabase()
-    return true
-  }
-
-  
+</html>
