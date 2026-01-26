@@ -505,8 +505,8 @@
 <script>
   ;(function() {
     var defaults = {
-      supabaseUrl: "https://mifottrhqimqzojiyytq.supabase.co",
-      supabaseKey: "sb_publishable_nJKPr9Lk-SppxXMAwLG79g_cz2d5rir",
+      supabaseUrl: "",
+      supabaseKey: "",
       buckets: {
         invoices: "Invoices",
         documents: "Documents"
@@ -1059,7 +1059,10 @@ with check (
 
       main.innerHTML = ""
       main.appendChild(c)
-      main.appendChild(setup)
+      // Show setup helper only when config is missing (or explicitly enabled)
+      if (!state.cfg.supabaseUrl || !state.cfg.supabaseKey || state.cfg.showSetupOnHome) {
+        main.appendChild(setup)
+      }
 
       if (state.user) renderSetupStatus()
     }
@@ -1355,147 +1358,77 @@ with check (
       else list.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "Sign in to view tickets" : "سجل دخول لعرض التذاكر"]))
     }
 
-    async function createTicket(subject, message) {
-      var user = requireUser()
-      if (!subject) throw new Error(state.lang === "en" ? "Subject is required" : "الموضوع مطلوب")
-      if (!message) throw new Error(state.lang === "en" ? "Message is required" : "الرسالة مطلوبة")
+    async function createTicket(subject, details) {
+    const user = state.user
+    if (!user) return
+    const sub = (subject || '').toString().trim()
+    const det = (details || '').toString().trim()
 
-      var tbl = state.cfg.tables.tickets
-      var payloads = [
-        { user_id: user.id, subject: subject, message: message, status: "open" },
-        { user_id: user.id, title: subject, message: message, status: "open" },
-        { user_id: user.id, subject: subject, notes: message, status: "open" },
-        { user_id: user.id, title: subject, notes: message, status: "open" },
-        { user_id: user.id, subject: subject, description: message, status: "open" },
-        { user_id: user.id, title: subject, description: message, status: "open" },
-        { user_id: user.id, topic: subject, message: message, status: "open" },
-        { user_id: user.id, topic: subject, content: message, status: "open" }
-      ]
-
-      var lastErr = null
-      for (var i = 0; i < payloads.length; i++) {
-        var res = await state.sb.from(tbl).insert(payloads[i]).select("*").single()
-        if (!res.error) return res.data
-        lastErr = res.error
-        var msg = String(res.error.message || "")
-        if (msg.indexOf("Could not find") === -1 && msg.indexOf("schema cache") === -1 && msg.indexOf("column") === -1) {
-          break
-        }
-      }
-      throw lastErr || new Error(state.lang === "en" ? "Failed to create ticket" : "فشل إنشاء التذكرة")
+    // Match current DB schema: tickets(subject_en, subject_ar, category, details, status, message?)
+    const base = {
+      user_id: user.id,
+      subject_en: sub,
+      subject_ar: sub,
+      category: 'Support',
+      details: det,
+      status: 'open'
     }
 
-    async function loadTickets(listEl) {
-      requireUser()
-      var tbl = state.cfg.tables.tickets
-      var r = await state.sb.from(tbl).select("*").order("created_at", { ascending: false }).limit(80)
-      if (r.error) throw r.error
-      var rows = r.data || []
-      listEl.innerHTML = ""
-      if (!rows.length) {
-        listEl.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "No tickets yet" : "لا توجد تذاكر"]))
-        return
-      }
+    // Try with optional "message" column first, then without it
+    let { error } = await supa().from(state.cfg.tables.tickets).insert({ ...base, message: det })
+    if (error) {
+      const r2 = await supa().from(state.cfg.tables.tickets).insert(base)
+      if (r2.error) throw r2.error
+    }
+  }
 
-      rows.forEach(function(row) {
-        var meta = []
-        if (row.status) meta.push(tx("state")+": "+row.status)
-        if (row.created_at) meta.push(fmtDate(row.created_at))
-        listEl.appendChild(el("div", { class:"item" }, [
-          el("div", { class:"icon" }, [iconTicket()]),
-          el("div", { class:"itxt" }, [
-            el("div", { class:"t" }, [safeStr(row.subject || ("#"+safeStr(row.id).slice(0,8)))]),
-            el("div", { class:"m" }, [meta.join(" • ") + (row.message ? " • " + safeStr(row.message) : "")])
-          ]),
-          el("div", { class:"itag ok" }, [safeStr(row.status || "open")])
-        ]))
-      })
+  async function loadTickets() {
+    if (!state.user) return []
+    const cols = 'id,subject_en,subject_ar,category,details,status,created_at'
+    const { data, error } = await supa()
+      .from(state.cfg.tables.tickets)
+      .select(cols)
+      .eq('user_id', state.user.id)
+      .order('created_at', { ascending: false })
+
+    if (error) throw error
+    return data || []
+  }
+
+  async function createMeeting(title, date, time, notes) {
+    const user = state.user
+    if (!user) return
+    const t = (title || '').toString().trim()
+    const d = (date || '').toString().trim()
+    let tm = (time || '').toString().trim()
+    const n = (notes || '').toString().trim()
+
+    // Default and validate time to avoid NULL inserts (DB may enforce NOT NULL)
+    if (!tm) tm = '10:00'
+    if (!/^\d{2}:\d{2}$/.test(tm)) {
+      throw new Error(lang() === 'ar' ? 'صيغة الوقت غير صحيحة' : 'Invalid time format')
+    }
+    if (!d) {
+      throw new Error(lang() === 'ar' ? 'اختر التاريخ' : 'Please choose a date')
+    }
+    if (!t) {
+      throw new Error(lang() === 'ar' ? 'اكتب عنوان الاجتماع' : 'Please enter a title')
     }
 
-    function renderMeetings() {
-      var main = document.getElementById("main")
-      var gate = authGate()
-
-      var titleInput = el("input", { class:"input", type:"text", placeholder: tx("subject") })
-      var dateInput = el("input", { class:"input", type:"date" })
-      var timeInput = el("input", { class:"input", type:"time", required:true, value:"10:00" })
-      var notesInput = el("textarea", { class:"ta", placeholder: tx("message") })
-
-      var sendBtn = el("button", {
-        class:"btn",
-        onclick: function() {
-          createMeeting(titleInput.value, dateInput.value, timeInput.value, notesInput.value).then(function() {
-            titleInput.value=""
-            notesInput.value=""
-            toast("ok", tx("done"))
-            renderCurrent(true)
-          }).catch(function(e) {
-            toast("bad", tx("failed") + ": " + (e.message || String(e)))
-          })
-        }
-      }, [tx("send")])
-
-      var list = el("div", { class:"list", id:"meetList" }, [])
-
-      var card = el("div", { class:"card" }, [
-        el("div", { class:"cardhd" }, [
-          el("div", null, [
-            el("h2", null, [tx("meetings")]),
-            el("div", { class:"sub" }, [state.lang==="en" ? "Request a meeting and track status" : "طلب اجتماع ومتابعة الحالة"])
-          ]),
-          el("button", { class:"btn secondary", onclick: function() { renderCurrent(true) } }, [tx("refresh")])
-        ]),
-        el("div", { class:"cardbd" }, [
-          gate,
-          el("div", { class:"row", style:"margin-top:10px" }, [
-            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("subject")]), titleInput]),
-            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("date")]), dateInput]),
-            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("time")]), timeInput]),
-            el("div", { class:"field" }, [el("div", { class:"label" }, [tx("message")]), notesInput]),
-            el("div", { class:"field" }, [el("div", { class:"label" }, [" "]), sendBtn])
-          ]),
-          el("div", { style:"height:10px" }),
-          list
-        ])
-      ])
-
-      main.innerHTML = ""
-      main.appendChild(card)
-
-      if (state.user) loadMeetings(list).catch(function(e) { toast("bad", e.message || String(e)) })
-      else list.appendChild(el("div", { class:"msg" }, [state.lang==="en" ? "Sign in to view meetings" : "سجل دخول لعرض الاجتماعات"]))
+    const payload = {
+      user_id: user.id,
+      title: t,
+      meeting_date: d,
+      meeting_time: tm,
+      notes: n,
+      status: 'open'
     }
 
-    async function createMeeting(title, date, time, notes) {
-      var user = requireUser()
-      if (!title) throw new Error(state.lang === "en" ? "Title is required" : "العنوان مطلوب")
-      if (!date) throw new Error(state.lang === "en" ? "Date is required" : "التاريخ مطلوب")
+    const { error } = await supa().from(state.cfg.tables.meetings).insert(payload)
+    if (error) throw error
+  }
 
-      var timeVal = time || "10:00"
-      var tbl = state.cfg.tables.meetings
-
-      var payloads = [
-        { user_id: user.id, title: title, meeting_date: date, meeting_time: timeVal, notes: notes || "" },
-        { user_id: user.id, subject: title, meeting_date: date, meeting_time: timeVal, notes: notes || "" },
-        { user_id: user.id, title: title, date: date, time: timeVal, notes: notes || "" },
-        { user_id: user.id, title: title, meeting_date: date, meeting_time: timeVal, message: notes || "" },
-        { user_id: user.id, subject: title, date: date, time: timeVal, message: notes || "" }
-      ]
-
-      var lastErr = null
-      for (var i = 0; i < payloads.length; i++) {
-        var res = await state.sb.from(tbl).insert(payloads[i]).select("*").single()
-        if (!res.error) return res.data
-        lastErr = res.error
-        var msg = String(res.error.message || "")
-        if (msg.indexOf("Could not find") === -1 && msg.indexOf("schema cache") === -1 && msg.indexOf("column") === -1 && msg.indexOf("violates") === -1) {
-          break
-        }
-      }
-      throw lastErr || new Error(state.lang === "en" ? "Failed to create meeting" : "فشل إنشاء الاجتماع")
-    }
-
-    async function loadMeetings(listEl) {
+  async function loadMeetings(listEl) {
       requireUser()
       var tbl = state.cfg.tables.meetings
       var r = await state.sb.from(tbl).select("*").order("created_at", { ascending: false }).limit(80)
