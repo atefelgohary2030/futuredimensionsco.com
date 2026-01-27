@@ -545,24 +545,168 @@
     }
 
   
-    /* Projects tab: keep all features and fit on mobile */
-    .tabs{ grid-template-columns: repeat(6, 1fr) }
-    @media (max-width: 560px){
-      .tabs{
-        display:flex;
-        overflow-x:auto;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-        padding-bottom: 2px;
-      }
-      .tab{
-        flex:0 0 auto;
-        min-width: 92px;
-        scroll-snap-align: start;
-        font-size: 12px;
-      }
-      .tabs::-webkit-scrollbar{ height: 6px }
-      .tabs::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.08); border-radius: 999px }
+    /* UI tweaks: make every button gold and raised (match older look) */
+    .btn{
+      border-radius:16px;
+      padding:11px 14px;
+      min-width:120px;
+      background: linear-gradient(180deg, rgba(255,232,155,0.98) 0%, rgba(214,179,91,0.96) 45%, rgba(161,120,44,0.94) 100%);
+      border:1px solid rgba(255,220,140,0.62);
+      box-shadow:
+        0 14px 32px rgba(0,0,0,0.42),
+        0 6px 0 rgba(120,88,24,0.55),
+        inset 0 1px 0 rgba(255,255,255,0.62),
+        inset 0 -14px 22px rgba(0,0,0,0.20);
+    }
+    .btn.secondary{
+      background: linear-gradient(180deg, rgba(255,232,155,0.28) 0%, rgba(214,179,91,0.22) 55%, rgba(161,120,44,0.18) 100%);
+      border-color: rgba(255,220,140,0.55);
+      box-shadow:
+        0 14px 30px rgba(0,0,0,0.38),
+        0 6px 0 rgba(120,88,24,0.42),
+        inset 0 1px 0 rgba(255,255,255,0.28),
+        inset 0 -14px 22px rgba(0,0,0,0.18);
+    }
+    .btn.ok{
+      background: linear-gradient(180deg, rgba(255,232,155,0.98) 0%, rgba(214,179,91,0.96) 45%, rgba(161,120,44,0.94) 100%);
+      border-color: rgba(255,220,140,0.62);
+      color: rgba(10,12,16,0.92);
+    }
+    .btn.danger{
+      background: linear-gradient(180deg, rgba(255,232,155,0.98) 0%, rgba(214,179,91,0.96) 45%, rgba(161,120,44,0.94) 100%);
+      border-color: rgba(255,96,96,0.55);
+      color: rgba(10,12,16,0.92);
+    }
+
+    .iconbtn{
+      border:1px solid rgba(255,220,140,0.60);
+      background: linear-gradient(180deg, rgba(255,232,155,0.22) 0%, rgba(214,179,91,0.14) 55%, rgba(161,120,44,0.10) 100%);
+      box-shadow:
+        0 14px 30px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.18);
+    }
+    .iconbtn:hover{ filter: brightness(1.05) }
+
+    /* Projects page look (match screenshot) */
+    .heroBtnWrap{ margin: 8px 2px 14px }
+    .btn-goldbig{
+      width:100%;
+      padding:16px 18px;
+      border-radius:999px;
+      font-weight:800;
+      letter-spacing:0.2px;
+      position:relative;
+      overflow:hidden;
+      min-width:auto;
+    }
+    .btn-goldbig:after{
+      content:"";
+      position:absolute;
+      top:-60%;
+      left:-60%;
+      width:200%;
+      height:200%;
+      background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.55) 45%, rgba(255,255,255,0) 60%);
+      transform: rotate(10deg) translateX(-55%);
+      opacity:0.55;
+      animation: fdShine 3.8s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes fdShine{
+      0%{ transform: rotate(10deg) translateX(-55%) }
+      45%{ transform: rotate(10deg) translateX(55%) }
+      100%{ transform: rotate(10deg) translateX(55%) }
+    }
+
+    .projNewBox{
+      border-radius:22px;
+      border:1px solid rgba(255,220,140,0.24);
+      background: radial-gradient(120% 120% at 10% 15%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 35%, rgba(0,0,0,0.08) 100%);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.45);
+      margin-bottom: 14px;
+    }
+
+    .projList{ display:flex; flex-direction:column; gap:14px; padding-bottom: 10px }
+
+    .projCard{
+      border-radius:22px;
+      border:1px solid rgba(255,220,140,0.22);
+      background: radial-gradient(120% 120% at 10% 15%, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 35%, rgba(0,0,0,0.08) 100%);
+      padding:16px 16px 14px;
+      box-shadow: 0 22px 70px rgba(0,0,0,0.45);
+    }
+    .projHead{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px }
+    .projIco{
+      width:38px; height:38px; border-radius:14px;
+      display:grid; place-items:center;
+      border:1px solid rgba(255,220,140,0.22);
+      background: rgba(255,255,255,0.03);
+    }
+    .projTitle{ font-weight:800; font-size:14px; margin: 2px 0 6px }
+    .projMeta{ font-size:12px; color: rgba(255,255,255,0.78); margin-bottom:10px }
+
+    .statusChip{
+      display:inline-flex; align-items:center;
+      padding:7px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,220,140,0.28);
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.92);
+      font-size:12px;
+      user-select:none;
+    }
+    .statusChip.active{
+      border-color: rgba(214,179,91,0.55);
+      background: rgba(214,179,91,0.14);
+    }
+    .statusChip.delivered{
+      border-color: rgba(120,240,180,0.35);
+      background: rgba(120,240,180,0.08);
+    }
+    .statusChip.hold{
+      border-color: rgba(255,180,90,0.35);
+      background: rgba(255,180,90,0.08);
+    }
+
+    .pbar{
+      height:10px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.06);
+      overflow:hidden;
+      margin: 10px 0 12px;
+    }
+    .pbar .fill{
+      height:100%;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(255,232,155,0.98) 0%, rgba(214,179,91,0.95) 55%, rgba(161,120,44,0.92) 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.40);
+    }
+    .tlTitle{ font-weight:800; font-size:12px; margin: 0 0 8px; color: rgba(255,255,255,0.92) }
+    .tlWrap{ display:flex; flex-direction:column; gap:8px }
+    .tlItem{
+      display:flex; align-items:center; gap:10px;
+      color: rgba(255,255,255,0.86);
+      font-size:12px;
+    }
+    .tlItem.done{ color: rgba(255,255,255,0.92) }
+    .tlIco{ width:18px; display:inline-grid; place-items:center }
+
+    /* Bottom tabs look closer to old design */
+    .tabs{
+      border-radius:999px;
+      border:1px solid rgba(255,220,140,0.16);
+      background: rgba(10,14,22,0.55);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+      padding:10px;
+    }
+    .tab{
+      border-radius:18px;
+      min-width:70px;
+    }
+    .tab.active{
+      background: linear-gradient(180deg, rgba(255,232,155,0.22) 0%, rgba(214,179,91,0.16) 55%, rgba(161,120,44,0.12) 100%);
+      border-color: rgba(255,220,140,0.34);
     }
 
 </style>
@@ -626,13 +770,13 @@
 
   <div class="bottomnav">
     <div class="tabs">
-      <div class="tab active" data-page="home" id="tabHome">الرئيسية</div>
-            <div class="tab" data-page="projects" id="tabProjects">المشاريع</div>
-<div class="tab" data-page="invoices" id="tabInvoices">الفواتير</div>
-      <div class="tab" data-page="documents" id="tabDocuments">المستندات</div>
+      <div class="tab" data-page="invoices" id="tabInvoices">الفواتير</div>
       <div class="tab" data-page="support" id="tabSupport">الدعم</div>
-      <div class="tab" data-page="meetings" id="tabMeetings">الاجتماعات</div>
+      <div class="tab" data-page="documents" id="tabDocuments">المستندات</div>
+      <div class="tab" data-page="projects" id="tabProjects">المشاريع</div>
+      <div class="tab active" data-page="home" id="tabHome">الملخص</div>
     </div>
+  </div>
   </div>
 
   <div class="modal-back" id="settingsModal">
@@ -774,15 +918,11 @@ const state = {
       if (bt) bt.textContent = txt("أبعاد المستقبل","Future Dimensions")
       if (bs) bs.textContent = txt("للاستشارات وحلول الأعمال","Consulting & Business Solutions")
 
-      $("tabHome").textContent = txt("الرئيسية","Home")
+      $("tabHome").textContent = txt("الملخص","Summary")
       $("tabInvoices").textContent = txt("الفواتير","Invoices")
       $("tabDocuments").textContent = txt("المستندات","Documents")
       $("tabSupport").textContent = txt("الدعم","Support")
-      $("tabMeetings").textContent = txt("الاجتماعات","Meetings")
-
-      
-      $("tabProjects").textContent = txt("المشاريع","Projects")
-$("refreshBtn").textContent = txt("تحديث","Refresh")
+      $("tabProjects").textContent = txt("المشاريع","Projects")$("refreshBtn").textContent = txt("تحديث","Refresh")
       $("testBtn").textContent = txt("اختبار","Test")
 
       $("settingsTitle").textContent = txt("الإعدادات","Settings")
@@ -1006,7 +1146,7 @@ const clearCfg = () => {
     }
 
     const renderHome = () => {
-      $("pageTitle").textContent = txt("الرئيسية","Home")
+      $("pageTitle").textContent = txt("الملخص","Summary")
       $("pageSub").textContent = txt("ادخل بتحديات واخرج بأبعاد جديدة","Enter with challenges, leave with new dimensions")
 
       const cfgOk = !!(state.cfg && state.cfg.url && state.cfg.key)
@@ -1026,6 +1166,14 @@ const clearCfg = () => {
             </div>
             <div class="badge">📁</div>
           </div>
+          <div class="card" data-go="projects">
+            <div>
+              <strong>${txt("المشاريع","Projects")}</strong>
+              <span>${txt("متابعة التقدم والجدول الزمني","Track progress and timeline")}</span>
+            </div>
+            <div class="badge">📂</div>
+          </div>
+
           <div class="card" data-go="invoices">
             <div>
               <strong>${txt("الفواتير","Invoices")}</strong>
@@ -1033,15 +1181,7 @@ const clearCfg = () => {
             </div>
             <div class="badge">🧾</div>
           </div>
-          
-<div class="card" data-go="projects">
-  <div>
-    <strong>${txt("المشاريع","Projects")}</strong>
-    <span>${txt("متابعة تقدم المشروع","Track project progress")}</span>
-  </div>
-  <div class="badge">📌</div>
-</div>
-<div class="card" data-go="support">
+          <div class="card" data-go="support">
             <div>
               <strong>${txt("الدعم","Support")}</strong>
               <span>${txt("إنشاء ومتابعة التذاكر","Create and track tickets")}</span>
@@ -1076,7 +1216,150 @@ const clearCfg = () => {
       `
     }
 
-    const renderDocuments = async () => {
+    
+    const sinceText = (v) => {
+      try{
+        if (!v) return txt("غير معروف","Unknown")
+        const d = new Date(v)
+        if (isNaN(d.getTime())) return String(v)
+        const diff = Date.now() - d.getTime()
+        const mins = Math.floor(diff / 60000)
+        const hrs = Math.floor(mins / 60)
+        const days = Math.floor(hrs / 24)
+        if (days >= 1) return state.lang === "ar" ? `منذ ${days} يوم` : `${days}d ago`
+        if (hrs >= 1) return state.lang === "ar" ? `منذ ${hrs} ساعة` : `${hrs}h ago`
+        if (mins >= 1) return state.lang === "ar" ? `منذ ${mins} دقيقة` : `${mins}m ago`
+        return txt("الآن","Just now")
+      }catch{
+        return txt("غير معروف","Unknown")
+      }
+    }
+
+    const renderProjects = async () => {
+      $("pageTitle").textContent = txt("المشاريع","Projects")
+      $("pageSub").textContent = txt("متابعة تطور المشروع المشترك","Track the shared project progress")
+
+      const ok = await mustCfg()
+      if (!ok) return renderNeedSetup()
+
+      const cols = await ensureColumns("projects", ["id","user_id","title","name","name_ar","name_en","status","progress","updated_at","created_at","timeline","steps"])
+      const titleKey = cols.includes("title") ? "title"
+        : (cols.includes("name") ? "name"
+        : (state.lang === "ar" ? (cols.includes("name_ar") ? "name_ar" : "name_en") : (cols.includes("name_en") ? "name_en" : "name_ar")))
+
+      const hasProgress = cols.includes("progress")
+      const hasStatus = cols.includes("status")
+      const dateKey = cols.includes("updated_at") ? "updated_at" : "created_at"
+      const hasTimeline = cols.includes("timeline") || cols.includes("steps")
+      const tlKey = cols.includes("timeline") ? "timeline" : (cols.includes("steps") ? "steps" : null)
+
+      let listHtml = `<div class="hint">${txt("لا توجد مشاريع حتى الآن","No projects yet")}</div>`
+
+      const defaultSteps = [
+        { t: txt("جمع البيانات والتشخيص","Data collection and diagnosis"), done: true },
+        { t: txt("تحليل مالي واستخلاص النتائج","Financial analysis and findings"), done: true },
+        { t: txt("خطة تحسين الربحية","Profitability improvement plan"), done: false },
+        { t: txt("دعم التنفيذ والمتابعة","Execution support and follow-up"), done: false }
+      ]
+
+      try{
+        const { data, error } = await state.supabase
+          .from("projects")
+          .select("*")
+          .order(dateKey, { ascending:false })
+          .limit(50)
+
+        if (error) throw error
+
+        if (data && data.length) {
+          listHtml = data.map(row => {
+            const id = row.id ?? ""
+            const title = row[titleKey] ?? txt("مشروع","Project")
+            const status = hasStatus ? (row.status ?? txt("نشط","Active")) : txt("نشط","Active")
+            const prog = hasProgress ? Number(row.progress ?? 0) : 0
+            const pct = (isFinite(prog) ? Math.max(0, Math.min(100, prog)) : 0)
+
+            let chipClass = "active"
+            const s = String(status || "").toLowerCase()
+            if (s.includes("deliver") || s.includes("done") || String(status).includes("تم")) chipClass = "delivered"
+            if (s.includes("pause") || s.includes("hold") || String(status).includes("معلق")) chipClass = "hold"
+
+            let steps = defaultSteps
+            if (hasTimeline && tlKey && row[tlKey]) {
+              try{
+                const raw = row[tlKey]
+                const arr = Array.isArray(raw) ? raw : JSON.parse(raw)
+                if (Array.isArray(arr) && arr.length) {
+                  steps = arr.map(x => ({
+                    t: x.t || x.title || x.name || "",
+                    done: !!(x.done || x.checked || x.completed)
+                  })).filter(x => x.t)
+                }
+              }catch{}
+            } else if (hasProgress) {
+              const doneCount = pct >= 75 ? 3 : (pct >= 50 ? 2 : (pct >= 25 ? 1 : 0))
+              steps = defaultSteps.map((s, i) => ({ ...s, done: i < doneCount }))
+            }
+
+            const when = row[dateKey] ? sinceText(row[dateKey]) : txt("غير معروف","Unknown")
+
+            const stepsHtml = steps.map(st => `
+              <div class="tlItem ${st.done ? "done" : ""}">
+                <span class="tlIco">${st.done ? "✅" : "⏳"}</span>
+                <span>${escapeHtml(st.t)}</span>
+              </div>
+            `).join("")
+
+            return `
+              <div class="projCard" data-proj="${escapeAttr(id)}">
+                <div class="projHead">
+                  <div class="statusChip ${chipClass}">${escapeHtml(status)}</div>
+                  <div class="projIco">📁</div>
+                </div>
+
+                <div class="projTitle">${escapeHtml(title)}</div>
+                <div class="projMeta">${txt("آخر تحديث","Last update")}: ${escapeHtml(when)}</div>
+
+                <div class="pbar"><div class="fill" style="width:${pct}%"></div></div>
+
+                <div class="tlTitle">${txt("الجدول الزمني","Timeline")}</div>
+                <div class="tlWrap">${stepsHtml}</div>
+              </div>
+            `
+          }).join("")
+        }
+      }catch(err){
+        listHtml = `<div class="hint">${txt("تعذر تحميل المشاريع","Could not load projects")}: ${escapeHtml(err.message || String(err))}</div>`
+      }
+
+      return `
+        <div class="heroBtnWrap">
+          <button class="btn btn-goldbig" id="projNewBtn">${txt("اطلب مشروع جديد","Request new project")}</button>
+        </div>
+
+        <div class="panel projNewBox hide" id="projNewBox">
+          <div class="panel-body" style="padding:14px">
+            <div class="field">
+              <div class="label">${txt("عنوان المشروع","Project title")}</div>
+              <input class="input" id="projTitle" placeholder="${txt("مثال: تحسين تشغيل شركة خدمات","Example: Improve operations")}">
+            </div>
+            <div class="field">
+              <div class="label">${txt("وصف مختصر","Short description")}</div>
+              <textarea class="input" id="projNotes" placeholder="${txt("اكتب تفاصيل بسيطة عن المطلوب","Write brief details")}"></textarea>
+            </div>
+            <div class="row" style="gap:10px">
+              <button class="btn" id="projSubmitBtn">${txt("إرسال الطلب","Submit")}</button>
+              <button class="btn secondary" id="projCancelBtn">${txt("إغلاق","Close")}</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="projList">${listHtml}</div>
+      `
+    }
+
+
+const renderDocuments = async () => {
       $("pageTitle").textContent = txt("المستندات","Documents")
       $("pageSub").textContent = txt("رفع وإدارة مستندات العملاء","Upload and manage client documents")
 
@@ -1088,9 +1371,7 @@ const clearCfg = () => {
 
       let listHtml = `<div class="hint">${txt("لا توجد مستندات","No documents yet")}</div>`
       try{
-        let q = state.supabase.from("documents").select("*").order("created_at", { ascending:false }).limit(50)
-        if (!FD_ADMIN_MODE && state.user && cols.includes("user_id")) q = q.eq("user_id", state.user.id)
-        const { data, error } = await q
+        const { data, error } = await state.supabase.from("documents").select("*").order("created_at", { ascending:false }).limit(50)
         if (error) throw error
         if (data && data.length) {
           listHtml = data.map(row => {
@@ -1161,9 +1442,7 @@ const clearCfg = () => {
 
       let listHtml = `<div class="hint">${txt("لا توجد فواتير","No invoices yet")}</div>`
       try{
-        let q = state.supabase.from("invoices").select("*").order("created_at", { ascending:false }).limit(50)
-        if (!FD_ADMIN_MODE && state.user && cols.includes("user_id")) q = q.eq("user_id", state.user.id)
-        const { data, error } = await q
+        const { data, error } = await state.supabase.from("invoices").select("*").order("created_at", { ascending:false }).limit(50)
         if (error) throw error
         if (data && data.length) {
           listHtml = data.map(row => {
@@ -1208,146 +1487,6 @@ const clearCfg = () => {
       `
     }
 
-    
-    const renderProjects = async () => {
-      $("pageTitle").textContent = txt("المشاريع","Projects")
-      $("pageSub").textContent = txt("متابعة تقدم المشاريع والمهام","Track projects and milestones")
-
-      const ok = await mustCfg()
-      if (!ok) return renderNeedSetup()
-
-      const cols = await ensureColumns("projects", ["id","user_id","title","status","progress","updated_at","created_at","notes","steps"])
-      const hasUser = cols.includes("user_id")
-      const titleKey = cols.includes("title") ? "title" : (cols.includes("name") ? "name" : (cols.includes("project_name") ? "project_name" : null))
-      const statusKey = cols.includes("status") ? "status" : null
-      const progKey = cols.includes("progress") ? "progress" : null
-
-      const needsAuth = !state.user && !FD_ADMIN_MODE
-      if (needsAuth) {
-        return `
-          <div class="panel" style="background:var(--panel2); border-radius:var(--r2); border:1px solid var(--stroke)">
-            <div class="panel-body" style="padding:16px">
-              <b>${txt("سجل دخول لعرض مشاريعك","Sign in to view your projects")}</b>
-              <div class="hint" style="margin-top:8px">${txt("بعد تسجيل الدخول ستظهر المشاريع المرتبطة بحسابك","After signing in, projects linked to your account will appear")}</div>
-              <div class="row" style="margin-top:12px">
-                <button class="btn ok" id="needAuthBtn">${txt("تسجيل الدخول","Sign in")}</button>
-              </div>
-            </div>
-          </div>
-        `
-      }
-
-      let listHtml = `<div class="hint">${txt("لا توجد مشاريع","No projects yet")}</div>`
-      try{
-        let q = state.supabase.from("projects").select("*").limit(50)
-        if (cols.includes("updated_at")) q = q.order("updated_at", { ascending:false })
-        q = q.order("created_at", { ascending:false })
-        if (!FD_ADMIN_MODE && state.user && hasUser) q = q.eq("user_id", state.user.id)
-        const { data, error } = await q
-        if (error) throw error
-
-        if (data && data.length) {
-          listHtml = data.map(row => {
-            const title = (titleKey && row[titleKey]) ? row[titleKey] : (row.name || row.project_name || "Project")
-            const st = statusKey ? (row[statusKey] || "-") : (row.status || "-")
-            const when = safeDate(row.updated_at || row.created_at)
-            let p = progKey ? row[progKey] : row.progress
-            p = (p == null) ? null : Number(p)
-            if (!isFinite(p)) p = null
-            if (p != null) { if (p < 0) p = 0; if (p > 100) p = 100 }
-
-            const steps = row.steps
-            const stepsHtml = Array.isArray(steps) && steps.length ? `
-              <div class="hint" style="margin-top:10px">${txt("الخطوات","Steps")}</div>
-              <div class="list" style="margin-top:8px">
-                ${steps.slice(0,6).map(s => `
-                  <div class="item" style="padding:10px 12px">
-                    <div class="meta">
-                      <b style="font-size:13px">${escapeHtml(typeof s === "string" ? s : (s.title || s.name || "Step"))}</b>
-                      <small>${escapeHtml((typeof s === "object" && s && s.status) ? s.status : "")}</small>
-                    </div>
-                  </div>
-                `).join("")}
-              </div>
-            ` : ""
-
-            return `
-              <div class="card projcard" style="cursor:default">
-                <div style="display:flex; align-items:center; justify-content:space-between; gap:12px">
-                  <div>
-                    <strong>${escapeHtml(title)}</strong>
-                    <div class="hint" style="margin-top:6px">
-                      ${txt("آخر تحديث","Last update")}: ${escapeHtml(when)}
-                    </div>
-                  </div>
-                  <div class="badge" style="min-width:56px; text-align:center">${escapeHtml(st)}</div>
-                </div>
-
-                ${p == null ? "" : `
-                  <div style="margin-top:12px">
-                    <div class="hint">${txt("نسبة الإنجاز","Progress")}: ${Math.round(p)}%</div>
-                    <div class="pbar" style="margin-top:8px"><div class="pfill" style="width:${Math.round(p)}%"></div></div>
-                  </div>
-                `}
-
-                ${stepsHtml}
-              </div>
-            `
-          }).join("")
-        }
-      }catch(err){
-        listHtml = `<div class="hint">${txt("تعذر تحميل المشاريع","Could not load projects")}: ${escapeHtml(err.message || String(err))}</div>`
-      }
-
-      return `
-        <div class="field">
-          <div class="label">${txt("طلب مشروع جديد","Request a new project")}</div>
-          <input class="input" id="projTitle" placeholder="${txt("مثال: استشارة مالية","Example: Financial consulting")}">
-        </div>
-        <div class="field">
-          <div class="label">${txt("ملاحظات","Notes")}</div>
-          <input class="input" id="projNotes" placeholder="${txt("اختياري","Optional")}">
-        </div>
-        <div class="row">
-          <button class="btn ok" id="projSendBtn">${txt("إرسال","Send")}</button>
-          <button class="btn secondary" id="projReloadBtn">${txt("تحديث","Refresh")}</button>
-        </div>
-
-        <div class="hr"></div>
-        <div class="list">${listHtml}</div>
-      `
-    }
-
-    const onCreateProject = async () => {
-      const ok = await mustCfg()
-      if (!ok) return
-      if (!requireSignedIn()) return
-
-      const title = ($("projTitle") ? $("projTitle").value : "").trim()
-      const notes = ($("projNotes") ? $("projNotes").value : "").trim()
-      if (!title) return showToast(txt("اكتب عنوان المشروع","Enter project title"))
-
-      try{
-        const cols = await ensureColumns("projects", ["id","user_id","title","status","progress","updated_at","created_at","notes"])
-        const row = {
-          user_id: state.user.id,
-          title,
-          notes,
-          status: "new",
-          progress: 0
-        }
-        const payload = pick(cols, row)
-        const ins = await state.supabase.from("projects").insert(payload).select("*").single()
-        if (ins.error) throw ins.error
-        showToast(txt("تم الإرسال","Sent"), true)
-        render()
-      }catch(err){
-        console.error(err)
-        showToast(err.message || String(err))
-      }
-    }
-
-
     const renderSupport = async () => {
       $("pageTitle").textContent = txt("الدعم","Support")
       $("pageSub").textContent = txt("إنشاء ومتابعة تذاكر الدعم","Create and track support tickets")
@@ -1361,9 +1500,7 @@ const clearCfg = () => {
 
       let listHtml = `<div class="hint">${txt("لا توجد تذاكر","No tickets yet")}</div>`
       try{
-        let q = state.supabase.from("tickets").select("*").order("created_at", { ascending:false }).limit(50)
-        if (!FD_ADMIN_MODE && state.user && cols.includes("user_id")) q = q.eq("user_id", state.user.id)
-        const { data, error } = await q
+        const { data, error } = await state.supabase.from("tickets").select("*").order("created_at", { ascending:false }).limit(50)
         if (error) throw error
         if (data && data.length) {
           listHtml = data.map(row => {
@@ -1430,9 +1567,7 @@ const clearCfg = () => {
 
       let listHtml = `<div class="hint">${txt("لا توجد اجتماعات","No meetings yet")}</div>`
       try{
-        let q = state.supabase.from("meetings").select("*").order("created_at", { ascending:false }).limit(50)
-        if (!FD_ADMIN_MODE && state.user && cols.includes("user_id")) q = q.eq("user_id", state.user.id)
-        const { data, error } = await q
+        const { data, error } = await state.supabase.from("meetings").select("*").order("created_at", { ascending:false }).limit(50)
         if (error) throw error
         if (data && data.length) {
           listHtml = data.map(row => {
@@ -1512,9 +1647,9 @@ const clearCfg = () => {
 
       if (state.page === "home") body.innerHTML = renderHome()
       if (state.page === "documents") body.innerHTML = await renderDocuments()
-      if (state.page === "projects") body.innerHTML = await renderProjects()
       if (state.page === "invoices") body.innerHTML = await renderInvoices()
       if (state.page === "support") body.innerHTML = await renderSupport()
+      if (state.page === "projects") body.innerHTML = await renderProjects()
       if (state.page === "meetings") body.innerHTML = await renderMeetings()
 
       bindPageEvents()
@@ -1544,8 +1679,78 @@ const clearCfg = () => {
       const meetReload = $("meetReloadBtn")
       if (meetReload) meetReload.onclick = () => render()
 
-      const projReload = $("projReloadBtn")
-      if (projReload) projReload.onclick = () => render()
+      const projNewBtn = $("projNewBtn")
+      if (projNewBtn) projNewBtn.onclick = () => {
+        const box = $("projNewBox")
+        if (!box) return
+        box.classList.toggle("hide")
+        if (!box.classList.contains("hide")) {
+          box.scrollIntoView({ behavior:"smooth", block:"start" })
+        }
+      }
+
+      const projCancelBtn = $("projCancelBtn")
+      if (projCancelBtn) projCancelBtn.onclick = () => {
+        const box = $("projNewBox")
+        if (box) box.classList.add("hide")
+      }
+
+      const projSubmitBtn = $("projSubmitBtn")
+      if (projSubmitBtn) projSubmitBtn.onclick = async () => {
+        const title = ($("projTitle") && $("projTitle").value) ? $("projTitle").value.trim() : ""
+        const notes = ($("projNotes") && $("projNotes").value) ? $("projNotes").value.trim() : ""
+
+        if (!title) {
+          showToast(txt("اكتب عنوان المشروع","Enter a project title"))
+          return
+        }
+
+        if (!state.user) {
+          showToast(txt("سجل دخول أولاً","Please sign in first"))
+          const so = $("signedOut"); if (so) so.classList.toggle("hide", !state.user)
+          openModal("authModal")
+          return
+        }
+
+        const ok = await mustCfg()
+        if (!ok) return
+
+        projSubmitBtn.disabled = true
+        try{
+          const cols = await ensureColumns("projects", ["id","user_id","title","name","name_ar","name_en","notes","description","status","progress","created_at"])
+          const payload = {}
+
+          if (cols.includes("user_id")) payload.user_id = state.user.id
+          if (cols.includes("title")) payload.title = title
+          else if (cols.includes("name")) payload.name = title
+          else if (cols.includes("name_ar")) payload.name_ar = title
+          else if (cols.includes("name_en")) payload.name_en = title
+
+          if (cols.includes("notes")) payload.notes = notes
+          else if (cols.includes("description")) payload.description = notes
+
+          if (cols.includes("status")) payload.status = txt("نشط","Active")
+          if (cols.includes("progress")) payload.progress = 0
+
+          const { error } = await state.supabase.from("projects").insert(payload)
+          if (error) throw error
+
+          showToast(txt("تم إرسال الطلب","Request sent"), true)
+
+          if ($("projTitle")) $("projTitle").value = ""
+          if ($("projNotes")) $("projNotes").value = ""
+
+          const box = $("projNewBox")
+          if (box) box.classList.add("hide")
+
+          await render()
+        }catch(err){
+          showToast(txt("تعذر إرسال الطلب","Could not submit") + ": " + (err.message || String(err)))
+        }finally{
+          projSubmitBtn.disabled = false
+        }
+      }
+
 
       const docUploadBtn = $("docUploadBtn")
       if (docUploadBtn) docUploadBtn.onclick = () => onUploadDocument()
@@ -1553,10 +1758,6 @@ const clearCfg = () => {
       if (invUploadBtn) invUploadBtn.onclick = () => onUploadInvoice()
       const ticketSendBtn = $("ticketSendBtn")
       if (ticketSendBtn) ticketSendBtn.onclick = () => onCreateTicket()
-
-
-      const projSendBtn = $("projSendBtn")
-      if (projSendBtn) projSendBtn.onclick = () => onCreateProject()
       const meetSendBtn = $("meetSendBtn")
       if (meetSendBtn) meetSendBtn.onclick = () => onCreateMeeting()
 
