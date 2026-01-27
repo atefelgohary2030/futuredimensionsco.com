@@ -33,7 +33,20 @@
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Arabic", "Noto Sans", Arial, sans-serif;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html,body{
+      height: calc(var(--appvh, 1vh) * 100);
+      min-height: calc(var(--appvh, 1vh) * 100);
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(214,179,91,0.18), transparent 60%),
+        radial-gradient(1200px 700px at 80% 10%, rgba(80,140,255,0.16), transparent 62%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
     html{height:100%;}
     body{
       min-height: 100vh;
@@ -49,8 +62,16 @@
       overflow-x:hidden;
     }
     a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px 16px calc(160px + env(safe-area-inset-bottom))}
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      flex:1 1 auto;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      padding:18px 16px calc(98px + env(safe-area-inset-bottom));
+    }
     .topbar{
+      flex:0 0 auto;
       position:sticky; top:0; z-index:30;
       backdrop-filter: blur(12px);
       background: linear-gradient(180deg, rgba(6,11,19,0.85), rgba(6,11,19,0.45));
@@ -728,6 +749,21 @@
         <button class="btn secondary" id="settingsClose">إغلاق</button>
       </div>
       <div class="modal-body">
+      <div class="panel" style="background:var(--panel2); border-radius:var(--r2); border:1px solid var(--stroke); margin-bottom:14px">
+        <div class="panel-body" style="padding:14px">
+          <div class="row" style="justify-content:space-between; align-items:flex-start">
+            <div>
+              <b id="settingsStatusTitle">حالة التشغيل</b>
+              <div class="hint" id="settingsStatusHint" style="margin-top:6px">...</div>
+              <div class="hint" id="settingsUserHint" style="margin-top:6px"></div>
+            </div>
+            <div class="row">
+              <button class="btn secondary" id="openAuthFromSettings">الحساب</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
         <div class="field">
           <div class="label">Supabase URL</div>
           <input class="input ltr" id="sbUrl" placeholder="https://xxxx.supabase.co">
@@ -1131,23 +1167,6 @@ const clearCfg = () => {
               <span>${txt("طلب اجتماع ومتابعة الحالة","Request meetings")}</span>
             </div>
             <div class="badge">📅</div>
-          </div>
-        </div>
-
-        <div class="hr"></div>
-
-        <div class="panel" style="background:var(--panel2); border-radius:var(--r2); border:1px solid var(--stroke)">
-          <div class="panel-body" style="padding:14px">
-            <div class="row" style="justify-content:space-between">
-              <div>
-                <b>${txt("حالة التشغيل","Run status")}</b>
-                <div class="hint" style="margin-top:6px">${warn}</div>
-              </div>
-              <div class="row">
-                <button class="btn secondary" id="openSettingsInline">${txt("فتح الإعدادات","Open settings")}</button>
-                <button class="btn secondary" id="openAuthInline">${txt("الحساب","Account")}</button>
-              </div>
-            </div>
           </div>
         </div>
       `
@@ -1841,6 +1860,8 @@ const renderInvoices = async () => {
         if (clearBtn) clearBtn.classList.add("hide")
       }
 
+      updateSettingsStatus()
+
       openModal("settingsModal")
     }
 
@@ -1849,6 +1870,8 @@ const renderInvoices = async () => {
 
       $("settingsBtn").onclick = () => openSettings()
       $("settingsClose").onclick = () => closeModal("settingsModal")
+      const authFromSettings = $("openAuthFromSettings")
+      if (authFromSettings) authFromSettings.onclick = () => { closeModal("settingsModal"); openModal("authModal") }
       $("clearCfgBtn").onclick = () => {
         clearCfg()
         closeModal("settingsModal")
@@ -1985,6 +2008,18 @@ const renderInvoices = async () => {
     }
     window.addEventListener("resize", setAppVh)
     window.addEventListener("orientationchange", setAppVh)
+
+    const updateSettingsStatus = () => {
+      const signed = !!state.user
+      const msg = !signed ? txt("سجل دخول لعرض بياناتك","Sign in to view your data") : txt("جاهز","Ready")
+      const online = navigator.onLine ? txt("متصل","Online") : txt("غير متصل","Offline")
+      const email = state.user && state.user.email ? state.user.email : txt("غير مسجل","Not signed in")
+      const hint = `${msg} · ${online}`
+      const elHint = $("settingsStatusHint")
+      if (elHint) elHint.textContent = hint
+      const elUser = $("settingsUserHint")
+      if (elUser) elUser.textContent = txt("المستخدم","User") + ": " + email
+    }
 
     const boot = async () => {
 
