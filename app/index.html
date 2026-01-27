@@ -150,19 +150,46 @@
       display:inline-flex; align-items:center; justify-content:center; gap:8px;
       padding:10px 12px;
       border-radius:14px;
-      background: rgba(214,179,91,0.12);
-      border:1px solid rgba(214,179,91,0.35);
-      color:rgba(255,255,255,0.92);
+      background: linear-gradient(180deg, rgba(255,223,140,0.95) 0%, rgba(214,179,91,0.92) 38%, rgba(161,120,44,0.90) 100%);
+      border:1px solid rgba(255,220,140,0.55);
+      color: rgba(10,12,16,0.92);
       cursor:pointer;
       min-width:120px;
       user-select:none;
+      box-shadow:
+        0 10px 24px rgba(0,0,0,0.38),
+        0 5px 0 rgba(120,88,24,0.55),
+        inset 0 1px 0 rgba(255,255,255,0.55),
+        inset 0 -10px 18px rgba(0,0,0,0.18);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.25);
+      transform: translateY(0);
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+    .btn:active{
+      transform: translateY(2px);
+      box-shadow:
+        0 8px 18px rgba(0,0,0,0.34),
+        0 2px 0 rgba(120,88,24,0.55),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -10px 18px rgba(0,0,0,0.18);
     }
     .btn:hover{background: rgba(214,179,91,0.16)}
     .btn.secondary{
-      background: rgba(255,255,255,0.03);
-      border-color: var(--stroke2);
+      background: linear-gradient(180deg, rgba(255,236,170,0.16) 0%, rgba(214,179,91,0.14) 55%, rgba(161,120,44,0.12) 100%);
+      border-color: rgba(214,179,91,0.40);
+      color: rgba(255,255,255,0.92);
       min-width:auto;
+      box-shadow:
+        0 10px 22px rgba(0,0,0,0.34),
+        0 4px 0 rgba(120,88,24,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.20),
+        inset 0 -10px 18px rgba(0,0,0,0.18);
     }
+    .btn.secondary:hover{ filter: brightness(1.05) }
     .btn.danger{
       background: rgba(255,90,106,0.12);
       border-color: rgba(255,90,106,0.35);
@@ -232,14 +259,22 @@
       background: rgba(255,255,255,0.03);
       border:1px solid var(--stroke);
       text-align:center;
-      cursor:pointer;
       color: rgba(255,255,255,0.85);
       user-select:none;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.26), inset 0 1px 0 rgba(255,255,255,0.08);
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
     }
+    .tab:hover{ transform: translateY(-1px) }
+    .tab:active{ transform: translateY(2px) }
     .tab.active{
-      border-color: rgba(214,179,91,0.42);
-      background: rgba(214,179,91,0.10);
-      color: rgba(255,255,255,0.95);
+      border-color: rgba(255,220,140,0.65);
+      background: linear-gradient(180deg, rgba(255,223,140,0.55) 0%, rgba(214,179,91,0.28) 55%, rgba(161,120,44,0.22) 100%);
+      color: rgba(255,255,255,0.96);
+      box-shadow:
+        0 14px 28px rgba(0,0,0,0.34),
+        0 5px 0 rgba(120,88,24,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        inset 0 -12px 18px rgba(0,0,0,0.22);
     }
     .modal-back{
       position:fixed; inset:0; z-index:70;
@@ -543,7 +578,7 @@
           <div class="panel-head">
             <div>
               <p class="panel-title" id="pageTitle">الرئيسية</p>
-              <p class="panel-sub" id="pageSub">لو ظهرت مشاكل في البيانات، غالبا السبب إعداد Supabase أو سياسات RLS</p>
+              <p class="panel-sub" id="pageSub">ادخل بتحديات واخرج بأبعاد جديدة</p>
             </div>
             <div class="row">
               <button class="btn secondary" id="refreshBtn">تحديث</button>
@@ -649,7 +684,7 @@ const $ = (id) => document.getElementById(id)
     
     // FD v3 config
     const FD_DEFAULT_SUPABASE_URL = "https://mifottrhqimqzojiyytq.supabase.co"
-    const FD_DEFAULT_ANON_KEY = "__FD_ANON_PUBLIC_KEY__"
+    const FD_DEFAULT_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pZm90dHJocWltcXpvaml5eXRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxOTQ1MzYsImV4cCI6MjA4NDc3MDUzNn0.g3LM3aYvCmZNy3hUShebv5T2evAwgMeNKr4wT3eXZS8"
     const FD_ADMIN_MODE = (() => {
       try{
         const u = new URL(location.href)
@@ -948,7 +983,7 @@ const clearCfg = () => {
 
     const renderHome = () => {
       $("pageTitle").textContent = txt("الرئيسية","Home")
-      $("pageSub").textContent = txt("أبعاد المستقبل للاستشارات وحلول الأعمال","Consulting & Business Solutions")
+      $("pageSub").textContent = txt("ادخل بتحديات واخرج بأبعاد جديدة","Enter with challenges, leave with new dimensions")
 
       const cfgOk = !!(state.cfg && state.cfg.url && state.cfg.key)
       const signed = !!state.user
@@ -1593,6 +1628,8 @@ const clearCfg = () => {
     }
 
     const bindGlobal = () => {
+      try{ if(!FD_ADMIN_MODE){ const b=$("settingsBtn"); if(b) b.style.display="none" } }catch{}
+
       $("settingsBtn").onclick = () => openSettings()
       $("settingsClose").onclick = () => closeModal("settingsModal")
       $("clearCfgBtn").onclick = () => {
