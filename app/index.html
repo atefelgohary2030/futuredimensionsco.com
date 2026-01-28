@@ -33,20 +33,7 @@
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans Arabic", "Noto Sans", Arial, sans-serif;
     }
     *{box-sizing:border-box}
-    html,body{
-      height: calc(var(--appvh, 1vh) * 100);
-      min-height: calc(var(--appvh, 1vh) * 100);
-      margin:0;
-      font-family:var(--font);
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% 0%, rgba(214,179,91,0.18), transparent 60%),
-        radial-gradient(1200px 700px at 80% 10%, rgba(80,140,255,0.16), transparent 62%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-    }
+    html,body{height:100%}
     html{height:100%;}
     body{
       min-height: 100vh;
@@ -62,16 +49,8 @@
       overflow-x:hidden;
     }
     a{color:inherit}
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      flex:1 1 auto;
-      overflow:auto;
-      -webkit-overflow-scrolling:touch;
-      padding:18px 16px calc(98px + env(safe-area-inset-bottom));
-    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 16px calc(160px + env(safe-area-inset-bottom))}
     .topbar{
-      flex:0 0 auto;
       position:sticky; top:0; z-index:30;
       backdrop-filter: blur(12px);
       background: linear-gradient(180deg, rgba(6,11,19,0.85), rgba(6,11,19,0.45));
@@ -95,6 +74,16 @@
     .brand h1{font-size:15px; margin:0; line-height:1.1}
     .brand small{display:block; margin-top:3px; color:var(--muted); font-size:11px}
     .actions{display:flex; align-items:center; gap:10px}
+    /* Action order by direction */
+    :root[dir="ltr"] #connPill{order:1}
+    :root[dir="ltr"] #langBtn{order:2}
+    :root[dir="ltr"] #settingsBtn{order:3}
+    :root[dir="ltr"] #userBtn{order:4}
+
+    :root[dir="rtl"] #userBtn{order:1}
+    :root[dir="rtl"] #langBtn{order:2}
+    :root[dir="rtl"] #settingsBtn{order:3}
+    :root[dir="rtl"] #connPill{order:4}
     .pill{
       display:inline-flex; align-items:center; gap:8px;
       padding:9px 12px; border-radius:999px;
@@ -119,11 +108,14 @@
     .main{padding-top:18px}
     .grid{
       display:grid; gap:14px;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1fr;
     }
     @media (max-width: 980px){
       .grid{grid-template-columns:1fr}
     }
+    /* Hide the side status panel: moved into Settings */
+    #panelSide{display:none}
+
     .panel{
       background: var(--panel);
       border:1px solid var(--stroke);
@@ -236,9 +228,18 @@
     }
     textarea{min-height:110px; resize:vertical}
     .field{display:grid; gap:7px; margin-bottom:12px}
+    .section{display:grid; gap:10px}
+    .section-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px}
+    .section-head .hint{margin:0; font-size:12px; color:var(--muted)}
     .label{font-size:12px; color:var(--muted)}
     .split{display:grid; grid-template-columns:1fr 1fr; gap:10px}
     @media (max-width: 560px){ .split{grid-template-columns:1fr} }
+    /* Responsive list items */
+    @media (max-width: 560px){
+      .item{flex-direction:column; align-items:stretch}
+      .item .ops{width:100%; justify-content:flex-start}
+      .item .ops .btn{flex:1}
+    }
     .list{display:grid; gap:10px}
     .item{
       border:1px solid var(--stroke);
@@ -246,6 +247,7 @@
       border-radius: var(--r2);
       padding:12px;
       display:flex; align-items:center; justify-content:space-between; gap:12px;
+      flex-wrap:wrap;
     }
     .item .meta{min-width:0}
     .item .meta b{display:block; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
@@ -748,23 +750,26 @@
         <b id="settingsTitle">الإعدادات</b>
         <button class="btn secondary" id="settingsClose">إغلاق</button>
       </div>
-      <div class="modal-body">
-      <div class="panel" style="background:var(--panel2); border-radius:var(--r2); border:1px solid var(--stroke); margin-bottom:14px">
-        <div class="panel-body" style="padding:14px">
-          <div class="row" style="justify-content:space-between; align-items:flex-start">
-            <div>
-              <b id="settingsStatusTitle">حالة التشغيل</b>
-              <div class="hint" id="settingsStatusHint" style="margin-top:6px">...</div>
-              <div class="hint" id="settingsUserHint" style="margin-top:6px"></div>
-            </div>
-            <div class="row">
-              <button class="btn secondary" id="openAuthFromSettings">الحساب</button>
-            </div>
+      <div class="modal-body">        <div class="section">
+          <div class="section-head">
+            <b id="settingsStatusHead">الحالة</b>
+            <span class="hint" id="settingsStatusHint">اتصال، حساب، واختبار سريع</span>
+          </div>
+          <div id="settingsStatus"></div>
+          <div class="row" style="margin-top:10px; flex-wrap:wrap">
+            <button class="btn secondary" id="settingsTestBtn">اختبار</button>
+            <button class="btn secondary" id="settingsAccountBtn">الحساب</button>
           </div>
         </div>
-      </div>
 
-        <div class="field">
+        <div class="hr"></div>
+
+        <div class="section" id="settingsAdminWrap">
+          <div class="section-head">
+            <b id="settingsAdminHead">إعدادات الاتصال</b>
+            <span class="hint">للإدارة فقط</span>
+          </div>
+<div class="field">
           <div class="label">Supabase URL</div>
           <input class="input ltr" id="sbUrl" placeholder="https://xxxx.supabase.co">
         </div>
@@ -775,7 +780,8 @@
         <div class="row">
           <button class="btn ok" id="saveCfgBtn">حفظ</button>
           <button class="btn secondary" id="clearCfgBtn">مسح</button>
-          <div class="hint" id="cfgHint">سيتم حفظ البيانات داخل المتصفح فقط</div>
+          <div class="hint" id="cfgHint">سيتم حفظ البيانات داخل المتصفح فقط
+        </div></div>
         </div>
       </div>
     </div>
@@ -908,6 +914,12 @@ const state = {
 
       $("settingsTitle").textContent = txt("الإعدادات","Settings")
       $("settingsClose").textContent = txt("إغلاق","Close")
+
+      const ssh = $("settingsStatusHead"); if (ssh) ssh.textContent = txt("الحالة","Status")
+      const ssh2 = $("settingsStatusHint"); if (ssh2) ssh2.textContent = txt("اتصال وحساب واختبار سريع","Connection, account, quick checks")
+      const st = $("settingsTestBtn"); if (st) st.textContent = txt("اختبار","Test")
+      const sa = $("settingsAccountBtn"); if (sa) sa.textContent = txt("الحساب","Account")
+      const sah = $("settingsAdminHead"); if (sah) sah.textContent = txt("إعدادات الاتصال","Connection settings")
       $("saveCfgBtn").textContent = txt("حفظ","Save")
       $("clearCfgBtn").textContent = txt("مسح","Clear")
       $("cfgHint").textContent = txt("سيتم حفظ البيانات داخل المتصفح فقط","Saved in this browser only")
@@ -1094,28 +1106,38 @@ const clearCfg = () => {
       return true
     }
 
-    const renderSide = () => {
-      const el = $("sideBody")
+        const renderStatusInto = (el) => {
       if (!el) return
 
       const email = state.user && state.user.email ? state.user.email : txt("غير مسجل","Not signed in")
       const cfgOk = !!(state.cfg && state.cfg.url && state.cfg.key)
       const conn = state.supabase ? txt("متصل","Online") : txt("غير متصل","Offline")
+      const run = cfgOk ? (state.supabase ? txt("جاهز","Ready") : txt("جاهز (لم يتم الاختبار)","Ready (not tested)")) : txt("غير جاهز","Not ready")
 
       el.innerHTML = `
+        <div class="field">
+          <div class="label">${txt("حالة التشغيل","Run status")}</div>
+          <div class="input" style="display:flex; justify-content:space-between; gap:10px">
+            <span>${run}</span>
+            <span class="badge">${cfgOk ? txt("جاهز","Ready") : txt("ناقص","Missing")}</span>
+          </div>
+        </div>
         <div class="field">
           <div class="label">${txt("الاتصال","Connection")}</div>
           <div class="input" style="display:flex; justify-content:space-between; gap:10px">
             <span>${conn}</span>
-            <span class="badge">${cfgOk ? txt("جاهز","Ready") : txt("ناقص","Missing")}</span>
+            <span class="badge">${state.supabase ? txt("متصل","Online") : txt("غير متصل","Offline")}</span>
           </div>
         </div>
         <div class="field">
           <div class="label">${txt("المستخدم","User")}</div>
           <div class="input ltr" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis">${email}</div>
         </div>
-        <div class="hr"></div>
       `
+    }
+
+    const renderSide = () => {
+      renderStatusInto($("sideBody"))
     }
 
     const setActiveTab = (page) => {
@@ -1132,7 +1154,6 @@ const clearCfg = () => {
 
       const cfgOk = !!(state.cfg && state.cfg.url && state.cfg.key)
       const signed = !!state.user
-      const warn = !signed ? txt("سجل دخول لعرض بياناتك","Sign in to view your data") : txt("جاهز","Ready")
 
       return `
         <div class="brandIntro">
@@ -1167,6 +1188,23 @@ const clearCfg = () => {
               <span>${txt("طلب اجتماع ومتابعة الحالة","Request meetings")}</span>
             </div>
             <div class="badge">📅</div>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="panel" style="background:var(--panel2); border-radius:var(--r2); border:1px solid var(--stroke)">
+          <div class="panel-body" style="padding:14px">
+            <div class="row" style="justify-content:space-between; flex-wrap:wrap">
+              <div>
+                <b>${txt("نظرة عامة","Overview")}</b>
+                <div class="hint" style="margin-top:6px">${txt("تابع مشاريعك، مستنداتك، وفواتيرك من مكان واحد","Track projects, documents, and invoices in one place")}</div>
+              </div>
+              <div class="row" style="flex-wrap:wrap">
+                <button class="btn secondary" id="openSettingsInline">${txt("الإعدادات","Settings")}</button>
+                <button class="btn secondary" id="openAuthInline">$الحساب</button>
+              </div>
+            </div>
           </div>
         </div>
       `
@@ -1429,7 +1467,7 @@ const renderInvoices = async () => {
               <div class="item">
                 <div class="meta">
                   <b>${escapeHtml(title)}</b>
-                  <small>${txt("الحالة","Status")}: ${escapeHtml(st)} · ${escapeHtml(when)} · ${txt("رقم","ID")}: ${escapeHtml(shortId(id))}</small>
+                  <small>$الحالة: ${escapeHtml(st)} · ${escapeHtml(when)} · ${txt("رقم","ID")}: ${escapeHtml(shortId(id))}</small>
                 </div>
                 <div class="ops">
                   <button class="btn secondary" data-ticket-view="${escapeAttr(id)}">${txt("عرض","View")}</button>
@@ -1558,6 +1596,7 @@ const renderInvoices = async () => {
 
     const render = async () => {
       renderSide()
+      if ($("settingsModal").style.display === "block") renderStatusInto($("settingsStatus"))
 
       const body = $("pageBody")
       if (!body) return
@@ -1860,18 +1899,24 @@ const renderInvoices = async () => {
         if (clearBtn) clearBtn.classList.add("hide")
       }
 
-      updateSettingsStatus()
+      // status section
+      renderStatusInto($("settingsStatus"))
+
+      // admin-only section
+      const adminWrap = $("settingsAdminWrap")
+      if (adminWrap) adminWrap.classList.toggle("hide", !FD_ADMIN_MODE)
 
       openModal("settingsModal")
     }
 
     const bindGlobal = () => {
-      try{ if(!FD_ADMIN_MODE){ const b=$("settingsBtn"); if(b) b.style.display="none" } }catch{}
-
       $("settingsBtn").onclick = () => openSettings()
       $("settingsClose").onclick = () => closeModal("settingsModal")
-      const authFromSettings = $("openAuthFromSettings")
-      if (authFromSettings) authFromSettings.onclick = () => { closeModal("settingsModal"); openModal("authModal") }
+
+      const st = $("settingsTestBtn")
+      if (st) st.onclick = () => testAll()
+      const sa = $("settingsAccountBtn")
+      if (sa) sa.onclick = () => { const so = $("signOutBtn"); if (so) so.classList.toggle("hide", !state.user); openModal("authModal") }
       $("clearCfgBtn").onclick = () => {
         clearCfg()
         closeModal("settingsModal")
@@ -2008,18 +2053,6 @@ const renderInvoices = async () => {
     }
     window.addEventListener("resize", setAppVh)
     window.addEventListener("orientationchange", setAppVh)
-
-    const updateSettingsStatus = () => {
-      const signed = !!state.user
-      const msg = !signed ? txt("سجل دخول لعرض بياناتك","Sign in to view your data") : txt("جاهز","Ready")
-      const online = navigator.onLine ? txt("متصل","Online") : txt("غير متصل","Offline")
-      const email = state.user && state.user.email ? state.user.email : txt("غير مسجل","Not signed in")
-      const hint = `${msg} · ${online}`
-      const elHint = $("settingsStatusHint")
-      if (elHint) elHint.textContent = hint
-      const elUser = $("settingsUserHint")
-      if (elUser) elUser.textContent = txt("المستخدم","User") + ": " + email
-    }
 
     const boot = async () => {
 
