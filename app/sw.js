@@ -45,18 +45,6 @@ self.addEventListener("fetch", (event) => {
 
   if (req.method !== "GET") return
 
-  // Do not cache Supabase/API/signed-file requests (prevents broken downloads/opens on mobile/PWA)
-  try{
-    const u = new URL(req.url)
-    const isSupabase = u.hostname.endsWith("supabase.co")
-    const isSigned = u.searchParams.has("token") || u.searchParams.has("X-Amz-Signature") || u.searchParams.has("X-Goog-Signature")
-    if (isSupabase || isSigned) {
-      event.respondWith(fetch(req))
-      return
-    }
-  }catch{ }
-
-
   if (isNavigation(req)) {
     // Network first, fallback to cache
     event.respondWith(
