@@ -961,6 +961,8 @@ const $ = (id) => document.getElementById(id)
       return s.slice(0, 8) + "..." + s.slice(-6)
     }
 
+var sb = null
+
 const state = {
       page: "home",
       lang: localStorage.getItem("fd_lang") || "ar",
@@ -1193,6 +1195,9 @@ const clearCfg = () => {
             detectSessionInUrl: true
           }
         })
+
+        sb = state.supabase
+        window.sb = sb
 
         const { data } = await state.supabase.auth.getSession()
         state.session = data ? data.session : null
@@ -2554,7 +2559,7 @@ const openSettings = () => {
       try{
         if ("serviceWorker" in navigator) {
           const swUrl = new URL("sw.js", location.href)
-          swUrl.searchParams.set("v","fd-ui-20260127-1")
+          swUrl.searchParams.set("v","fd-ui-20260129-1")
           navigator.serviceWorker.register(swUrl)
           navigator.serviceWorker.getRegistration().then((r) => r && r.update()).catch(() => {})
         }
