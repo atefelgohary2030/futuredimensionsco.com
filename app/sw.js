@@ -45,6 +45,16 @@ self.addEventListener("fetch", (event) => {
 
   if (req.method !== "GET") return
 
+  // Do not cache cross-origin requests (Supabase, CDN, signed URLs, etc.)
+  try{
+    const u = new URL(req.url)
+    const scope = scopeURL()
+    if (u.origin !== scope.origin) {
+      event.respondWith(fetch(req))
+      return
+    }
+  }catch{}
+
   if (isNavigation(req)) {
     // Network first, fallback to cache
     event.respondWith(
