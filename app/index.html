@@ -62,7 +62,7 @@
     }
     .brand{display:flex; align-items:center; gap:10px; min-width:240px}
     .logo{
-      width:50px; height:50px; border-radius:16px;
+      width:44px; height:44px; border-radius:14px;
       background: radial-gradient(circle at 30% 30%, rgba(214,179,91,0.85), rgba(155,122,42,0.18) 56%, rgba(0,0,0,0) 58%),
                   linear-gradient(135deg, rgba(214,179,91,0.35), rgba(6,11,19,0.2));
       border:1px solid rgba(214,179,91,0.35);
@@ -71,8 +71,8 @@
       position:relative;
     }
     .logo:after{content:""; display:none}
-    .brand h1{font-size:18px; margin:0; line-height:1.1}
-    .brand small{display:block; margin-top:3px; color:var(--muted); font-size:12px}
+    .brand h1{font-size:15px; margin:0; line-height:1.1}
+    .brand small{display:block; margin-top:3px; color:var(--muted); font-size:11px}
     .actions{display:flex; align-items:center; gap:10px}
     /* Action order by direction */
     :root[dir="ltr"] #connPill{order:1}
@@ -1322,7 +1322,7 @@ const clearCfg = () => {
 
       return `
         <div class="brandIntro homeHero">
-          <div class="tag">${txt("من التحدي ... إلى أبعاد جديدة","Enter with Challenges ... Exit with New Dimensions")}</div>
+          <div class="tag">${txt("من التحدي إلى أبعاد جديدة","Enter with Challenges ... Exit with New Dimensions")}</div>
           <div class="desc">${txt("( البعد المالي - البعد الإداري والتشغيلي - بعد استراتيجية النمو )","( Financial Dimension - Administrative & Operational Dimension - Growth Strategy Dimensions )")}</div>
         </div>
 
@@ -1514,7 +1514,7 @@ const clearCfg = () => {
           : `<div class="homeMiniEmpty">${txt("لا توجد مستندات","No documents yet")}</div>`
 
         for (const b of docEl.querySelectorAll("[data-doc-open]")) {
-          b.onclick = () => onOpenFileById("documents", b.getAttribute("data-doc-open"), state.buckets.documents)
+          b.onclick = () => onViewById("documents", b.getAttribute("data-doc-open"))
         }
         for (const b of docEl.querySelectorAll("[data-doc-dl]")) {
           b.onclick = () => onDownloadById("documents", b.getAttribute("data-doc-dl"), state.buckets.documents)
@@ -1976,10 +1976,10 @@ const renderInvoices = async () => {
         b.onclick = () => onViewById("meetings", b.getAttribute("data-meet-view"))
       }
       for (const b of document.querySelectorAll("[data-doc-open]")) {
-        b.onclick = () => onOpenFileById("documents", b.getAttribute("data-doc-open"), state.buckets.documents)
+        b.onclick = () => onViewById("documents", b.getAttribute("data-doc-open"))
       }
       for (const b of document.querySelectorAll("[data-inv-open]")) {
-        b.onclick = () => onOpenFileById("invoices", b.getAttribute("data-inv-open"), state.buckets.invoices)
+        b.onclick = () => onViewById("invoices", b.getAttribute("data-inv-open"))
       }
     }
 
@@ -2149,100 +2149,133 @@ const renderInvoices = async () => {
       }
     }
 
-
-    const ticketCategoryText = (raw) => {
-      const s = (raw ?? "").toString().trim().toUpperCase()
-      const isAr = state.lang === "ar"
-      const map = {
-        "EMPTY": ["عام","General"],
-        "TECH": ["تقني","Technical"],
-        "BILL": ["فواتير","Billing"]
-      }
-      if (map[s]) return isAr ? map[s][0] : map[s][1]
-      return raw || "-"
-    }
-
-    const prettyView = (table, data) => {
-      if (!data) return "-"
-      const lines = []
-      const add = (label, val) => {
-        if (val === undefined || val === null) return
-        const str = (typeof val === "string") ? val.trim() : String(val)
-        if (!str) return
-        lines.push(`${label}: ${str}`)
-      }
-
-      if (table === "tickets") {
-        add(txt("الموضوع","Subject"), data.subject_ar || data.subject_en)
-        add(txt("التصنيف","Category"), ticketCategoryText(data.category))
-        add(txt("الحالة","Status"), statusText(data.status, "ticket"))
-        add(txt("التاريخ","Date"), safeDate(data.created_at))
-        add(txt("التفاصيل","Details"), data.details)
-        add(txt("الرسالة","Message"), data.message)
-        return lines.join("\n")
-      }
-
-      return JSON.stringify(data, null, 2)
-    }
-
     
-    const onOpenFileById = async (table, id, bucket) => {
-      let preWin = null
-      try { preWin = window.open("about:blank", "_blank") } catch { preWin = null }
+    const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    const isStandalone = () => (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || !!navigator.standalone
 
-      const ok = await mustCfg()
-      if (!ok) {
-        try { preWin && preWin.close() } catch {}
-        return
-      }
-      if (!requireSignedIn()) {
-        try { preWin && preWin.close() } catch {}
-        return
-      }
-
+    const pickFileName = (row, path) => {
+      const n = row?.name_ar || row?.name_en || row?.name || ""
+      if (n && String(n).trim()) return String(n).trim()
       try{
-        const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
-        if (error) throw error
-
-        const path = data.storage_path || data.path || data.file_path
-        if (!path) {
-          showToast(txt("مسار الملف غير موجود في الجدول","File path is missing in table"))
-          try { preWin && preWin.close() } catch {}
-          return
-        }
-
-        const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 60)
-        if (signed.error) throw signed.error
-
-        const url = signed.data.signedUrl
-
-        let opened = false
-        try{
-          if (preWin && !preWin.closed) {
-            preWin.location.href = url
-            opened = true
-          }
-        }catch{}
-
-        if (!opened) {
-          try { window.location.href = url } catch {}
-        }
-      }catch(err){
-        console.error(err)
-        try { preWin && preWin.close() } catch {}
-        showToast(err.message || String(err))
+        const p = String(path || "")
+        return decodeURIComponent(p.split("/").pop() || "file")
+      }catch{
+        return "file"
       }
+    }
+
+    const tryShareFile = async (blob, fileName) => {
+      try{
+        if (!navigator.share || !navigator.canShare) return false
+        const file = new File([blob], fileName || "file", { type: blob.type || "application/octet-stream" })
+        if (!navigator.canShare({ files: [file] })) return false
+        await navigator.share({ files: [file], title: fileName || "file" })
+        return true
+      }catch{
+        return false
+      }
+    }
+
+    const saveBlobToDevice = async (blob, fileName) => {
+      // iOS: prefer Share Sheet when available
+      const shared = await tryShareFile(blob, fileName)
+      if (shared) return true
+
+      // Default: anchor download
+      try{
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement("a")
+        a.href = url
+        a.download = fileName || "file"
+        a.rel = "noopener"
+        a.style.display = "none"
+        document.body.appendChild(a)
+        a.click()
+        setTimeout(() => {
+          try{ URL.revokeObjectURL(url) }catch{}
+          try{ a.remove() }catch{}
+        }, 1500)
+        return true
+      }catch{
+        return false
+      }
+    }
+
+    const openExternalUrl = (url) => {
+      if (!url) return false
+      // iOS standalone often blocks window.open, so use same-tab navigation
+      if (isIOS() && isStandalone()) {
+        try{ window.location.href = url }catch{}
+        return true
+      }
+      let opened = false
+      try{
+        const w = window.open(url, "_blank")
+        opened = !!w
+      }catch{ }
+      if (!opened) {
+        try{ window.location.href = url }catch{}
+      }
+      return true
     }
 
 const onViewById = async (table, id) => {
       const ok = await mustCfg()
       if (!ok) return
+      if (!requireSignedIn()) return
 
       try{
         const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
         if (error) throw error
-        $("viewTitle").textContent = table === "tickets" ? txt("تفاصيل التذكرة","Ticket details") : txt("تفاصيل","Details")
-        $("viewBody").textContent = prettyView(table, data)
+
+        // Documents and invoices: open file instead of showing JSON
+        if (table === "documents" || table === "invoices") {
+          const bucket = table === "documents" ? state.buckets.documents : state.buckets.invoices
+          const path = data.storage_path || data.path || data.file_path
+          if (!path) {
+            showToast(txt("مسار الملف غير موجود","File path is missing"))
+            return
+          }
+
+          const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 60)
+          if (signed.error) throw signed.error
+          openExternalUrl(signed.data.signedUrl)
+          return
+        }
+
+        // Tickets and meetings: show tidy details
+        if (table === "tickets" || table === "meetings") {
+          const lines = []
+          const pushIf = (labelAr, labelEn, v) => {
+            if (v === undefined || v === null) return
+            const s = String(v).trim()
+            if (!s) return
+            lines.push(`${txt(labelAr, labelEn)}: ${s}`)
+          }
+          if (table === "tickets") {
+            pushIf("الموضوع","Subject", data.subject_ar || data.subject_en || data.subject)
+            pushIf("التصنيف","Category", data.category)
+            pushIf("الحالة","Status", data.status)
+            pushIf("تاريخ الإنشاء","Created", data.created_at)
+            pushIf("التفاصيل","Details", data.details)
+            pushIf("الرسالة","Message", data.message)
+          } else {
+            pushIf("العنوان","Title", data.title_ar || data.title_en || data.title)
+            pushIf("التاريخ","Date", data.date || data.created_at)
+            pushIf("المكان","Location", data.location)
+            pushIf("الحالة","Status", data.status)
+            pushIf("ملاحظات","Notes", data.notes || data.details)
+          }
+
+          $("viewTitle").textContent = txt("تفاصيل","Details")
+          $("viewBody").textContent = lines.length ? lines.join("
+") : JSON.stringify(data, null, 2)
+          openModal("viewModal")
+          return
+        }
+
+        $("viewTitle").textContent = txt("تفاصيل","Details")
+        $("viewBody").textContent = JSON.stringify(data, null, 2)
         openModal("viewModal")
       }catch(err){
         showToast(err.message || String(err))
@@ -2255,7 +2288,6 @@ const onViewById = async (table, id) => {
       if (!requireSignedIn()) return
 
       try{
-        const cols = await ensureColumns(table, ["id","storage_path","name","name_en","name_ar"])
         const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
         if (error) throw error
 
@@ -2264,6 +2296,36 @@ const onViewById = async (table, id) => {
           showToast(txt("مسار الملف غير موجود في الجدول","File path is missing in table"))
           return
         }
+
+        const fileName = pickFileName(data, path)
+
+        showToast(txt("جاري التحميل...","Downloading..."))
+
+        // Preferred: download as blob then save or share
+        let blob = null
+        try{
+          const dl = await state.supabase.storage.from(bucket).download(path)
+          if (dl.error) throw dl.error
+          blob = dl.data
+        }catch{
+          blob = null
+        }
+
+        if (blob) {
+          const okSave = await saveBlobToDevice(blob, fileName)
+          if (okSave) return
+        }
+
+        // Fallback: open signed URL (user can Save to Files on iOS)
+        const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 60)
+        if (signed.error) throw signed.error
+        openExternalUrl(signed.data.signedUrl)
+        if (isIOS()) showToast(txt("على الآيفون: بعد فتح الملف اضغط مشاركة ثم (حفظ في الملفات)","On iPhone: after opening, use Share then Save to Files"))
+      }catch(err){
+        console.error(err)
+        showToast(err.message || String(err))
+      }
+    }
 
         const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 60)
         if (signed.error) throw signed.error
