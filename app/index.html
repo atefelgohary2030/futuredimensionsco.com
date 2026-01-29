@@ -723,6 +723,12 @@
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
     }
 
+
+    /* --- Admin-only UI (hidden for customers) --- */
+    :root:not(.admin) #settingsAdminWrap{display:none !important;}
+    :root:not(.admin) #testBtn{display:none !important;}
+    :root:not(.admin) #settingsTestBtn{display:none !important;}
+
 </style>
 </head>
 <body>
@@ -737,7 +743,7 @@
       </div>
 
       <div class="actions">
-        <div class="pill hide" id="connPill" title="Connection">
+        <div class="pill" id="connPill" title="Connection">
           <span class="dot off" id="connDot"></span>
           <span id="connText" style="font-size:12px; color:var(--muted)">Offline</span>
         </div>
@@ -807,10 +813,7 @@
           <div class="row" style="margin-top:10px; flex-wrap:wrap">
             <button class="btn secondary" id="settingsTestBtn">اختبار</button>
             <button class="btn secondary" id="settingsAccountBtn">الحساب</button>
-            <button class="btn secondary hide" id="installBtn">تثبيت</button>
-          
-          <div class="hint" id="iosInstallHint" style="margin-top:8px; display:none"></div>
-</div>
+          </div>
         </div>
 
         <div class="hr"></div>
@@ -832,6 +835,9 @@
           <button class="btn ok" id="saveCfgBtn">حفظ</button>
           <button class="btn secondary" id="clearCfgBtn">مسح</button>
           <div class="hint" id="cfgHint">سيتم حفظ البيانات داخل المتصفح فقط
+        
+        <div class="hr"></div>
+        <div class="hint" id="buildInfo"></div>
         </div></div>
         </div>
       </div>
@@ -885,6 +891,8 @@ const $ = (id) => document.getElementById(id)
     
     // FD v3 config
     const FD_DEFAULT_SUPABASE_URL = "https://mifottrhqimqzojiyytq.supabase.co"
+
+const FD_BUILD = "20260129-1"
     const FD_DEFAULT_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pZm90dHJocWltcXpvaml5eXRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxOTQ1MzYsImV4cCI6MjA4NDc3MDUzNn0.g3LM3aYvCmZNy3hUShebv5T2evAwgMeNKr4wT3eXZS8"
     const FD_ADMIN_MODE = (() => {
       try{
@@ -895,6 +903,8 @@ const $ = (id) => document.getElementById(id)
       }
     })()
 
+
+    try { document.documentElement.classList.toggle("admin", FD_ADMIN_MODE) } catch {}
     const maskKey = (k) => {
       const s = (k || "").trim()
       if (!s) return ""
@@ -930,23 +940,13 @@ const state = {
     }
 
     const setConn = (on, label) => {
-      const pill = $("connPill")
       const dot = $("connDot")
       const t = $("connText")
-      const online = !!on
-
       if (dot) {
-        dot.classList.toggle("on", online)
-        dot.classList.toggle("off", !online)
+        dot.classList.toggle("on", !!on)
+        dot.classList.toggle("off", !on)
       }
-      if (t) t.textContent = label || (online ? "Online" : "Offline")
-
-      // For clients: show the pill only when offline
-      // For admin: keep it visible for quick diagnostics
-      if (pill) {
-        const show = FD_ADMIN_MODE || !online
-        pill.classList.toggle("hide", !show)
-      }
+      if (t) t.textContent = label || (on ? "Online" : "Offline")
     }
 
     const openModal = (id) => { const el = $(id); if (el) el.style.display = "block" }
@@ -1167,7 +1167,14 @@ const clearCfg = () => {
       return true
     }
 
-        const renderStatusInto = (el) => {
+        
+    const setBuildInfo = () => {
+      const el = $("buildInfo")
+      if (!el) return
+      el.textContent = "Build: " + (FD_BUILD || "")
+    }
+
+const renderStatusInto = (el) => {
       if (!el) return
 
       const email = state.user && state.user.email ? state.user.email : txt("غير مسجل","Not signed in")
@@ -2086,6 +2093,9 @@ const renderInvoices = async () => {
 
 
     const openSettings = () => {
+      try{
+        openModal("settingsModal")
+
       loadCfg()
 
       const url = (localStorage.getItem("fd_supabaseUrl") || FD_DEFAULT_SUPABASE_URL || "").trim()
@@ -2115,34 +2125,30 @@ const renderInvoices = async () => {
       const adminWrap = $("settingsAdminWrap")
       if (adminWrap) adminWrap.classList.toggle("hide", !FD_ADMIN_MODE)
 
-      refreshInstallUI()
-
       openModal("settingsModal")
+    
+        try{ setBuildInfo() }catch{}
+      }catch(err){
+        console.error(err)
+        try{ showToast("تعذر فتح الإعدادات", false) }catch{}
+        try{ openModal("settingsModal") }catch{}
+      }
     }
 
     const bindGlobal = () => {
-      $("settingsBtn").onclick = () => openSettings()
+      $("settingsBtn").onclick = () => { try{ openSettings() }catch(err){ console.error(err); try{ showToast("تعذر فتح الإعدادات", false) }catch{} } }
       $("settingsClose").onclick = () => closeModal("settingsModal")
-      const st = $("settingsTestBtn")
-      if (st) {
-        if (FD_ADMIN_MODE) st.onclick = () => testAll()
-        else st.classList.add("hide")
-      }
-      const sa = $("settingsAccountBtn")
 
-      const installBtn = $("installBtn")
-      if (installBtn) installBtn.onclick = () => onInstallClick()
+      const st = $("settingsTestBtn")
+      if (st) st.onclick = () => testAll()
+      const sa = $("settingsAccountBtn")
       if (sa) sa.onclick = () => { const so = $("signOutBtn"); if (so) so.classList.toggle("hide", !state.user); openModal("authModal") }
-      const clearCfgBtn = $("clearCfgBtn")
-      if (clearCfgBtn) clearCfgBtn.onclick = () => {
-        if (!FD_ADMIN_MODE) return
+      $("clearCfgBtn").onclick = () => {
         clearCfg()
         closeModal("settingsModal")
         showToast(txt("تم المسح","Cleared"), true)
       }
-      const saveCfgBtn = $("saveCfgBtn")
-      if (saveCfgBtn) saveCfgBtn.onclick = async () => {
-        if (!FD_ADMIN_MODE) return
+      $("saveCfgBtn").onclick = async () => {
         const url = $("sbUrl").value || ""
         const key = $("sbKey").value || ""
         saveCfg(url, key)
@@ -2165,89 +2171,16 @@ const renderInvoices = async () => {
         state.lang = state.lang === "ar" ? "en" : "ar"
         localStorage.setItem("fd_lang", state.lang)
         applyLang()
-
-
-      // Install prompt (Android and desktop Chromium) plus iOS guidance
-      let deferredInstallPrompt = null
-      const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent || "")
-      const isStandalone = () => {
-        try{
-          return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || (navigator.standalone === true)
-        }catch{
-          return false
-        }
-      }
-
-      const refreshInstallUI = () => {
-        const b = $("installBtn")
-        const hint = $("iosInstallHint")
-        if (!b) return
-
-        const standalone = isStandalone()
-        const canPrompt = !!deferredInstallPrompt
-
-        // Show install button when there is a browser prompt, or on iOS to show guidance
-        const show = !standalone && (canPrompt || isIOS)
-        b.classList.toggle("hide", !show)
-
-        if (show) {
-          b.textContent = txt("تثبيت","Install")
-        }
-
-        if (hint) {
-          if (!standalone && isIOS) {
-            hint.style.display = "block"
-            hint.textContent = txt("على iPhone: افتح قائمة المشاركة ثم اختر (Add to Home Screen).","On iPhone: use Share then choose Add to Home Screen.")
-          } else {
-            hint.style.display = "none"
-          }
-        }
-      }
-
-      const onInstallClick = async () => {
-        if (deferredInstallPrompt) {
-          try{
-            deferredInstallPrompt.prompt()
-            const choice = await deferredInstallPrompt.userChoice
-            deferredInstallPrompt = null
-            refreshInstallUI()
-            if (choice && choice.outcome === "accepted") showToast(txt("تم بدء التثبيت","Install started"), true)
-          }catch(err){
-            console.warn("install", err)
-          }
-        } else if (isIOS && !isStandalone()) {
-          refreshInstallUI()
-          showToast(txt("على iPhone: افتح قائمة المشاركة ثم اختر (Add to Home Screen).","On iPhone: use Share then choose Add to Home Screen."), true)
-        }
-      }
-
-      window.addEventListener("beforeinstallprompt", (e) => {
-        e.preventDefault()
-        deferredInstallPrompt = e
-        refreshInstallUI()
-      })
-
-      window.addEventListener("appinstalled", () => {
-        deferredInstallPrompt = null
-        refreshInstallUI()
-      })
       }
 
       $("refreshBtn").onclick = () => render()
-      const tb = $("testBtn")
-      if (tb) {
-        if (FD_ADMIN_MODE) tb.onclick = () => testAll()
-        else tb.classList.add("hide")
-      }
+      $("testBtn").onclick = () => testAll()
 
       for (const el of document.querySelectorAll(".tab")) {
         el.onclick = () => setActiveTab(el.dataset.page)
       }
-      const cp = $("connPill")
-      if (cp) {
-        if (FD_ADMIN_MODE) cp.onclick = () => testAll()
-        else cp.onclick = () => openSettings()
-      }
+
+      $("connPill").onclick = () => testAll()
 
       // close modals when tapping outside (mobile friendly)
       for (const id of ["settingsModal","authModal","viewModal"]) {
@@ -2356,23 +2289,7 @@ const renderInvoices = async () => {
         if ("serviceWorker" in navigator) {
           const swUrl = new URL("sw.js", location.href)
           swUrl.searchParams.set("v","fd-ui-20260129-1")
-          navigator.serviceWorker.register(swUrl).then((reg) => {
-            try{
-              if (reg) {
-                reg.addEventListener("updatefound", () => {
-                  const nw = reg.installing
-                  if (!nw) return
-                  nw.addEventListener("statechange", () => {
-                    if (nw.state === "installed" && navigator.serviceWorker.controller) {
-                      showToast(txt("يوجد تحديث جديد للتطبيق. أعد تحميل الصفحة.","An update is available. Reload the page."), true)
-                    }
-                  })
-                })
-              }
-            }catch(err){
-              console.warn("SW update", err)
-            }
-          }).catch(() => {})
+          navigator.serviceWorker.register(swUrl)
           navigator.serviceWorker.getRegistration().then((r) => r && r.update()).catch(() => {})
         }
       }catch(err){
