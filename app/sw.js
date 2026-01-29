@@ -1,5 +1,5 @@
-// Future Dimensions PWA Service Worker (v4.0.1)
-const VERSION = "fd-pwa-v4.0.1"
+// Future Dimensions PWA Service Worker (v4.0.2)
+const VERSION = "fd-pwa-v4.0.2"
 const CACHE_NAME = VERSION
 
 const scopeURL = () => {
