@@ -724,12 +724,68 @@
     }
 
 
-    /* --- Admin-only UI (hidden for customers) --- */
-    :root:not(.admin) #settingsAdminWrap{display:none !important;}
-    :root:not(.admin) #testBtn{display:none !important;}
-    :root:not(.admin) #settingsTestBtn{display:none !important;}
+    /* Icon action buttons (compact, luxurious) */
+    .iconact{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:46px; height:46px;
+      border-radius:16px;
+      border:1px solid rgba(255,220,140,0.55);
+      background: linear-gradient(180deg, rgba(255,223,140,0.95) 0%, rgba(214,179,91,0.92) 38%, rgba(161,120,44,0.90) 100%);
+      color:#000;
+      cursor:pointer;
+      user-select:none;
+      box-shadow:
+        0 10px 22px rgba(0,0,0,0.36),
+        0 4px 0 rgba(120,88,24,0.52),
+        inset 0 1px 0 rgba(255,255,255,0.50),
+        inset 0 -10px 18px rgba(0,0,0,0.16);
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      font-size:18px;
+      line-height:1;
+    }
+    .iconact:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+    .iconact:active{
+      transform: translateY(2px);
+      box-shadow:
+        0 8px 18px rgba(0,0,0,0.34),
+        0 2px 0 rgba(120,88,24,0.52),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -10px 18px rgba(0,0,0,0.18);
+    }
+    .iconact.secondary{
+      background: linear-gradient(180deg, rgba(255,236,170,0.20) 0%, rgba(214,179,91,0.18) 55%, rgba(161,120,44,0.14) 100%);
+      border-color: rgba(214,179,91,0.45);
+      color:#000;
+      box-shadow:
+        0 10px 20px rgba(0,0,0,0.34),
+        0 4px 0 rgba(120,88,24,0.36),
+        inset 0 1px 0 rgba(255,255,255,0.25),
+        inset 0 -10px 18px rgba(0,0,0,0.12);
+    }
 
-</style>
+    /* Mobile: reduce header height and show more text in titles */
+    @media (max-width: 560px){
+      .topbar-inner{
+        padding: calc(8px + env(safe-area-inset-top)) 12px 8px;
+        gap:10px;
+      }
+      .brand h1{font-size:16px}
+      .brand small{font-size:11px}
+      .logo{width:38px; height:38px; border-radius:14px}
+      .iconbtn{width:40px; height:40px; border-radius:16px}
+      .pill{padding:7px 10px}
+      .item .meta b{
+        white-space:normal;
+        display:-webkit-box;
+        -webkit-line-clamp:2;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+      }
+      .item .ops{justify-content:flex-end}
+      .iconact{width:44px; height:44px; border-radius:16px}
+    }
+
+  </style>
 </head>
 <body>
   <div class="topbar">
@@ -743,7 +799,7 @@
       </div>
 
       <div class="actions">
-        <div class="pill" id="connPill" title="Connection">
+        <div class="pill" id="connPill" style="display:none" title="Connection">
           <span class="dot off" id="connDot"></span>
           <span id="connText" style="font-size:12px; color:var(--muted)">Offline</span>
         </div>
@@ -835,9 +891,6 @@
           <button class="btn ok" id="saveCfgBtn">حفظ</button>
           <button class="btn secondary" id="clearCfgBtn">مسح</button>
           <div class="hint" id="cfgHint">سيتم حفظ البيانات داخل المتصفح فقط
-        
-        <div class="hr"></div>
-        <div class="hint" id="buildInfo"></div>
         </div></div>
         </div>
       </div>
@@ -891,8 +944,6 @@ const $ = (id) => document.getElementById(id)
     
     // FD v3 config
     const FD_DEFAULT_SUPABASE_URL = "https://mifottrhqimqzojiyytq.supabase.co"
-
-const FD_BUILD = "20260129-1"
     const FD_DEFAULT_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pZm90dHJocWltcXpvaml5eXRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxOTQ1MzYsImV4cCI6MjA4NDc3MDUzNn0.g3LM3aYvCmZNy3hUShebv5T2evAwgMeNKr4wT3eXZS8"
     const FD_ADMIN_MODE = (() => {
       try{
@@ -903,8 +954,6 @@ const FD_BUILD = "20260129-1"
       }
     })()
 
-
-    try { document.documentElement.classList.toggle("admin", FD_ADMIN_MODE) } catch {}
     const maskKey = (k) => {
       const s = (k || "").trim()
       if (!s) return ""
@@ -929,6 +978,54 @@ const state = {
 
     const txt = (ar, en) => state.lang === "ar" ? ar : en
 
+    const statusText = (raw, kind="generic") => {
+      const s = (raw ?? "").toString().trim()
+      if (!s) return "-"
+      const low = s.toLowerCase()
+      const isAr = state.lang === "ar"
+
+      const maps = {
+        invoice: {
+          paid: ["مدفوع","Paid"],
+          unpaid: ["غير مدفوع","Unpaid"],
+          pending: ["قيد الانتظار","Pending"],
+          overdue: ["متأخر","Overdue"],
+          partially_paid: ["مدفوع جزئياً","Partially paid"],
+          partial: ["مدفوع جزئياً","Partially paid"]
+        },
+        ticket: {
+          open: ["مفتوح","Open"],
+          closed: ["مغلق","Closed"],
+          resolved: ["تم الحل","Resolved"],
+          pending: ["قيد المتابعة","Pending"],
+          in_progress: ["قيد العمل","In progress"]
+        }
+      }
+
+      const map = maps[kind] || null
+      if (map && map[low]) return isAr ? map[low][0] : map[low][1]
+
+      // Basic Arabic to English fallback (when someone stored Arabic values)
+      if (!isAr) {
+        const arToEn = {
+          "مدفوع":"Paid",
+          "غير مدفوع":"Unpaid",
+          "قيد الانتظار":"Pending",
+          "متأخر":"Overdue",
+          "مدفوع جزئياً":"Partially paid",
+          "مفتوح":"Open",
+          "مغلق":"Closed",
+          "تم الحل":"Resolved",
+          "قيد المتابعة":"Pending",
+          "قيد العمل":"In progress"
+        }
+        if (arToEn[s]) return arToEn[s]
+      }
+
+      return s
+    }
+
+
     const showToast = (msg, ok=false) => {
       const el = $("toast")
       if (!el) return
@@ -940,13 +1037,23 @@ const state = {
     }
 
     const setConn = (on, label) => {
+      const pill = $("connPill")
       const dot = $("connDot")
       const t = $("connText")
+
       if (dot) {
         dot.classList.toggle("on", !!on)
         dot.classList.toggle("off", !on)
       }
-      if (t) t.textContent = label || (on ? "Online" : "Offline")
+
+      if (t) t.textContent = label || (on ? txt("متصل","Online") : txt("غير متصل","Offline"))
+
+      // For clients: hide the pill when everything is OK, show it only when offline.
+      // For admins: keep it visible all the time for quick diagnostics.
+      if (pill) {
+        const show = (!on) || !!FD_ADMIN_MODE
+        pill.style.display = show ? "flex" : "none"
+      }
     }
 
     const openModal = (id) => { const el = $(id); if (el) el.style.display = "block" }
@@ -1167,14 +1274,7 @@ const clearCfg = () => {
       return true
     }
 
-        
-    const setBuildInfo = () => {
-      const el = $("buildInfo")
-      if (!el) return
-      el.textContent = "Build: " + (FD_BUILD || "")
-    }
-
-const renderStatusInto = (el) => {
+        const renderStatusInto = (el) => {
       if (!el) return
 
       const email = state.user && state.user.email ? state.user.email : txt("غير مسجل","Not signed in")
@@ -1339,8 +1439,8 @@ const renderStatusInto = (el) => {
             <small>${txt("تاريخ","Date")}: ${escapeHtml(when)} · ${txt("رقم","ID")}: ${escapeHtml(shortId(id))}</small>
           </div>
           <div class="ops">
-            <button class="btn secondary" data-doc-open="${escapeAttr(id)}">${txt("فتح","Open")}</button>
-            <button class="btn" data-doc-dl="${escapeAttr(id)}">${txt("تحميل","Download")}</button>
+            <button class="iconact secondary" data-doc-open="${escapeAttr(id)}" aria-label="${txt("فتح","Open")}" title="${txt("فتح","Open")}">👁️</button>
+            <button class="iconact" data-doc-dl="${escapeAttr(id)}" aria-label="${txt("تحميل","Download")}" title="${txt("تحميل","Download")}">⬇️</button>
           </div>
         </div>
       `
@@ -1615,9 +1715,9 @@ const renderInvoices = async () => {
         if (error) throw error
         if (data && data.length) {
           listHtml = data.map(row => {
-            const title = row[nameKey] || "Invoice"
+            const title = row[nameKey] || txt("فاتورة","Invoice")
             const when = safeDate(row.created_at)
-            const status = row.status || "-"
+            const status = statusText(row.status, "invoice")
             const id = row.id || ""
             return `
               <div class="item">
@@ -1626,8 +1726,8 @@ const renderInvoices = async () => {
                   <small>${txt("حالة","Status")}: ${escapeHtml(status)} · ${txt("تاريخ","Date")}: ${escapeHtml(when)}</small>
                 </div>
                 <div class="ops">
-                  <button class="btn secondary" data-inv-open="${escapeAttr(id)}">${txt("فتح","Open")}</button>
-                  <button class="btn" data-inv-dl="${escapeAttr(id)}">${txt("تحميل","Download")}</button>
+                  <button class="iconact secondary" data-inv-open="${escapeAttr(id)}" aria-label="${txt("فتح","Open")}" title="${txt("فتح","Open")}">👁️</button>
+                  <button class="iconact" data-inv-dl="${escapeAttr(id)}" aria-label="${txt("تحميل","Download")}" title="${txt("تحميل","Download")}">⬇️</button>
                 </div>
               </div>
             `
@@ -1673,18 +1773,18 @@ const renderInvoices = async () => {
         if (error) throw error
         if (data && data.length) {
           listHtml = data.map(row => {
-            const title = row[subjKey] || row.subject_en || row.subject_ar || "Ticket"
+            const title = row[subjKey] || row.subject_en || row.subject_ar || txt("تذكرة","Ticket")
             const when = safeDate(row.created_at)
-            const st = row.status || "open"
+            const st = statusText(row.status || "open", "ticket")
             const id = row.id || ""
             return `
               <div class="item">
                 <div class="meta">
                   <b>${escapeHtml(title)}</b>
-                  <small>$الحالة: ${escapeHtml(st)} · ${escapeHtml(when)} · ${txt("رقم","ID")}: ${escapeHtml(shortId(id))}</small>
+                  <small>${txt("الحالة","Status")}: ${escapeHtml(st)} · ${escapeHtml(when)} · ${txt("رقم","ID")}: ${escapeHtml(shortId(id))}</small>
                 </div>
                 <div class="ops">
-                  <button class="btn secondary" data-ticket-view="${escapeAttr(id)}">${txt("عرض","View")}</button>
+                  <button class="iconact secondary" data-ticket-view="${escapeAttr(id)}" aria-label="${txt("عرض","View")}" title="${txt("عرض","View")}">👁️</button>
                 </div>
               </div>
             `
@@ -1740,7 +1840,7 @@ const renderInvoices = async () => {
         if (error) throw error
         if (data && data.length) {
           listHtml = data.map(row => {
-            const title = row.title || "Meeting"
+            const title = row.title || txt("اجتماع","Meeting")
             const when = safeDate(row.created_at)
             const d = row.meeting_date || "-"
             const tm = row.meeting_time || "-"
@@ -2093,9 +2193,6 @@ const renderInvoices = async () => {
 
 
     const openSettings = () => {
-      try{
-        openModal("settingsModal")
-
       loadCfg()
 
       const url = (localStorage.getItem("fd_supabaseUrl") || FD_DEFAULT_SUPABASE_URL || "").trim()
@@ -2125,18 +2222,14 @@ const renderInvoices = async () => {
       const adminWrap = $("settingsAdminWrap")
       if (adminWrap) adminWrap.classList.toggle("hide", !FD_ADMIN_MODE)
 
+      const testBtn = $("settingsTestBtn")
+      if (testBtn) testBtn.classList.toggle("hide", !FD_ADMIN_MODE)
+
       openModal("settingsModal")
-    
-        try{ setBuildInfo() }catch{}
-      }catch(err){
-        console.error(err)
-        try{ showToast("تعذر فتح الإعدادات", false) }catch{}
-        try{ openModal("settingsModal") }catch{}
-      }
     }
 
     const bindGlobal = () => {
-      $("settingsBtn").onclick = () => { try{ openSettings() }catch(err){ console.error(err); try{ showToast("تعذر فتح الإعدادات", false) }catch{} } }
+      $("settingsBtn").onclick = () => openSettings()
       $("settingsClose").onclick = () => closeModal("settingsModal")
 
       const st = $("settingsTestBtn")
@@ -2288,7 +2381,7 @@ const renderInvoices = async () => {
       try{
         if ("serviceWorker" in navigator) {
           const swUrl = new URL("sw.js", location.href)
-          swUrl.searchParams.set("v","fd-ui-20260129-1")
+          swUrl.searchParams.set("v","fd-ui-20260127-1")
           navigator.serviceWorker.register(swUrl)
           navigator.serviceWorker.getRegistration().then((r) => r && r.update()).catch(() => {})
         }
