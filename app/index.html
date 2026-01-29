@@ -62,7 +62,7 @@
     }
     .brand{display:flex; align-items:center; gap:10px; min-width:240px}
     .logo{
-      width:44px; height:44px; border-radius:14px;
+      width:50px; height:50px; border-radius:16px;
       background: radial-gradient(circle at 30% 30%, rgba(214,179,91,0.85), rgba(155,122,42,0.18) 56%, rgba(0,0,0,0) 58%),
                   linear-gradient(135deg, rgba(214,179,91,0.35), rgba(6,11,19,0.2));
       border:1px solid rgba(214,179,91,0.35);
@@ -71,8 +71,8 @@
       position:relative;
     }
     .logo:after{content:""; display:none}
-    .brand h1{font-size:15px; margin:0; line-height:1.1}
-    .brand small{display:block; margin-top:3px; color:var(--muted); font-size:11px}
+    .brand h1{font-size:clamp(18px, 2.2vw, 22px); margin:0; line-height:1.1}
+    .brand small{display:block; margin-top:3px; color:var(--muted); font-size:clamp(11px, 1.6vw, 13px)}
     .actions{display:flex; align-items:center; gap:10px}
     /* Action order by direction */
     :root[dir="ltr"] #connPill{order:1}
@@ -1322,7 +1322,7 @@ const clearCfg = () => {
 
       return `
         <div class="brandIntro homeHero">
-          <div class="tag">${txt("من التحدي إلى أبعاد جديدة","Enter with Challenges ... Exit with New Dimensions")}</div>
+          <div class="tag">${txt("من التحدي ... إلى أبعاد جديدة","Enter with Challenges ... Exit with New Dimensions")}</div>
           <div class="desc">${txt("( البعد المالي - البعد الإداري والتشغيلي - بعد استراتيجية النمو )","( Financial Dimension - Administrative & Operational Dimension - Growth Strategy Dimensions )")}</div>
         </div>
 
@@ -1514,7 +1514,7 @@ const clearCfg = () => {
           : `<div class="homeMiniEmpty">${txt("لا توجد مستندات","No documents yet")}</div>`
 
         for (const b of docEl.querySelectorAll("[data-doc-open]")) {
-          b.onclick = () => onViewById("documents", b.getAttribute("data-doc-open"))
+          b.onclick = () => onOpenFileById("documents", b.getAttribute("data-doc-open"), state.buckets.documents)
         }
         for (const b of docEl.querySelectorAll("[data-doc-dl]")) {
           b.onclick = () => onDownloadById("documents", b.getAttribute("data-doc-dl"), state.buckets.documents)
@@ -1976,10 +1976,10 @@ const renderInvoices = async () => {
         b.onclick = () => onViewById("meetings", b.getAttribute("data-meet-view"))
       }
       for (const b of document.querySelectorAll("[data-doc-open]")) {
-        b.onclick = () => onViewById("documents", b.getAttribute("data-doc-open"))
+        b.onclick = () => onOpenFileById("documents", b.getAttribute("data-doc-open"), state.buckets.documents)
       }
       for (const b of document.querySelectorAll("[data-inv-open]")) {
-        b.onclick = () => onViewById("invoices", b.getAttribute("data-inv-open"))
+        b.onclick = () => onOpenFileById("invoices", b.getAttribute("data-inv-open"), state.buckets.invoices)
       }
     }
 
@@ -2149,143 +2149,56 @@ const renderInvoices = async () => {
       }
     }
 
+
+    const ticketCategoryText = (raw) => {
+      const s = (raw ?? "").toString().trim().toUpperCase()
+      const isAr = state.lang === "ar"
+      const map = {
+        "EMPTY": ["عام","General"],
+        "TECH": ["تقني","Technical"],
+        "BILL": ["فواتير","Billing"]
+      }
+      if (map[s]) return isAr ? map[s][0] : map[s][1]
+      return raw || "-"
+    }
+
+    const prettyView = (table, data) => {
+      if (!data) return "-"
+      const lines = []
+      const add = (label, val) => {
+        if (val === undefined || val === null) return
+        const str = (typeof val === "string") ? val.trim() : String(val)
+        if (!str) return
+        lines.push(`${label}: ${str}`)
+      }
+
+      if (table === "tickets") {
+        add(txt("الموضوع","Subject"), data.subject_ar || data.subject_en)
+        add(txt("التصنيف","Category"), ticketCategoryText(data.category))
+        add(txt("الحالة","Status"), statusText(data.status, "ticket"))
+        add(txt("التاريخ","Date"), safeDate(data.created_at))
+        add(txt("التفاصيل","Details"), data.details)
+        add(txt("الرسالة","Message"), data.message)
+        return lines.join("\n")
+      }
+
+      return JSON.stringify(data, null, 2)
+    }
+
     
-    const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
-    const isStandalone = () => (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || !!navigator.standalone
+    const onOpenFileById = async (table, id, bucket) => {
+      let preWin = null
+      try { preWin = window.open("about:blank", "_blank") } catch { preWin = null }
 
-    const pickFileName = (row, path) => {
-      const n = row?.name_ar || row?.name_en || row?.name || ""
-      if (n && String(n).trim()) return String(n).trim()
-      try{
-        const p = String(path || "")
-        return decodeURIComponent(p.split("/").pop() || "file")
-      }catch{
-        return "file"
-      }
-    }
-
-    const tryShareFile = async (blob, fileName) => {
-      try{
-        if (!navigator.share || !navigator.canShare) return false
-        const file = new File([blob], fileName || "file", { type: blob.type || "application/octet-stream" })
-        if (!navigator.canShare({ files: [file] })) return false
-        await navigator.share({ files: [file], title: fileName || "file" })
-        return true
-      }catch{
-        return false
-      }
-    }
-
-    const saveBlobToDevice = async (blob, fileName) => {
-      // iOS: prefer Share Sheet when available
-      const shared = await tryShareFile(blob, fileName)
-      if (shared) return true
-
-      // Default: anchor download
-      try{
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement("a")
-        a.href = url
-        a.download = fileName || "file"
-        a.rel = "noopener"
-        a.style.display = "none"
-        document.body.appendChild(a)
-        a.click()
-        setTimeout(() => {
-          try{ URL.revokeObjectURL(url) }catch{}
-          try{ a.remove() }catch{}
-        }, 1500)
-        return true
-      }catch{
-        return false
-      }
-    }
-
-    const openExternalUrl = (url) => {
-      if (!url) return false
-      // iOS standalone often blocks window.open, so use same-tab navigation
-      if (isIOS() && isStandalone()) {
-        try{ window.location.href = url }catch{}
-        return true
-      }
-      let opened = false
-      try{
-        const w = window.open(url, "_blank")
-        opened = !!w
-      }catch{ }
-      if (!opened) {
-        try{ window.location.href = url }catch{}
-      }
-      return true
-    }
-
-const onViewById = async (table, id) => {
       const ok = await mustCfg()
-      if (!ok) return
-      if (!requireSignedIn()) return
-
-      try{
-        const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
-        if (error) throw error
-
-        // Documents and invoices: open file instead of showing JSON
-        if (table === "documents" || table === "invoices") {
-          const bucket = table === "documents" ? state.buckets.documents : state.buckets.invoices
-          const path = data.storage_path || data.path || data.file_path
-          if (!path) {
-            showToast(txt("مسار الملف غير موجود","File path is missing"))
-            return
-          }
-
-          const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 60)
-          if (signed.error) throw signed.error
-          openExternalUrl(signed.data.signedUrl)
-          return
-        }
-
-        // Tickets and meetings: show tidy details
-        if (table === "tickets" || table === "meetings") {
-          const lines = []
-          const pushIf = (labelAr, labelEn, v) => {
-            if (v === undefined || v === null) return
-            const s = String(v).trim()
-            if (!s) return
-            lines.push(`${txt(labelAr, labelEn)}: ${s}`)
-          }
-          if (table === "tickets") {
-            pushIf("الموضوع","Subject", data.subject_ar || data.subject_en || data.subject)
-            pushIf("التصنيف","Category", data.category)
-            pushIf("الحالة","Status", data.status)
-            pushIf("تاريخ الإنشاء","Created", data.created_at)
-            pushIf("التفاصيل","Details", data.details)
-            pushIf("الرسالة","Message", data.message)
-          } else {
-            pushIf("العنوان","Title", data.title_ar || data.title_en || data.title)
-            pushIf("التاريخ","Date", data.date || data.created_at)
-            pushIf("المكان","Location", data.location)
-            pushIf("الحالة","Status", data.status)
-            pushIf("ملاحظات","Notes", data.notes || data.details)
-          }
-
-          $("viewTitle").textContent = txt("تفاصيل","Details")
-          $("viewBody").textContent = lines.length ? lines.join("
-") : JSON.stringify(data, null, 2)
-          openModal("viewModal")
-          return
-        }
-
-        $("viewTitle").textContent = txt("تفاصيل","Details")
-        $("viewBody").textContent = JSON.stringify(data, null, 2)
-        openModal("viewModal")
-      }catch(err){
-        showToast(err.message || String(err))
+      if (!ok) {
+        try { preWin && preWin.close() } catch {}
+        return
       }
-    }
-
-    const onDownloadById = async (table, id, bucket) => {
-      const ok = await mustCfg()
-      if (!ok) return
-      if (!requireSignedIn()) return
+      if (!requireSignedIn()) {
+        try { preWin && preWin.close() } catch {}
+        return
+      }
 
       try{
         const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
@@ -2294,52 +2207,165 @@ const onViewById = async (table, id) => {
         const path = data.storage_path || data.path || data.file_path
         if (!path) {
           showToast(txt("مسار الملف غير موجود في الجدول","File path is missing in table"))
+          try { preWin && preWin.close() } catch {}
           return
         }
-
-        const fileName = pickFileName(data, path)
-
-        showToast(txt("جاري التحميل...","Downloading..."))
-
-        // Preferred: download as blob then save or share
-        let blob = null
-        try{
-          const dl = await state.supabase.storage.from(bucket).download(path)
-          if (dl.error) throw dl.error
-          blob = dl.data
-        }catch{
-          blob = null
-        }
-
-        if (blob) {
-          const okSave = await saveBlobToDevice(blob, fileName)
-          if (okSave) return
-        }
-
-        // Fallback: open signed URL (user can Save to Files on iOS)
-        const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 60)
-        if (signed.error) throw signed.error
-        openExternalUrl(signed.data.signedUrl)
-        if (isIOS()) showToast(txt("على الآيفون: بعد فتح الملف اضغط مشاركة ثم (حفظ في الملفات)","On iPhone: after opening, use Share then Save to Files"))
-      }catch(err){
-        console.error(err)
-        showToast(err.message || String(err))
-      }
-    }
 
         const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 60)
         if (signed.error) throw signed.error
 
         const url = signed.data.signedUrl
-        window.open(url, "_blank")
+
+        let opened = false
+        try{
+          if (preWin && !preWin.closed) {
+            preWin.location.href = url
+            opened = true
+          }
+        }catch{}
+
+        if (!opened) {
+          try { window.location.href = url } catch {}
+        }
       }catch(err){
         console.error(err)
+        try { preWin && preWin.close() } catch {}
         showToast(err.message || String(err))
       }
     }
 
+const onViewById = async (table, id) => {
+      const ok = await mustCfg()
+      if (!ok) return
 
-    const openSettings = () => {
+      try{
+        const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
+        if (error) throw error
+        $("viewTitle").textContent = table === "tickets" ? txt("تفاصيل التذكرة","Ticket details") : txt("تفاصيل","Details")
+        $("viewBody").textContent = prettyView(table, data)
+        openModal("viewModal")
+      }catch(err){
+        showToast(err.message || String(err))
+      }
+    }
+
+    const onDownloadById = async (table, id, bucket) => {
+      // iOS (Safari + Add to Home Screen) does not reliably support programmatic "download".
+      // Best UX is to use the Share Sheet (Save to Files). If that is not available, we open the file URL.
+      const ua = navigator.userAgent || "";
+      const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      const isStandalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone;
+
+      // Only pre-open a window when we might need it (popup blockers on iOS/PWA).
+      let preWin = null;
+      if (isIOS || isStandalone) {
+        try { preWin = window.open("about:blank", "_blank"); } catch(e) { preWin = null; }
+      }
+
+      const closePreWin = () => { try { if (preWin && !preWin.closed) preWin.close(); } catch(e) {} };
+
+      const getDlName = (data, path) => {
+        const n = (data?.name_ar || data?.name_en || data?.name || "").toString().trim();
+        if (n) return n;
+        const p = (path || "").toString().split("/").pop();
+        return p || "file";
+      };
+
+      const tryShareFile = async (blob, filename) => {
+        try {
+          if (!navigator.share || typeof File === "undefined") return false;
+          const file = new File([blob], filename, { type: blob.type || "application/octet-stream" });
+          if (navigator.canShare && !navigator.canShare({ files: [file] })) return false;
+          await navigator.share({ files: [file], title: filename });
+          return true;
+        } catch (e) {
+          return false;
+        }
+      };
+
+      const blobDownload = (blob, filename) => {
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = blobUrl;
+        a.download = filename;
+        a.rel = "noopener";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 4000);
+      };
+
+      try {
+        const { data, error } = await sb.from(table).select("*").eq("id", id).single();
+        if (error) throw error;
+
+        const path = data.storage_path || data.path || data.file_path;
+        if (!path) throw new Error("Missing file path");
+
+        const signed = await sb.storage.from(bucket).createSignedUrl(path, 60 * 5);
+        if (signed.error) throw signed.error;
+
+        const url = signed.data.signedUrl;
+        const dlName = getDlName(data, path);
+
+        // iOS flow: try Share Sheet with the actual file, then fall back to opening the file.
+        if (isIOS) {
+          try {
+            const r = await fetch(url, { cache: "no-store" });
+            if (!r.ok) throw new Error("Fetch failed");
+            const blob = await r.blob();
+
+            const shared = await tryShareFile(blob, dlName);
+            if (shared) {
+              closePreWin();
+              showToast('تم فتح المشاركة. اختر "حفظ في الملفات".', true);
+              return;
+            }
+
+            // Share not available, fall back to opening (user can use Share in viewer).
+            try {
+              if (preWin && !preWin.closed) preWin.location.href = url;
+              else window.location.href = url;
+              showToast('تم فتح الملف. لتحميله استخدم زر المشاركة ثم "حفظ في الملفات".', true);
+              return;
+            } catch (e) {
+              window.location.href = url;
+              return;
+            }
+          } catch (e) {
+            // If fetch/share failed, still open the file URL.
+            try {
+              if (preWin && !preWin.closed) preWin.location.href = url;
+              else window.location.href = url;
+              showToast('تم فتح الملف. لتحميله استخدم زر المشاركة ثم "حفظ في الملفات".', true);
+              return;
+            } catch (e2) {
+              window.location.href = url;
+              return;
+            }
+          }
+        }
+
+        // Non-iOS: prefer true download via blob, fallback to opening the URL.
+        try {
+          const r = await fetch(url, { cache: "no-store" });
+          if (!r.ok) throw new Error("Fetch failed");
+          const blob = await r.blob();
+          blobDownload(blob, dlName);
+          closePreWin();
+          return;
+        } catch (e) {
+          closePreWin();
+          try { window.open(url, "_blank"); } catch(e2) { window.location.href = url; }
+        }
+      } catch (err) {
+        closePreWin();
+        console.error(err);
+        showToast(err?.message || "تعذر التحميل", false);
+      }
+    }
+
+const openSettings = () => {
       loadCfg()
 
       const url = (localStorage.getItem("fd_supabaseUrl") || FD_DEFAULT_SUPABASE_URL || "").trim()
