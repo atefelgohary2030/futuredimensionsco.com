@@ -1,5 +1,5 @@
-// Future Dimensions PWA Service Worker (v4.0.3)
-const VERSION = "fd-pwa-v4.0.3"
+// Future Dimensions PWA Service Worker (v4)
+const VERSION = "fd-pwa-v4.0.2"
 const CACHE_NAME = VERSION
 
 const scopeURL = () => {
@@ -45,15 +45,27 @@ self.addEventListener("fetch", (event) => {
 
   if (req.method !== "GET") return
 
-  // Do not cache cross-origin requests (Supabase, CDN, signed URLs, etc.)
-  try{
-    const u = new URL(req.url)
-    const scope = scopeURL()
-    if (u.origin !== scope.origin) {
-      event.respondWith(fetch(req))
-      return
+  // Do not cache cross-origin or dynamic API/file URLs (Supabase signed links, etc.)
+  const bypassCache = () => {
+    try{
+      const u = new URL(req.url)
+      const scope = scopeURL()
+      if (u.origin !== scope.origin) return true
+      const p = u.pathname || ""
+      const s = u.search || ""
+      if (s.includes("token=") || s.includes("X-Amz-Signature") || s.includes("X-Amz-Credential") || s.includes("X-Amz-Date")) return true
+      if (p.includes("/storage/v1/") || p.includes("/rest/v1/") || p.includes("/auth/v1/") || p.includes("/functions/v1/")) return true
+      if (p.includes("/supabase") || u.hostname.includes("supabase")) return true
+      return false
+    }catch{
+      return true
     }
-  }catch{}
+  }
+
+  if (bypassCache()) {
+    event.respondWith(fetch(req))
+    return
+  }
 
   if (isNavigation(req)) {
     // Network first, fallback to cache
