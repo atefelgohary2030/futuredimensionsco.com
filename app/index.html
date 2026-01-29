@@ -932,7 +932,7 @@
         <button class="btn secondary" id="viewClose">إغلاق</button>
       </div>
       <div class="modal-body">
-        <div class="hint mono" id="viewBody" style="white-space:pre-wrap"></div>
+        <div class="hint mono" id="viewBody" style="white-space:normal"></div>
       </div>
     </div>
   </div>
@@ -1514,7 +1514,7 @@ const clearCfg = () => {
           : `<div class="homeMiniEmpty">${txt("لا توجد مستندات","No documents yet")}</div>`
 
         for (const b of docEl.querySelectorAll("[data-doc-open]")) {
-          b.onclick = () => onViewById("documents", b.getAttribute("data-doc-open"))
+          b.onclick = () => onOpenFileById("documents", b.getAttribute("data-doc-open"), state.buckets.documents)
         }
         for (const b of docEl.querySelectorAll("[data-doc-dl]")) {
           b.onclick = () => onDownloadById("documents", b.getAttribute("data-doc-dl"), state.buckets.documents)
@@ -1976,10 +1976,10 @@ const renderInvoices = async () => {
         b.onclick = () => onViewById("meetings", b.getAttribute("data-meet-view"))
       }
       for (const b of document.querySelectorAll("[data-doc-open]")) {
-        b.onclick = () => onViewById("documents", b.getAttribute("data-doc-open"))
+        b.onclick = () => onOpenFileById("documents", b.getAttribute("data-doc-open"), state.buckets.documents)
       }
       for (const b of document.querySelectorAll("[data-inv-open]")) {
-        b.onclick = () => onViewById("invoices", b.getAttribute("data-inv-open"))
+        b.onclick = () => onOpenFileById("invoices", b.getAttribute("data-inv-open"), state.buckets.invoices)
       }
     }
 
@@ -2152,33 +2152,137 @@ const renderInvoices = async () => {
     const onViewById = async (table, id) => {
       const ok = await mustCfg()
       if (!ok) return
+      if (!requireSignedIn()) return
+
+      const kv = (k, v) => {
+        const val = (v === null || v === undefined || v === "") ? "-" : String(v)
+        const dir = state.lang === "ar" ? "rtl" : "ltr"
+        return `
+          <div style="display:flex; gap:12px; justify-content:space-between; align-items:flex-start; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.08)">
+            <div style="opacity:.75; min-width:120px">${escapeHtml(k)}</div>
+            <div class="mono" style="text-align:${dir === "rtl" ? "left" : "right"}; overflow-wrap:anywhere">${escapeHtml(val)}</div>
+          </div>
+        `
+      }
+
+      const section = (title, body) => `
+        <div style="margin:0 0 14px">
+          <div style="font-weight:700; margin:0 0 8px">${escapeHtml(title)}</div>
+          <div>${body}</div>
+        </div>
+      `
 
       try{
         const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
         if (error) throw error
+
         $("viewTitle").textContent = txt("تفاصيل","Details")
-        $("viewBody").textContent = JSON.stringify(data, null, 2)
-        openModal("viewModal")
+
+        if (FD_ADMIN_MODE) {
+          $("viewBody").innerHTML = `<pre class="mono" style="white-space:pre-wrap; margin:0">${escapeHtml(JSON.stringify(data, null, 2))}</pre>`
+          openModal($("viewModal"))
+          return
+        }
+
+        if (table === "tickets") {
+          const body = [
+            kv(txt("الموضوع","Subject"), data.subject_ar || data.subject_en || "-"),
+            kv(txt("التصنيف","Category"), data.category || "-"),
+            kv(txt("الحالة","Status"), data.status || "-"),
+            kv(txt("التاريخ","Date"), safeDate(data.created_at)),
+            section(txt("التفاصيل","Details"), `<div style="white-space:pre-wrap; opacity:.95; overflow-wrap:anywhere">${escapeHtml(data.details || data.message || "-")}</div>`)
+          ].join("")
+          $("viewBody").innerHTML = body
+          openModal($("viewModal"))
+          return
+        }
+
+        if (table === "meetings") {
+          const body = [
+            kv(txt("الموضوع","Title"), data.title || "-"),
+            kv(txt("التاريخ","Date"), data.meeting_date || safeDate(data.created_at)),
+            kv(txt("الوقت","Time"), data.meeting_time || "-"),
+            kv(txt("الحالة","Status"), data.status || "-"),
+            section(txt("ملاحظات","Notes"), `<div style="white-space:pre-wrap; opacity:.95; overflow-wrap:anywhere">${escapeHtml(data.notes || "-")}</div>`)
+          ].join("")
+          $("viewBody").innerHTML = body
+          openModal($("viewModal"))
+          return
+        }
+
+        // Fallback for any other table
+        const keys = Object.keys(data || {})
+        const body = keys.slice(0, 30).map((k) => kv(k, data[k])).join("") + (keys.length > 30 ? `<div class="hint" style="margin-top:10px">${txt("تم إخفاء حقول إضافية","Additional fields hidden")}</div>` : "")
+        $("viewBody").innerHTML = body
+        openModal($("viewModal"))
       }catch(err){
+        console.error(err)
         showToast(err.message || String(err))
       }
     }
+    }
 
-    const onDownloadById = async (table, id, bucket) => {
-      const ok = await mustCfg()
-      if (!ok) return
+    const openSignedUrlById = (table, id, bucket, mode) => {
+      loadCfg()
+      if (!state.cfg) {
+        showToast(txt("التطبيق غير مهيأ للاتصال","App is not configured"))
+        return
+      }
       if (!requireSignedIn()) return
 
+      let popup = null
       try{
-        const cols = await ensureColumns(table, ["id","storage_path","name","name_en","name_ar"])
-        const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
-        if (error) throw error
-
-        const path = data.storage_path || data.path || data.file_path
-        if (!path) {
-          showToast(txt("مسار الملف غير موجود في الجدول","File path is missing in table"))
-          return
+        popup = window.open("about:blank", "_blank")
+        if (popup) {
+          const dir = state.lang === "ar" ? "rtl" : "ltr"
+          popup.document.write(`
+            <div style="font-family:system-ui; padding:16px; direction:${dir}; color:#e7e7e7; background:#0b0f17; height:100vh">
+              <div style="max-width:520px; margin:0 auto">
+                <h3 style="margin:0 0 8px">${txt("جاري التحميل...","Loading...")}</h3>
+                <p style="opacity:.8; margin:0">${txt("سيتم فتح الملف بعد لحظات","Your file will open in a moment")}</p>
+              </div>
+            </div>
+          `)
+          popup.document.close()
         }
+      }catch{}
+
+      ;(async () => {
+        try{
+          const ok = await mustCfg()
+          if (!ok) { try{ if (popup && !popup.closed) popup.close() }catch{}; return }
+
+          const cols = await ensureColumns(table, ["id","storage_path","name","name_en","name_ar"])
+          const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
+          if (error) throw error
+
+          const path = data.storage_path || data.path || data.file_path
+          if (!path) throw new Error(txt("مسار الملف غير موجود في الجدول","File path is missing in table"))
+
+          const fname = (data.name_ar || data.name_en || data.name || "file").toString()
+          const opts = mode === "download" ? { download: fname } : undefined
+
+          const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 300, opts)
+          if (signed.error) throw signed.error
+
+          const url = signed.data.signedUrl
+
+          if (popup && !popup.closed) {
+            try { popup.location.href = url; popup.focus() }
+            catch { location.href = url }
+          } else {
+            location.href = url
+          }
+        }catch(err){
+          try{ if (popup && !popup.closed) popup.close() }catch{}
+          console.error(err)
+          showToast(err.message || String(err))
+        }
+      })()
+    }
+
+    const onOpenFileById = (table, id, bucket) => openSignedUrlById(table, id, bucket, "open")
+    const onDownloadById = (table, id, bucket) => openSignedUrlById(table, id, bucket, "download")
 
         const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 60)
         if (signed.error) throw signed.error
@@ -2381,7 +2485,7 @@ const renderInvoices = async () => {
       try{
         if ("serviceWorker" in navigator) {
           const swUrl = new URL("sw.js", location.href)
-          swUrl.searchParams.set("v","fd-ui-20260127-1")
+          swUrl.searchParams.set("v","fd-ui-20260129-1")
           navigator.serviceWorker.register(swUrl)
           navigator.serviceWorker.getRegistration().then((r) => r && r.update()).catch(() => {})
         }
