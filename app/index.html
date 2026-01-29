@@ -62,7 +62,7 @@
     }
     .brand{display:flex; align-items:center; gap:10px; min-width:240px}
     .logo{
-      width:44px; height:44px; border-radius:14px;
+      width:50px; height:50px; border-radius:16px;
       background: radial-gradient(circle at 30% 30%, rgba(214,179,91,0.85), rgba(155,122,42,0.18) 56%, rgba(0,0,0,0) 58%),
                   linear-gradient(135deg, rgba(214,179,91,0.35), rgba(6,11,19,0.2));
       border:1px solid rgba(214,179,91,0.35);
@@ -71,8 +71,8 @@
       position:relative;
     }
     .logo:after{content:""; display:none}
-    .brand h1{font-size:15px; margin:0; line-height:1.1}
-    .brand small{display:block; margin-top:3px; color:var(--muted); font-size:11px}
+    .brand h1{font-size:18px; margin:0; line-height:1.1}
+    .brand small{display:block; margin-top:3px; color:var(--muted); font-size:12px}
     .actions{display:flex; align-items:center; gap:10px}
     /* Action order by direction */
     :root[dir="ltr"] #connPill{order:1}
@@ -1322,7 +1322,7 @@ const clearCfg = () => {
 
       return `
         <div class="brandIntro homeHero">
-          <div class="tag">${txt("من التحدي إلى أبعاد جديدة","Enter with Challenges ... Exit with New Dimensions")}</div>
+          <div class="tag">${txt("من التحدي ... إلى أبعاد جديدة","Enter with Challenges ... Exit with New Dimensions")}</div>
           <div class="desc">${txt("( البعد المالي - البعد الإداري والتشغيلي - بعد استراتيجية النمو )","( Financial Dimension - Administrative & Operational Dimension - Growth Strategy Dimensions )")}</div>
         </div>
 
@@ -1514,7 +1514,7 @@ const clearCfg = () => {
           : `<div class="homeMiniEmpty">${txt("لا توجد مستندات","No documents yet")}</div>`
 
         for (const b of docEl.querySelectorAll("[data-doc-open]")) {
-          b.onclick = () => onOpenFileById("documents", b.getAttribute("data-doc-open"), state.buckets.documents)
+          b.onclick = () => onViewById("documents", b.getAttribute("data-doc-open"))
         }
         for (const b of docEl.querySelectorAll("[data-doc-dl]")) {
           b.onclick = () => onDownloadById("documents", b.getAttribute("data-doc-dl"), state.buckets.documents)
@@ -1976,10 +1976,10 @@ const renderInvoices = async () => {
         b.onclick = () => onViewById("meetings", b.getAttribute("data-meet-view"))
       }
       for (const b of document.querySelectorAll("[data-doc-open]")) {
-        b.onclick = () => onOpenFileById("documents", b.getAttribute("data-doc-open"), state.buckets.documents)
+        b.onclick = () => onViewById("documents", b.getAttribute("data-doc-open"))
       }
       for (const b of document.querySelectorAll("[data-inv-open]")) {
-        b.onclick = () => onOpenFileById("invoices", b.getAttribute("data-inv-open"), state.buckets.invoices)
+        b.onclick = () => onViewById("invoices", b.getAttribute("data-inv-open"))
       }
     }
 
@@ -2149,6 +2149,42 @@ const renderInvoices = async () => {
       }
     }
 
+
+    const ticketCategoryText = (raw) => {
+      const s = (raw ?? "").toString().trim().toUpperCase()
+      const isAr = state.lang === "ar"
+      const map = {
+        "EMPTY": ["عام","General"],
+        "TECH": ["تقني","Technical"],
+        "BILL": ["فواتير","Billing"]
+      }
+      if (map[s]) return isAr ? map[s][0] : map[s][1]
+      return raw || "-"
+    }
+
+    const prettyView = (table, data) => {
+      if (!data) return "-"
+      const lines = []
+      const add = (label, val) => {
+        if (val === undefined || val === null) return
+        const str = (typeof val === "string") ? val.trim() : String(val)
+        if (!str) return
+        lines.push(`${label}: ${str}`)
+      }
+
+      if (table === "tickets") {
+        add(txt("الموضوع","Subject"), data.subject_ar || data.subject_en)
+        add(txt("التصنيف","Category"), ticketCategoryText(data.category))
+        add(txt("الحالة","Status"), statusText(data.status, "ticket"))
+        add(txt("التاريخ","Date"), safeDate(data.created_at))
+        add(txt("التفاصيل","Details"), data.details)
+        add(txt("الرسالة","Message"), data.message)
+        return lines.join("\n")
+      }
+
+      return JSON.stringify(data, null, 2)
+    }
+
     const onViewById = async (table, id) => {
       const ok = await mustCfg()
       if (!ok) return
@@ -2156,113 +2192,10 @@ const renderInvoices = async () => {
       try{
         const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
         if (error) throw error
-        $("viewTitle").textContent = txt("تفاصيل","Details")
-        $("viewBody").textContent = JSON.stringify(data, null, 2)
+        $("viewTitle").textContent = table === "tickets" ? txt("تفاصيل التذكرة","Ticket details") : txt("تفاصيل","Details")
+        $("viewBody").textContent = prettyView(table, data)
         openModal("viewModal")
       }catch(err){
-        showToast(err.message || String(err))
-      }
-    }
-
-        const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
-
-    const isStandalone = () => {
-      try{
-        return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone === true
-      }catch{
-        return false
-      }
-    }
-
-    const preOpenWindow = () => {
-      try{
-        const w = window.open("", "_blank")
-        if (w) { try{ w.opener = null }catch{} }
-        return w
-      }catch{
-        return null
-      }
-    }
-
-    const closeWin = (w) => {
-      try{ if (w && !w.closed) w.close() }catch{}
-    }
-
-    const navigateWindow = (w, url) => {
-      if (!url) return
-      if (w && !w.closed) {
-        try{ w.location.href = url; return }catch{}
-      }
-      try{ window.open(url, "_blank") }catch{ window.location.href = url }
-    }
-
-    const inferExt = (path) => {
-      try{
-        const p = (path || "").split("?")[0]
-        const last = p.split("/").pop() || ""
-        const dot = last.lastIndexOf(".")
-        if (dot > 0 && dot < last.length - 1) return last.slice(dot + 1)
-      }catch{}
-      return ""
-    }
-
-    const safeFileName = (name, extHint) => {
-      let n = (name || "file").toString().trim()
-      n = n.replace(/[\\\/:*?"<>|]+/g, "-").replace(/\s+/g, " ").trim()
-      if (!n) n = "file"
-      const ext = (extHint || "").toString().trim().replace(/^\./, "")
-      if (ext && !n.toLowerCase().endsWith("." + ext.toLowerCase())) n += "." + ext
-      return n
-    }
-
-    const triggerBrowserDownload = (blob, filename) => {
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement("a")
-      a.href = url
-      a.download = filename || "file"
-      a.rel = "noopener"
-      a.style.display = "none"
-      document.body.appendChild(a)
-      a.click()
-      a.remove()
-
-      setTimeout(() => { try{ URL.revokeObjectURL(url) }catch{} }, 4000)
-
-      if (isIOS() && isStandalone()) {
-        setTimeout(() => {
-          try{ window.open(url, "_blank") }catch{}
-        }, 350)
-        showToast(txt("لو لم يبدأ التحميل: اضغط مشاركة ثم حفظ إلى الملفات","If download doesn't start: tap Share then Save to Files"))
-      }
-    }
-
-    const onOpenFileById = async (table, id, bucket) => {
-      const preWin = preOpenWindow()
-
-      const ok = await mustCfg()
-      if (!ok) { closeWin(preWin); return }
-      if (!requireSignedIn()) { closeWin(preWin); return }
-
-      try{
-        await initSupabase()
-
-        const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
-        if (error) throw error
-
-        const path = data.storage_path || data.path || data.file_path
-        if (!path) {
-          closeWin(preWin)
-          showToast(txt("مسار الملف غير موجود في الجدول","File path is missing in table"))
-          return
-        }
-
-        const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 60)
-        if (signed.error) throw signed.error
-
-        navigateWindow(preWin, signed.data.signedUrl)
-      }catch(err){
-        closeWin(preWin)
-        console.error(err)
         showToast(err.message || String(err))
       }
     }
@@ -2273,8 +2206,7 @@ const renderInvoices = async () => {
       if (!requireSignedIn()) return
 
       try{
-        await initSupabase()
-
+        const cols = await ensureColumns(table, ["id","storage_path","name","name_en","name_ar"])
         const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
         if (error) throw error
 
@@ -2284,31 +2216,16 @@ const renderInvoices = async () => {
           return
         }
 
-        const baseName = data.name || data.name_ar || data.name_en || data.title || data.subject || "file"
-        const fileName = safeFileName(baseName, inferExt(path))
+        const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 60)
+        if (signed.error) throw signed.error
 
-        let blob = null
-        try{
-          const dl = await state.supabase.storage.from(bucket).download(path)
-          if (dl && !dl.error && dl.data) blob = dl.data
-        }catch{}
-
-        if (!blob) {
-          const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 60)
-          if (signed.error) throw signed.error
-
-          const res = await fetch(signed.data.signedUrl, { credentials: "omit" })
-          if (!res.ok) throw new Error("Download failed: " + res.status)
-          blob = await res.blob()
-        }
-
-        triggerBrowserDownload(blob, fileName)
+        const url = signed.data.signedUrl
+        window.open(url, "_blank")
       }catch(err){
         console.error(err)
         showToast(err.message || String(err))
       }
     }
-
 
 
     const openSettings = () => {
