@@ -1514,7 +1514,7 @@ const clearCfg = () => {
           : `<div class="homeMiniEmpty">${txt("لا توجد مستندات","No documents yet")}</div>`
 
         for (const b of docEl.querySelectorAll("[data-doc-open]")) {
-          b.onclick = () => onViewById("documents", b.getAttribute("data-doc-open"))
+          b.onclick = () => onOpenFileById("documents", b.getAttribute("data-doc-open"), state.buckets.documents)
         }
         for (const b of docEl.querySelectorAll("[data-doc-dl]")) {
           b.onclick = () => onDownloadById("documents", b.getAttribute("data-doc-dl"), state.buckets.documents)
@@ -1976,10 +1976,10 @@ const renderInvoices = async () => {
         b.onclick = () => onViewById("meetings", b.getAttribute("data-meet-view"))
       }
       for (const b of document.querySelectorAll("[data-doc-open]")) {
-        b.onclick = () => onViewById("documents", b.getAttribute("data-doc-open"))
+        b.onclick = () => onOpenFileById("documents", b.getAttribute("data-doc-open"), state.buckets.documents)
       }
       for (const b of document.querySelectorAll("[data-inv-open]")) {
-        b.onclick = () => onViewById("invoices", b.getAttribute("data-inv-open"))
+        b.onclick = () => onOpenFileById("invoices", b.getAttribute("data-inv-open"), state.buckets.invoices)
       }
     }
 
@@ -2185,7 +2185,56 @@ const renderInvoices = async () => {
       return JSON.stringify(data, null, 2)
     }
 
-    const onViewById = async (table, id) => {
+    
+    const onOpenFileById = async (table, id, bucket) => {
+      let preWin = null
+      try { preWin = window.open("about:blank", "_blank") } catch { preWin = null }
+
+      const ok = await mustCfg()
+      if (!ok) {
+        try { preWin && preWin.close() } catch {}
+        return
+      }
+      if (!requireSignedIn()) {
+        try { preWin && preWin.close() } catch {}
+        return
+      }
+
+      try{
+        const { data, error } = await state.supabase.from(table).select("*").eq("id", id).limit(1).single()
+        if (error) throw error
+
+        const path = data.storage_path || data.path || data.file_path
+        if (!path) {
+          showToast(txt("مسار الملف غير موجود في الجدول","File path is missing in table"))
+          try { preWin && preWin.close() } catch {}
+          return
+        }
+
+        const signed = await state.supabase.storage.from(bucket).createSignedUrl(path, 60)
+        if (signed.error) throw signed.error
+
+        const url = signed.data.signedUrl
+
+        let opened = false
+        try{
+          if (preWin && !preWin.closed) {
+            preWin.location.href = url
+            opened = true
+          }
+        }catch{}
+
+        if (!opened) {
+          try { window.location.href = url } catch {}
+        }
+      }catch(err){
+        console.error(err)
+        try { preWin && preWin.close() } catch {}
+        showToast(err.message || String(err))
+      }
+    }
+
+const onViewById = async (table, id) => {
       const ok = await mustCfg()
       if (!ok) return
 
