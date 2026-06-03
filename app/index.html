@@ -324,9 +324,10 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
-    const FD_VERSION = 'FD-CLIENT-PORTAL-2026-06-03-MOBILE-V5-ADMIN';
+    const FD_VERSION = 'FD-CLIENT-PORTAL-2026-06-03-MOBILE-V6-EDGE-ADMIN';
     const FD_SUPABASE_URL = 'https://mifottrhqimqzojiyytq.supabase.co';
-    const FD_ADMIN_EMAILS = ['info@futuredimensionsco.com']; // Add your admin login emails here if needed
+    const FD_ADMIN_EMAILS = ['info@futuredimensionsco.com','atef.elgohary@gmail.com']; // Add your admin login emails here if needed
+    const FD_ADMIN_FUNCTION = 'admin-access';
     const FD_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pZm90dHJocWltcXpvaml5eXRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxOTQ1MzYsImV4cCI6MjA4NDc3MDUzNn0.g3LM3aYvCmZNy3hUShebv5T2evAwgMeNKr4wT3eXZS8';
     const CONTACT_EMAIL = 'info@futuredimensionsco.com';
     const CONTACT_PHONE = '+20 100 391 4628';
@@ -357,7 +358,7 @@
       diagnose:['التشخيص','Diagnose'], design:['التصميم','Design'], deliver:['التنفيذ','Deliver'], confirmation:['التأكيد','Confirmation'], completed:['مكتمل','Completed'], inProgress:['قيد التنفيذ','In progress'], waitingClient:['بانتظار العميل','Waiting for client'], newStatus:['جديد','New'], paid:['مدفوعة','Paid'], unpaid:['غير مدفوعة','Unpaid'], overdue:['متأخرة','Overdue'], openStatus:['مفتوح','Open'], closed:['مغلق','Closed'], high:['عالية','High'], medium:['متوسطة','Medium'], low:['منخفضة','Low'],
       pwaReady:['التطبيق جاهز للتثبيت والعمل كتطبيق هاتف.','The portal is ready to install and run as a mobile app.'],
       secureNote:['تم إخفاء إعدادات الاتصال التقنية من واجهة العميل. يجب تفعيل RLS في Supabase لحماية بيانات كل عميل.','Technical connection settings are hidden from the client interface. Supabase RLS must be enabled to protect each client’s data.'],
-      admin:['أدمن','Admin'], adminPanel:['لوحة الإدارة','Admin Panel'], accessRequests:['طلبات صلاحية الدخول','Access requests'], pendingRequests:['طلبات قيد المراجعة','Pending requests'], clients:['العملاء','Clients'], approve:['اعتماد','Approve'], reject:['رفض','Reject'], activate:['تفعيل','Activate'], markPending:['إرجاع للمراجعة','Mark pending'], addClient:['إضافة عميل','Add client'], createClient:['إنشاء ملف عميل','Create client profile'], clientName:['اسم العميل','Client name'], contactName:['اسم مسؤول التواصل','Contact name'], serviceNeeded:['الخدمة المطلوبة','Required service'], notes:['ملاحظات','Notes'], requestReceived:['تم تسجيل الطلب','Request received'], requestSubmitted:['تم إرسال طلبك وسيقوم الفريق بالمراجعة','Your request has been submitted for review'], requestFallback:['لو لم يتم الحفظ تلقائياً، أرسل الطلب بالبريد من الزر التالي.','If automatic saving is unavailable, send the request by email using the next button.'], sendByEmail:['إرسال بالبريد','Send by email'], sendActivation:['إرسال رابط دخول','Send login link'], copyInvitation:['نسخ رسالة التفعيل','Copy invitation'], invitationCopied:['تم نسخ رسالة التفعيل','Invitation message copied'], activationSent:['تم إرسال رابط الدخول','Login link sent'], cannotCreateAuth:['مهم: إنشاء مستخدم Auth جديد أو دعوته رسمياً يتم من Supabase Authentication أو من Edge Function آمنة؛ لا نضع Service Role داخل المتصفح.','Important: creating/inviting an Auth user is done from Supabase Authentication or a secure Edge Function; the Service Role must never be placed in the browser.'], adminWelcome:['مركز تحكم الأدمن لإدارة طلبات الدخول وملفات العملاء والإرشادات التشغيلية.','Admin control center for access requests, client profiles and operational guidance.'], openSupabase:['افتح Supabase','Open Supabase'], setupRequired:['قد تحتاج لتشغيل ملف SQL المرفق أولاً حتى تعمل الجداول والصلاحيات.','You may need to run the included SQL file first so tables and policies work.'], delete:['حذف','Delete'], deleteDocument:['حذف مستند','Delete document'], deleteInvoice:['حذف فاتورة','Delete invoice'], confirmDelete:['هل أنت متأكد من الحذف؟ لا يمكن التراجع عن هذه العملية.','Are you sure you want to delete this item? This cannot be undone.'], deleted:['تم الحذف','Deleted'], notAdmin:['هذه العملية متاحة للأدمن فقط','This action is for admins only'], adminControls:['أدوات الأدمن','Admin controls'], installInstructions:['من أندرويد: اضغط زر التثبيت أو من قائمة Chrome اختر Install app. من iPhone: افتح Safari ثم Share ثم Add to Home Screen.','On Android: tap Install or choose Install app from Chrome menu. On iPhone: open Safari, tap Share, then Add to Home Screen.'], closeMenu:['إغلاق القائمة','Close menu']
+      admin:['أدمن','Admin'], adminPanel:['لوحة الإدارة','Admin Panel'], accessRequests:['طلبات صلاحية الدخول','Access requests'], pendingRequests:['طلبات قيد المراجعة','Pending requests'], clients:['العملاء','Clients'], approve:['اعتماد','Approve'], reject:['رفض','Reject'], activate:['تفعيل','Activate'], markPending:['إرجاع للمراجعة','Mark pending'], addClient:['إضافة عميل','Add client'], createClient:['إنشاء ملف عميل','Create client profile'], clientName:['اسم العميل','Client name'], contactName:['اسم مسؤول التواصل','Contact name'], serviceNeeded:['الخدمة المطلوبة','Required service'], notes:['ملاحظات','Notes'], requestReceived:['تم تسجيل الطلب','Request received'], requestSubmitted:['تم إرسال طلبك وسيقوم الفريق بالمراجعة','Your request has been submitted for review'], requestFallback:['لو لم يتم الحفظ تلقائياً، أرسل الطلب بالبريد من الزر التالي.','If automatic saving is unavailable, send the request by email using the next button.'], sendByEmail:['إرسال بالبريد','Send by email'], sendActivation:['إرسال رابط دخول','Send login link'], copyInvitation:['نسخ رسالة التفعيل','Copy invitation'], invitationCopied:['تم نسخ رسالة التفعيل','Invitation message copied'], activationSent:['تم إرسال رابط الدخول','Login link sent'], oneClickActivate:['اعتماد وتفعيل العميل','Approve & activate client'], edgeReady:['التفعيل الاحترافي جاهز: زر الاعتماد ينشئ مستخدم Auth ويرسل رابط الدخول من خلال Edge Function آمنة بعد نشرها.','Professional activation is ready: approval creates the Auth user and sends the login link through a secure Edge Function once deployed.'], edgeNotReady:['لم يتم نشر Edge Function أو لم يتم ضبط الأسرار بعد. راجع دليل الإعداد المرفق.','The Edge Function is not deployed or secrets are not configured yet. Check the included setup guide.'], cannotCreateAuth:['مهم: لا نضع Service Role داخل المتصفح. تم نقل إنشاء المستخدمين وإرسال الدعوات إلى Edge Function آمنة.','Important: the Service Role key is never placed in the browser. User creation and invitations are handled by a secure Edge Function.'], adminWelcome:['مركز تحكم الأدمن لإدارة طلبات الدخول وملفات العملاء والإرشادات التشغيلية.','Admin control center for access requests, client profiles and operational guidance.'], openSupabase:['افتح Supabase','Open Supabase'], setupRequired:['قد تحتاج لتشغيل ملف SQL المرفق أولاً حتى تعمل الجداول والصلاحيات.','You may need to run the included SQL file first so tables and policies work.'], delete:['حذف','Delete'], deleteDocument:['حذف مستند','Delete document'], deleteInvoice:['حذف فاتورة','Delete invoice'], confirmDelete:['هل أنت متأكد من الحذف؟ لا يمكن التراجع عن هذه العملية.','Are you sure you want to delete this item? This cannot be undone.'], deleted:['تم الحذف','Deleted'], notAdmin:['هذه العملية متاحة للأدمن فقط','This action is for admins only'], adminControls:['أدوات الأدمن','Admin controls'], installInstructions:['من أندرويد: اضغط زر التثبيت أو من قائمة Chrome اختر Install app. من iPhone: افتح Safari ثم Share ثم Add to Home Screen.','On Android: tap Install or choose Install app from Chrome menu. On iPhone: open Safari, tap Share, then Add to Home Screen.'], closeMenu:['إغلاق القائمة','Close menu']
     };
     const t = (key)=> (i18n[key] || [key,key])[state.lang==='ar'?0:1];
     const state = {
@@ -492,10 +493,46 @@
       const {error}=await state.sb.auth.signInWithOtp({email,options:{emailRedirectTo:location.href.split('#')[0]}}); if(error) toast(error.message); else toast(t('sent'));
     }
     async function logout(){ if(state.sb) await state.sb.auth.signOut(); state.session=null;state.user=null; await loadData(); render(); }
+    
     function requestAccess(){
-      const subject=encodeURIComponent('Client Portal Access Request'); const body=encodeURIComponent('Hello Future Dimensions Team,\n\nPlease create a Client Portal account for our company.\n\nCompany Name:\nContact Name:\nEmail:\nPhone:\nProject / Service:\n\nThank you.');
-      location.href=`mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+      showModal(t('requestAccess'), `
+        <div class="grid cols2">
+          <div class="field"><label>${t('company')}</label><input class="input" id="reqCompany" placeholder="${state.lang==='ar'?'اسم الشركة':'Company name'}"></div>
+          <div class="field"><label>${t('contactName')}</label><input class="input" id="reqContact" placeholder="${state.lang==='ar'?'اسم مسؤول التواصل':'Contact person'}"></div>
+          <div class="field"><label>${t('email')}</label><input class="input ltr" type="email" id="reqEmail" placeholder="name@company.com"></div>
+          <div class="field"><label>${state.lang==='ar'?'رقم الهاتف':'Phone'}</label><input class="input ltr" id="reqPhone" placeholder="+20..."></div>
+        </div>
+        <div class="field"><label>${t('serviceNeeded')}</label><select id="reqService"><option>Financial Diagnostics</option><option>Governance & Operating Model</option><option>Growth Strategy</option><option>Administrative & Operational Optimization</option><option>Other</option></select></div>
+        <div class="field"><label>${t('message')}</label><textarea id="reqMessage" placeholder="${state.lang==='ar'?'اكتب نبذة مختصرة عن المطلوب':'Briefly describe what you need'}"></textarea></div>
+        <div class="split"><button class="btn" onclick="submitAccessRequest()">${t('send')}</button><button class="btn secondary" onclick="sendAccessRequestByEmail()">${t('sendByEmail')}</button></div>
+        <div class="hint smallText" style="margin-top:12px">${t('requestFallback')}</div>
+      `);
     }
+    window.sendAccessRequestByEmail=()=>{
+      const company=$('reqCompany')?.value?.trim()||'';
+      const contact=$('reqContact')?.value?.trim()||'';
+      const email=$('reqEmail')?.value?.trim()||'';
+      const phone=$('reqPhone')?.value?.trim()||'';
+      const service=$('reqService')?.value||'';
+      const message=$('reqMessage')?.value?.trim()||'';
+      const subject=encodeURIComponent('Client Portal Access Request');
+      const body=encodeURIComponent(`Hello Future Dimensions Team,\n\nPlease create a Client Portal account for our company.\n\nCompany Name: ${company}\nContact Name: ${contact}\nEmail: ${email}\nPhone: ${phone}\nProject / Service: ${service}\nMessage: ${message}\n\nThank you.`);
+      location.href=`mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    };
+    window.submitAccessRequest=async()=>{
+      const row={company:$('reqCompany')?.value?.trim()||'',contact_name:$('reqContact')?.value?.trim()||'',email:$('reqEmail')?.value?.trim()||'',phone:$('reqPhone')?.value?.trim()||'',service:$('reqService')?.value||'',message:$('reqMessage')?.value?.trim()||'',status:'pending'};
+      if(!row.company||!row.contact_name||!row.email){toast(t('company')+' / '+t('contactName')+' / '+t('email'));return;}
+      try{
+        if(!state.sb) throw new Error('No Supabase connection');
+        const {error}=await state.sb.from('access_requests').insert(row);
+        if(error) throw error;
+        closeModal(); toast(t('requestSubmitted'));
+      }catch(e){
+        toast(e.message||t('failed'));
+        showModal(t('requestAccess'), `<div class="softWarning">${t('requestFallback')}<br>${escapeHtml(e.message||'')}</div><div class="copyBox">${escapeHtml(JSON.stringify(row,null,2))}</div><button class="btn" onclick="sendAccessRequestByEmail()">${t('sendByEmail')}</button>`);
+      }
+    }
+    
     function whatsapp(text){ window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,'_blank'); }
     function renderGate(){
       return `<div class="hero">
@@ -695,7 +732,7 @@
       const clients=(state.data.clients||[]).length;
       const docs=(state.data.documents||[]).length;
       const inv=(state.data.invoices||[]).length;
-      return `<div class="card adminPanelHero premiumGlow"><div class="sectionTitle" style="margin:0"><div><h3>${t('adminPanel')}</h3><p>${t('adminWelcome')}</p></div><span class="badge gold">${state.user?.email||''}</span></div><div class="softWarning" style="margin-top:14px">${t('cannotCreateAuth')}<br>${t('setupRequired')}</div></div>
+      return `<div class="card adminPanelHero premiumGlow"><div class="sectionTitle" style="margin:0"><div><h3>${t('adminPanel')}</h3><p>${t('adminWelcome')}</p></div><span class="badge gold">${state.user?.email||''}</span></div><div class="softWarning" style="margin-top:14px">${t('edgeReady')}<br>${t('setupRequired')}</div></div>
       <div class="grid cols4" style="margin-top:14px">${metric(pending,t('pendingRequests'),'◷')}${metric(clients,t('clients'),'☉')}${metric(docs,t('documents'),'▣')}${metric(inv,t('invoices'),'◆')}</div>
       <div class="adminTabs"><button class="btn small active" onclick="adminShow('requests')">${t('accessRequests')}</button><button class="btn small secondary" onclick="adminShow('clients')">${t('clients')}</button><button class="btn small secondary" onclick="adminShow('guide')">${state.lang==='ar'?'إرشادات التفعيل':'Activation guide'}</button></div>
       <div id="adminArea">${renderAdminRequests()}</div>`;
@@ -708,7 +745,7 @@
     };
     function renderAdminRequests(){
       const rows=state.data.access_requests||[];
-      return `<div class="sectionTitle"><div><h3>${t('accessRequests')}</h3><p>${state.lang==='ar'?'راجع الطلبات، اعتمد العميل، ثم أرسل له رابط الدخول أو رسالة التفعيل.':'Review requests, approve the client, then send a login link or activation message.'}</p></div></div><div class="grid cols2">${rows.map(r=>`<div class="card requestCard"><div class="requestTop"><div><h4>${escapeHtml(r.company||'-')}</h4><div class="smallText muted">${escapeHtml(r.contact_name||'-')} · <span class="ltr">${escapeHtml(r.email||'-')}</span></div></div>${badge(r.status||'pending')}</div><div class="requestMeta"><div>${t('serviceNeeded')}: <b>${escapeHtml(r.service||'-')}</b></div><div>${state.lang==='ar'?'الهاتف':'Phone'}: <b class="ltr">${escapeHtml(r.phone||'-')}</b></div><div>${t('date')}: <b>${fmtDate(r.created_at)}</b></div><div>${t('message')}: <b>${escapeHtml(r.message||'-')}</b></div></div><div class="actionRow"><button class="btn small" onclick="approveRequest('${escapeHtml(r.id)}')">${t('approve')}</button><button class="btn small secondary" onclick="createClientFromRequest('${escapeHtml(r.id)}')">${t('createClient')}</button><button class="btn small secondary" onclick="sendActivationLink('${escapeHtml(r.email||'')}')">${t('sendActivation')}</button><button class="btn small secondary" onclick="copyInvitation('${escapeHtml(r.email||'')}','${escapeHtml(r.company||'')}')">${t('copyInvitation')}</button><button class="btn small danger" onclick="rejectRequest('${escapeHtml(r.id)}')">${t('reject')}</button></div></div>`).join('') || `<div class="card empty">${t('noData')}</div>`}</div>`;
+      return `<div class="sectionTitle"><div><h3>${t('accessRequests')}</h3><p>${state.lang==='ar'?'راجع الطلبات، اعتمد العميل، ثم أرسل له رابط الدخول أو رسالة التفعيل.':'Review requests, approve the client, then send a login link or activation message.'}</p></div></div><div class="grid cols2">${rows.map(r=>`<div class="card requestCard"><div class="requestTop"><div><h4>${escapeHtml(r.company||'-')}</h4><div class="smallText muted">${escapeHtml(r.contact_name||'-')} · <span class="ltr">${escapeHtml(r.email||'-')}</span></div></div>${badge(r.status||'pending')}</div><div class="requestMeta"><div>${t('serviceNeeded')}: <b>${escapeHtml(r.service||'-')}</b></div><div>${state.lang==='ar'?'الهاتف':'Phone'}: <b class="ltr">${escapeHtml(r.phone||'-')}</b></div><div>${t('date')}: <b>${fmtDate(r.created_at)}</b></div><div>${t('message')}: <b>${escapeHtml(r.message||'-')}</b></div></div><div class="actionRow"><button class="btn small" onclick="activateRequest('${escapeHtml(r.id)}')">${t('oneClickActivate')}</button><button class="btn small secondary" onclick="approveRequest('${escapeHtml(r.id)}')">${t('approve')}</button><button class="btn small secondary" onclick="createClientFromRequest('${escapeHtml(r.id)}')">${t('createClient')}</button><button class="btn small secondary" onclick="sendActivationLink('${escapeHtml(r.email||'')}')">${t('sendActivation')}</button><button class="btn small secondary" onclick="copyInvitation('${escapeHtml(r.email||'')}','${escapeHtml(r.company||'')}')">${t('copyInvitation')}</button><button class="btn small danger" onclick="rejectRequest('${escapeHtml(r.id)}')">${t('reject')}</button></div></div>`).join('') || `<div class="card empty">${t('noData')}</div>`}</div>`;
     }
     function renderAdminClients(){
       const rows=state.data.clients||[];
@@ -716,38 +753,55 @@
     }
     function renderAdminGuide(){
       const msg = onboardingMessage('client@example.com','Client Company');
-      return `<div class="grid cols2"><div class="card"><h4>${state.lang==='ar'?'خطوات تفعيل عميل جديد':'New client activation steps'}</h4><ol class="resourceList"><li>${state.lang==='ar'?'راجع طلب الصلاحية وتأكد من بيانات العميل.':'Review the access request and verify the client details.'}</li><li>${state.lang==='ar'?'اضغط اعتماد ثم إنشاء ملف عميل.':'Click Approve, then create a client profile.'}</li><li>${state.lang==='ar'?'أنشئ المستخدم في Supabase Authentication أو أرسل Magic Link إذا كان مفعلاً.':'Create the user in Supabase Authentication or send a Magic Link if enabled.'}</li><li>${state.lang==='ar'?'اربط مشاريع ومستندات وفواتير العميل بسجله داخل الجداول.':'Link the client’s projects, documents and invoices to the client profile.'}</li></ol></div><div class="card"><h4>${t('copyInvitation')}</h4><div class="copyBox">${escapeHtml(msg)}</div><button class="btn small" style="margin-top:12px" onclick="copyText(${JSON.stringify(msg)})">${state.lang==='ar'?'نسخ المثال':'Copy example'}</button></div></div>`;
+      return `<div class="grid cols2"><div class="card"><h4>${state.lang==='ar'?'خطوات تفعيل عميل جديد':'New client activation steps'}</h4><ol class="resourceList"><li>${state.lang==='ar'?'راجع طلب الصلاحية وتأكد من بيانات العميل.':'Review the access request and verify the client details.'}</li><li>${state.lang==='ar'?'اضغط اعتماد ثم إنشاء ملف عميل.':'Click Approve, then create a client profile.'}</li><li>${state.lang==='ar'?'بعد نشر Edge Function، اضغط اعتماد وتفعيل العميل ليتم إنشاء المستخدم وإرسال رابط الدخول تلقائياً.':'After deploying the Edge Function, click Approve & activate client to create the user and send the login link automatically.'}</li><li>${state.lang==='ar'?'اربط مشاريع ومستندات وفواتير العميل بسجله داخل الجداول.':'Link the client’s projects, documents and invoices to the client profile.'}</li></ol></div><div class="card"><h4>${t('copyInvitation')}</h4><div class="copyBox">${escapeHtml(msg)}</div><button class="btn small" style="margin-top:12px" onclick="copyText(${JSON.stringify(msg)})">${state.lang==='ar'?'نسخ المثال':'Copy example'}</button></div></div>`;
+    }
+    async function callAdminFunction(action,payload={}){
+      if(!isAdmin()) throw new Error(t('notAdmin'));
+      if(!state.sb || !state.session) throw new Error(t('signInNeeded'));
+      const {data,error}=await state.sb.functions.invoke(FD_ADMIN_FUNCTION,{body:{action,...payload}});
+      if(error) throw error;
+      if(data && data.error) throw new Error(data.error);
+      return data;
     }
     async function updateRequestStatus(id,status){
       if(!isAdmin()) return toast(t('notAdmin'));
       const rows=state.data.access_requests||[]; const item=rows.find(x=>String(x.id)===String(id));
       try{
-        if(state.sb && state.session && !state.demoMode){ const {error}=await state.sb.from('access_requests').update({status,reviewed_by:state.user.email,reviewed_at:new Date().toISOString()}).eq('id',id); if(error) throw error; await loadData(); }
+        if(state.sb && state.session){ await callAdminFunction(status==='rejected'?'reject_request':'approve_request',{request_id:id}); await loadData(); }
         else if(item){ item.status=status; }
         render(); setTimeout(()=>adminShow('requests'),80); toast(t('saved'));
-      }catch(e){toast(e.message||t('failed'));}
+      }catch(e){
+        if(item && state.demoMode){ item.status=status; render(); setTimeout(()=>adminShow('requests'),80); toast(t('saved')); }
+        else { toast(e.message||t('failed')); showModal(t('setupRequired'), `<div class="softWarning">${t('edgeNotReady')}</div><div class="copyBox">${escapeHtml(e.message||'')}</div>`); }
+      }
     }
     window.approveRequest=(id)=>updateRequestStatus(id,'approved');
     window.rejectRequest=(id)=>updateRequestStatus(id,'rejected');
     async function upsertClient(row){
       if(!isAdmin()) return toast(t('notAdmin'));
       try{
-        if(state.sb && state.session && !state.demoMode){ const {error}=await state.sb.from('clients').upsert(row,{onConflict:'email'}); if(error) throw error; await loadData(); }
+        if(state.sb && state.session){ await callAdminFunction('create_client',{client:row}); await loadData(); }
         else{ const list=state.data.clients||[]; const i=list.findIndex(x=>String(x.email).toLowerCase()===String(row.email).toLowerCase()); if(i>=0) list[i]={...list[i],...row}; else list.unshift({...row,id:'c'+Date.now(),created_at:new Date().toISOString()}); state.data.clients=list; }
         toast(t('saved')); render(); setTimeout(()=>adminShow('clients'),80);
-      }catch(e){toast(e.message||t('failed'));}
+      }catch(e){toast(e.message||t('failed')); showModal(t('setupRequired'), `<div class="softWarning">${t('edgeNotReady')}</div><div class="copyBox">${escapeHtml(e.message||'')}</div>`);}
     }
-    window.createClientFromRequest=(id)=>{ const r=(state.data.access_requests||[]).find(x=>String(x.id)===String(id)); if(!r)return; upsertClient({name:r.company||'',contact_name:r.contact_name||'',email:r.email||'',phone:r.phone||'',status:'active',source_request_id:id}); };
+    window.activateRequest=async(id)=>{
+      if(!isAdmin()) return toast(t('notAdmin'));
+      try{ const data=await callAdminFunction('activate_request',{request_id:id,redirect_to:location.href.split('#')[0]}); await loadData(); render(); setTimeout(()=>adminShow('requests'),80); if(data?.action_link){showActivationLink(data.action_link)} else {toast(t('activationSent'));} }
+      catch(e){ toast(e.message||t('failed')); showModal(t('setupRequired'), `<div class="softWarning">${t('edgeNotReady')}</div><div class="copyBox">${escapeHtml(e.message||'')}</div>`); }
+    };
+    window.createClientFromRequest=async(id)=>{ const r=(state.data.access_requests||[]).find(x=>String(x.id)===String(id)); if(!r)return; try{ await callAdminFunction('create_client_from_request',{request_id:id}); await loadData(); render(); setTimeout(()=>adminShow('clients'),80); toast(t('saved')); } catch(e){ upsertClient({name:r.company||'',contact_name:r.contact_name||'',email:r.email||'',phone:r.phone||'',status:'active',source_request_id:id}); } };
     window.createClientManual=()=>{ const row={name:$('clientCompany')?.value?.trim()||'',contact_name:$('clientContact')?.value?.trim()||'',email:$('clientEmail')?.value?.trim()||'',phone:$('clientPhone')?.value?.trim()||'',status:'active'}; if(!row.name||!row.email){toast(t('company')+' / '+t('email'));return;} upsertClient(row); };
     function onboardingMessage(email,company){
       return state.lang==='ar' ? `عميلنا العزيز ${company||''}\n\nتم تفعيل صلاحية الدخول إلى بوابة عملاء شركة أبعاد المستقبل.\n\nرابط الدخول:\n${location.href.split('#')[0]}\n\nاستخدم بريدك: ${email||''}\nإذا لم يكن لديك كلمة مرور، اضغط رابط دخول بالبريد من شاشة الدخول.\n\nمع تحيات شركة أبعاد المستقبل` : `Dear ${company||'Client'},\n\nYour access to Future Dimensions Client Portal has been activated.\n\nPortal link:\n${location.href.split('#')[0]}\n\nUse your email: ${email||''}\nIf you do not have a password, use the Email magic link option on the login screen.\n\nFuture Dimensions Team`;
     }
     window.copyInvitation=async(email,company)=>{ await copyText(onboardingMessage(email,company)); toast(t('invitationCopied')); };
     window.copyText=async(text)=>{ try{await navigator.clipboard.writeText(text);toast(state.lang==='ar'?'تم النسخ':'Copied');}catch{toast(t('failed'));} };
+    function showActivationLink(link){ showModal(t('sendActivation'), `<div class="softWarning">${state.lang==='ar'?'تم إنشاء رابط دخول آمن. انسخه وأرسله للعميل إذا لم يصل له البريد تلقائياً.':'A secure login link was generated. Copy it and send it to the client if the email is not delivered automatically.'}</div><div class="copyBox ltr">${escapeHtml(link)}</div><button class="btn small" onclick='copyText(${JSON.stringify(link)})'>${state.lang==='ar'?'نسخ الرابط':'Copy link'}</button>`); }
     window.sendActivationLink=async(email)=>{
       if(!email) return toast(t('email'));
-      try{ if(!state.sb) throw new Error('No Supabase connection'); const {error}=await state.sb.auth.signInWithOtp({email,options:{emailRedirectTo:location.href.split('#')[0],shouldCreateUser:true}}); if(error) throw error; toast(t('activationSent')); }
-      catch(e){ toast(e.message||t('failed')); showModal(t('copyInvitation'), `<div class="softWarning">${t('cannotCreateAuth')}</div><div class="copyBox">${escapeHtml(onboardingMessage(email,''))}</div>`); }
+      try{ const data=await callAdminFunction('send_invite',{email,redirect_to:location.href.split('#')[0]}); if(data?.action_link){showActivationLink(data.action_link)} else {toast(t('activationSent'));} }
+      catch(e){ toast(e.message||t('failed')); showModal(t('copyInvitation'), `<div class="softWarning">${t('edgeNotReady')}</div><div class="copyBox">${escapeHtml(onboardingMessage(email,''))}</div>`); }
     };
 
     function renderAccount(){
@@ -809,7 +863,7 @@
     $('langBtn').onclick=()=>{state.lang=state.lang==='ar'?'en':'ar';render();}; $('refreshBtn').onclick=async()=>{await loadData();render();toast(t('refresh'));}; $('requestAccessBtn').onclick=requestAccess; $('logoutBtn').onclick=logout; $('modalClose').onclick=closeModal; $('modalBackdrop').addEventListener('click',(e)=>{if(e.target.id==='modalBackdrop')closeModal();});
     (async function boot(){
       updateInstallButtons();
-      if('serviceWorker' in navigator){ try{ await navigator.serviceWorker.register('sw.js?v=4005'); }catch(e){console.warn(e)} }
+      if('serviceWorker' in navigator){ try{ await navigator.serviceWorker.register('sw.js?v=4006'); }catch(e){console.warn(e)} }
       await initSupabase(); await loadData(); render();
     })();
   </script>
