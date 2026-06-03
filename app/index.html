@@ -269,7 +269,12 @@
     @media (max-width:760px){.adminTabs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}.adminTabs .btn{white-space:nowrap}.requestCard .requestTop{display:grid}.copyBox{font-size:12px}}
 
     @media print{.sidebar,.topbar,.btn,.toast{display:none!important}.shell{display:block}.content{max-width:none;color:#000}.glass,.card{box-shadow:none;background:#fff;color:#000;border-color:#ddd}.muted,.card p{color:#333}}
-  </style>
+  
+    .emptyStateHero{border:1px solid rgba(215,173,56,.28);background:linear-gradient(135deg,rgba(215,173,56,.12),rgba(255,255,255,.035));border-radius:24px;padding:22px;margin-bottom:18px;display:grid;gap:12px}
+    .emptyStateHero h3{margin:0;color:var(--gold-2);font-size:24px}.emptyStateHero p{margin:0;color:var(--muted);line-height:1.8}
+    .adminFormGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.adminFormGrid .full{grid-column:1/-1}
+    @media (max-width:760px){.adminFormGrid{grid-template-columns:1fr}.emptyStateHero{padding:16px}.emptyStateHero h3{font-size:20px}}
+</style>
 </head>
 <body>
   <div class="shell">
@@ -324,7 +329,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
-    const FD_VERSION = 'FD-CLIENT-PORTAL-2026-06-03-MOBILE-V6-EDGE-ADMIN';
+    const FD_VERSION = 'FD-CLIENT-PORTAL-2026-06-03-MOBILE-V7-PRODUCTION-CLIENT-CLEAN';
     const FD_SUPABASE_URL = 'https://mifottrhqimqzojiyytq.supabase.co';
     const FD_ADMIN_EMAILS = ['info@futuredimensionsco.com','atef.elgohary@gmail.com']; // Add your admin login emails here if needed
     const FD_ADMIN_FUNCTION = 'admin-access';
@@ -358,7 +363,7 @@
       diagnose:['التشخيص','Diagnose'], design:['التصميم','Design'], deliver:['التنفيذ','Deliver'], confirmation:['التأكيد','Confirmation'], completed:['مكتمل','Completed'], inProgress:['قيد التنفيذ','In progress'], waitingClient:['بانتظار العميل','Waiting for client'], newStatus:['جديد','New'], paid:['مدفوعة','Paid'], unpaid:['غير مدفوعة','Unpaid'], overdue:['متأخرة','Overdue'], openStatus:['مفتوح','Open'], closed:['مغلق','Closed'], high:['عالية','High'], medium:['متوسطة','Medium'], low:['منخفضة','Low'],
       pwaReady:['التطبيق جاهز للتثبيت والعمل كتطبيق هاتف.','The portal is ready to install and run as a mobile app.'],
       secureNote:['تم إخفاء إعدادات الاتصال التقنية من واجهة العميل. يجب تفعيل RLS في Supabase لحماية بيانات كل عميل.','Technical connection settings are hidden from the client interface. Supabase RLS must be enabled to protect each client’s data.'],
-      admin:['أدمن','Admin'], adminPanel:['لوحة الإدارة','Admin Panel'], accessRequests:['طلبات صلاحية الدخول','Access requests'], pendingRequests:['طلبات قيد المراجعة','Pending requests'], clients:['العملاء','Clients'], approve:['اعتماد','Approve'], reject:['رفض','Reject'], activate:['تفعيل','Activate'], markPending:['إرجاع للمراجعة','Mark pending'], addClient:['إضافة عميل','Add client'], createClient:['إنشاء ملف عميل','Create client profile'], clientName:['اسم العميل','Client name'], contactName:['اسم مسؤول التواصل','Contact name'], serviceNeeded:['الخدمة المطلوبة','Required service'], notes:['ملاحظات','Notes'], requestReceived:['تم تسجيل الطلب','Request received'], requestSubmitted:['تم إرسال طلبك وسيقوم الفريق بالمراجعة','Your request has been submitted for review'], requestFallback:['لو لم يتم الحفظ تلقائياً، أرسل الطلب بالبريد من الزر التالي.','If automatic saving is unavailable, send the request by email using the next button.'], sendByEmail:['إرسال بالبريد','Send by email'], sendActivation:['إرسال رابط دخول','Send login link'], copyInvitation:['نسخ رسالة التفعيل','Copy invitation'], invitationCopied:['تم نسخ رسالة التفعيل','Invitation message copied'], activationSent:['تم إرسال رابط الدخول','Login link sent'], oneClickActivate:['اعتماد وتفعيل العميل','Approve & activate client'], edgeReady:['التفعيل الاحترافي جاهز: زر الاعتماد ينشئ مستخدم Auth ويرسل رابط الدخول من خلال Edge Function آمنة بعد نشرها.','Professional activation is ready: approval creates the Auth user and sends the login link through a secure Edge Function once deployed.'], edgeNotReady:['لم يتم نشر Edge Function أو لم يتم ضبط الأسرار بعد. راجع دليل الإعداد المرفق.','The Edge Function is not deployed or secrets are not configured yet. Check the included setup guide.'], cannotCreateAuth:['مهم: لا نضع Service Role داخل المتصفح. تم نقل إنشاء المستخدمين وإرسال الدعوات إلى Edge Function آمنة.','Important: the Service Role key is never placed in the browser. User creation and invitations are handled by a secure Edge Function.'], adminWelcome:['مركز تحكم الأدمن لإدارة طلبات الدخول وملفات العملاء والإرشادات التشغيلية.','Admin control center for access requests, client profiles and operational guidance.'], openSupabase:['افتح Supabase','Open Supabase'], setupRequired:['قد تحتاج لتشغيل ملف SQL المرفق أولاً حتى تعمل الجداول والصلاحيات.','You may need to run the included SQL file first so tables and policies work.'], delete:['حذف','Delete'], deleteDocument:['حذف مستند','Delete document'], deleteInvoice:['حذف فاتورة','Delete invoice'], confirmDelete:['هل أنت متأكد من الحذف؟ لا يمكن التراجع عن هذه العملية.','Are you sure you want to delete this item? This cannot be undone.'], deleted:['تم الحذف','Deleted'], notAdmin:['هذه العملية متاحة للأدمن فقط','This action is for admins only'], adminControls:['أدوات الأدمن','Admin controls'], installInstructions:['من أندرويد: اضغط زر التثبيت أو من قائمة Chrome اختر Install app. من iPhone: افتح Safari ثم Share ثم Add to Home Screen.','On Android: tap Install or choose Install app from Chrome menu. On iPhone: open Safari, tap Share, then Add to Home Screen.'], closeMenu:['إغلاق القائمة','Close menu']
+      admin:['أدمن','Admin'], adminPanel:['لوحة الإدارة','Admin Panel'], accessRequests:['طلبات صلاحية الدخول','Access requests'], pendingRequests:['طلبات قيد المراجعة','Pending requests'], clients:['العملاء','Clients'], approve:['اعتماد','Approve'], reject:['رفض','Reject'], activate:['تفعيل','Activate'], markPending:['إرجاع للمراجعة','Mark pending'], addClient:['إضافة عميل','Add client'], createClient:['إنشاء ملف عميل','Create client profile'], clientName:['اسم العميل','Client name'], contactName:['اسم مسؤول التواصل','Contact name'], serviceNeeded:['الخدمة المطلوبة','Required service'], notes:['ملاحظات','Notes'], requestReceived:['تم تسجيل الطلب','Request received'], requestSubmitted:['تم إرسال طلبك وسيقوم الفريق بالمراجعة','Your request has been submitted for review'], requestFallback:['لو لم يتم الحفظ تلقائياً، أرسل الطلب بالبريد من الزر التالي.','If automatic saving is unavailable, send the request by email using the next button.'], sendByEmail:['إرسال بالبريد','Send by email'], sendActivation:['إرسال رابط دخول','Send login link'], copyInvitation:['نسخ رسالة التفعيل','Copy invitation'], invitationCopied:['تم نسخ رسالة التفعيل','Invitation message copied'], activationSent:['تم إرسال رابط الدخول','Login link sent'], oneClickActivate:['اعتماد وتفعيل العميل','Approve & activate client'], edgeReady:['التفعيل الاحترافي جاهز: زر الاعتماد ينشئ مستخدم Auth ويرسل رابط الدخول من خلال Edge Function آمنة بعد نشرها.','Professional activation is ready: approval creates the Auth user and sends the login link through a secure Edge Function once deployed.'], edgeNotReady:['لم يتم نشر Edge Function أو لم يتم ضبط الأسرار بعد. راجع دليل الإعداد المرفق.','The Edge Function is not deployed or secrets are not configured yet. Check the included setup guide.'], cannotCreateAuth:['مهم: لا نضع Service Role داخل المتصفح. تم نقل إنشاء المستخدمين وإرسال الدعوات إلى Edge Function آمنة.','Important: the Service Role key is never placed in the browser. User creation and invitations are handled by a secure Edge Function.'], adminWelcome:['مركز تحكم الأدمن لإدارة طلبات الدخول وملفات العملاء والإرشادات التشغيلية.','Admin control center for access requests, client profiles and operational guidance.'], openSupabase:['افتح Supabase','Open Supabase'], setupRequired:['قد تحتاج لتشغيل ملف SQL المرفق أولاً حتى تعمل الجداول والصلاحيات.','You may need to run the included SQL file first so tables and policies work.'], delete:['حذف','Delete'], deleteDocument:['حذف مستند','Delete document'], deleteInvoice:['حذف فاتورة','Delete invoice'], confirmDelete:['هل أنت متأكد من الحذف؟ لا يمكن التراجع عن هذه العملية.','Are you sure you want to delete this item? This cannot be undone.'], deleted:['تم الحذف','Deleted'], notAdmin:['هذه العملية متاحة للأدمن فقط','This action is for admins only'], adminControls:['أدوات الأدمن','Admin controls'], installInstructions:['من أندرويد: اضغط زر التثبيت أو من قائمة Chrome اختر Install app. من iPhone: افتح Safari ثم Share ثم Add to Home Screen.','On Android: tap Install or choose Install app from Chrome menu. On iPhone: open Safari, tap Share, then Add to Home Screen.'], operationalData:['بيانات العملاء','Client data'], addProject:['إضافة مشروع','Add project'], addDocumentRecord:['إضافة مستند','Add document'], addInvoiceRecord:['إضافة فاتورة','Add invoice'], addMeetingRecord:['إضافة اجتماع','Add meeting'], selectClient:['اختر العميل','Select client'], clientCleanTitle:['تم تفعيل حسابك بنجاح','Your account is active'], clientCleanMsg:['لم تتم إضافة مشاريع أو مستندات أو فواتير لحسابك حتى الآن. سيتم عرض بياناتك هنا بمجرد أن يضيفها فريق شركة أبعاد المستقبل.','No projects, documents or invoices have been added to your account yet. Your data will appear here once the Future Dimensions team adds it.'], clientCleanAdminHint:['اختر العميل من لوحة الإدارة ثم أضف له مشروعاً أو مستنداً أو فاتورة أو اجتماعاً.','Select the client from Admin Panel, then add a project, document, invoice or meeting.'], closeMenu:['إغلاق القائمة','Close menu']
     };
     const t = (key)=> (i18n[key] || [key,key])[state.lang==='ar'?0:1];
     const state = {
@@ -450,28 +455,40 @@
       if(!state.sb || !state.session) return [];
       try{ let q=state.sb.from(table).select('*').limit(100); if(order) q=q.order(order,{ascending:false}); const {data,error}=await q; if(error) throw error; return data||[]; }catch(e){ console.warn(table,e.message); return []; }
     }
+    function liveActivity(d){
+      const events=[];
+      (d.projects||[]).slice(0,2).forEach(p=>events.push({icon:'✓', ar:`تحديث مشروع: ${nameOf(p)} - ${Number(p.progress||0)}%`, en:`Project update: ${nameOf(p)} - ${Number(p.progress||0)}%`, date:p.updated_at||p.created_at}));
+      (d.documents||[]).slice(0,2).forEach(x=>events.push({icon:'📄', ar:`مستند: ${nameOf(x)}`, en:`Document: ${nameOf(x)}`, date:x.created_at}));
+      (d.tickets||[]).slice(0,1).forEach(x=>events.push({icon:'🎫', ar:`طلب دعم: ${nameOf(x)}`, en:`Support ticket: ${nameOf(x)}`, date:x.created_at}));
+      return events.sort((a,b)=>new Date(b.date||0)-new Date(a.date||0)).slice(0,4);
+    }
     async function loadData(){
       const demo=demoData();
       if(!state.sb || !state.session){ state.demoMode=true; state.data=demo; updateStatus(); return; }
       const [projects,documents,invoices,tickets,meetings,accessRequests,clients]=await Promise.all([
         safeSelect('projects','updated_at'), safeSelect('documents','created_at'), safeSelect('invoices','created_at'), safeSelect('tickets','created_at'), safeSelect('meetings','meeting_date'), safeSelect('access_requests','created_at'), safeSelect('clients','created_at')
       ]);
-      state.demoMode = !(projects.length||documents.length||invoices.length||tickets.length||meetings.length||accessRequests.length||clients.length);
-      state.data = {
-        projects: projects.length?projects:demo.projects,
-        documents: documents.length?documents:demo.documents,
-        invoices: invoices.length?invoices:demo.invoices,
-        tickets: tickets.length?tickets:demo.tickets,
-        meetings: meetings.length?meetings:demo.meetings,
-        access_requests: accessRequests.length?accessRequests:demo.access_requests,
-        clients: clients.length?clients:demo.clients,
-        activity: demo.activity
-      };
+      state.demoMode = false;
+      const live={projects,documents,invoices,tickets,meetings,access_requests:accessRequests,clients};
+      state.data = {...live, activity: liveActivity(live)};
       updateStatus();
     }
     const nameOf=(x)=> state.lang==='ar' ? (x.name_ar||x.title_ar||x.name||x.title||x.name_en||x.title_en||'-') : (x.name_en||x.title_en||x.name||x.title||x.name_ar||x.title_ar||'-');
     const clientOf=(x)=> state.lang==='ar' ? (x.client_ar||x.client||x.client_en||'-') : (x.client_en||x.client||x.client_ar||'-');
     const nextOf=(x)=> state.lang==='ar' ? (x.next_ar||x.next_milestone||x.next_en||'-') : (x.next_en||x.next_milestone||x.next_ar||'-');
+    const hasClientWork=()=> ['projects','documents','invoices','tickets','meetings'].some(k=>(state.data[k]||[]).length>0);
+    const currentClient=()=> (state.data.clients||[]).find(c=>String(c.email||'').toLowerCase()===String(state.user?.email||'').toLowerCase()) || null;
+    const clientLabel=(c)=> `${c.name||c.company||c.email||'-'}${c.email?' · '+c.email:''}`;
+    function clientSelect(id='adminClientId'){
+      const clients=state.data.clients||[];
+      return `<select id="${id}">${clients.map(c=>`<option value="${escapeHtml(c.id)}">${escapeHtml(clientLabel(c))}</option>`).join('')}</select>`;
+    }
+    function adminSelectedClient(id='adminClientId'){
+      const cid=$(id)?.value; return (state.data.clients||[]).find(c=>String(c.id)===String(cid));
+    }
+    function cleanEmptyState(){
+      return `<div class="emptyStateHero premiumGlow"><h3>${t('clientCleanTitle')}</h3><p>${t('clientCleanMsg')}</p><div class="split"><button class="btn small" onclick="go('meetings')">${t('requestMeeting')}</button><button class="btn small secondary" onclick="go('support')">${t('newTicket')}</button><button class="btn small secondary" onclick="whatsapp('${state.lang==='ar'?'تم تفعيل حسابي وأرغب في معرفة الخطوات التالية':'My account is active and I would like to know the next steps'}')">WhatsApp</button></div></div>`;
+    }
     function requireAuth(){ if(!state.session){toast(t('signInNeeded')); return false;} return true; }
     function isAdmin(){
       const email=String(state.user?.email||'').toLowerCase();
@@ -567,14 +584,15 @@
     }
     function renderDashboard(){
       setTop('dashboard','overview'); const d=state.data; const active=d.projects.filter(p=>!['completed','closed'].includes(String(p.status||'').toLowerCase())).length; const review=d.documents.filter(x=>['under_review','pending','new'].includes(String(x.status||'').toLowerCase())).length; const unpaid=d.invoices.filter(x=>['unpaid','overdue','pending'].includes(String(x.status||'').toLowerCase())).length; const open=d.tickets.filter(x=>['open','pending','in_progress'].includes(String(x.status||'').toLowerCase())).length;
-      return `${state.demoMode?`<div class="hint" style="margin-bottom:16px">${state.lang==='ar'?'أنت الآن تشاهد بيانات عرض تجريبي. بعد تسجيل الدخول وتهيئة الجداول ستظهر بيانات العميل الحقيقية فقط.':'You are viewing demo data. After sign-in and database setup, only the client’s real data will appear.'}</div>`:''}
+      const clean = state.session && !isAdmin() && !hasClientWork();
+      return `${state.demoMode?`<div class="hint" style="margin-bottom:16px">${state.lang==='ar'?'أنت الآن تشاهد بيانات عرض تجريبي. بعد تسجيل الدخول وتهيئة الجداول ستظهر بيانات العميل الحقيقية فقط.':'You are viewing demo data. After sign-in and database setup, only the client’s real data will appear.'}</div>`:''}${clean?cleanEmptyState():''}
       <div class="grid cols4">
         ${metric(active,t('activeProjects'),'◈')}${metric(review,t('pendingDocs'),'▣')}${metric(open,t('openTickets'),'✦')}${metric(unpaid,t('unpaidInvoices'),'◆')}
       </div>
       <div class="sectionTitle"><div><h3>${t('projectHealth')}</h3><p>${t('latestActivity')}</p></div><button class="btn small secondary" onclick="go('projects')">${t('allProjects')}</button></div>
       <div class="grid cols2">
-        <div class="card">${d.projects.slice(0,3).map(projectMini).join('')}</div>
-        <div class="card"><h4>${t('latestActivity')}</h4><div class="timeline">${d.activity.map(a=>`<div class="timeItem"><div class="timeDot">${a.icon}</div><div class="timeBody"><strong>${escapeHtml(state.lang==='ar'?a.ar:a.en)}</strong><span>${fmtDate(a.date)}</span></div></div>`).join('')}</div></div>
+        <div class="card">${d.projects.length?d.projects.slice(0,3).map(projectMini).join(''):`<div class="empty">${t('noData')}<br><span class="smallText muted">${t('clientCleanMsg')}</span></div>`}</div>
+        <div class="card"><h4>${t('latestActivity')}</h4><div class="timeline">${d.activity.length?d.activity.map(a=>`<div class="timeItem"><div class="timeDot">${a.icon}</div><div class="timeBody"><strong>${escapeHtml(state.lang==='ar'?a.ar:a.en)}</strong><span>${fmtDate(a.date)}</span></div></div>`).join(''):`<div class="empty">${t('noData')}</div>`}</div></div>
       </div>
       <div class="sectionTitle"><div><h3>${t('nextActions')}</h3><p>${state.lang==='ar'?'اختصارات تشغيلية للعميل والفريق':'Operational shortcuts for clients and the team'}</p></div></div>
       <div class="grid cols4">
@@ -582,14 +600,14 @@
         <button class="card gold" onclick="go('support')"><h4>${t('newTicket')}</h4><p>${t('support')}</p></button>
         <button class="card gold" onclick="go('meetings')"><h4>${t('requestMeeting')}</h4><p>${t('meetings')}</p></button>
         <button class="card gold" onclick="go('invoices')"><h4>${t('contactFinance')}</h4><p>${t('invoices')}</p></button>
-      </div>`;
+      </div>${isAdmin()?`<div class="adminNote" style="margin-top:16px">${t('clientCleanAdminHint')}</div>`:''}`;
     }
     function metric(v,label,icon){ return `<div class="card metricCard"><div class="metric"><div><div class="metricVal">${v}</div><div class="metricLabel">${label}</div></div><div class="metricIcon">${icon}</div></div></div>`; }
     function projectMini(p){ const prog=Number(p.progress||0); return `<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)"><div class="projectHead"><div><strong>${escapeHtml(nameOf(p))}</strong><div class="smallText muted">${escapeHtml(clientOf(p))} · ${escapeHtml(p.owner||'-')}</div></div>${badge(p.status)}</div><div class="progress" style="margin-top:10px"><span style="width:${Math.min(100,Math.max(0,prog))}%"></span></div><div class="smallText muted" style="margin-top:8px">${prog}% · ${escapeHtml(nextOf(p))}</div></div>`; }
     function renderProjects(){
       setTop('projects','allProjects'); const d=state.data.projects;
       return `<div class="sectionTitle"><div><h3>${t('allProjects')}</h3><p>${state.lang==='ar'?'مراحل التنفيذ مبنية على منهجية شركة أبعاد المستقبل.':'Execution stages follow Future Dimensions methodology.'}</p></div><button class="btn small" onclick="go('support')">${t('newTicket')}</button></div>
-      <div class="grid cols2">${d.map(p=>{ const prog=Number(p.progress||0); return `<div class="card projectCard"><div class="projectHead"><div><h4>${escapeHtml(nameOf(p))}</h4><p>${escapeHtml(clientOf(p))}</p></div>${badge(p.status)}</div><div><div class="split" style="justify-content:space-between"><span class="muted smallText">${t('progress')}</span><b>${prog}%</b></div><div class="progress"><span style="width:${Math.min(100,Math.max(0,prog))}%"></span></div></div><div class="stageList">${['diagnose','design','deliver','confirmation'].map(s=>`<div class="stage ${stageClass(p.stage,s)}">${t(s)}</div>`).join('')}</div><div class="grid cols2"><div><span class="muted smallText">${t('owner')}</span><br><b>${escapeHtml(p.owner||'-')}</b></div><div><span class="muted smallText">${t('updated')}</span><br><b>${fmtDate(p.updated_at||p.created_at)}</b></div></div><div class="hint"><b>${t('nextMilestone')}:</b> ${escapeHtml(nextOf(p))}</div><button class="btn small secondary" onclick="projectDetails('${escapeHtml(p.id)}')">${t('viewDetails')}</button></div>`}).join('')}</div>`;
+      <div class="grid cols2">${d.length?d.map(p=>{ const prog=Number(p.progress||0); return `<div class="card projectCard"><div class="projectHead"><div><h4>${escapeHtml(nameOf(p))}</h4><p>${escapeHtml(clientOf(p))}</p></div>${badge(p.status)}</div><div><div class="split" style="justify-content:space-between"><span class="muted smallText">${t('progress')}</span><b>${prog}%</b></div><div class="progress"><span style="width:${Math.min(100,Math.max(0,prog))}%"></span></div></div><div class="stageList">${['diagnose','design','deliver','confirmation'].map(s=>`<div class="stage ${stageClass(p.stage,s)}">${t(s)}</div>`).join('')}</div><div class="grid cols2"><div><span class="muted smallText">${t('owner')}</span><br><b>${escapeHtml(p.owner||'-')}</b></div><div><span class="muted smallText">${t('updated')}</span><br><b>${fmtDate(p.updated_at||p.created_at)}</b></div></div><div class="hint"><b>${t('nextMilestone')}:</b> ${escapeHtml(nextOf(p))}</div><button class="btn small secondary" onclick="projectDetails('${escapeHtml(p.id)}')">${t('viewDetails')}</button></div>`}).join(''):`<div class="card empty">${t('noData')}<br><span class="smallText muted">${t('clientCleanMsg')}</span></div>`}</div>`;
     }
     function stageClass(cur,s){ const order=['diagnose','design','deliver','confirmation']; const ci=order.indexOf(String(cur||'diagnose').toLowerCase()); const si=order.indexOf(s); return si<ci?'done':si===ci?'current':''; }
     window.projectDetails=(id)=>{ const p=state.data.projects.find(x=>String(x.id)===String(id)); if(!p)return; showModal(nameOf(p), `<div class="grid cols2"><div class="card"><h4>${t('status')}</h4>${badge(p.status)}</div><div class="card"><h4>${t('progress')}</h4><div class="metricVal">${Number(p.progress||0)}%</div></div></div><div class="divider"></div><p class="smallText muted">${escapeHtml(nextOf(p))}</p>`); };
@@ -734,14 +752,14 @@
       const inv=(state.data.invoices||[]).length;
       return `<div class="card adminPanelHero premiumGlow"><div class="sectionTitle" style="margin:0"><div><h3>${t('adminPanel')}</h3><p>${t('adminWelcome')}</p></div><span class="badge gold">${state.user?.email||''}</span></div><div class="softWarning" style="margin-top:14px">${t('edgeReady')}<br>${t('setupRequired')}</div></div>
       <div class="grid cols4" style="margin-top:14px">${metric(pending,t('pendingRequests'),'◷')}${metric(clients,t('clients'),'☉')}${metric(docs,t('documents'),'▣')}${metric(inv,t('invoices'),'◆')}</div>
-      <div class="adminTabs"><button class="btn small active" onclick="adminShow('requests')">${t('accessRequests')}</button><button class="btn small secondary" onclick="adminShow('clients')">${t('clients')}</button><button class="btn small secondary" onclick="adminShow('guide')">${state.lang==='ar'?'إرشادات التفعيل':'Activation guide'}</button></div>
+      <div class="adminTabs"><button class="btn small active" onclick="adminShow('requests')">${t('accessRequests')}</button><button class="btn small secondary" onclick="adminShow('clients')">${t('clients')}</button><button class="btn small secondary" onclick="adminShow('operations')">${t('operationalData')}</button><button class="btn small secondary" onclick="adminShow('guide')">${state.lang==='ar'?'إرشادات التفعيل':'Activation guide'}</button></div>
       <div id="adminArea">${renderAdminRequests()}</div>`;
     }
     window.adminShow=(tab)=>{
       document.querySelectorAll('.adminTabs .btn').forEach(b=>b.classList.remove('active'));
       const btn=[...document.querySelectorAll('.adminTabs .btn')].find(b=>b.getAttribute('onclick')?.includes(tab)); if(btn){btn.classList.add('active'); btn.classList.remove('secondary');}
       const area=$('adminArea'); if(!area) return;
-      area.innerHTML = tab==='clients' ? renderAdminClients() : tab==='guide' ? renderAdminGuide() : renderAdminRequests();
+      area.innerHTML = tab==='clients' ? renderAdminClients() : tab==='operations' ? renderAdminOperations() : tab==='guide' ? renderAdminGuide() : renderAdminRequests();
     };
     function renderAdminRequests(){
       const rows=state.data.access_requests||[];
@@ -749,7 +767,19 @@
     }
     function renderAdminClients(){
       const rows=state.data.clients||[];
-      return `<div class="grid cols2"><div class="card adminActionCard"><h4>${t('addClient')}</h4><div class="field"><label>${t('company')}</label><input class="input" id="clientCompany"></div><div class="field"><label>${t('contactName')}</label><input class="input" id="clientContact"></div><div class="field"><label>${t('email')}</label><input class="input ltr" id="clientEmail" type="email"></div><div class="field"><label>${state.lang==='ar'?'رقم الهاتف':'Phone'}</label><input class="input ltr" id="clientPhone"></div><button class="btn" onclick="createClientManual()">${t('save')}</button></div><div class="card"><h4>${t('clients')}</h4><div class="timeline">${rows.map(c=>`<div class="timeItem"><div class="timeDot">☉</div><div class="timeBody"><strong>${escapeHtml(c.name||c.company||'-')}</strong><span>${escapeHtml(c.contact_name||'-')} · ${escapeHtml(c.email||'-')} · ${badge(c.status||'active')}</span></div></div>`).join('') || `<div class="empty">${t('noData')}</div>`}</div></div></div>`;
+      return `<div class="grid cols2"><div class="card adminActionCard"><h4>${t('addClient')}</h4><div class="field"><label>${t('company')}</label><input class="input" id="clientCompany"></div><div class="field"><label>${t('contactName')}</label><input class="input" id="clientContact"></div><div class="field"><label>${t('email')}</label><input class="input ltr" id="clientEmail" type="email"></div><div class="field"><label>${state.lang==='ar'?'رقم الهاتف':'Phone'}</label><input class="input ltr" id="clientPhone"></div><button class="btn" onclick="createClientManual()">${t('save')}</button></div><div class="card"><h4>${t('clients')}</h4><div class="timeline">${rows.map(c=>`<div class="timeItem"><div class="timeDot">☉</div><div class="timeBody"><strong>${escapeHtml(c.name||c.company||'-')}</strong><span>${escapeHtml(c.contact_name||'-')} · ${escapeHtml(c.email||'-')} · ${badge(c.status||'active')}</span><div class="actionRow" style="margin-top:8px"><button class="btn small secondary" onclick="adminShow('operations')">${t('operationalData')}</button></div></div></div>`).join('') || `<div class="empty">${t('noData')}</div>`}</div></div></div>`;
+    }
+    function renderAdminOperations(){
+      const clients=state.data.clients||[];
+      if(!clients.length) return `<div class="card empty">${state.lang==='ar'?'لا يوجد عملاء بعد. اعتمد طلب صلاحية أو أضف عميلاً أولاً.':'No clients yet. Approve an access request or add a client first.'}</div>`;
+      const clientPick = `<div class="field full"><label>${t('selectClient')}</label>${clientSelect('opClient')}</div>`;
+      return `<div class="sectionTitle"><div><h3>${t('operationalData')}</h3><p>${state.lang==='ar'?'أضف بيانات حقيقية للعميل بعد التفعيل حتى تظهر في حسابه فقط.':'Add real client data after activation so it appears only in that client account.'}</p></div></div>
+      <div class="grid cols2">
+        <div class="card adminActionCard"><h4>${t('addProject')}</h4><div class="adminFormGrid">${clientPick}<div class="field"><label>${state.lang==='ar'?'اسم المشروع عربي':'Project Arabic name'}</label><input class="input" id="opProjectAr"></div><div class="field"><label>${state.lang==='ar'?'اسم المشروع إنجليزي':'Project English name'}</label><input class="input" id="opProjectEn"></div><div class="field"><label>${t('owner')}</label><input class="input" id="opProjectOwner" placeholder="Dr. Atef Elgohary"></div><div class="field"><label>${t('progress')}</label><input class="input ltr" id="opProjectProgress" type="number" min="0" max="100" value="0"></div><div class="field"><label>${t('status')}</label><select id="opProjectStatus"><option value="new">${t('newStatus')}</option><option value="in_progress">${t('inProgress')}</option><option value="waiting_client">${t('waitingClient')}</option><option value="completed">${t('completed')}</option></select></div><div class="field"><label>${t('stage')}</label><select id="opProjectStage"><option value="diagnose">${t('diagnose')}</option><option value="design">${t('design')}</option><option value="deliver">${t('deliver')}</option><option value="confirmation">${t('confirmation')}</option></select></div><div class="field full"><label>${t('nextMilestone')}</label><input class="input" id="opProjectNext"></div></div><button class="btn" onclick="adminCreateProject()">${t('save')}</button></div>
+        <div class="card adminActionCard"><h4>${t('addDocumentRecord')}</h4><div class="adminFormGrid">${clientPick.replace('opClient','opDocClient')}<div class="field"><label>${t('name')}</label><input class="input" id="opDocName"></div><div class="field"><label>${t('type')}</label><select id="opDocType">${['finance','governance','strategy','operations','hr','legal','other'].map(x=>`<option value="${x}">${t(x)}</option>`).join('')}</select></div><div class="field"><label>${t('status')}</label><select id="opDocStatus"><option value="under_review">${t('pendingDocs')}</option><option value="approved">${state.lang==='ar'?'معتمد':'Approved'}</option><option value="new">${t('newStatus')}</option></select></div></div><button class="btn" onclick="adminCreateDocumentRecord()">${t('save')}</button></div>
+        <div class="card adminActionCard"><h4>${t('addInvoiceRecord')}</h4><div class="adminFormGrid">${clientPick.replace('opClient','opInvoiceClient')}<div class="field"><label>${t('invoiceNo')}</label><input class="input ltr" id="opInvNo" placeholder="FD-2026-001"></div><div class="field"><label>${t('name')}</label><input class="input" id="opInvName"></div><div class="field"><label>${t('amount')}</label><input class="input ltr" id="opInvAmount" type="number" value="0"></div><div class="field"><label>${t('dueDate')}</label><input class="input ltr" id="opInvDue" type="date"></div><div class="field"><label>${t('status')}</label><select id="opInvStatus"><option value="unpaid">${t('unpaid')}</option><option value="paid">${t('paid')}</option><option value="overdue">${t('overdue')}</option></select></div></div><button class="btn" onclick="adminCreateInvoiceRecord()">${t('save')}</button></div>
+        <div class="card adminActionCard"><h4>${t('addMeetingRecord')}</h4><div class="adminFormGrid">${clientPick.replace('opClient','opMeetingClient')}<div class="field"><label>${t('title')}</label><input class="input" id="opMeetTitle"></div><div class="field"><label>${t('meetingDate')}</label><input class="input ltr" id="opMeetDate" type="datetime-local"></div><div class="field full"><label>${t('description')}</label><textarea id="opMeetDesc"></textarea></div></div><button class="btn" onclick="adminCreateMeetingRecord()">${t('save')}</button></div>
+      </div>`;
     }
     function renderAdminGuide(){
       const msg = onboardingMessage('client@example.com','Client Company');
@@ -804,9 +834,34 @@
       catch(e){ toast(e.message||t('failed')); showModal(t('copyInvitation'), `<div class="softWarning">${t('edgeNotReady')}</div><div class="copyBox">${escapeHtml(onboardingMessage(email,''))}</div>`); }
     };
 
+    async function adminInsert(table,row){
+      if(!isAdmin()) return toast(t('notAdmin'));
+      if(!state.sb || !state.session) return toast(t('signInNeeded'));
+      const {error}=await state.sb.from(table).insert(row);
+      if(error) throw error;
+      toast(t('saved')); await loadData(); render(); setTimeout(()=>adminShow('operations'),80);
+    }
+    window.adminCreateProject=async()=>{
+      const c=adminSelectedClient('opClient'); if(!c) return toast(t('selectClient'));
+      const ar=$('opProjectAr')?.value?.trim()||''; const en=$('opProjectEn')?.value?.trim()||ar; if(!ar) return toast(t('name'));
+      try{ await adminInsert('projects',{user_id:c.user_id||null,client_id:c.id,name_ar:ar,name_en:en,client_ar:c.name,client_en:c.name,owner:$('opProjectOwner')?.value?.trim()||'',status:$('opProjectStatus')?.value||'new',stage:$('opProjectStage')?.value||'diagnose',progress:Number($('opProjectProgress')?.value||0),next_ar:$('opProjectNext')?.value?.trim()||'',next_en:$('opProjectNext')?.value?.trim()||'',updated_at:new Date().toISOString()}); }catch(e){toast(e.message||t('failed'));}
+    };
+    window.adminCreateDocumentRecord=async()=>{
+      const c=adminSelectedClient('opDocClient'); if(!c) return toast(t('selectClient')); const name=$('opDocName')?.value?.trim()||''; if(!name) return toast(t('name'));
+      try{ await adminInsert('documents',{user_id:c.user_id||null,client_id:c.id,name_ar:name,name_en:name,type:$('opDocType')?.value||'other',status:$('opDocStatus')?.value||'under_review'}); }catch(e){toast(e.message||t('failed'));}
+    };
+    window.adminCreateInvoiceRecord=async()=>{
+      const c=adminSelectedClient('opInvoiceClient'); if(!c) return toast(t('selectClient')); const no=$('opInvNo')?.value?.trim()||`FD-${new Date().getFullYear()}-${Date.now().toString().slice(-4)}`; const name=$('opInvName')?.value?.trim()||no;
+      try{ await adminInsert('invoices',{user_id:c.user_id||null,client_id:c.id,invoice_no:no,name_ar:name,name_en:name,amount:Number($('opInvAmount')?.value||0),currency:'EGP',status:$('opInvStatus')?.value||'unpaid',due_date:$('opInvDue')?.value||null}); }catch(e){toast(e.message||t('failed'));}
+    };
+    window.adminCreateMeetingRecord=async()=>{
+      const c=adminSelectedClient('opMeetingClient'); if(!c) return toast(t('selectClient')); const title=$('opMeetTitle')?.value?.trim()||''; if(!title) return toast(t('title'));
+      try{ await adminInsert('meetings',{user_id:c.user_id||null,client_id:c.id,title_ar:title,title_en:title,description:$('opMeetDesc')?.value?.trim()||'',meeting_date:$('opMeetDate')?.value||null,status:'scheduled'}); }catch(e){toast(e.message||t('failed'));}
+    };
+
     function renderAccount(){
       setTop('account','accountSettings');
-      return `<div class="grid cols2"><div class="card"><h4>${t('profile')}</h4><div class="field"><label>${t('email')}</label><input class="input ltr" value="${escapeHtml(state.user?.email||'')}" readonly></div><div class="field"><label>${t('company')}</label><input class="input" value="${state.lang==='ar'?'عميل شركة أبعاد المستقبل':'Future Dimensions Client'}"></div><div class="field"><label>${t('role')}</label><input class="input" value="Client" readonly></div></div><div class="card"><h4>${t('security')}</h4><p>${state.lang==='ar'?'البيانات الحساسة يجب أن تكون محمية بسياسات RLS، وتسجيل كل عمليات الرفع والتحميل والتعديل في Audit Log.':'Sensitive data must be protected by RLS policies, and all uploads, downloads and changes should be logged in an Audit Log.'}</p><div class="divider"></div><div class="hint smallText">${t('secureNote')}</div></div>${isAdmin()?`<div class="card"><h4>${t('adminControls')}</h4><p>${state.lang==='ar'?'إدارة طلبات الدخول والعملاء من لوحة الإدارة، وحذف الفواتير والمستندات من صفحاتها.':'Manage access requests and clients from the Admin Panel; delete invoices and documents from their pages.'}</p></div>`:''}</div>`;
+      return `<div class="grid cols2"><div class="card"><h4>${t('profile')}</h4><div class="field"><label>${t('email')}</label><input class="input ltr" value="${escapeHtml(state.user?.email||'')}" readonly></div><div class="field"><label>${t('company')}</label><input class="input" value="${escapeHtml(currentClient()?.name || (state.lang==='ar'?'عميل شركة أبعاد المستقبل':'Future Dimensions Client'))}"></div><div class="field"><label>${t('role')}</label><input class="input" value="Client" readonly></div></div><div class="card"><h4>${t('security')}</h4><p>${state.lang==='ar'?'البيانات الحساسة يجب أن تكون محمية بسياسات RLS، وتسجيل كل عمليات الرفع والتحميل والتعديل في Audit Log.':'Sensitive data must be protected by RLS policies, and all uploads, downloads and changes should be logged in an Audit Log.'}</p><div class="divider"></div><div class="hint smallText">${t('secureNote')}</div></div>${isAdmin()?`<div class="card"><h4>${t('adminControls')}</h4><p>${state.lang==='ar'?'إدارة طلبات الدخول والعملاء من لوحة الإدارة، وحذف الفواتير والمستندات من صفحاتها.':'Manage access requests and clients from the Admin Panel; delete invoices and documents from their pages.'}</p></div>`:''}</div>`;
     }
     async function downloadFile(kind,id){
       const list = kind==='invoices'?state.data.invoices:state.data.documents; const item=list.find(x=>String(x.id)===String(id));
@@ -863,7 +918,7 @@
     $('langBtn').onclick=()=>{state.lang=state.lang==='ar'?'en':'ar';render();}; $('refreshBtn').onclick=async()=>{await loadData();render();toast(t('refresh'));}; $('requestAccessBtn').onclick=requestAccess; $('logoutBtn').onclick=logout; $('modalClose').onclick=closeModal; $('modalBackdrop').addEventListener('click',(e)=>{if(e.target.id==='modalBackdrop')closeModal();});
     (async function boot(){
       updateInstallButtons();
-      if('serviceWorker' in navigator){ try{ await navigator.serviceWorker.register('sw.js?v=4006'); }catch(e){console.warn(e)} }
+      if('serviceWorker' in navigator){ try{ await navigator.serviceWorker.register('sw.js?v=4007'); }catch(e){console.warn(e)} }
       await initSupabase(); await loadData(); render();
     })();
   </script>
