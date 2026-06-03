@@ -82,3 +82,26 @@ create policy "clients can read own tickets" on public.tickets for select using 
 create policy "clients can insert own tickets" on public.tickets for insert with check (auth.uid() = user_id);
 create policy "clients can read own meetings" on public.meetings for select using (auth.uid() = user_id);
 create policy "clients can insert own meetings" on public.meetings for insert with check (auth.uid() = user_id);
+
+-- Admin helper policies for deletion/update.
+-- To use these safely, set the admin user's app_metadata role to "admin" from Supabase Auth admin tools / service role backend.
+-- Example JWT check used below: (auth.jwt() -> 'app_metadata' ->> 'role') = 'admin'
+
+create policy "admins can read all projects" on public.projects
+  for select using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
+
+create policy "admins can manage documents" on public.documents
+  for all using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin')
+  with check ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
+
+create policy "admins can manage invoices" on public.invoices
+  for all using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin')
+  with check ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
+
+create policy "admins can manage tickets" on public.tickets
+  for all using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin')
+  with check ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
+
+create policy "admins can manage meetings" on public.meetings
+  for all using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin')
+  with check ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');

@@ -1,10 +1,16 @@
-Future Dimensions Client Portal - Upload Instructions
+Future Dimensions Client Portal - Mobile V3 / v4003
 
-1) Upload all files inside this folder to the /app/ directory on GitHub Pages.
-2) Replace the old app/index.html, app/manifest.webmanifest, app/sw.js and image assets.
-3) Keep the main website CNAME file unchanged in the repository root.
-4) After deployment, open https://www.futuredimensionsco.com/app/?v=4002
-5) Press Ctrl + F5 or open an Incognito window to bypass old cache.
-6) Optional: run supabase_schema_optional.sql in Supabase, then review RLS policies before using real client data.
+Upload all files in this folder into the GitHub /app/ directory.
 
-7) This v4002 package includes mobile-first layout, bottom navigation, mobile cards and improved small-screen spacing.
+Open after upload:
+https://www.futuredimensionsco.com/app/?v=4003
+
+Important:
+- Replace the old app files with these files.
+- If the old version appears, open the URL with ?v=4003 and use Ctrl+F5 or clear browser cache.
+- Do not remove your website root CNAME file.
+
+Admin deletion:
+- Admin emails are controlled in index.html by the FD_ADMIN_EMAILS constant.
+- Add your admin login email to FD_ADMIN_EMAILS if it is not already there.
+- Admin delete buttons appear in Documents and Invoices after admin login.

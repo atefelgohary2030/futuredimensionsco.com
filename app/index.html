@@ -186,6 +186,34 @@
     }
     @media (max-width:380px){.heroGrid,.grid.cols4{grid-template-columns:1fr!important}.topTitle p{max-width:150px}.topActions #requestAccessBtn{display:none}.card{padding:13px}.content{padding-inline:10px}}
 
+
+    /* Premium mobile polish + fixed drawer/menu - v4003 */
+    .topLogo{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 10px 22px rgba(215,173,56,.22))}
+    .drawerBackdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);z-index:75}
+    .drawerBackdrop.show{display:block}
+    .installFab{display:none;position:fixed;right:14px;bottom:92px;z-index:72;border:1px solid rgba(215,173,56,.48);border-radius:999px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#07101f;font-weight:950;padding:11px 14px;box-shadow:0 18px 42px rgba(0,0,0,.36),0 0 0 5px rgba(215,173,56,.12);gap:8px;align-items:center}
+    html[dir="rtl"] .installFab{right:auto;left:14px}
+    .installFab:hover{transform:translateY(-2px)}
+    .actionRow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .adminNote{border:1px solid rgba(215,173,56,.30);background:linear-gradient(135deg,rgba(215,173,56,.13),rgba(255,255,255,.035));border-radius:18px;padding:14px;color:#f6e3a2;line-height:1.8}
+    .premiumGlow{position:relative;overflow:hidden}
+    .premiumGlow::before{content:"";position:absolute;inset:-40% -20% auto auto;width:220px;height:220px;background:radial-gradient(circle,rgba(240,207,103,.24),transparent 66%);pointer-events:none}
+    .card,.glass{transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+    @media (hover:hover){.card:hover,.glass:hover{transform:translateY(-2px);border-color:rgba(215,173,56,.24);box-shadow:0 24px 70px rgba(0,0,0,.30)}}
+    @media (max-width:760px){
+      .sidebar.open{transform:translate3d(0,0,0)!important;z-index:110}
+      .topLogo{width:30px;height:30px}
+      .installFab{display:inline-flex}
+      .topActions #installBtnTop{display:none!important}
+      .mobileBottomNav{display:flex!important;grid-template-columns:none!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:6px;padding-inline:8px;-webkit-overflow-scrolling:touch}
+      .mobileBottomNav::-webkit-scrollbar{display:none}
+      .mobileBottomNav button{min-width:74px;scroll-snap-align:center;flex:0 0 auto}
+      .mobileBottomNav button .navIcon{width:25px;height:23px}
+      .content{padding-bottom:136px!important}
+      .heroCard.glass,.loginPanel.glass{background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.035));border-color:rgba(215,173,56,.18)}
+      .card.gold{background:linear-gradient(145deg,#ffe79a,#d5a531 60%,#b9881d);box-shadow:0 18px 48px rgba(0,0,0,.24)}
+    }
+
     @media print{.sidebar,.topbar,.btn,.toast{display:none!important}.shell{display:block}.content{max-width:none;color:#000}.glass,.card{box-shadow:none;background:#fff;color:#000;border-color:#ddd}.muted,.card p{color:#333}}
   </style>
 </head>
@@ -214,7 +242,8 @@
     <main class="main">
       <header class="topbar">
         <div class="split">
-          <button class="btn secondary mobileMenu" id="mobileMenu">☰</button>
+          <button class="btn secondary mobileMenu" id="mobileMenu" type="button" aria-label="Open menu">☰</button>
+          <img class="topLogo" src="logo.png" alt="Future Dimensions">
           <div class="topTitle">
             <h1 id="pageTitle">Client Portal</h1>
             <p id="pageSub">Secure workspace</p>
@@ -222,6 +251,7 @@
         </div>
         <div class="topActions">
           <button class="btn small secondary" id="langBtn">English</button>
+          <button class="btn small secondary" id="installBtnTop" type="button" data-i18n="installApp">تثبيت التطبيق</button>
           <button class="btn small ghost" id="refreshBtn" data-i18n="refresh">تحديث</button>
           <button class="btn small" id="requestAccessBtn" data-i18n="requestAccess">طلب صلاحية دخول</button>
           <button class="btn small danger hide" id="logoutBtn" data-i18n="logout">خروج</button>
@@ -230,7 +260,9 @@
       <section class="content" id="app"></section>
     </main>
   </div>
+  <div class="drawerBackdrop" id="drawerBackdrop" aria-hidden="true"></div>
   <nav class="mobileBottomNav" id="mobileBottomNav" aria-label="Mobile navigation"></nav>
+  <button class="installFab" id="installFab" type="button"><span>⇩</span><b data-i18n="installApp">تثبيت التطبيق</b></button>
   <div class="toast" id="toast"></div>
   <div class="modalBackdrop" id="modalBackdrop" role="dialog" aria-modal="true">
     <div class="modal">
@@ -240,8 +272,9 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
-    const FD_VERSION = 'FD-CLIENT-PORTAL-2026-06-03-MOBILE-V2';
+    const FD_VERSION = 'FD-CLIENT-PORTAL-2026-06-03-MOBILE-V3';
     const FD_SUPABASE_URL = 'https://mifottrhqimqzojiyytq.supabase.co';
+    const FD_ADMIN_EMAILS = ['info@futuredimensionsco.com']; // Add your admin login emails here if needed
     const FD_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pZm90dHJocWltcXpvaml5eXRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxOTQ1MzYsImV4cCI6MjA4NDc3MDUzNn0.g3LM3aYvCmZNy3hUShebv5T2evAwgMeNKr4wT3eXZS8';
     const CONTACT_EMAIL = 'info@futuredimensionsco.com';
     const CONTACT_PHONE = '+20 100 391 4628';
@@ -271,7 +304,8 @@
       governance:['حوكمة وتنظيم','Governance'], finance:['مالي','Financial'], strategy:['استراتيجية','Strategy'], operations:['تشغيلي','Operations'], hr:['موارد بشرية','Human Resources'], legal:['قانوني','Legal'], other:['أخرى','Other'],
       diagnose:['التشخيص','Diagnose'], design:['التصميم','Design'], deliver:['التنفيذ','Deliver'], confirmation:['التأكيد','Confirmation'], completed:['مكتمل','Completed'], inProgress:['قيد التنفيذ','In progress'], waitingClient:['بانتظار العميل','Waiting for client'], newStatus:['جديد','New'], paid:['مدفوعة','Paid'], unpaid:['غير مدفوعة','Unpaid'], overdue:['متأخرة','Overdue'], openStatus:['مفتوح','Open'], closed:['مغلق','Closed'], high:['عالية','High'], medium:['متوسطة','Medium'], low:['منخفضة','Low'],
       pwaReady:['التطبيق جاهز للتثبيت والعمل كتطبيق هاتف.','The portal is ready to install and run as a mobile app.'],
-      secureNote:['تم إخفاء إعدادات الاتصال التقنية من واجهة العميل. يجب تفعيل RLS في Supabase لحماية بيانات كل عميل.','Technical connection settings are hidden from the client interface. Supabase RLS must be enabled to protect each client’s data.']
+      secureNote:['تم إخفاء إعدادات الاتصال التقنية من واجهة العميل. يجب تفعيل RLS في Supabase لحماية بيانات كل عميل.','Technical connection settings are hidden from the client interface. Supabase RLS must be enabled to protect each client’s data.'],
+      admin:['أدمن','Admin'], delete:['حذف','Delete'], deleteDocument:['حذف مستند','Delete document'], deleteInvoice:['حذف فاتورة','Delete invoice'], confirmDelete:['هل أنت متأكد من الحذف؟ لا يمكن التراجع عن هذه العملية.','Are you sure you want to delete this item? This cannot be undone.'], deleted:['تم الحذف','Deleted'], notAdmin:['هذه العملية متاحة للأدمن فقط','This action is for admins only'], adminControls:['أدوات الأدمن','Admin controls'], installInstructions:['من أندرويد: اضغط زر التثبيت أو من قائمة Chrome اختر Install app. من iPhone: افتح Safari ثم Share ثم Add to Home Screen.','On Android: tap Install or choose Install app from Chrome menu. On iPhone: open Safari, tap Share, then Add to Home Screen.'], closeMenu:['إغلاق القائمة','Close menu']
     };
     const t = (key)=> (i18n[key] || [key,key])[state.lang==='ar'?0:1];
     const state = {
@@ -332,7 +366,7 @@
     function badge(raw,kind){ const v=statusLabel(raw,kind); return `<span class="badge ${v.cls}">${escapeHtml(v.text)}</span>`; }
     function setTop(key, subKey){ $('pageTitle').textContent=t(key); $('pageSub').textContent=t(subKey||'secureWorkspace'); }
     function renderNav(){ $('nav').innerHTML = navItems.map(([page,label,icon])=>`<button data-page="${page}" class="${state.page===page?'active':''}"><span class="navIcon">${icon}</span><span>${t(label)}</span></button>`).join(''); document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.page)); renderMobileNav(); }
-    function renderMobileNav(){ const box=$('mobileBottomNav'); if(!box) return; const mobileItems=[['dashboard','dashboard','⌂'],['projects','projects','◈'],['documents','documents','▣'],['invoices','invoices','◆'],['support','support','✦']]; box.innerHTML=mobileItems.map(([page,label,icon])=>`<button data-page="${page}" class="${state.page===page?'active':''}"><span class="navIcon">${icon}</span><span>${t(label)}</span></button>`).join(''); box.querySelectorAll('button').forEach(b=>b.onclick=()=>go(b.dataset.page)); }
+    function renderMobileNav(){ const box=$('mobileBottomNav'); if(!box) return; const mobileItems=navItems; box.innerHTML=mobileItems.map(([page,label,icon])=>`<button data-page="${page}" class="${state.page===page?'active':''}"><span class="navIcon">${icon}</span><span>${t(label)}</span></button>`).join(''); box.querySelectorAll('button').forEach(b=>b.onclick=()=>go(b.dataset.page)); }
     function go(page){ state.page=page || 'dashboard'; history.replaceState(null,'','#'+state.page); render(); if(innerWidth<1080) $('sidebar').classList.remove('open'); }
     function updateStatus(){
       $('year').textContent=nowYear; const dot=$('netDot'); dot.className='dot '+(state.online?'ok':'bad'); $('netText').textContent=state.online?t('online'):t('offline');
@@ -374,6 +408,16 @@
     const clientOf=(x)=> state.lang==='ar' ? (x.client_ar||x.client||x.client_en||'-') : (x.client_en||x.client||x.client_ar||'-');
     const nextOf=(x)=> state.lang==='ar' ? (x.next_ar||x.next_milestone||x.next_en||'-') : (x.next_en||x.next_milestone||x.next_ar||'-');
     function requireAuth(){ if(!state.session){toast(t('signInNeeded')); return false;} return true; }
+    function isAdmin(){
+      const email=String(state.user?.email||'').toLowerCase();
+      const role=String(state.user?.user_metadata?.role || state.user?.app_metadata?.role || '').toLowerCase();
+      return !!email && (FD_ADMIN_EMAILS.map(x=>String(x).toLowerCase()).includes(email) || ['admin','owner','manager'].includes(role));
+    }
+    function adminDeleteButton(kind,id){
+      if(!isAdmin()) return '';
+      const label = kind==='invoices' ? t('deleteInvoice') : t('deleteDocument');
+      return `<button class="btn small danger" onclick="deleteRecord('${kind}','${encodeURIComponent(String(id))}')">${label}</button>`;
+    }
     async function signIn(){
       const email=$('loginEmail')?.value?.trim(); const password=$('loginPassword')?.value||''; if(!email || !password){toast(t('email')+' / '+t('password'));return;}
       if(!state.sb){toast(t('failed'));return;}
@@ -391,7 +435,7 @@
     function whatsapp(text){ window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`,'_blank'); }
     function renderGate(){
       return `<div class="hero">
-        <div class="heroCard glass">
+        <div class="heroCard glass premiumGlow">
           <div class="eyebrow">${t('clientPortal')}</div>
           <h2>${t('enterPortal')}</h2>
           <p>${t('heroCopy')}</p>
@@ -406,7 +450,7 @@
             <div class="miniMetric"><strong>PWA</strong><span>${t('pwaReady')}</span></div>
           </div>
         </div>
-        <div class="loginPanel glass">
+        <div class="loginPanel glass premiumGlow">
           <div class="sectionTitle"><div><h3>${t('login')}</h3><p>${t('needAccess')}</p></div></div>
           <div class="field"><label>${t('email')}</label><input class="input ltr" id="loginEmail" type="email" placeholder="name@company.com"></div>
           <div class="field"><label>${t('password')}</label><input class="input ltr" id="loginPassword" type="password" placeholder="••••••••"></div>
@@ -453,8 +497,8 @@
       return `<div class="grid cols2"><div class="card"><h4>${t('uploadDocument')}</h4><div class="field"><label>${t('name')}</label><input class="input" id="docName"></div><div class="field"><label>${t('type')}</label><select id="docType">${['finance','governance','strategy','operations','hr','legal','other'].map(x=>`<option value="${x}">${t(x)}</option>`).join('')}</select></div><div class="field"><label>${t('documents')}</label><input class="input" id="docFile" type="file"></div><button class="btn" id="uploadDocBtn">${t('upload')}</button><div class="hint smallText" style="margin-top:12px">${state.lang==='ar'?'الرفع الفعلي يتطلب تسجيل الدخول وتفعيل Storage Bucket باسم Documents.':'Real upload requires sign-in and a Storage Bucket named Documents.'}</div></div><div class="card"><h4>${t('secure')}</h4><p>${state.lang==='ar'?'تصنيف المستندات ومراجعتها يقلل الفوضى ويجعل كل مخرجات المشروع قابلة للتتبع.':'Document classification and review reduce noise and keep every deliverable traceable.'}</p><div class="pillBar" style="margin-top:16px"><span class="pill">PDF</span><span class="pill">DOCX</span><span class="pill">XLSX</span><span class="pill">PNG/JPG</span></div></div></div>${renderDocTable(rows)}`;
     }
     function renderDocTable(rows){
-      const mobile = `<div class="mobileList">${rows.length?rows.map(x=>`<div class="mobileListItem"><h4>${escapeHtml(nameOf(x))}</h4><div class="mobileMeta"><div><span>${t('type')}</span><b>${t(x.type)||escapeHtml(x.type||'-')}</b></div><div><span>${t('status')}</span><b>${badge(x.status)}</b></div><div><span>${t('date')}</span><b>${fmtDate(x.created_at)}</b></div></div><button class="btn small secondary" onclick="downloadFile('documents','${escapeHtml(x.id)}')">${t('download')}</button></div>`).join(''):`<div class="card empty">${t('noData')}</div>`}</div>`;
-      return `<div class="sectionTitle"><h3>${t('documents')}</h3></div>${mobile}<div class="tableWrap"><table><thead><tr><th>${t('name')}</th><th>${t('type')}</th><th>${t('status')}</th><th>${t('date')}</th><th>${t('actions')}</th></tr></thead><tbody>${rows.length?rows.map(x=>`<tr><td><b>${escapeHtml(nameOf(x))}</b></td><td>${t(x.type)||escapeHtml(x.type||'-')}</td><td>${badge(x.status)}</td><td>${fmtDate(x.created_at)}</td><td><button class="btn small secondary" onclick="downloadFile('documents','${escapeHtml(x.id)}')">${t('download')}</button></td></tr>`).join('') : `<tr><td colspan="5"><div class="empty">${t('noData')}</div></td></tr>`}</tbody></table></div>`;
+      const mobile = `<div class="mobileList">${rows.length?rows.map(x=>`<div class="mobileListItem"><h4>${escapeHtml(nameOf(x))}</h4><div class="mobileMeta"><div><span>${t('type')}</span><b>${t(x.type)||escapeHtml(x.type||'-')}</b></div><div><span>${t('status')}</span><b>${badge(x.status)}</b></div><div><span>${t('date')}</span><b>${fmtDate(x.created_at)}</b></div></div><div class="actionRow"><button class="btn small secondary" onclick="downloadFile('documents','${escapeHtml(x.id)}')">${t('download')}</button>${adminDeleteButton('documents',x.id)}</div></div>`).join(''):`<div class="card empty">${t('noData')}</div>`}</div>`;
+      return `${isAdmin()?`<div class="adminNote" style="margin-top:14px"><b>${t('adminControls')}</b> · ${state.lang==='ar'?'يمكنك كأدمن حذف المستندات من أزرار الحذف الظاهرة بجوار كل مستند.':'As an admin, you can delete documents using the delete buttons next to each document.'}</div>`:''}<div class="sectionTitle"><h3>${t('documents')}</h3></div>${mobile}<div class="tableWrap"><table><thead><tr><th>${t('name')}</th><th>${t('type')}</th><th>${t('status')}</th><th>${t('date')}</th><th>${t('actions')}</th></tr></thead><tbody>${rows.length?rows.map(x=>`<tr><td><b>${escapeHtml(nameOf(x))}</b></td><td>${t(x.type)||escapeHtml(x.type||'-')}</td><td>${badge(x.status)}</td><td>${fmtDate(x.created_at)}</td><td><div class="actionRow"><button class="btn small secondary" onclick="downloadFile('documents','${escapeHtml(x.id)}')">${t('download')}</button>${adminDeleteButton('documents',x.id)}</div></td></tr>`).join('') : `<tr><td colspan="5"><div class="empty">${t('noData')}</div></td></tr>`}</tbody></table></div>`;
     }
     async function uploadDocument(){
       if(!requireAuth()) return; const file=$('docFile')?.files?.[0]; const name=$('docName')?.value?.trim() || file?.name; const type=$('docType')?.value||'other'; if(!file){toast(t('documents'));return;}
@@ -462,8 +506,8 @@
     }
     function renderInvoices(){
       setTop('invoices','contactFinance'); const rows=state.data.invoices;
-      const mobile = `<div class="mobileList">${rows.length?rows.map(x=>`<div class="mobileListItem"><div class="projectHead"><h4>${escapeHtml(x.invoice_no||nameOf(x))}</h4>${badge(x.status,'invoice')}</div><div class="mobileMeta"><div><span>${t('name')}</span><b>${escapeHtml(nameOf(x))}</b></div><div><span>${t('amount')}</span><b>${fmtMoney(x.amount,x.currency||'EGP')}</b></div><div><span>${t('dueDate')}</span><b>${fmtDate(x.due_date||x.created_at)}</b></div></div><button class="btn small secondary" onclick="downloadFile('invoices','${escapeHtml(x.id)}')">${t('download')}</button></div>`).join(''):`<div class="card empty">${t('noData')}</div>`}</div>`;
-      return `<div class="sectionTitle"><div><h3>${t('invoices')}</h3><p>${state.lang==='ar'?'متابعة الحالة المالية وربطها بالمشروع والمرحلة.':'Track financial status linked to projects and phases.'}</p></div><button class="btn small" onclick="whatsapp('${state.lang==='ar'?'أرغب في الاستفسار عن فاتورة في بوابة العملاء':'I would like to ask about an invoice in the client portal'}')">WhatsApp</button></div>${mobile}<div class="tableWrap"><table><thead><tr><th>${t('invoiceNo')}</th><th>${t('name')}</th><th>${t('amount')}</th><th>${t('status')}</th><th>${t('dueDate')}</th><th>${t('actions')}</th></tr></thead><tbody>${rows.length?rows.map(x=>`<tr><td><b>${escapeHtml(x.invoice_no||x.number||x.id)}</b></td><td>${escapeHtml(nameOf(x))}</td><td>${fmtMoney(x.amount,x.currency||'EGP')}</td><td>${badge(x.status,'invoice')}</td><td>${fmtDate(x.due_date||x.created_at)}</td><td><button class="btn small secondary" onclick="downloadFile('invoices','${escapeHtml(x.id)}')">${t('download')}</button></td></tr>`).join('') : `<tr><td colspan="6"><div class="empty">${t('noData')}</div></td></tr>`}</tbody></table></div>`;
+      const mobile = `<div class="mobileList">${rows.length?rows.map(x=>`<div class="mobileListItem"><div class="projectHead"><h4>${escapeHtml(x.invoice_no||nameOf(x))}</h4>${badge(x.status,'invoice')}</div><div class="mobileMeta"><div><span>${t('name')}</span><b>${escapeHtml(nameOf(x))}</b></div><div><span>${t('amount')}</span><b>${fmtMoney(x.amount,x.currency||'EGP')}</b></div><div><span>${t('dueDate')}</span><b>${fmtDate(x.due_date||x.created_at)}</b></div></div><div class="actionRow"><button class="btn small secondary" onclick="downloadFile('invoices','${escapeHtml(x.id)}')">${t('download')}</button>${adminDeleteButton('invoices',x.id)}</div></div>`).join(''):`<div class="card empty">${t('noData')}</div>`}</div>`;
+      return `${isAdmin()?`<div class="adminNote" style="margin-bottom:14px"><b>${t('adminControls')}</b> · ${state.lang==='ar'?'يمكنك كأدمن حذف الفواتير من أزرار الحذف الظاهرة بجوار كل فاتورة.':'As an admin, you can delete invoices using the delete buttons next to each invoice.'}</div>`:''}<div class="sectionTitle"><div><h3>${t('invoices')}</h3><p>${state.lang==='ar'?'متابعة الحالة المالية وربطها بالمشروع والمرحلة.':'Track financial status linked to projects and phases.'}</p></div><button class="btn small" onclick="whatsapp('${state.lang==='ar'?'أرغب في الاستفسار عن فاتورة في بوابة العملاء':'I would like to ask about an invoice in the client portal'}')">WhatsApp</button></div>${mobile}<div class="tableWrap"><table><thead><tr><th>${t('invoiceNo')}</th><th>${t('name')}</th><th>${t('amount')}</th><th>${t('status')}</th><th>${t('dueDate')}</th><th>${t('actions')}</th></tr></thead><tbody>${rows.length?rows.map(x=>`<tr><td><b>${escapeHtml(x.invoice_no||x.number||x.id)}</b></td><td>${escapeHtml(nameOf(x))}</td><td>${fmtMoney(x.amount,x.currency||'EGP')}</td><td>${badge(x.status,'invoice')}</td><td>${fmtDate(x.due_date||x.created_at)}</td><td><div class="actionRow"><button class="btn small secondary" onclick="downloadFile('invoices','${escapeHtml(x.id)}')">${t('download')}</button>${adminDeleteButton('invoices',x.id)}</div></td></tr>`).join('') : `<tr><td colspan="6"><div class="empty">${t('noData')}</div></td></tr>`}</tbody></table></div>`;
     }
     function renderSupport(){
       setTop('support','newTicket'); const rows=state.data.tickets;
@@ -491,13 +535,34 @@
     }
     function renderAccount(){
       setTop('account','accountSettings');
-      return `<div class="grid cols2"><div class="card"><h4>${t('profile')}</h4><div class="field"><label>${t('email')}</label><input class="input ltr" value="${escapeHtml(state.user?.email||'')}" readonly></div><div class="field"><label>${t('company')}</label><input class="input" value="${state.lang==='ar'?'عميل شركة أبعاد المستقبل':'Future Dimensions Client'}"></div><div class="field"><label>${t('role')}</label><input class="input" value="Client" readonly></div></div><div class="card"><h4>${t('security')}</h4><p>${state.lang==='ar'?'البيانات الحساسة يجب أن تكون محمية بسياسات RLS، وتسجيل كل عمليات الرفع والتحميل والتعديل في Audit Log.':'Sensitive data must be protected by RLS policies, and all uploads, downloads and changes should be logged in an Audit Log.'}</p><div class="divider"></div><div class="hint smallText">${t('secureNote')}</div></div></div>`;
+      return `<div class="grid cols2"><div class="card"><h4>${t('profile')}</h4><div class="field"><label>${t('email')}</label><input class="input ltr" value="${escapeHtml(state.user?.email||'')}" readonly></div><div class="field"><label>${t('company')}</label><input class="input" value="${state.lang==='ar'?'عميل شركة أبعاد المستقبل':'Future Dimensions Client'}"></div><div class="field"><label>${t('role')}</label><input class="input" value="Client" readonly></div></div><div class="card"><h4>${t('security')}</h4><p>${state.lang==='ar'?'البيانات الحساسة يجب أن تكون محمية بسياسات RLS، وتسجيل كل عمليات الرفع والتحميل والتعديل في Audit Log.':'Sensitive data must be protected by RLS policies, and all uploads, downloads and changes should be logged in an Audit Log.'}</p><div class="divider"></div><div class="hint smallText">${t('secureNote')}</div></div>${isAdmin()?`<div class="card"><h4>${t('adminControls')}</h4><p>${state.lang==='ar'?'حذف الفواتير والمستندات يتم من صفحات الفواتير والمستندات بعد ظهور أزرار الحذف بجوار كل عنصر.':'Delete invoices and documents from the Invoices and Documents pages using the delete buttons next to each item.'}</p></div>`:''}</div>`;
     }
     async function downloadFile(kind,id){
       const list = kind==='invoices'?state.data.invoices:state.data.documents; const item=list.find(x=>String(x.id)===String(id));
       if(!item){toast(t('failed'));return;} if(!item.storage_path){showModal(nameOf(item), `<div class="empty"><div class="emptyIcon">▣</div><p>${state.lang==='ar'?'هذا عنصر تجريبي أو لا يحتوي على ملف مرفوع.':'This is a demo item or has no uploaded file.'}</p></div>`);return;}
       if(!requireAuth()) return; try{ const bucket=kind==='invoices'?INV_BUCKET:DOC_BUCKET; const {data,error}=await state.sb.storage.from(bucket).createSignedUrl(item.storage_path,60); if(error) throw error; window.open(data.signedUrl,'_blank'); }catch(e){toast(e.message||t('failed'));}
     }
+    async function deleteRecord(kind,id){
+      id = decodeURIComponent(id||'');
+      if(!isAdmin()){ toast(t('notAdmin')); return; }
+      if(!confirm(t('confirmDelete'))) return;
+      const table = kind==='invoices' ? 'invoices' : 'documents';
+      const bucket = kind==='invoices' ? INV_BUCKET : DOC_BUCKET;
+      const list = state.data[table] || [];
+      const item = list.find(x=>String(x.id)===String(id));
+      try{
+        if(state.sb && state.session && !state.demoMode){
+          if(item?.storage_path){ await state.sb.storage.from(bucket).remove([item.storage_path]); }
+          const {error}=await state.sb.from(table).delete().eq('id', id);
+          if(error) throw error;
+          await loadData();
+        }else{
+          state.data[table] = list.filter(x=>String(x.id)!==String(id));
+        }
+        toast(t('deleted')); render();
+      }catch(e){ toast(e.message || t('failed')); }
+    }
+    window.deleteRecord = deleteRecord;
     function attachPageEvents(){
       $('loginBtn')?.addEventListener('click',signIn); $('magicBtn')?.addEventListener('click',sendMagic); $('heroDemo')?.addEventListener('click',()=>{state.demoMode=true;go('dashboard')}); $('heroRequest')?.addEventListener('click',requestAccess);
       $('uploadDocBtn')?.addEventListener('click',uploadDocument); $('sendTicketBtn')?.addEventListener('click',sendTicket); $('sendMeetingBtn')?.addEventListener('click',sendMeeting);
@@ -509,12 +574,25 @@
       const renders={dashboard:renderDashboard,projects:renderProjects,documents:renderDocuments,invoices:renderInvoices,support:renderSupport,meetings:renderMeetings,resources:renderResources,account:renderAccount};
       app.innerHTML=(renders[state.page]||renderDashboard)(); attachPageEvents();
     }
-    window.addEventListener('online',()=>{state.online=true;updateStatus();}); window.addEventListener('offline',()=>{state.online=false;updateStatus();});
-    window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();state.deferredPrompt=e; $('installBtnSide').style.display='inline-flex';});
-    async function installApp(){ if(state.deferredPrompt){state.deferredPrompt.prompt(); await state.deferredPrompt.userChoice; state.deferredPrompt=null; $('installBtnSide').style.display='none';} }
-    $('installBtnSide').onclick=installApp; $('mobileMenu').onclick=()=>$('sidebar').classList.toggle('open'); document.querySelector('.content').addEventListener('click',()=>{ if(innerWidth<1080) $('sidebar').classList.remove('open'); }); $('langBtn').onclick=()=>{state.lang=state.lang==='ar'?'en':'ar';render();}; $('refreshBtn').onclick=async()=>{await loadData();render();toast(t('refresh'));}; $('requestAccessBtn').onclick=requestAccess; $('logoutBtn').onclick=logout; $('modalClose').onclick=closeModal; $('modalBackdrop').addEventListener('click',(e)=>{if(e.target.id==='modalBackdrop')closeModal();});
+    window.addEventListener('online',()=>{state.online=true;updateStatus();}); window.addEventListener('offline',()=>{state.online=false;updateStatus();}); window.addEventListener('resize',updateInstallButtons);
+    window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();state.deferredPrompt=e;updateInstallButtons();});
+    function isStandalone(){ return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true; }
+    function updateInstallButtons(){ const show=!isStandalone(); const mobile=window.innerWidth<=760; ['installBtnSide','installBtnTop','installFab'].forEach(id=>{const el=$(id); if(!el) return; el.style.display=(show && (id!=='installFab' || mobile))?'inline-flex':'none';}); }
+    async function installApp(){
+      if(state.deferredPrompt){ state.deferredPrompt.prompt(); await state.deferredPrompt.userChoice; state.deferredPrompt=null; updateInstallButtons(); return; }
+      showModal(t('installApp'), `<div class="adminNote">${t('installInstructions')}</div>`);
+    }
+    function openMobileMenu(){ $('sidebar').classList.add('open'); $('drawerBackdrop').classList.add('show'); document.body.classList.add('drawer-open'); }
+    function closeMobileMenu(){ $('sidebar').classList.remove('open'); $('drawerBackdrop').classList.remove('show'); document.body.classList.remove('drawer-open'); }
+    $('installBtnSide').onclick=installApp; $('installBtnTop').onclick=installApp; $('installFab').onclick=installApp;
+    $('mobileMenu').addEventListener('click',(e)=>{e.preventDefault();e.stopPropagation(); $('sidebar').classList.contains('open')?closeMobileMenu():openMobileMenu();});
+    $('drawerBackdrop').addEventListener('click',closeMobileMenu);
+    document.addEventListener('keydown',(e)=>{if(e.key==='Escape') closeMobileMenu();});
+    document.querySelector('.content').addEventListener('click',()=>{ if(innerWidth<1080) closeMobileMenu(); });
+    $('langBtn').onclick=()=>{state.lang=state.lang==='ar'?'en':'ar';render();}; $('refreshBtn').onclick=async()=>{await loadData();render();toast(t('refresh'));}; $('requestAccessBtn').onclick=requestAccess; $('logoutBtn').onclick=logout; $('modalClose').onclick=closeModal; $('modalBackdrop').addEventListener('click',(e)=>{if(e.target.id==='modalBackdrop')closeModal();});
     (async function boot(){
-      if('serviceWorker' in navigator){ try{ await navigator.serviceWorker.register('sw.js?v=4002'); }catch(e){console.warn(e)} }
+      updateInstallButtons();
+      if('serviceWorker' in navigator){ try{ await navigator.serviceWorker.register('sw.js?v=4003'); }catch(e){console.warn(e)} }
       await initSupabase(); await loadData(); render();
     })();
   </script>
