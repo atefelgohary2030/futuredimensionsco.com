@@ -807,6 +807,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 <a class="btn gold" href="index.html#contact" id="mCta" style="padding:10px 14px;display:inline-flex;align-items:center">Get a Proposal</a>
 </div>
 </div>
+</div>
 <main>
 <section class="pageView" data-page="about">
 <div class="wrap">
@@ -844,12 +845,12 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 </div>
 <div>
 <div aria-label="Quick links" class="footerLinks">
-<a href="#home" id="fHome">Home</a>
-<a href="#about" id="fAbout">About</a>
-<a href="#services" id="fServices">Services</a>
+<a href="index.html#home" id="fHome">Home</a>
+<a href="about.html" id="fAbout">About</a>
+<a href="index.html#services" id="fServices">Services</a>
 <a href="team.html" id="fTeam">Team</a>
 <a href="careers.html" id="fCareers">Careers</a>
-<a href="#contact" id="fContact">Contact</a>
+<a href="index.html#contact" id="fContact">Contact</a>
 </div>
 </div>
 </div>
@@ -874,17 +875,17 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
       back:"← Back"
     },
     ar:{
-      brandName:"Future Dimensions",
+      brandName:"شركة أبعاد المستقبل",
       brandSub:"للاستشارات وحلول الأعمال",
       nav:{home:"الرئيسية",about:"من نحن",services:"الخدمات",team:"فريق العمل",careers:"التوظيف",approach:"منهجيتنا",contact:"تواصل معنا"},
       dd:{fin:"البعد المالي",adm:"البعد الإداري والتشغيلي",gr:"استراتيجية النمو"},
       cta:"اطلب عرضاً",
       langBtn:"English",
-      mBrand:"Future Dimensions",
+      mBrand:"شركة أبعاد المستقبل",
       mSub:"للاستشارات",
       mNav:{home:"الرئيسية",about:"من نحن",services:"الخدمات",team:"فريق العمل",careers:"التوظيف",approach:"منهجيتنا",contact:"تواصل معنا"},
       f:{home:"الرئيسية",about:"من نحن",services:"الخدمات",team:"فريق العمل",careers:"التوظيف",contact:"تواصل معنا"},
-      copy:"© Future Dimensions — جميع الحقوق محفوظة.",
+      copy:"© شركة أبعاد المستقبل — جميع الحقوق محفوظة.",
       back:"عودة ←"
     }
   };
@@ -1017,7 +1018,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 window.applyPageContent = function(lang){
   const t = (lang==="ar") ? {
     title:"من نحن",
-    p:"تعمل Future Dimensions للاستشارات وحلول الأعمال كشريك استراتيجي — وليس مجرد مستشار — لدعم القيادات من التشخيص وحتى التنفيذ، بمخرجات موثقة وجاهزة للمراجعة ونتائج قابلة للقياس.",
+    p:"تعمل شركة أبعاد المستقبل للاستشارات وحلول الأعمال كشريك استراتيجي — وليس مجرد مستشار — لدعم القيادات من التشخيص وحتى التنفيذ، بمخرجات موثقة وجاهزة للمراجعة ونتائج قابلة للقياس.",
     bullets:[
       "تحول حقيقي — وليس حلولاً مؤقتة",
       "منهجية واضحة وتنفيذ عملي",
@@ -1042,9 +1043,9 @@ window.applyPageContent = function(lang){
   if(pp) pp.textContent=t.p;
   if(ul) ul.innerHTML=t.bullets.map(x=>`<li>${x}</li>`).join("");
 };
+window.applyPageContent((localStorage.getItem("fd_lang")||"en")==="ar"?"ar":"en");
 
 </script>
-</div>
 <a class="whatsappFloat" href="https://wa.me/201001938264?text=Hello%20Future%20Dimensions%2C%20I%20would%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener" aria-label="Contact Future Dimensions on WhatsApp"><span class="waIcon">☎</span><span>WhatsApp</span></a>
 </body>
 </html>

@@ -813,7 +813,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 <!-- ✅ Additional pages (icons only) -->
 <a href="team.html" id="navTeam">Team</a>
 <a href="careers.html" id="navCareers">Careers</a>
-<a href="#approach" id="navApproach">Approach</a>
+<a href="index.html#methodology" id="navApproach">Approach</a>
 <a href="#contact" id="navContact">Contact</a>
 </nav>
 <div class="navRight">
@@ -852,7 +852,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 </div><a href="insights.html" id="mInsights">Global Insights</a>
 <a href="team.html" id="mTeam">Team</a>
 <a href="careers.html" id="mCareers">Careers</a>
-<a href="#approach" id="mApproach">Approach</a>
+<a href="index.html#methodology" id="mApproach">Approach</a>
 <a href="#contact" id="mContact">Contact</a>
 </div>
 <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
@@ -1059,7 +1059,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 <ul class="bullets blackBullets">
 <li><b id="contactInfoEmailLabel">Email:</b> <a href="mailto:info@futuredimensionsco.com">info@futuredimensionsco.com</a></li>
 <li><b id="contactInfoWebsiteLabel">Website:</b> www.futuredimensionsco.com</li>
-<li><b id="contactInfoPhoneLabel">Phone:</b> <span dir="ltr" id="contactInfoPhoneVal" style="direction:ltr;unicode-bidi:bidi-override;">+20 100 193 8264</span></li>
+<li><b id="contactInfoPhoneLabel">Phone:</b> <span dir="ltr" id="contactInfoPhoneVal" style="direction:ltr;unicode-bidi:isolate;">+20 100 193 8264</span></li>
 </ul>
 </div>
 <div class="cardActions">
@@ -1332,12 +1332,12 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 </div>
 <div>
 <div aria-label="Quick links" class="footerLinks">
-<a href="#home" id="fHome">Home</a>
-<a href="#about" id="fAbout">About</a>
-<a href="#services" id="fServices">Services</a><a href="insights.html" id="fInsights">Global Insights</a>
+<a href="index.html#home" id="fHome">Home</a>
+<a href="about.html" id="fAbout">About</a>
+<a href="index.html#services" id="fServices">Services</a><a href="insights.html" id="fInsights">Global Insights</a>
 <a href="team.html" id="fTeam">Team</a>
 <a href="careers.html" id="fCareers">Careers</a>
-<a href="#contact" id="fContact">Contact</a>
+<a href="index.html#contact" id="fContact">Contact</a>
 </div>
 </div>
 </div>
@@ -2154,6 +2154,8 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
     setText("servicesHint", c.servicesHint);
 
     // About page cards (home)
+    setText("aboutTitle", c.aboutTitle);
+    setText("aboutSub", c.aboutHint);
     setText("aboutH3", c.aboutH3);
     setText("aboutP", c.aboutP);
     setText("aboutMoreLabel", c.aboutMoreLabel);
@@ -2205,7 +2207,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
     setText("contactInfoEmailLabel", c.contactInfoEmailLabel);
     setText("contactInfoWebsiteLabel", c.contactInfoWebsiteLabel);
     setText("contactInfoPhoneLabel", c.contactInfoPhoneLabel);
-  setText("contactInfoPhoneVal", c.contactInfoPhoneVal);
+  setText("contactInfoPhoneVal", "+20 100 193 8264");
     setText("contactInfoBtnEmail", c.contactInfoBtnEmail);
     setText("contactInfoBtnWebsite", c.contactInfoBtnWebsite);
     setText("contactInfoBtnCall", c.contactInfoBtnCall);

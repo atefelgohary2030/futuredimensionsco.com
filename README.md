@@ -1,15 +1,14 @@
-# Future Dimensions Website - Improved Package
+# Future Dimensions Website - Corrected Full Package
 
 Upload all files in this folder to the website root.
 
-Main improvements included:
-- Clean internal links instead of ?page= service links.
-- Improved Team page with professional bilingual leadership profiles.
-- New Global Insights page plus 3 full professional articles.
-- Contact form using mailto and WhatsApp prefilled message.
-- Floating WhatsApp button using the existing phone number.
-- Updated sitemap.xml and robots.txt.
-- Added/expanded SEO metadata, Open Graph images, and structured data.
-- Optimized logo image size for better loading without changing identity.
+Corrections included:
+- Fixed team role text contrast on gold cards.
+- Fixed phone number direction in Arabic/RTL views.
+- Fixed About and Vision/Mission pages opening as blank pages.
+- Translated Arabic homepage About title correctly.
+- Standardized Arabic company name to "شركة أبعاد المستقبل" in Arabic UI text.
+- Fixed Methodology menu link to open the real methodology section.
+- Rechecked bilingual navigation, footer labels, WhatsApp button, sitemap, and core internal links.
 
-Note: The contact form is static. For direct server-side form submissions, connect it later to hosting form handling, CRM, or a backend endpoint.
+Important: keep your GitHub CNAME file if it already exists in the repository.
