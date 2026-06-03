@@ -1,0 +1,349 @@
+<!DOCTYPE html><html dir="ltr" lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operating Model Redesign | Future Dimensions Insights</title>
+<meta name="description" content="A practical article on redesigning operating models to improve decisions, accountability, productivity, and profitability.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.futuredimensionsco.com/insight-operating-model.html">
+<link rel="alternate" hreflang="en" href="https://www.futuredimensionsco.com/insight-operating-model.html">
+<link rel="alternate" hreflang="ar" href="https://www.futuredimensionsco.com/insight-operating-model.html">
+<meta property="og:site_name" content="Future Dimensions">
+<meta property="og:title" content="Operating Model Redesign | Future Dimensions Insights">
+<meta property="og:description" content="A practical article on redesigning operating models to improve decisions, accountability, productivity, and profitability.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.futuredimensionsco.com/insight-operating-model.html">
+<meta property="og:image" content="https://www.futuredimensionsco.com/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Operating Model Redesign | Future Dimensions Insights">
+<meta name="twitter:description" content="A practical article on redesigning operating models to improve decisions, accountability, productivity, and profitability.">
+<meta name="twitter:image" content="https://www.futuredimensionsco.com/logo.png">
+<meta name="theme-color" content="#0b1322">
+<link href="favicon.ico" rel="icon" type="image/x-icon">
+<link href="favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+<link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+<style>
+
+:root{
+  --navy:#0b1322;
+  --navy2:#0f1b2d;
+  --gold:#d4af37;
+  --gold2:#f3df92;
+  --gold3:#c79d2e;
+  --teal:#18b6a4;      /* third accent */
+  --mint:#bff6e8;      /* soft accent */
+  --ink:#0b1322;
+  --paper:#ffffff;
+  --muted:#9fb0c2;
+  --shadow: 0 24px 60px rgba(0,0,0,.35);
+  --radius: 20px;
+  --radius2: 28px;
+  --max: 1180px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans Arabic", "Noto Kufi Arabic", sans-serif;
+  background:
+    radial-gradient(1200px 700px at 10% 0%, rgba(212,175,55,.12), rgba(212,175,55,0) 60%),
+    radial-gradient(900px 650px at 90% 20%, rgba(24,182,164,.10), rgba(24,182,164,0) 60%),
+    linear-gradient(180deg, var(--navy) 0%, #070c16 100%);
+  color: #eef3ff;
+}
+
+a{color:inherit; text-decoration:none}
+.container{max-width:var(--max); margin:0 auto; padding:0 18px}
+.hr{height:1px; background:linear-gradient(90deg, rgba(212,175,55,0), rgba(212,175,55,.25), rgba(212,175,55,0)); margin:26px 0}
+
+header{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter: blur(10px);
+  background: rgba(11,19,34,.66);
+  border-bottom: 1px solid rgba(212,175,55,.16);
+}
+
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 0;
+}
+.brand{
+  display:flex; align-items:center; gap:10px;
+  min-width: 210px;
+}
+.brand img{
+  width:34px; height:34px; object-fit:contain;
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,.45));
+}
+.brandName{
+  display:flex; flex-direction:column; line-height:1.05;
+}
+.brandName b{font-size:15px; letter-spacing:.4px}
+.brandName span{font-size:12px; color:rgba(212,175,55,.85)}
+.navLinks{
+  display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+}
+.navLinks a{
+  font-size:13px;
+  padding:8px 10px;
+  border-radius:999px;
+  color:rgba(238,243,255,.92);
+  border:1px solid rgba(255,255,255,0);
+  transition:.18s ease;
+}
+.navLinks a:hover{
+  border-color: rgba(212,175,55,.28);
+  background: rgba(212,175,55,.08);
+}
+.navRight{display:flex; gap:10px; align-items:center}
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:8px;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(212,175,55,.30);
+  background: linear-gradient(135deg, rgba(212,175,55,.22), rgba(212,175,55,.10));
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.btn:hover{transform: translateY(-1px); border-color: rgba(212,175,55,.45)}
+.btnGhost{
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  font-weight:650;
+}
+.pill{
+  display:inline-flex; align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  border-radius:999px;
+  background: rgba(11,19,34,.08);
+  border:1px solid rgba(11,19,34,.16);
+  color: rgba(11,19,34,.92);
+  font-weight:750;
+  font-size:13px;
+}
+.pill:hover{background: rgba(11,19,34,.12)}
+.hero{
+  padding:56px 0 18px;
+}
+.heroGrid{
+  display:grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap:18px;
+  align-items:stretch;
+}
+.heroCard{
+  border-radius: var(--radius2);
+  box-shadow: var(--shadow);
+  border:1px solid rgba(212,175,55,.22);
+  background:
+    radial-gradient(900px 520px at 12% 0%, rgba(212,175,55,.22), rgba(212,175,55,0) 60%),
+    radial-gradient(820px 560px at 94% 18%, rgba(24,182,164,.14), rgba(24,182,164,0) 55%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  padding:26px;
+  overflow:hidden;
+  position:relative;
+}
+.heroCard:before{
+  content:"";
+  position:absolute; inset:-2px;
+  background: radial-gradient(600px 260px at 22% -10%, rgba(243,223,146,.22), rgba(243,223,146,0) 60%);
+  pointer-events:none;
+}
+.kicker{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:8px 12px;
+  border-radius:999px;
+  background: rgba(212,175,55,.12);
+  border:1px solid rgba(212,175,55,.22);
+  color: rgba(243,223,146,.98);
+  font-weight:750;
+  font-size:12px;
+}
+.heroTitle{
+  margin:14px 0 10px;
+  font-size: clamp(30px, 4.7vw, 46px);
+  line-height:1.08;
+}
+.heroTitle .gold{color: var(--gold2)}
+.heroText{
+  color: rgba(238,243,255,.86);
+  font-size: 15px;
+  line-height:1.9;
+  margin: 0 0 16px;
+}
+.heroActions{display:flex; gap:10px; flex-wrap:wrap}
+
+.sideCard{
+  border-radius: var(--radius2);
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+  padding:22px;
+}
+.sideCard h3{margin:0 0 10px; font-size:16px}
+.sideCard p{margin:0; color: rgba(238,243,255,.84); line-height:1.85; font-size:13px}
+
+.section{
+  padding: 20px 0 10px;
+}
+.sectionTitle{
+  display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  margin: 0 0 12px;
+}
+.sectionTitle h2{
+  margin:0;
+  font-size: clamp(20px, 3.2vw, 28px);
+}
+.sectionTitle .hint{color: rgba(238,243,255,.72); font-size:13px}
+
+.grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+.grid2{display:grid; grid-template-columns: repeat(2, 1fr); gap:14px}
+
+.card{
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border:1px solid rgba(0,0,0,.12);
+  padding:18px;
+  position:relative;
+  overflow:hidden;
+  color: var(--ink);
+
+  background:
+    radial-gradient(900px 480px at 12% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+    linear-gradient(135deg, #FBF7EA 0%, var(--gold3) 22%, var(--gold) 62%, #A98022 130%);
+}
+.card h3{margin:0 0 8px; font-size:18px; color: rgba(11,19,34,.98)}
+.card p, .card li{color: rgba(11,19,34,.88); line-height:1.75; font-size:14px}
+.card ul{margin:10px 0 0; padding-inline-start:18px}
+.card .tag{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:12px; font-weight:800;
+  padding:7px 10px;
+  border-radius:999px;
+  background: rgba(11,19,34,.08);
+  border: 1px solid rgba(11,19,34,.16);
+  color: rgba(11,19,34,.92);
+}
+
+.footer{
+  padding: 22px 0 36px;
+  color: rgba(238,243,255,.72);
+  font-size: 13px;
+}
+.footerGrid{display:grid; grid-template-columns: 1.2fr .8fr; gap:16px}
+.footer a{color: rgba(243,223,146,.92)}
+.footer small{color: rgba(238,243,255,.62)}
+
+.toast{
+  position: fixed; bottom: 16px; left: 16px; right: 16px;
+  max-width: 420px; margin: 0 auto;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.70);
+  border: 1px solid rgba(212,175,55,.26);
+  color: rgba(255,255,255,.92);
+  display:none;
+}
+
+/* Mobile */
+@media(max-width: 900px){
+  .heroGrid{grid-template-columns: 1fr}
+  .grid3{grid-template-columns: 1fr}
+  .grid2{grid-template-columns: 1fr}
+  .navLinks{display:none}
+}
+@media(max-width: 480px){
+  body{font-size: 15px}
+  .hero{padding:44px 0 10px}
+  .heroCard, .sideCard{padding:18px}
+  .btn{width:100%; justify-content:center}
+  .btnGhost{width:100%}
+  .brand img{width:32px;height:32px}
+}
+
+  
+
+/* ===== Lead Conversion Enhancements ===== */
+.whatsappFloat{
+  position:fixed;right:18px;bottom:18px;z-index:9999;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 16px;border-radius:999px;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:#fff !important;font-weight:950;
+  box-shadow:0 16px 40px rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.22)
+}
+.whatsappFloat:hover{transform:translateY(-2px);filter:brightness(1.03)}
+.whatsappFloat .waIcon{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18)}
+.leadForm{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.leadForm .full{grid-column:1/-1}
+.leadForm input,.leadForm select,.leadForm textarea{
+  width:100%;border:1px solid rgba(11,19,34,.18);border-radius:14px;
+  padding:12px 13px;font:inherit;background:rgba(255,255,255,.88);color:#071224;outline:none
+}
+.leadForm textarea{min-height:112px;resize:vertical}
+.leadForm input:focus,.leadForm select:focus,.leadForm textarea:focus{border-color:rgba(212,175,55,.85);box-shadow:0 0 0 4px rgba(212,175,55,.14)}
+.trustStrip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.trustPill{border:1px solid rgba(212,175,55,.24);border-radius:16px;padding:14px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.88)}
+.trustPill b{display:block;color:#F1D77A;margin-bottom:4px}
+@media(max-width:760px){.leadForm,.trustStrip{grid-template-columns:1fr}.whatsappFloat{left:14px;right:14px;justify-content:center}.whatsappFloat span:last-child{display:inline}}
+
+
+
+.profileLead{font-size:18px;line-height:1.85;color:rgba(255,255,255,.82);max-width:920px}
+.metricGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.metricCard{padding:18px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid rgba(212,175,55,.25)}
+.metricCard b{display:block;color:var(--gold2);font-size:18px;margin-bottom:6px}.metricCard span{color:rgba(255,255,255,.76);line-height:1.65}
+.profileCard h3{margin-bottom:6px}.profileCard .role{font-weight:950;color:var(--gold);margin-bottom:10px}.profileCard ul{margin:12px 0 0;padding-inline-start:20px;line-height:1.75;color:rgba(11,19,34,.86)}
+.articleHero{padding:64px 0 24px}.articleContent{max-width:920px;margin:auto}.articleContent h2{font-size:30px;margin:34px 0 12px;color:var(--gold2)}.articleContent p,.articleContent li{font-size:17px;line-height:1.9;color:rgba(255,255,255,.84)}.articleContent .card p,.articleContent .card li{color:rgba(11,19,34,.86)}.articleContent ol,.articleContent ul{padding-inline-start:24px}.articleMeta{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.articleMeta span{border:1px solid rgba(212,175,55,.3);border-radius:999px;padding:8px 12px;color:rgba(255,255,255,.75);font-weight:800}.articleGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.articleGrid .card{height:100%}.noteBox{border-left:4px solid var(--gold);padding:16px 18px;border-radius:14px;background:rgba(212,175,55,.10);margin:20px 0;color:rgba(255,255,255,.88);line-height:1.8}
+@media(max-width:900px){.metricGrid,.articleGrid{grid-template-columns:1fr}.profileLead{font-size:16px}}
+
+
+/* ===== Lead Conversion Enhancements ===== */
+.whatsappFloat{
+  position:fixed;right:18px;bottom:18px;z-index:9999;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 16px;border-radius:999px;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:#fff !important;font-weight:950;
+  box-shadow:0 16px 40px rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.22)
+}
+.whatsappFloat:hover{transform:translateY(-2px);filter:brightness(1.03)}
+.whatsappFloat .waIcon{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18)}
+.leadForm{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.leadForm .full{grid-column:1/-1}
+.leadForm input,.leadForm select,.leadForm textarea{
+  width:100%;border:1px solid rgba(11,19,34,.18);border-radius:14px;
+  padding:12px 13px;font:inherit;background:rgba(255,255,255,.88);color:#071224;outline:none
+}
+.leadForm textarea{min-height:112px;resize:vertical}
+.leadForm input:focus,.leadForm select:focus,.leadForm textarea:focus{border-color:rgba(212,175,55,.85);box-shadow:0 0 0 4px rgba(212,175,55,.14)}
+.trustStrip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.trustPill{border:1px solid rgba(212,175,55,.24);border-radius:16px;padding:14px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.88)}
+.trustPill b{display:block;color:#F1D77A;margin-bottom:4px}
+@media(max-width:760px){.leadForm,.trustStrip{grid-template-columns:1fr}.whatsappFloat{left:14px;right:14px;justify-content:center}.whatsappFloat span:last-child{display:inline}}
+
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Future Dimensions for Consulting & Business Solutions", "alternateName": "Future Dimensions", "url": "https://www.futuredimensionsco.com", "logo": "https://www.futuredimensionsco.com/logo.png", "email": "info@futuredimensionsco.com", "telephone": "+20 100 193 8264", "address": {"@type": "PostalAddress", "streetAddress": "Building No. 6, Mostafa Anani St., Heliopolis", "addressLocality": "Cairo", "addressCountry": "EG"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Operating Model Redesign: The Hidden Lever Behind Performance", "description": "A practical article on redesigning operating models to improve decisions, accountability, productivity, and profitability.", "author": {"@type": "Organization", "name": "Future Dimensions"}, "publisher": {"@type": "Organization", "name": "Future Dimensions", "logo": {"@type": "ImageObject", "url": "https://www.futuredimensionsco.com/logo.png"}}, "datePublished": "2026-06-03", "dateModified": "2026-06-03", "mainEntityOfPage": "https://www.futuredimensionsco.com/insight-operating-model.html"}</script>
+</head><body><header><div class="container nav"><a aria-label="Future Dimensions Home" class="brand" href="index.html"><img alt="Future Dimensions logo" src="logo.png"/><div class="brandName"><b>Future Dimensions</b><span>Consulting &amp; Business Solutions</span></div></a><nav aria-label="Primary" class="navLinks"><a href="index.html" class="" data-en="Home" data-ar="الرئيسية">Home</a><a href="about.html" class="" data-en="About" data-ar="من نحن">About</a><a href="financial.html" class="" data-en="Financial" data-ar="الاستشارات المالية">Financial</a><a href="administrative.html" class="" data-en="Administrative" data-ar="الإداري والتشغيلي">Administrative</a><a href="growth.html" class="" data-en="Growth" data-ar="استراتيجيات النمو">Growth</a><a href="insights.html" class="active" data-en="Insights" data-ar="مقالات ورؤى">Insights</a><a href="team.html" class="" data-en="Team" data-ar="فريق العمل">Team</a><a href="careers.html" class="" data-en="Careers" data-ar="التوظيف">Careers</a><a href="index.html#contact" class="" data-en="Contact" data-ar="تواصل معنا">Contact</a></nav><div class="navRight"><button class="btn btnGhost" id="langToggle" type="button">العربية</button><a class="btn" href="index.html#contact" data-en="Request Consultation" data-ar="اطلب استشارة">Request Consultation</a></div></div></header><main><section class="articleHero"><div class="container articleContent"><a class="btn btnGhost" href="insights.html" data-en="← Back to Insights" data-ar="→ العودة إلى المقالات">← Back to Insights</a><div class="articleMeta"><span data-en="Administrative & Operational Dimension" data-ar="البعد الإداري والتشغيلي">Administrative & Operational Dimension</span><span data-en="9 min read" data-ar="قراءة ٩ دقائق">9 min read</span></div><h1 class="heroTitle" style="margin-top:18px"><span data-en="Operating Model Redesign: The Hidden Lever Behind Performance" data-ar="إعادة تصميم نموذج التشغيل: الرافعة الخفية وراء الأداء">Operating Model Redesign: The Hidden Lever Behind Performance</span></h1><p class="profileLead" data-en="A practical article on redesigning operating models to improve decisions, accountability, productivity, and profitability." data-ar="مقال عملي من فيوتشر ديمينشنز يترجم الخبرة الاستشارية إلى خطوات واضحة قابلة للتطبيق داخل الشركات في مصر والسعودية والمنطقة.">A practical article on redesigning operating models to improve decisions, accountability, productivity, and profitability.</p></div></section><section class="section"><div class="container articleContent"><h2 data-en="Why operating models become outdated" data-ar="لماذا تصبح نماذج التشغيل قديمة؟">Why operating models become outdated</h2><p data-en="As companies grow, their original way of working often stops serving them. Roles overlap, approvals multiply, processes depend on individuals, and departments optimize their own work instead of the company’s overall outcome." data-ar="مع نمو الشركات، تتوقف طريقة العمل القديمة عن خدمة الواقع الجديد. تتداخل الأدوار، وتزيد الموافقات، وتعتمد العمليات على الأفراد، وتبدأ الإدارات في تحسين عملها منفردة بدلاً من تحسين نتيجة الشركة ككل.">As companies grow, their original way of working often stops serving them. Roles overlap, approvals multiply, processes depend on individuals, and departments optimize their own work instead of the company’s overall outcome.</p><h2 data-en="Symptoms management should not ignore" data-ar="مؤشرات لا يجب تجاهلها">Symptoms management should not ignore</h2><p data-en="Recurring delays, unclear ownership, repeated escalation, duplicated work, weak accountability, and reports that describe the past without helping decisions are all signs that the operating model needs redesign." data-ar="التأخير المتكرر، وغموض المسؤولية، وكثرة التصعيد، وازدواجية العمل، وضعف المساءلة، والتقارير التي تصف الماضي دون دعم القرار؛ كلها مؤشرات أن نموذج التشغيل يحتاج إلى إعادة تصميم.">Recurring delays, unclear ownership, repeated escalation, duplicated work, weak accountability, and reports that describe the past without helping decisions are all signs that the operating model needs redesign.</p><h2 data-en="What redesign includes" data-ar="ماذا تشمل إعادة التصميم؟">What redesign includes</h2><p data-en="A strong redesign clarifies structure, decision rights, process flows, SOPs, delegation of authority, KPIs, meeting rhythm, and reporting lines. It connects people, process, governance, and data in one practical system." data-ar="إعادة التصميم القوية توضح الهيكل، وحقوق القرار، وتدفقات العمليات، وإجراءات العمل، ومصفوفة الصلاحيات، ومؤشرات الأداء، وإيقاع الاجتماعات، وخطوط التقارير. وهي تربط الناس والعمليات والحوكمة والبيانات في نظام عملي واحد.">A strong redesign clarifies structure, decision rights, process flows, SOPs, delegation of authority, KPIs, meeting rhythm, and reporting lines. It connects people, process, governance, and data in one practical system.</p><h2 data-en="Future Dimensions perspective" data-ar="رؤية فيوتشر ديمينشنز">Future Dimensions perspective</h2><p data-en="We do not redesign organizations on paper only. We build operating models that management teams can actually run: clear roles, clear approvals, clear dashboards, and a realistic implementation roadmap." data-ar="نحن لا نعيد تصميم المؤسسات على الورق فقط. نبني نماذج تشغيل تستطيع فرق الإدارة تشغيلها فعلياً: أدوار واضحة، واعتمادات واضحة، ولوحات مؤشرات واضحة، وخارطة تنفيذ واقعية.">We do not redesign organizations on paper only. We build operating models that management teams can actually run: clear roles, clear approvals, clear dashboards, and a realistic implementation roadmap.</p><div class="noteBox" data-en="If your organization is facing similar challenges, Future Dimensions can start with a focused diagnostic session to identify priorities, risks, and practical next steps." data-ar="إذا كانت مؤسستك تواجه تحديات مشابهة، تستطيع فيوتشر ديمينشنز البدء بجلسة تشخيص مركزة لتحديد الأولويات والمخاطر والخطوات العملية التالية.">If your organization is facing similar challenges, Future Dimensions can start with a focused diagnostic session to identify priorities, risks, and practical next steps.</div><a class="btn" href="index.html#contact" data-en="Request a Diagnostic Consultation" data-ar="اطلب جلسة تشخيص">Request a Diagnostic Consultation</a></div></section></main><footer class="footer"><div class="container footerGrid"><div><b style="display:block; font-size:14px; margin-bottom:8px">Future Dimensions</b><div style="max-width:520px; line-height:1.85" data-en="A consulting partner blending financial expertise, operational excellence, and growth strategy to build resilient organizations and sustainable results." data-ar="شريك استشاري يجمع بين الخبرة المالية والتميز التشغيلي واستراتيجيات النمو لبناء منظمات مرنة ونتائج مستدامة.">A consulting partner blending financial expertise, operational excellence, and growth strategy to build resilient organizations and sustainable results.</div><div style="margin-top:10px"><small>© 2026 Future Dimensions. All rights reserved.</small></div></div><div><b style="display:block; font-size:14px; margin-bottom:8px" data-en="Contact" data-ar="التواصل">Contact</b><div style="line-height:1.9"><div><a href="mailto:info@futuredimensionsco.com">info@futuredimensionsco.com</a></div><div><a href="tel:+201001938264">+20 100 193 8264</a></div><div><a href="https://www.futuredimensionsco.com" rel="noopener" target="_blank">www.futuredimensionsco.com</a></div></div></div></div></footer><script>
+(function(){
+  function setLang(lang){
+    document.documentElement.lang=lang; document.documentElement.dir=(lang==='ar'?'rtl':'ltr');
+    document.querySelectorAll('[data-en][data-ar]').forEach(function(el){ el.textContent = el.getAttribute(lang==='ar'?'data-ar':'data-en'); });
+    const btn=document.getElementById('langToggle'); if(btn) btn.textContent=(lang==='ar'?'English':'العربية');
+    localStorage.setItem('fd_lang', lang);
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    setLang(localStorage.getItem('fd_lang')||'en');
+    const btn=document.getElementById('langToggle'); if(btn) btn.addEventListener('click', function(){ setLang((localStorage.getItem('fd_lang')||'en')==='en'?'ar':'en'); });
+  });
+})();
+</script>
+<a class="whatsappFloat" href="https://wa.me/201001938264?text=Hello%20Future%20Dimensions%2C%20I%20would%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener" aria-label="Contact Future Dimensions on WhatsApp"><span class="waIcon">☎</span><span>WhatsApp</span></a>
+</body></html>

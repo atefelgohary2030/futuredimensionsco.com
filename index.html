@@ -8,7 +8,7 @@
 <meta content="apPz_urNfcx8kFW" name="google-site-verification"/>
 <!-- ✅ SEO -->
 <title>Future Dimensions | Financial, Operational &amp; Growth Consulting</title>
-<meta content="Future Dimensions is an integrated consulting firm delivering Financial, Administrative &amp; Operational, and Growth Strategy solutions with measurable impact." name="description"/>
+<meta content="Future Dimensions is an integrated consulting firm helping organizations improve financial performance, governance, operations, and growth through practical, measurable consulting engagements." name="description"/>
 <meta content="index, follow" name="robots"/>
 <link href="https://www.futuredimensionsco.com/" rel="canonical"/>
 <link href="https://www.futuredimensionsco.com/" hreflang="en" rel="alternate"/>
@@ -745,6 +745,33 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 /* Ensure gold-card text is true black (not muted/gray) */
 .cardGold, .cardGold h3, .cardGold h4, .cardGold p, .cardGold li { color: var(--ink); }
 
+
+
+/* ===== Lead Conversion Enhancements ===== */
+.whatsappFloat{
+  position:fixed;right:18px;bottom:18px;z-index:9999;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 16px;border-radius:999px;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:#fff !important;font-weight:950;
+  box-shadow:0 16px 40px rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.22)
+}
+.whatsappFloat:hover{transform:translateY(-2px);filter:brightness(1.03)}
+.whatsappFloat .waIcon{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18)}
+.leadForm{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.leadForm .full{grid-column:1/-1}
+.leadForm input,.leadForm select,.leadForm textarea{
+  width:100%;border:1px solid rgba(11,19,34,.18);border-radius:14px;
+  padding:12px 13px;font:inherit;background:rgba(255,255,255,.88);color:#071224;outline:none
+}
+.leadForm textarea{min-height:112px;resize:vertical}
+.leadForm input:focus,.leadForm select:focus,.leadForm textarea:focus{border-color:rgba(212,175,55,.85);box-shadow:0 0 0 4px rgba(212,175,55,.14)}
+.trustStrip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.trustPill{border:1px solid rgba(212,175,55,.24);border-radius:16px;padding:14px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.88)}
+.trustPill b{display:block;color:#F1D77A;margin-bottom:4px}
+@media(max-width:760px){.leadForm,.trustStrip{grid-template-columns:1fr}.whatsappFloat{left:14px;right:14px;justify-content:center}.whatsappFloat span:last-child{display:inline}}
+
 </style>
 <meta content="https://www.futuredimensionsco.com/logo.png" property="og:image"/><meta content="Future Dimensions logo" property="og:image:alt"/><meta content="https://www.futuredimensionsco.com/logo.png" name="twitter:image"/><script id="ld-org" type="application/ld+json">{
   "@context": "https://schema.org",
@@ -778,11 +805,11 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 <div class="dropdown" id="servicesDropdown">
 <button aria-expanded="false" aria-haspopup="true" id="navServicesBtn" type="button">Services ▾</button>
 <div aria-label="Services menu" class="dropMenu" role="menu">
-<a href="?page=financial" id="ddFinancial">Financial Dimension <span class="chip" id="chip1">Page</span></a>
-<a href="?page=administrative" id="ddAdminOps">Administrative &amp; Operational <span class="chip" id="chip2">Page</span></a>
-<a href="?page=growth" id="ddGrowth">Growth Strategy <span class="chip" id="chip3">Page</span></a>
+<a href="financial.html" id="ddFinancial">Financial Dimension <span class="chip" id="chip1">Page</span></a>
+<a href="administrative.html" id="ddAdminOps">Administrative &amp; Operational <span class="chip" id="chip2">Page</span></a>
+<a href="growth.html" id="ddGrowth">Growth Strategy <span class="chip" id="chip3">Page</span></a>
 </div>
-</div><a href="?page=insights" id="navInsights">Global Insights</a>
+</div><a href="insights.html" id="navInsights">Global Insights</a>
 <!-- ✅ Additional pages (icons only) -->
 <a href="team.html" id="navTeam">Team</a>
 <a href="careers.html" id="navCareers">Careers</a>
@@ -819,10 +846,10 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 <span>▾</span>
 </button>
 <div class="mSub" id="mServicesSub">
-<a href="?page=financial" id="mFin">Financial Dimension</a>
-<a href="?page=administrative" id="mAdm">Administrative &amp; Operational</a>
-<a href="?page=growth" id="mGr">Growth Strategy</a>
-</div><a href="?page=insights" id="mInsights">Global Insights</a>
+<a href="financial.html" id="mFin">Financial Dimension</a>
+<a href="administrative.html" id="mAdm">Administrative &amp; Operational</a>
+<a href="growth.html" id="mGr">Growth Strategy</a>
+</div><a href="insights.html" id="mInsights">Global Insights</a>
 <a href="team.html" id="mTeam">Team</a>
 <a href="careers.html" id="mCareers">Careers</a>
 <a href="#approach" id="mApproach">Approach</a>
@@ -883,7 +910,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 </ul>
 </div>
 <div class="cardActions">
-<a class="slink primary" href="?page=about" id="aboutMoreBtn">
+<a class="slink primary" href="about.html" id="aboutMoreBtn">
 <span class="ic"></span><span id="aboutMoreLabel">More</span>
 </a>
 </div>
@@ -913,7 +940,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 </div>
 </div>
 <div class="cardActions">
-<a class="slink primary" href="?page=vision" id="vmMoreBtn">
+<a class="slink primary" href="vision.html" id="vmMoreBtn">
 <span class="ic"></span><span id="vmMoreLabel">More</span>
 </a>
 </div>
@@ -944,7 +971,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 </ul>
 </div>
 <div class="cardActions">
-<a class="slink primary" href="?page=financial" id="finMoreBtn"><span class="ic"></span><span id="finMoreLabel">More</span></a>
+<a class="slink primary" href="financial.html" id="finMoreBtn"><span class="ic"></span><span id="finMoreLabel">More</span></a>
 </div>
 </div>
 <div class="card cardGold cardFlex">
@@ -962,7 +989,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 </ul>
 </div>
 <div class="cardActions">
-<a class="slink primary" href="?page=administrative" id="adMoreBtn"><span class="ic"></span><span id="adMoreLabel">More</span></a>
+<a class="slink primary" href="administrative.html" id="adMoreBtn"><span class="ic"></span><span id="adMoreLabel">More</span></a>
 </div>
 </div>
 <div class="card cardGold cardFlex">
@@ -980,7 +1007,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 </ul>
 </div>
 <div class="cardActions">
-<a class="slink primary" href="?page=growth" id="grMoreBtn"><span class="ic"></span><span id="grMoreLabel">More</span></a>
+<a class="slink primary" href="growth.html" id="grMoreBtn"><span class="ic"></span><span id="grMoreLabel">More</span></a>
 </div>
 </div>
 </div>
@@ -1022,35 +1049,54 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 <div class="wrap">
 <div class="sectionTitle">
 <h2 id="contactTitle">Contact</h2>
-<p id="contactHint"><span id="contactSub">Let’s start your transformation</span></p>
+<p id="contactHint"><span id="contactSub">Book a 30-minute consultation and start with a clear diagnostic conversation.</span></p>
 </div>
 <div class="grid2 equalCards">
 <div class="card cardGold cardFlex">
 <div>
 <h3 id="contactInfoTitle">Contact Info</h3>
-<p class="pStrong" id="contactInfoDesc">Reach us through the channels below — we respond promptly.</p>
+<p class="pStrong" id="contactInfoDesc">Reach us through the channels below — or send the consultation form and we will respond promptly.</p>
 <ul class="bullets blackBullets">
-<li><b id="contactInfoEmailLabel">Email:</b> info@futuredimensionsco.com</li>
+<li><b id="contactInfoEmailLabel">Email:</b> <a href="mailto:info@futuredimensionsco.com">info@futuredimensionsco.com</a></li>
 <li><b id="contactInfoWebsiteLabel">Website:</b> www.futuredimensionsco.com</li>
 <li><b id="contactInfoPhoneLabel">Phone:</b> <span dir="ltr" id="contactInfoPhoneVal" style="direction:ltr;unicode-bidi:bidi-override;">+20 100 193 8264</span></li>
 </ul>
 </div>
 <div class="cardActions">
 <a class="slink primary" href="mailto:info@futuredimensionsco.com"><span class="ic"></span><span id="contactInfoBtnEmail">Email</span></a>
-<a class="slink" href="https://www.futuredimensionsco.com" rel="noopener" target="_blank"><span class="ic"></span><span id="contactInfoBtnWebsite">Website</span></a>
+<a class="slink" href="https://wa.me/201001938264?text=Hello%20Future%20Dimensions%2C%20I%20would%20like%20to%20book%20a%2030-minute%20consultation." rel="noopener" target="_blank"><span class="ic"></span><span>WhatsApp</span></a>
 <a class="slink" href="tel:+201001938264"><span class="ic"></span><span id="contactInfoBtnCall">Call</span></a>
 </div>
 </div>
 <div class="card cardGold cardFlex">
 <div>
-<h3 id="careersCardTitle">Careers</h3>
-<p class="pStrong" id="careersCardDesc">Interested in joining? Submit your CV and we’ll contact you when a fit opens.</p>
+<h3 id="careersCardTitle">Request a Consultation</h3>
+<p class="pStrong" id="careersCardDesc">Tell us about your challenge. The form opens your email with a structured request, and you can also send it directly by WhatsApp.</p>
+<form class="leadForm" id="leadForm">
+<input aria-label="Full name" id="leadName" name="name" placeholder="Full name" required=""/>
+<input aria-label="Company" id="leadCompany" name="company" placeholder="Company"/>
+<input aria-label="Email" id="leadEmail" name="email" placeholder="Email" required="" type="email"/>
+<input aria-label="Phone" id="leadPhone" name="phone" placeholder="Phone / WhatsApp"/>
+<select aria-label="Service" class="full" id="leadService" name="service">
+<option value="Financial Dimension">Financial Dimension</option>
+<option value="Administrative &amp; Operational Dimension">Administrative &amp; Operational Dimension</option>
+<option value="Growth Strategy Dimension">Growth Strategy Dimension</option>
+<option value="Integrated Diagnostic Consultation">Integrated Diagnostic Consultation</option>
+</select>
+<textarea aria-label="Message" class="full" id="leadMessage" name="message" placeholder="Briefly describe your business challenge"></textarea>
+<div class="cardActions full" style="margin-top:0">
+<button class="slink primary" type="submit"><span class="ic"></span><span>Send by Email</span></button>
+<a class="slink" href="https://wa.me/201001938264" id="leadWhatsApp" rel="noopener" target="_blank"><span class="ic"></span><span>Send on WhatsApp</span></a>
 </div>
-<div class="cardActions">
-<a class="slink primary" href="careers.html"><span class="ic"></span><span id="careersBtnApply">Apply</span></a>
-<a class="slink" href="team.html"><span class="ic"></span><span id="careersBtnTeam">Team</span></a>
+</form>
 </div>
 </div>
+</div>
+<div class="trustStrip">
+<div class="trustPill"><b>Executive Advisory</b> Board-level thinking with implementation discipline.</div>
+<div class="trustPill"><b>Financial Clarity</b> Diagnostics, reporting, profitability and cash-flow focus.</div>
+<div class="trustPill"><b>Operational Control</b> Governance, SOPs, KPIs and execution cadence.</div>
+<div class="trustPill"><b>Growth Readiness</b> Practical expansion, market entry and transformation roadmaps.</div>
 </div>
 </div>
 </section>
@@ -1181,7 +1227,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 </div>
 <div class="darkBand" style="margin-top:16px">
 <p id="pageInsightsSubLead">Global Insight</p>
-<p id="pageInsightsCaseTitle" style="margin-top:8px;font-weight:950">How Governance Saved Reputation & Results (Lessons from Volkswagen)</p>
+<p id="pageInsightsCaseTitle" style="margin-top:8px;font-weight:950">How Governance Saved Reputation &amp; Results (Lessons from Volkswagen)</p>
 </div>
 <section style="padding:18px 0 0">
 <div class="grid2 equalCards">
@@ -1238,7 +1284,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 <h3 id="insLocalTitle">What This Means for Middle East Companies</h3>
 <p class="pStrong" id="insLocalP">
           Many organizations in the region experience rapid growth without governance maturity: decision rights are blurred,
-          financial reporting is not decision‑ready, and expansion outpaces operational control. The core lesson from IBM is simple:
+          financial reporting is not decision‑ready, and expansion outpaces operational control. The core lesson from Volkswagen is simple:
           governance is not a compliance exercise — it is a growth enabler that protects value and accelerates execution.
         </p>
 <ul class="bullets blackBullets" id="insLocalBullets">
@@ -1257,9 +1303,9 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
           We translate global best practices into executable policies, decision frameworks, and financial performance systems — without adding bureaucracy.
         </p>
 <div class="serviceActions">
-<a class="slink primary" href="?page=administrative" id="insCtaGov"><span class="ic"></span><span id="insCtaGovTxt">Governance &amp; Operating Model</span></a>
-<a class="slink" href="?page=financial" id="insCtaFin"><span class="ic"></span><span id="insCtaFinTxt">Financial Diagnostics</span></a>
-<a class="slink" href="?page=growth" id="insCtaGrow"><span class="ic"></span><span id="insCtaGrowTxt">Growth Strategy</span></a>
+<a class="slink primary" href="administrative.html" id="insCtaGov"><span class="ic"></span><span id="insCtaGovTxt">Governance &amp; Operating Model</span></a>
+<a class="slink" href="financial.html" id="insCtaFin"><span class="ic"></span><span id="insCtaFinTxt">Financial Diagnostics</span></a>
+<a class="slink" href="growth.html" id="insCtaGrow"><span class="ic"></span><span id="insCtaGrowTxt">Growth Strategy</span></a>
 </div>
 </div>
 </section>
@@ -1288,7 +1334,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 <div aria-label="Quick links" class="footerLinks">
 <a href="#home" id="fHome">Home</a>
 <a href="#about" id="fAbout">About</a>
-<a href="#services" id="fServices">Services</a><a href="?page=insights" id="fInsights">Global Insights</a>
+<a href="#services" id="fServices">Services</a><a href="insights.html" id="fInsights">Global Insights</a>
 <a href="team.html" id="fTeam">Team</a>
 <a href="careers.html" id="fCareers">Careers</a>
 <a href="#contact" id="fContact">Contact</a>
@@ -2269,6 +2315,41 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
   // Apply on load
   applyLang(current);
 
+</script>
+<a aria-label="Contact Future Dimensions on WhatsApp" class="whatsappFloat" href="https://wa.me/201001938264?text=Hello%20Future%20Dimensions%2C%20I%20would%20like%20to%20book%20a%20consultation." rel="noopener" target="_blank"><span class="waIcon">☎</span><span>WhatsApp</span></a>
+
+<script>
+(function(){
+  const form = document.getElementById('leadForm');
+  const wa = document.getElementById('leadWhatsApp');
+  function buildMessage(){
+    const name = document.getElementById('leadName')?.value || '';
+    const company = document.getElementById('leadCompany')?.value || '';
+    const email = document.getElementById('leadEmail')?.value || '';
+    const phone = document.getElementById('leadPhone')?.value || '';
+    const service = document.getElementById('leadService')?.value || '';
+    const message = document.getElementById('leadMessage')?.value || '';
+    return `Consultation Request - Future Dimensions
+
+Name: ${name}
+Company: ${company}
+Email: ${email}
+Phone: ${phone}
+Service: ${service}
+Message: ${message}`;
+  }
+  function updateWhatsApp(){ if(wa) wa.href='https://wa.me/201001938264?text=' + encodeURIComponent(buildMessage()); }
+  if(form){
+    form.addEventListener('input', updateWhatsApp);
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const subject = encodeURIComponent('Consultation Request - Future Dimensions');
+      const body = encodeURIComponent(buildMessage());
+      window.location.href = 'mailto:info@futuredimensionsco.com?subject=' + subject + '&body=' + body;
+    });
+    updateWhatsApp();
+  }
+})();
 </script>
 </body>
 </html>

@@ -4,7 +4,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Future Dimensions | Vision &amp; Mission</title>
+<title>Vision & Mission | Future Dimensions</title>
+<meta name="description" content="Discover the Future Dimensions vision and mission: practical consulting that turns business challenges into measurable transformation and sustainable growth.">
+<link rel="canonical" href="https://www.futuredimensionsco.com/vision.html">
+<meta property="og:title" content="Vision & Mission | Future Dimensions">
+<meta property="og:description" content="Discover the Future Dimensions vision and mission: practical consulting that turns business challenges into measurable transformation and sustainable growth.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.futuredimensionsco.com/vision.html">
+<meta property="og:image" content="https://www.futuredimensionsco.com/logo.png">
 <link as="image" href="logo.png" rel="preload"/>
 <style>
     :root{
@@ -686,6 +693,33 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 /* Ensure gold-card text is true black (not muted/gray) */
 .cardGold, .cardGold h3, .cardGold h4, .cardGold p, .cardGold li { color: var(--ink); }
 
+
+
+/* ===== Lead Conversion Enhancements ===== */
+.whatsappFloat{
+  position:fixed;right:18px;bottom:18px;z-index:9999;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 16px;border-radius:999px;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:#fff !important;font-weight:950;
+  box-shadow:0 16px 40px rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.22)
+}
+.whatsappFloat:hover{transform:translateY(-2px);filter:brightness(1.03)}
+.whatsappFloat .waIcon{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18)}
+.leadForm{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.leadForm .full{grid-column:1/-1}
+.leadForm input,.leadForm select,.leadForm textarea{
+  width:100%;border:1px solid rgba(11,19,34,.18);border-radius:14px;
+  padding:12px 13px;font:inherit;background:rgba(255,255,255,.88);color:#071224;outline:none
+}
+.leadForm textarea{min-height:112px;resize:vertical}
+.leadForm input:focus,.leadForm select:focus,.leadForm textarea:focus{border-color:rgba(212,175,55,.85);box-shadow:0 0 0 4px rgba(212,175,55,.14)}
+.trustStrip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.trustPill{border:1px solid rgba(212,175,55,.24);border-radius:16px;padding:14px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.88)}
+.trustPill b{display:block;color:#F1D77A;margin-bottom:4px}
+@media(max-width:760px){.leadForm,.trustStrip{grid-template-columns:1fr}.whatsappFloat{left:14px;right:14px;justify-content:center}.whatsappFloat span:last-child{display:inline}}
+
 </style>
 <meta content="Discover Future Dimensions’ vision and mission—practical, measurable consulting that helps organizations execute and grow." name="description"/><meta content="index, follow" name="robots"/><link href="https://www.futuredimensionsco.com/vision.html" rel="canonical"/><link href="https://www.futuredimensionsco.com/" hreflang="x-default" rel="alternate"/><meta content="website" property="og:type"/><meta content="Future Dimensions" property="og:site_name"/><meta content="Future Dimensions | Vision &amp; Mission" property="og:title"/><meta content="Discover Future Dimensions’ vision and mission—practical, measurable consulting that helps organizations execute and grow." property="og:description"/><meta content="https://www.futuredimensionsco.com/vision.html" property="og:url"/><meta content="https://www.futuredimensionsco.com/logo.png" property="og:image"/><meta content="Future Dimensions logo" property="og:image:alt"/><meta content="summary" name="twitter:card"/><meta content="Future Dimensions | Vision &amp; Mission" name="twitter:title"/><meta content="Discover Future Dimensions’ vision and mission—practical, measurable consulting that helps organizations execute and grow." name="twitter:description"/><meta content="https://www.futuredimensionsco.com/logo.png" name="twitter:image"/><script id="ld-org" type="application/ld+json">{
   "@context": "https://schema.org",
@@ -713,8 +747,8 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 </div>
 <!-- Desktop Menu -->
 <nav aria-label="Main navigation" class="menu">
-<a class="active" href="#home" id="navHome">Home</a>
-<a href="#about" id="navAbout">About</a>
+<a class="active" href="index.html#home" id="navHome">Home</a>
+<a href="about.html" id="navAbout">About</a>
 <!-- ✅ Services Dropdown -> Internal pages -->
 <div class="dropdown" id="servicesDropdown">
 <button aria-expanded="false" aria-haspopup="true" id="navServicesBtn" type="button">Services ▾</button>
@@ -727,13 +761,13 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 <!-- ✅ Additional pages (icons only) -->
 <a href="team.html" id="navTeam">Team</a>
 <a href="careers.html" id="navCareers">Careers</a>
-<a href="#approach" id="navApproach">Approach</a>
-<a href="#contact" id="navContact">Contact</a>
+<a href="index.html#methodology" id="navApproach">Approach</a>
+<a href="index.html#contact" id="navContact">Contact</a>
 </nav>
 <div class="navRight">
 <button aria-label="Open menu" class="burger" id="burgerBtn">☰</button>
 <button class="btn lang" id="langToggle">العربية</button>
-<a class="btn gold" href="#contact" id="navCta">Get a Proposal</a>
+<a class="btn gold" href="index.html#contact" id="navCta">Get a Proposal</a>
 </div>
 </div>
 </header>
@@ -752,8 +786,8 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 <button aria-label="Close menu" class="mclose" id="mCloseBtn">✕</button>
 </div>
 <div class="mnav">
-<a href="#home" id="mHome">Home</a>
-<a href="#about" id="mAbout">About</a>
+<a href="index.html#home" id="mHome">Home</a>
+<a href="about.html" id="mAbout">About</a>
 <button id="mServicesBtn" type="button">
 <span id="mServicesTxt">Services</span>
 <span>▾</span>
@@ -765,12 +799,12 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 </div>
 <a href="team.html" id="mTeam">Team</a>
 <a href="careers.html" id="mCareers">Careers</a>
-<a href="#approach" id="mApproach">Approach</a>
-<a href="#contact" id="mContact">Contact</a>
+<a href="index.html#methodology" id="mApproach">Approach</a>
+<a href="index.html#contact" id="mContact">Contact</a>
 </div>
 <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
 <button class="btn lang" id="mLangToggle" style="padding:10px 14px">العربية</button>
-<a class="btn gold" href="#contact" id="mCta" style="padding:10px 14px;display:inline-flex;align-items:center">Get a Proposal</a>
+<a class="btn gold" href="index.html#contact" id="mCta" style="padding:10px 14px;display:inline-flex;align-items:center">Get a Proposal</a>
 </div>
 </div>
 <main>
@@ -1030,5 +1064,7 @@ window.applyPageContent = function(lang){
 };
 
 </script>
-</div></body>
+</div>
+<a class="whatsappFloat" href="https://wa.me/201001938264?text=Hello%20Future%20Dimensions%2C%20I%20would%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener" aria-label="Contact Future Dimensions on WhatsApp"><span class="waIcon">☎</span><span>WhatsApp</span></a>
+</body>
 </html>
