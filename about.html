@@ -720,6 +720,12 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 .trustPill b{display:block;color:#F1D77A;margin-bottom:4px}
 @media(max-width:760px){.leadForm,.trustStrip{grid-template-columns:1fr}.whatsappFloat{left:14px;right:14px;justify-content:center}.whatsappFloat span:last-child{display:inline}}
 
+
+
+/* v3 fix: make standalone About/Vision pages visible even if old routing styles are cached */
+body.standalone-page main{display:block !important;}
+body.standalone-page main > section.pageView{display:block !important; padding:48px 0 10px !important;}
+body.standalone-page .pageView{display:block !important;}
 </style>
 <meta content="Learn about Future Dimensions—an integrated consulting firm helping organizations improve financial performance, operations, and growth strategy." name="description"/><meta content="index, follow" name="robots"/><link href="https://www.futuredimensionsco.com/about.html" rel="canonical"/><link href="https://www.futuredimensionsco.com/" hreflang="x-default" rel="alternate"/><meta content="website" property="og:type"/><meta content="Future Dimensions" property="og:site_name"/><meta content="Future Dimensions | About" property="og:title"/><meta content="Learn about Future Dimensions—an integrated consulting firm helping organizations improve financial performance, operations, and growth strategy." property="og:description"/><meta content="https://www.futuredimensionsco.com/about.html" property="og:url"/><meta content="https://www.futuredimensionsco.com/logo.png" property="og:image"/><meta content="Future Dimensions logo" property="og:image:alt"/><meta content="summary" name="twitter:card"/><meta content="Future Dimensions | About" name="twitter:title"/><meta content="Learn about Future Dimensions—an integrated consulting firm helping organizations improve financial performance, operations, and growth strategy." name="twitter:description"/><meta content="https://www.futuredimensionsco.com/logo.png" name="twitter:image"/><script id="ld-org" type="application/ld+json">{
   "@context": "https://schema.org",
@@ -733,7 +739,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
   "name": "Future Dimensions",
   "url": "https://www.futuredimensionsco.com/"
 }</script></head>
-<body data-page="about">
+<body class="standalone-page" data-page="about">
 <header>
 <div class="wrap nav">
 <div class="brand">
@@ -809,7 +815,7 @@ body[data-page="vision"] .pageView[data-page="vision"]{display:block;}
 </div>
 </div>
 <main>
-<section class="pageView" data-page="about">
+<section class="pageView" data-page="about" style="display:block !important;">
 <div class="wrap">
 <div class="pageTop">
 <a class="backHome" data-home="" href="index.html#home"><span id="backLabelAbout">← Back</span></a>
@@ -1047,5 +1053,16 @@ window.applyPageContent((localStorage.getItem("fd_lang")||"en")==="ar"?"ar":"en"
 
 </script>
 <a class="whatsappFloat" href="https://wa.me/201001938264?text=Hello%20Future%20Dimensions%2C%20I%20would%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener" aria-label="Contact Future Dimensions on WhatsApp"><span class="waIcon">☎</span><span>WhatsApp</span></a>
+
+<script>
+(function(){
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.getRegistrations().then(function(regs){ regs.forEach(function(reg){ reg.unregister(); }); }).catch(function(){});
+  }
+  if(window.caches){
+    caches.keys().then(function(keys){ keys.forEach(function(key){ caches.delete(key); }); }).catch(function(){});
+  }
+})();
+</script>
 </body>
 </html>

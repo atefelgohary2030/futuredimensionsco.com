@@ -12,3 +12,6 @@ Corrections included:
 - Rechecked bilingual navigation, footer labels, WhatsApp button, sitemap, and core internal links.
 
 Important: keep your GitHub CNAME file if it already exists in the repository.
+
+
+V3 fixes: About/Vision More buttons now open standalone visible pages in both Arabic and English, with cache/service-worker cleanup. Upload/replace sw.js as well.

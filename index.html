@@ -772,6 +772,11 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 .trustPill b{display:block;color:#F1D77A;margin-bottom:4px}
 @media(max-width:760px){.leadForm,.trustStrip{grid-template-columns:1fr}.whatsappFloat{left:14px;right:14px;justify-content:center}.whatsappFloat span:last-child{display:inline}}
 
+
+
+/* v3 fix: force routed internal pages visible if opened via ?page=about or ?page=vision */
+body[data-page="about"] main > section.pageView[data-page="about"],
+body[data-page="vision"] main > section.pageView[data-page="vision"]{display:block !important;}
 </style>
 <meta content="https://www.futuredimensionsco.com/logo.png" property="og:image"/><meta content="Future Dimensions logo" property="og:image:alt"/><meta content="https://www.futuredimensionsco.com/logo.png" name="twitter:image"/><script id="ld-org" type="application/ld+json">{
   "@context": "https://schema.org",
@@ -910,7 +915,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 </ul>
 </div>
 <div class="cardActions">
-<a class="slink primary" href="about.html" id="aboutMoreBtn">
+<a class="slink primary" href="about.html?v=3" id="aboutMoreBtn">
 <span class="ic"></span><span id="aboutMoreLabel">More</span>
 </a>
 </div>
@@ -940,7 +945,7 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 </div>
 </div>
 <div class="cardActions">
-<a class="slink primary" href="vision.html" id="vmMoreBtn">
+<a class="slink primary" href="vision.html?v=3" id="vmMoreBtn">
 <span class="ic"></span><span id="vmMoreLabel">More</span>
 </a>
 </div>
@@ -2350,6 +2355,17 @@ Message: ${message}`;
       window.location.href = 'mailto:info@futuredimensionsco.com?subject=' + subject + '&body=' + body;
     });
     updateWhatsApp();
+  }
+})();
+</script>
+
+<script>
+(function(){
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.getRegistrations().then(function(regs){ regs.forEach(function(reg){ reg.unregister(); }); }).catch(function(){});
+  }
+  if(window.caches){
+    caches.keys().then(function(keys){ keys.forEach(function(key){ caches.delete(key); }); }).catch(function(){});
   }
 })();
 </script>
