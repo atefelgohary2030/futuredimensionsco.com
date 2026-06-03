@@ -105,3 +105,69 @@ create policy "admins can manage tickets" on public.tickets
 create policy "admins can manage meetings" on public.meetings
   for all using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin')
   with check ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
+
+-- =========================================================
+-- V5 Admin Panel additions: access requests and clients
+-- Run this in Supabase SQL Editor after reviewing it.
+-- The admin email below must match the app constant FD_ADMIN_EMAILS.
+-- =========================================================
+
+create table if not exists public.access_requests (
+  id uuid primary key default gen_random_uuid(),
+  company text not null,
+  contact_name text not null,
+  email text not null,
+  phone text,
+  service text,
+  message text,
+  status text default 'pending',
+  reviewed_by text,
+  reviewed_at timestamptz,
+  created_at timestamptz default now()
+);
+
+create table if not exists public.clients (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  contact_name text,
+  email text unique not null,
+  phone text,
+  status text default 'active',
+  source_request_id uuid,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+alter table public.access_requests enable row level security;
+alter table public.clients enable row level security;
+
+-- Public visitors can submit access requests. They cannot read all requests.
+drop policy if exists "Public can create access requests" on public.access_requests;
+create policy "Public can create access requests"
+  on public.access_requests for insert
+  with check (true);
+
+-- Admin can read and update access requests.
+drop policy if exists "Admin can manage access requests" on public.access_requests;
+create policy "Admin can manage access requests"
+  on public.access_requests for all
+  using (lower(auth.email()) in ('info@futuredimensionsco.com'))
+  with check (lower(auth.email()) in ('info@futuredimensionsco.com'));
+
+-- Admin can manage client profiles.
+drop policy if exists "Admin can manage clients" on public.clients;
+create policy "Admin can manage clients"
+  on public.clients for all
+  using (lower(auth.email()) in ('info@futuredimensionsco.com'))
+  with check (lower(auth.email()) in ('info@futuredimensionsco.com'));
+
+-- A signed-in client can read only their own client profile by email.
+drop policy if exists "Client can read own profile" on public.clients;
+create policy "Client can read own profile"
+  on public.clients for select
+  using (lower(email) = lower(auth.email()));
+
+-- IMPORTANT:
+-- Do not expose the Supabase Service Role key in the browser.
+-- Official user creation/invitation should be done from Supabase Authentication dashboard
+-- or through a secure Edge Function/server endpoint.

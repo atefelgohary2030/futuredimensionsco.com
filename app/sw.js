@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fd-client-portal-v4004';
+const CACHE_NAME = 'fd-client-portal-v4005';
 const APP_SHELL = [
   './', './index.html', './manifest.webmanifest', './logo.png', './android-chrome-192x192.png', './android-chrome-512x512.png', './apple-touch-icon.png'
 ];

@@ -1,19 +1,19 @@
-Future Dimensions Client Portal - Mobile V4 / v4003
+Future Dimensions Client Portal - Mobile V5 Admin Panel
 
-Upload all files in this folder into the GitHub /app/ directory.
+Upload all files inside this folder to your GitHub /app directory.
 
-Open after upload:
-https://www.futuredimensionsco.com/app/?v=4004
+Recommended URL after upload:
+https://www.futuredimensionsco.com/app/?v=4005
+
+What changed in V5:
+- Added Admin Panel visible only to approved admin emails.
+- Added access request form inside the app.
+- Added client profile management from the Admin Panel.
+- Added approve/reject request actions.
+- Added copy invitation message and send magic-login link helper.
+- Updated optional Supabase SQL with access_requests and clients tables + RLS policies.
 
 Important:
-- Replace the old app files with these files.
-- If the old version appears, open the URL with ?v=4004 and use Ctrl+F5 or clear browser cache.
-- Do not remove your website root CNAME file.
-
-Admin deletion:
-- Admin emails are controlled in index.html by the FD_ADMIN_EMAILS constant.
-- Add your admin login email to FD_ADMIN_EMAILS if it is not already there.
-- Admin delete buttons appear in Documents and Invoices after admin login.
-
-
-Mobile V4 updates: Resources are active, install button moved to side drawer only, dashboard metrics are smaller and gold.
+- Keep the Supabase Service Role key OUT of the browser.
+- To create official Auth users, use Supabase Authentication dashboard or a secure Edge Function.
+- Admin email in the app is info@futuredimensionsco.com. The email must exist in Supabase Authentication and have a password or magic link enabled.
