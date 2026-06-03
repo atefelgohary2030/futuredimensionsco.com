@@ -144,6 +144,48 @@
     .toast{position:fixed;bottom:22px;left:22px;z-index:200;display:grid;gap:10px}.toastItem{background:#101b2d;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:16px;padding:12px 14px;max-width:360px;line-height:1.6}.modalBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.58);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}.modalBackdrop.show{display:flex}.modal{width:min(680px,100%);max-height:86vh;overflow:auto;background:#0c1728;border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow)}.modalHead{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}.modalBody{padding:20px}.pillBar{display:flex;gap:8px;flex-wrap:wrap}.pill{padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);font-size:12px;font-weight:850}
     @media (max-width:1080px){.shell{grid-template-columns:1fr}.sidebar{position:fixed;inset-block:0;inset-inline-start:0;width:310px;transform:translateX(-110%);transition:.25s ease;box-shadow:var(--shadow)}html[dir="rtl"] .sidebar{transform:translateX(110%)}.sidebar.open{transform:translateX(0)}.mobileMenu{display:inline-flex}.hero,.grid.cols2,.grid.cols3,.grid.cols4{grid-template-columns:1fr}.stageList{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:640px){.topbar{padding:14px}.content{padding:16px}.hero h2{font-size:28px}.heroCard{padding:20px}.loginPanel{padding:18px}.topActions{gap:7px}.btn{padding:10px 12px}.brandTitle{font-size:14px}.stageList{grid-template-columns:1fr}.heroGrid{grid-template-columns:1fr}.toast{left:12px;right:12px}.toastItem{max-width:none}}
+
+
+    /* Mobile-first enhancements - v4002 */
+    .mobileBottomNav{display:none}
+    @media (max-width:760px){
+      :root{--radius:18px}
+      body{background:linear-gradient(160deg,#050b14,#091427 55%,#06111f)}
+      body::before{background-size:360px auto;background-position:120% 14%;opacity:.035}
+      .shell{display:block;min-height:100vh}
+      .sidebar{width:min(86vw,330px);padding:18px 14px 90px;overflow:auto;z-index:80}
+      .brand img{width:48px;height:48px}.brandTitle{font-size:15px}.brandSub{font-size:11px}
+      .statusBox{padding:12px;border-radius:16px}.statusLine{font-size:11px}
+      .nav{gap:6px}.nav button{padding:12px;border-radius:14px;font-size:14px}.navIcon{width:28px;height:28px}
+      .topbar{padding:10px 12px;gap:8px;align-items:center;position:sticky;top:0;z-index:50;background:rgba(7,16,31,.90)}
+      .topTitle h1{font-size:17px;line-height:1.25}.topTitle p{font-size:11px;max-width:190px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .topActions{gap:6px;justify-content:flex-end}.topActions .btn{font-size:12px;padding:9px 10px;border-radius:12px}
+      #refreshBtn{display:none}.mobileMenu{display:inline-flex;padding:9px 12px!important}
+      #requestAccessBtn{max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .content{padding:14px 12px 104px;max-width:100%}
+      .hero{gap:14px}.heroCard{padding:18px}.loginPanel{padding:16px}.hero h2{font-size:26px;line-height:1.15}.hero p{font-size:14px;line-height:1.75}.eyebrow{font-size:11px}
+      .split{gap:8px}.split .btn{flex:1 1 auto}.btn{min-height:42px;padding:10px 12px;border-radius:13px;font-size:13px}.btn.small{min-height:38px;padding:8px 10px;font-size:12px}
+      .heroGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.miniMetric{padding:12px;border-radius:15px}.miniMetric strong{font-size:20px}.miniMetric span{font-size:11px;line-height:1.45;display:block}
+      .grid{gap:12px}.grid.cols2,.grid.cols3{grid-template-columns:1fr!important}.grid.cols4{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+      .card{padding:14px;border-radius:18px}.card h4{font-size:15px}.card p{font-size:13px;line-height:1.65}.card.gold{text-align:inherit;min-height:104px}
+      .metricIcon{width:34px;height:34px;border-radius:12px}.metricVal{font-size:25px}.metricLabel{font-size:11px;line-height:1.35}
+      .sectionTitle{align-items:flex-start;margin:16px 0 10px}.sectionTitle h3{font-size:18px}.sectionTitle p{font-size:12px;line-height:1.55}.sectionTitle .btn{flex:0 0 auto}
+      .projectHead{gap:10px}.projectHead h4{line-height:1.35}.stageList{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px}.stage{font-size:11px;padding:9px;border-radius:12px;text-align:center}
+      .progress{height:10px}.hint{padding:12px;border-radius:15px;font-size:12px}.pillBar{gap:6px}.pill{font-size:11px;padding:7px 9px}
+      .field{gap:6px;margin-bottom:10px}.field label{font-size:11px}.input,select,textarea{padding:12px;border-radius:13px;font-size:14px}textarea{min-height:96px}
+      .timeline{gap:10px}.timeItem{grid-template-columns:34px 1fr;gap:10px}.timeDot{width:30px;height:30px;border-radius:11px}.timeBody strong{font-size:13px}.timeBody span{font-size:11px}
+      .tableWrap{display:none}.mobileList{display:grid;gap:10px}.mobileListItem{padding:13px;border-radius:16px;background:rgba(255,255,255,.065);border:1px solid var(--line)}.mobileListItem h4{margin:0 0 8px;font-size:14px}.mobileMeta{display:grid;gap:7px;margin:10px 0}.mobileMeta div{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:12px;color:var(--muted)}.mobileMeta b{color:#fff;text-align:end}.mobileMeta .badge{font-size:11px}
+      .toast{left:10px;right:10px;bottom:86px}.toastItem{max-width:none;font-size:13px;border-radius:14px;padding:11px 12px}
+      .modalBackdrop{align-items:flex-end;padding:0}.modal{width:100%;max-height:84vh;border-radius:24px 24px 0 0;border-inline:0;border-bottom:0}.modalHead{padding:15px}.modalBody{padding:15px}.modalBody .grid.cols2{grid-template-columns:1fr!important}
+      .sideFooter{font-size:11px}
+      .mobileBottomNav{position:fixed;left:0;right:0;bottom:0;z-index:70;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:8px 8px calc(8px + env(safe-area-inset-bottom));background:rgba(7,16,31,.94);border-top:1px solid var(--line);backdrop-filter:blur(18px);box-shadow:0 -18px 50px rgba(0,0,0,.28)}
+      .mobileBottomNav button{appearance:none;border:1px solid transparent;background:transparent;color:var(--muted);border-radius:14px;padding:8px 4px 7px;display:grid;place-items:center;gap:3px;font-weight:850;font-size:10px;min-width:0}
+      .mobileBottomNav button .navIcon{width:24px;height:22px;border-radius:9px;font-size:12px;background:rgba(255,255,255,.06)}
+      .mobileBottomNav button.active{background:rgba(215,173,56,.16);border-color:rgba(215,173,56,.32);color:#fff}.mobileBottomNav button.active .navIcon{background:rgba(215,173,56,.26);color:var(--gold2)}
+      .mobileBottomNav span:last-child{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    }
+    @media (max-width:380px){.heroGrid,.grid.cols4{grid-template-columns:1fr!important}.topTitle p{max-width:150px}.topActions #requestAccessBtn{display:none}.card{padding:13px}.content{padding-inline:10px}}
+
     @media print{.sidebar,.topbar,.btn,.toast{display:none!important}.shell{display:block}.content{max-width:none;color:#000}.glass,.card{box-shadow:none;background:#fff;color:#000;border-color:#ddd}.muted,.card p{color:#333}}
   </style>
 </head>
@@ -188,6 +230,7 @@
       <section class="content" id="app"></section>
     </main>
   </div>
+  <nav class="mobileBottomNav" id="mobileBottomNav" aria-label="Mobile navigation"></nav>
   <div class="toast" id="toast"></div>
   <div class="modalBackdrop" id="modalBackdrop" role="dialog" aria-modal="true">
     <div class="modal">
@@ -197,7 +240,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
-    const FD_VERSION = 'FD-CLIENT-PORTAL-2026-06-03-V1';
+    const FD_VERSION = 'FD-CLIENT-PORTAL-2026-06-03-MOBILE-V2';
     const FD_SUPABASE_URL = 'https://mifottrhqimqzojiyytq.supabase.co';
     const FD_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pZm90dHJocWltcXpvaml5eXRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxOTQ1MzYsImV4cCI6MjA4NDc3MDUzNn0.g3LM3aYvCmZNy3hUShebv5T2evAwgMeNKr4wT3eXZS8';
     const CONTACT_EMAIL = 'info@futuredimensionsco.com';
@@ -288,7 +331,8 @@
     }
     function badge(raw,kind){ const v=statusLabel(raw,kind); return `<span class="badge ${v.cls}">${escapeHtml(v.text)}</span>`; }
     function setTop(key, subKey){ $('pageTitle').textContent=t(key); $('pageSub').textContent=t(subKey||'secureWorkspace'); }
-    function renderNav(){ $('nav').innerHTML = navItems.map(([page,label,icon])=>`<button data-page="${page}" class="${state.page===page?'active':''}"><span class="navIcon">${icon}</span><span>${t(label)}</span></button>`).join(''); document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.page)); }
+    function renderNav(){ $('nav').innerHTML = navItems.map(([page,label,icon])=>`<button data-page="${page}" class="${state.page===page?'active':''}"><span class="navIcon">${icon}</span><span>${t(label)}</span></button>`).join(''); document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.page)); renderMobileNav(); }
+    function renderMobileNav(){ const box=$('mobileBottomNav'); if(!box) return; const mobileItems=[['dashboard','dashboard','⌂'],['projects','projects','◈'],['documents','documents','▣'],['invoices','invoices','◆'],['support','support','✦']]; box.innerHTML=mobileItems.map(([page,label,icon])=>`<button data-page="${page}" class="${state.page===page?'active':''}"><span class="navIcon">${icon}</span><span>${t(label)}</span></button>`).join(''); box.querySelectorAll('button').forEach(b=>b.onclick=()=>go(b.dataset.page)); }
     function go(page){ state.page=page || 'dashboard'; history.replaceState(null,'','#'+state.page); render(); if(innerWidth<1080) $('sidebar').classList.remove('open'); }
     function updateStatus(){
       $('year').textContent=nowYear; const dot=$('netDot'); dot.className='dot '+(state.online?'ok':'bad'); $('netText').textContent=state.online?t('online'):t('offline');
@@ -408,14 +452,18 @@
       setTop('documents','uploadDocument'); const rows=state.data.documents;
       return `<div class="grid cols2"><div class="card"><h4>${t('uploadDocument')}</h4><div class="field"><label>${t('name')}</label><input class="input" id="docName"></div><div class="field"><label>${t('type')}</label><select id="docType">${['finance','governance','strategy','operations','hr','legal','other'].map(x=>`<option value="${x}">${t(x)}</option>`).join('')}</select></div><div class="field"><label>${t('documents')}</label><input class="input" id="docFile" type="file"></div><button class="btn" id="uploadDocBtn">${t('upload')}</button><div class="hint smallText" style="margin-top:12px">${state.lang==='ar'?'الرفع الفعلي يتطلب تسجيل الدخول وتفعيل Storage Bucket باسم Documents.':'Real upload requires sign-in and a Storage Bucket named Documents.'}</div></div><div class="card"><h4>${t('secure')}</h4><p>${state.lang==='ar'?'تصنيف المستندات ومراجعتها يقلل الفوضى ويجعل كل مخرجات المشروع قابلة للتتبع.':'Document classification and review reduce noise and keep every deliverable traceable.'}</p><div class="pillBar" style="margin-top:16px"><span class="pill">PDF</span><span class="pill">DOCX</span><span class="pill">XLSX</span><span class="pill">PNG/JPG</span></div></div></div>${renderDocTable(rows)}`;
     }
-    function renderDocTable(rows){ return `<div class="sectionTitle"><h3>${t('documents')}</h3></div><div class="tableWrap"><table><thead><tr><th>${t('name')}</th><th>${t('type')}</th><th>${t('status')}</th><th>${t('date')}</th><th>${t('actions')}</th></tr></thead><tbody>${rows.length?rows.map(x=>`<tr><td><b>${escapeHtml(nameOf(x))}</b></td><td>${t(x.type)||escapeHtml(x.type||'-')}</td><td>${badge(x.status)}</td><td>${fmtDate(x.created_at)}</td><td><button class="btn small secondary" onclick="downloadFile('documents','${escapeHtml(x.id)}')">${t('download')}</button></td></tr>`).join(''):`<tr><td colspan="5"><div class="empty">${t('noData')}</div></td></tr>`}</tbody></table></div>`; }
+    function renderDocTable(rows){
+      const mobile = `<div class="mobileList">${rows.length?rows.map(x=>`<div class="mobileListItem"><h4>${escapeHtml(nameOf(x))}</h4><div class="mobileMeta"><div><span>${t('type')}</span><b>${t(x.type)||escapeHtml(x.type||'-')}</b></div><div><span>${t('status')}</span><b>${badge(x.status)}</b></div><div><span>${t('date')}</span><b>${fmtDate(x.created_at)}</b></div></div><button class="btn small secondary" onclick="downloadFile('documents','${escapeHtml(x.id)}')">${t('download')}</button></div>`).join(''):`<div class="card empty">${t('noData')}</div>`}</div>`;
+      return `<div class="sectionTitle"><h3>${t('documents')}</h3></div>${mobile}<div class="tableWrap"><table><thead><tr><th>${t('name')}</th><th>${t('type')}</th><th>${t('status')}</th><th>${t('date')}</th><th>${t('actions')}</th></tr></thead><tbody>${rows.length?rows.map(x=>`<tr><td><b>${escapeHtml(nameOf(x))}</b></td><td>${t(x.type)||escapeHtml(x.type||'-')}</td><td>${badge(x.status)}</td><td>${fmtDate(x.created_at)}</td><td><button class="btn small secondary" onclick="downloadFile('documents','${escapeHtml(x.id)}')">${t('download')}</button></td></tr>`).join('') : `<tr><td colspan="5"><div class="empty">${t('noData')}</div></td></tr>`}</tbody></table></div>`;
+    }
     async function uploadDocument(){
       if(!requireAuth()) return; const file=$('docFile')?.files?.[0]; const name=$('docName')?.value?.trim() || file?.name; const type=$('docType')?.value||'other'; if(!file){toast(t('documents'));return;}
       try{ toast(t('uploading')); const path=`${state.user.id}/${Date.now()}-${file.name.replace(/[^\w.\-]+/g,'_')}`; const up=await state.sb.storage.from(DOC_BUCKET).upload(path,file,{upsert:false}); if(up.error) throw up.error; const row={user_id:state.user.id,name_ar:name,name_en:name,type,status:'under_review',storage_path:path}; const {error}=await state.sb.from('documents').insert(row); if(error) console.warn(error.message); toast(t('saved')); await loadData(); render(); }catch(e){toast(e.message||t('failed'));}
     }
     function renderInvoices(){
       setTop('invoices','contactFinance'); const rows=state.data.invoices;
-      return `<div class="sectionTitle"><div><h3>${t('invoices')}</h3><p>${state.lang==='ar'?'متابعة الحالة المالية وربطها بالمشروع والمرحلة.':'Track financial status linked to projects and phases.'}</p></div><button class="btn small" onclick="whatsapp('${state.lang==='ar'?'أرغب في الاستفسار عن فاتورة في بوابة العملاء':'I would like to ask about an invoice in the client portal'}')">WhatsApp</button></div><div class="tableWrap"><table><thead><tr><th>${t('invoiceNo')}</th><th>${t('name')}</th><th>${t('amount')}</th><th>${t('status')}</th><th>${t('dueDate')}</th><th>${t('actions')}</th></tr></thead><tbody>${rows.map(x=>`<tr><td><b>${escapeHtml(x.invoice_no||x.number||x.id)}</b></td><td>${escapeHtml(nameOf(x))}</td><td>${fmtMoney(x.amount,x.currency||'EGP')}</td><td>${badge(x.status,'invoice')}</td><td>${fmtDate(x.due_date||x.created_at)}</td><td><button class="btn small secondary" onclick="downloadFile('invoices','${escapeHtml(x.id)}')">${t('download')}</button></td></tr>`).join('') || `<tr><td colspan="6"><div class="empty">${t('noData')}</div></td></tr>`}</tbody></table></div>`;
+      const mobile = `<div class="mobileList">${rows.length?rows.map(x=>`<div class="mobileListItem"><div class="projectHead"><h4>${escapeHtml(x.invoice_no||nameOf(x))}</h4>${badge(x.status,'invoice')}</div><div class="mobileMeta"><div><span>${t('name')}</span><b>${escapeHtml(nameOf(x))}</b></div><div><span>${t('amount')}</span><b>${fmtMoney(x.amount,x.currency||'EGP')}</b></div><div><span>${t('dueDate')}</span><b>${fmtDate(x.due_date||x.created_at)}</b></div></div><button class="btn small secondary" onclick="downloadFile('invoices','${escapeHtml(x.id)}')">${t('download')}</button></div>`).join(''):`<div class="card empty">${t('noData')}</div>`}</div>`;
+      return `<div class="sectionTitle"><div><h3>${t('invoices')}</h3><p>${state.lang==='ar'?'متابعة الحالة المالية وربطها بالمشروع والمرحلة.':'Track financial status linked to projects and phases.'}</p></div><button class="btn small" onclick="whatsapp('${state.lang==='ar'?'أرغب في الاستفسار عن فاتورة في بوابة العملاء':'I would like to ask about an invoice in the client portal'}')">WhatsApp</button></div>${mobile}<div class="tableWrap"><table><thead><tr><th>${t('invoiceNo')}</th><th>${t('name')}</th><th>${t('amount')}</th><th>${t('status')}</th><th>${t('dueDate')}</th><th>${t('actions')}</th></tr></thead><tbody>${rows.length?rows.map(x=>`<tr><td><b>${escapeHtml(x.invoice_no||x.number||x.id)}</b></td><td>${escapeHtml(nameOf(x))}</td><td>${fmtMoney(x.amount,x.currency||'EGP')}</td><td>${badge(x.status,'invoice')}</td><td>${fmtDate(x.due_date||x.created_at)}</td><td><button class="btn small secondary" onclick="downloadFile('invoices','${escapeHtml(x.id)}')">${t('download')}</button></td></tr>`).join('') : `<tr><td colspan="6"><div class="empty">${t('noData')}</div></td></tr>`}</tbody></table></div>`;
     }
     function renderSupport(){
       setTop('support','newTicket'); const rows=state.data.tickets;
@@ -464,9 +512,9 @@
     window.addEventListener('online',()=>{state.online=true;updateStatus();}); window.addEventListener('offline',()=>{state.online=false;updateStatus();});
     window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();state.deferredPrompt=e; $('installBtnSide').style.display='inline-flex';});
     async function installApp(){ if(state.deferredPrompt){state.deferredPrompt.prompt(); await state.deferredPrompt.userChoice; state.deferredPrompt=null; $('installBtnSide').style.display='none';} }
-    $('installBtnSide').onclick=installApp; $('mobileMenu').onclick=()=>$('sidebar').classList.toggle('open'); $('langBtn').onclick=()=>{state.lang=state.lang==='ar'?'en':'ar';render();}; $('refreshBtn').onclick=async()=>{await loadData();render();toast(t('refresh'));}; $('requestAccessBtn').onclick=requestAccess; $('logoutBtn').onclick=logout; $('modalClose').onclick=closeModal; $('modalBackdrop').addEventListener('click',(e)=>{if(e.target.id==='modalBackdrop')closeModal();});
+    $('installBtnSide').onclick=installApp; $('mobileMenu').onclick=()=>$('sidebar').classList.toggle('open'); document.querySelector('.content').addEventListener('click',()=>{ if(innerWidth<1080) $('sidebar').classList.remove('open'); }); $('langBtn').onclick=()=>{state.lang=state.lang==='ar'?'en':'ar';render();}; $('refreshBtn').onclick=async()=>{await loadData();render();toast(t('refresh'));}; $('requestAccessBtn').onclick=requestAccess; $('logoutBtn').onclick=logout; $('modalClose').onclick=closeModal; $('modalBackdrop').addEventListener('click',(e)=>{if(e.target.id==='modalBackdrop')closeModal();});
     (async function boot(){
-      if('serviceWorker' in navigator){ try{ await navigator.serviceWorker.register('sw.js?v=4001'); }catch(e){console.warn(e)} }
+      if('serviceWorker' in navigator){ try{ await navigator.serviceWorker.register('sw.js?v=4002'); }catch(e){console.warn(e)} }
       await initSupabase(); await loadData(); render();
     })();
   </script>

@@ -4,7 +4,7 @@
   "description": "Secure client portal for Future Dimensions consulting projects, documents, invoices and support.",
   "lang": "ar",
   "dir": "rtl",
-  "start_url": "./?v=4001",
+  "start_url": "./?v=4002",
   "scope": "./",
   "display": "standalone",
   "background_color": "#07101f",
