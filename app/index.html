@@ -203,7 +203,6 @@
     @media (max-width:760px){
       .sidebar.open{transform:translate3d(0,0,0)!important;z-index:110}
       .topLogo{width:30px;height:30px}
-      .installFab{display:inline-flex}
       .topActions #installBtnTop{display:none!important}
       .mobileBottomNav{display:flex!important;grid-template-columns:none!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:6px;padding-inline:8px;-webkit-overflow-scrolling:touch}
       .mobileBottomNav::-webkit-scrollbar{display:none}
@@ -212,6 +211,44 @@
       .content{padding-bottom:136px!important}
       .heroCard.glass,.loginPanel.glass{background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.035));border-color:rgba(215,173,56,.18)}
       .card.gold{background:linear-gradient(145deg,#ffe79a,#d5a531 60%,#b9881d);box-shadow:0 18px 48px rgba(0,0,0,.24)}
+    }
+
+
+
+    /* Mobile V4 refinements: resources, install placement, dashboard metrics */
+    #installBtnSide{
+      width:100%;
+      justify-content:center;
+      border-color:rgba(215,173,56,.42)!important;
+      background:rgba(215,173,56,.10)!important;
+      color:#fff!important;
+    }
+    #installBtnSide::before{content:"⇩";color:var(--gold2);font-weight:950;font-size:16px;line-height:1}
+    .installFab{display:none!important}
+    .metricCard{
+      padding:14px 15px;
+      min-height:96px;
+      background:linear-gradient(145deg,#ffe69a,#d0a02c 58%,#ad7e17)!important;
+      border-color:rgba(255,255,255,.30)!important;
+      color:#07101f!important;
+      box-shadow:0 14px 34px rgba(0,0,0,.20),0 0 0 1px rgba(215,173,56,.10)!important;
+    }
+    .metricCard .metricVal{font-size:26px;color:#07101f;font-weight:950}
+    .metricCard .metricLabel{color:#182334;font-weight:850}
+    .metricCard .metricIcon{width:36px;height:36px;border-radius:13px;background:rgba(7,16,31,.14);color:#07101f}
+    .resourceCard{position:relative;overflow:hidden}
+    .resourceCard::after{content:"";position:absolute;inset:auto -50px -70px auto;width:160px;height:160px;border-radius:50%;background:rgba(215,173,56,.10);pointer-events:none}
+    .resourceIcon{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;background:rgba(215,173,56,.16);color:var(--gold2);font-weight:950;margin-bottom:12px}
+    .resourceList{margin:12px 0 0;padding-inline-start:22px;color:#dce4f1;line-height:1.85}
+    html[dir="rtl"] .resourceList{padding-inline-start:0;padding-inline-end:22px}
+    .resourceActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    @media (max-width:760px){
+      #installBtnSide{min-height:42px;border-radius:13px}
+      .metricCard{padding:10px 10px;min-height:82px;border-radius:15px}
+      .metricCard .metricVal{font-size:21px}
+      .metricCard .metricLabel{font-size:10.5px;line-height:1.25}
+      .metricCard .metricIcon{width:30px;height:30px;border-radius:11px;font-size:12px}
+      .resourceIcon{width:38px;height:38px;border-radius:13px}
     }
 
     @media print{.sidebar,.topbar,.btn,.toast{display:none!important}.shell{display:block}.content{max-width:none;color:#000}.glass,.card{box-shadow:none;background:#fff;color:#000;border-color:#ddd}.muted,.card p{color:#333}}
@@ -251,7 +288,6 @@
         </div>
         <div class="topActions">
           <button class="btn small secondary" id="langBtn">English</button>
-          <button class="btn small secondary" id="installBtnTop" type="button" data-i18n="installApp">تثبيت التطبيق</button>
           <button class="btn small ghost" id="refreshBtn" data-i18n="refresh">تحديث</button>
           <button class="btn small" id="requestAccessBtn" data-i18n="requestAccess">طلب صلاحية دخول</button>
           <button class="btn small danger hide" id="logoutBtn" data-i18n="logout">خروج</button>
@@ -262,7 +298,6 @@
   </div>
   <div class="drawerBackdrop" id="drawerBackdrop" aria-hidden="true"></div>
   <nav class="mobileBottomNav" id="mobileBottomNav" aria-label="Mobile navigation"></nav>
-  <button class="installFab" id="installFab" type="button"><span>⇩</span><b data-i18n="installApp">تثبيت التطبيق</b></button>
   <div class="toast" id="toast"></div>
   <div class="modalBackdrop" id="modalBackdrop" role="dialog" aria-modal="true">
     <div class="modal">
@@ -272,7 +307,7 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
-    const FD_VERSION = 'FD-CLIENT-PORTAL-2026-06-03-MOBILE-V3';
+    const FD_VERSION = 'FD-CLIENT-PORTAL-2026-06-03-MOBILE-V4';
     const FD_SUPABASE_URL = 'https://mifottrhqimqzojiyytq.supabase.co';
     const FD_ADMIN_EMAILS = ['info@futuredimensionsco.com']; // Add your admin login emails here if needed
     const FD_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pZm90dHJocWltcXpvaml5eXRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxOTQ1MzYsImV4cCI6MjA4NDc3MDUzNn0.g3LM3aYvCmZNy3hUShebv5T2evAwgMeNKr4wT3eXZS8';
@@ -483,7 +518,7 @@
         <button class="card gold" onclick="go('invoices')"><h4>${t('contactFinance')}</h4><p>${t('invoices')}</p></button>
       </div>`;
     }
-    function metric(v,label,icon){ return `<div class="card"><div class="metric"><div><div class="metricVal">${v}</div><div class="metricLabel">${label}</div></div><div class="metricIcon">${icon}</div></div></div>`; }
+    function metric(v,label,icon){ return `<div class="card metricCard"><div class="metric"><div><div class="metricVal">${v}</div><div class="metricLabel">${label}</div></div><div class="metricIcon">${icon}</div></div></div>`; }
     function projectMini(p){ const prog=Number(p.progress||0); return `<div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)"><div class="projectHead"><div><strong>${escapeHtml(nameOf(p))}</strong><div class="smallText muted">${escapeHtml(clientOf(p))} · ${escapeHtml(p.owner||'-')}</div></div>${badge(p.status)}</div><div class="progress" style="margin-top:10px"><span style="width:${Math.min(100,Math.max(0,prog))}%"></span></div><div class="smallText muted" style="margin-top:8px">${prog}% · ${escapeHtml(nextOf(p))}</div></div>`; }
     function renderProjects(){
       setTop('projects','allProjects'); const d=state.data.projects;
@@ -528,11 +563,101 @@
       if(state.session && state.sb){ try{ const {error}=await state.sb.from('meetings').insert({user_id:state.user.id,title_ar:title,title_en:title,description:desc,meeting_date:date,status:'pending'}); if(error) throw error; toast(t('sent')); await loadData(); render(); return; }catch(e){toast(e.message||t('failed'));} }
       whatsapp(`${state.lang==='ar'?'طلب اجتماع':'Meeting request'}\n${title}\n${date}\n${desc||''}`);
     }
+    function resourceLibrary(){
+      return [
+        {
+          id:'governance', type:'governance', icon:'◈',
+          title_ar:'دليل الحوكمة التشغيلية', title_en:'Operational Governance Guide',
+          desc_ar:'إطار عملي لمساعدة العميل على تنظيم الصلاحيات، اللجان، السياسات، ومؤشرات الرقابة داخل الشركة.',
+          desc_en:'A practical framework to organize authorities, committees, policies and control KPIs within the organization.',
+          sections:[
+            {ar:'متى تحتاجه؟', en:'When to use it?', items_ar:['عند توسع الشركة أو دخول شركاء جدد.','عند وجود تداخل في الصلاحيات أو بطء في اتخاذ القرار.','عند الحاجة إلى فصل الملكية عن الإدارة التنفيذية.'], items_en:['When the company is growing or onboarding new partners.','When authorities overlap or decisions are slow.','When ownership needs to be separated from executive management.']},
+            {ar:'المخرجات المتوقعة', en:'Expected deliverables', items_ar:['مصفوفة صلاحيات واضحة.','هيكل لجان وتقارير دورية.','سياسات تشغيل ورقابة داخلية.','تقويم امتثال ومؤشرات متابعة.'], items_en:['Clear authority matrix.','Committee structure and periodic reporting.','Operating policies and internal controls.','Compliance calendar and monitoring KPIs.']}
+          ]
+        },
+        {
+          id:'finance', type:'finance', icon:'◆',
+          title_ar:'قائمة التشخيص المالي', title_en:'Financial Diagnostics Checklist',
+          desc_ar:'قائمة بيانات وتحليلات تساعد على فهم الربحية، السيولة، التكلفة، المخاطر، وفرص التحسين المالي.',
+          desc_en:'A data and analysis checklist to understand profitability, liquidity, cost structure, risk and financial improvement opportunities.',
+          sections:[
+            {ar:'البيانات المطلوبة', en:'Required data', items_ar:['قوائم مالية آخر 3 سنوات.','تحليل المبيعات والتكلفة حسب النشاط أو المنتج.','أعمار الذمم المدينة والدائنة.','التدفقات النقدية والالتزامات البنكية.'], items_en:['Financial statements for the last 3 years.','Sales and cost analysis by activity or product.','Accounts receivable and payable aging.','Cash flow and banking obligations.']},
+            {ar:'محاور التحليل', en:'Analysis areas', items_ar:['الربحية والهامش.','رأس المال العامل والسيولة.','نقاط تسرب التكلفة.','جاهزية IFRS 9 و IAS 19 عند الحاجة.'], items_en:['Profitability and margins.','Working capital and liquidity.','Cost leakage points.','IFRS 9 and IAS 19 readiness when required.']}
+          ]
+        },
+        {
+          id:'strategy', type:'strategy', icon:'✦',
+          title_ar:'قالب استراتيجية النمو', title_en:'Growth Strategy Template',
+          desc_ar:'قالب مختصر لتحويل فرص النمو إلى مبادرات قابلة للتنفيذ والقياس، مع ربطها بالسوق والعملاء والإيرادات.',
+          desc_en:'A concise template to convert growth opportunities into executable and measurable initiatives linked to market, customers and revenue.',
+          sections:[
+            {ar:'مكونات القالب', en:'Template components', items_ar:['تعريف القطاعات والعملاء المستهدفين.','تحليل الوضع الحالي ونقاط القوة.','تحديد فرص النمو ذات الأولوية.','خطة مبادرات 90 يوم و 12 شهر.'], items_en:['Define target segments and customers.','Analyze current position and strengths.','Prioritize growth opportunities.','Build a 90-day and 12-month initiative plan.']},
+            {ar:'مؤشرات القياس', en:'Measurement KPIs', items_ar:['نمو الإيرادات.','معدل التحويل.','قيمة العميل.','نسبة تنفيذ المبادرات.'], items_en:['Revenue growth.','Conversion rate.','Customer value.','Initiative completion rate.']}
+          ]
+        },
+        {
+          id:'operations', type:'operations', icon:'▣',
+          title_ar:'نموذج متابعة التنفيذ', title_en:'Execution Follow-up Template',
+          desc_ar:'نموذج متابعة مبني على منهجية شركة أبعاد المستقبل: التشخيص، التصميم، التنفيذ، التأكيد.',
+          desc_en:'A follow-up model based on Future Dimensions methodology: Diagnose, Design, Deliver and Confirmation.',
+          sections:[
+            {ar:'مراحل المتابعة', en:'Follow-up stages', items_ar:['Diagnose: تحديد المشكلة وأسبابها.','Design: تصميم الحل والحوكمة المطلوبة.','Deliver: تنفيذ المبادرات والمخرجات.','Confirmation: قياس النتائج وتأكيد الأثر.'], items_en:['Diagnose: define the issue and root causes.','Design: design the solution and required governance.','Deliver: implement initiatives and deliverables.','Confirmation: measure results and confirm impact.']},
+            {ar:'ما الذي يتم متابعته؟', en:'What to track?', items_ar:['المسؤوليات والمهام.','نسب الإنجاز والمخاطر.','قرارات العميل المطلوبة.','المخرجات النهائية ومؤشرات النجاح.'], items_en:['Responsibilities and tasks.','Progress and risks.','Required client decisions.','Final deliverables and success KPIs.']}
+          ]
+        },
+        {
+          id:'dimensions', type:'strategy', icon:'◎',
+          title_ar:'أبعاد خدمات الشركة', title_en:'Future Dimensions Service Map',
+          desc_ar:'خريطة مختصرة تربط بين البعد المالي، الإداري، والنمو لتوضيح نطاق العمل المتوقع في كل مشروع.',
+          desc_en:'A concise service map connecting financial, administrative and growth dimensions to clarify the expected scope in each engagement.',
+          sections:[
+            {ar:'الأبعاد الرئيسية', en:'Core dimensions', items_ar:['البعد المالي: تشخيص مالي، ربحية، سيولة، تكلفة، تقارير.','البعد الإداري: حوكمة، هيكل تنظيمي، صلاحيات، سياسات.','بعد النمو: استراتيجية، تحول، دخول أسواق، مبادرات تنفيذ.'], items_en:['Financial Dimension: diagnostics, profitability, liquidity, cost and reporting.','Administrative Dimension: governance, structure, authorities and policies.','Growth Dimension: strategy, transformation, market entry and execution initiatives.']},
+            {ar:'قيمة الدمج بين الأبعاد', en:'Value of integration', items_ar:['حلول لا تقف عند التقرير بل تمتد إلى التنفيذ.','رؤية إدارية ومالية متكاملة.','مخرجات قابلة للقياس والمتابعة.'], items_en:['Solutions that extend beyond reports into execution.','Integrated managerial and financial view.','Measurable and trackable deliverables.']}
+          ]
+        },
+        {
+          id:'industries', type:'operations', icon:'◷',
+          title_ar:'دليل القطاعات المستهدفة', title_en:'Industries Focus Guide',
+          desc_ar:'مرجع سريع يوضح كيف يتم تكييف خدمات الاستشارات حسب طبيعة القطاع وحجم التحديات.',
+          desc_en:'A quick reference showing how consulting services are tailored by industry and challenge size.',
+          sections:[
+            {ar:'قطاعات مناسبة', en:'Relevant industries', items_ar:['الشركات الصناعية والمصانع.','شركات مواد البناء والأسمنت.','الشركات العائلية.','الخدمات والتجزئة.','العقارات والمقاولات.'], items_en:['Industrial companies and factories.','Building materials and cement businesses.','Family businesses.','Services and retail.','Real estate and contracting.']},
+            {ar:'طريقة التخصيص', en:'Tailoring approach', items_ar:['فهم نموذج التشغيل أولاً.','ربط التحليل المالي بالقرارات الإدارية.','اختيار مؤشرات قياس مناسبة لكل قطاع.'], items_en:['Understand the operating model first.','Connect financial analysis with management decisions.','Select KPIs suitable for each industry.']}
+          ]
+        }
+      ];
+    }
     function renderResources(){
       setTop('resources','secureWorkspace');
-      const cards=[['governance',state.lang==='ar'?'دليل الحوكمة التشغيلية':'Operational Governance Guide'],['finance',state.lang==='ar'?'قائمة التشخيص المالي':'Financial Diagnostic Checklist'],['strategy',state.lang==='ar'?'قالب استراتيجية النمو':'Growth Strategy Template'],['operations',state.lang==='ar'?'نموذج متابعة التنفيذ':'Execution Follow-up Template']];
-      return `<div class="sectionTitle"><div><h3>${t('resources')}</h3><p>${state.lang==='ar'?'مكتبة موارد مختارة لدعم العميل أثناء المشروع.':'Selected resources to support clients during projects.'}</p></div></div><div class="grid cols2">${cards.map(([type,title])=>`<div class="card"><div class="projectHead"><h4>${title}</h4><span class="badge gold">${t(type)}</span></div><p>${state.lang==='ar'?'سيتم إتاحة التحميل حسب صلاحية العميل ونوع المشروع.':'Download availability depends on client permissions and project type.'}</p><button class="btn small secondary" style="margin-top:14px" onclick="toast('${state.lang==='ar'?'سيتم إتاحته قريباً':'Coming soon'}')">${t('open')}</button></div>`).join('')}</div>`;
+      const cards = resourceLibrary();
+      return `<div class="sectionTitle"><div><h3>${t('resources')}</h3><p>${state.lang==='ar'?'مكتبة موارد عملية مستوحاة من خدمات ومنهجية شركة أبعاد المستقبل، ويمكن للعميل فتحها وقراءتها فوراً.':'A practical resource library inspired by Future Dimensions services and methodology, ready for clients to open and read.'}</p></div></div><div class="grid cols2">${cards.map(r=>`<div class="card resourceCard"><div class="resourceIcon">${r.icon}</div><div class="projectHead"><h4>${escapeHtml(state.lang==='ar'?r.title_ar:r.title_en)}</h4><span class="badge gold">${t(r.type)}</span></div><p>${escapeHtml(state.lang==='ar'?r.desc_ar:r.desc_en)}</p><div class="resourceActions"><button class="btn small" onclick="openResource('${r.id}')">${t('open')}</button><button class="btn small secondary" onclick="downloadResource('${r.id}')">${t('download')}</button></div></div>`).join('')}</div>`;
     }
+    function resourceText(r){
+      const title = state.lang==='ar'?r.title_ar:r.title_en;
+      const desc = state.lang==='ar'?r.desc_ar:r.desc_en;
+      const lines = [`${title}`, '', desc, ''];
+      r.sections.forEach(sec=>{ lines.push(state.lang==='ar'?sec.ar:sec.en); (state.lang==='ar'?sec.items_ar:sec.items_en).forEach(it=>lines.push(`- ${it}`)); lines.push(''); });
+      lines.push(state.lang==='ar'?'شركة أبعاد المستقبل للاستشارات وحلول الأعمال':'Future Dimensions Consulting & Business Solutions');
+      return lines.join('\n');
+    }
+    window.openResource=(id)=>{
+      const r=resourceLibrary().find(x=>x.id===id); if(!r) return;
+      const title=state.lang==='ar'?r.title_ar:r.title_en;
+      const desc=state.lang==='ar'?r.desc_ar:r.desc_en;
+      const body=`<div class="card gold" style="margin-bottom:14px"><h4>${escapeHtml(title)}</h4><p>${escapeHtml(desc)}</p></div>${r.sections.map(sec=>`<div class="card" style="margin-bottom:12px"><h4>${escapeHtml(state.lang==='ar'?sec.ar:sec.en)}</h4><ul class="resourceList">${(state.lang==='ar'?sec.items_ar:sec.items_en).map(it=>`<li>${escapeHtml(it)}</li>`).join('')}</ul></div>`).join('')}<div class="resourceActions"><button class="btn small" onclick="downloadResource('${r.id}')">${t('download')}</button><button class="btn small secondary" onclick="copyResource('${r.id}')">${state.lang==='ar'?'نسخ المحتوى':'Copy content'}</button></div>`;
+      showModal(title, body);
+    };
+    window.downloadResource=(id)=>{
+      const r=resourceLibrary().find(x=>x.id===id); if(!r) return;
+      const blob=new Blob([resourceText(r)],{type:'text/plain;charset=utf-8'});
+      const url=URL.createObjectURL(blob); const a=document.createElement('a');
+      a.href=url; a.download=`future-dimensions-${id}.txt`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      toast(state.lang==='ar'?'تم تجهيز ملف المورد للتحميل':'Resource file prepared for download');
+    };
+    window.copyResource=async(id)=>{
+      const r=resourceLibrary().find(x=>x.id===id); if(!r) return;
+      try{ await navigator.clipboard.writeText(resourceText(r)); toast(state.lang==='ar'?'تم نسخ المحتوى':'Content copied'); }catch{ toast(t('failed')); }
+    };
     function renderAccount(){
       setTop('account','accountSettings');
       return `<div class="grid cols2"><div class="card"><h4>${t('profile')}</h4><div class="field"><label>${t('email')}</label><input class="input ltr" value="${escapeHtml(state.user?.email||'')}" readonly></div><div class="field"><label>${t('company')}</label><input class="input" value="${state.lang==='ar'?'عميل شركة أبعاد المستقبل':'Future Dimensions Client'}"></div><div class="field"><label>${t('role')}</label><input class="input" value="Client" readonly></div></div><div class="card"><h4>${t('security')}</h4><p>${state.lang==='ar'?'البيانات الحساسة يجب أن تكون محمية بسياسات RLS، وتسجيل كل عمليات الرفع والتحميل والتعديل في Audit Log.':'Sensitive data must be protected by RLS policies, and all uploads, downloads and changes should be logged in an Audit Log.'}</p><div class="divider"></div><div class="hint smallText">${t('secureNote')}</div></div>${isAdmin()?`<div class="card"><h4>${t('adminControls')}</h4><p>${state.lang==='ar'?'حذف الفواتير والمستندات يتم من صفحات الفواتير والمستندات بعد ظهور أزرار الحذف بجوار كل عنصر.':'Delete invoices and documents from the Invoices and Documents pages using the delete buttons next to each item.'}</p></div>`:''}</div>`;
@@ -574,17 +699,17 @@
       const renders={dashboard:renderDashboard,projects:renderProjects,documents:renderDocuments,invoices:renderInvoices,support:renderSupport,meetings:renderMeetings,resources:renderResources,account:renderAccount};
       app.innerHTML=(renders[state.page]||renderDashboard)(); attachPageEvents();
     }
-    window.addEventListener('online',()=>{state.online=true;updateStatus();}); window.addEventListener('offline',()=>{state.online=false;updateStatus();}); window.addEventListener('resize',updateInstallButtons);
+    window.addEventListener('online',()=>{state.online=true;updateStatus();}); window.addEventListener('offline',()=>{state.online=false;updateStatus();});
     window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();state.deferredPrompt=e;updateInstallButtons();});
     function isStandalone(){ return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true; }
-    function updateInstallButtons(){ const show=!isStandalone(); const mobile=window.innerWidth<=760; ['installBtnSide','installBtnTop','installFab'].forEach(id=>{const el=$(id); if(!el) return; el.style.display=(show && (id!=='installFab' || mobile))?'inline-flex':'none';}); }
+    function updateInstallButtons(){ const show=!isStandalone(); const side=$('installBtnSide'); if(side) side.style.display=show?'inline-flex':'none'; }
     async function installApp(){
       if(state.deferredPrompt){ state.deferredPrompt.prompt(); await state.deferredPrompt.userChoice; state.deferredPrompt=null; updateInstallButtons(); return; }
       showModal(t('installApp'), `<div class="adminNote">${t('installInstructions')}</div>`);
     }
     function openMobileMenu(){ $('sidebar').classList.add('open'); $('drawerBackdrop').classList.add('show'); document.body.classList.add('drawer-open'); }
     function closeMobileMenu(){ $('sidebar').classList.remove('open'); $('drawerBackdrop').classList.remove('show'); document.body.classList.remove('drawer-open'); }
-    $('installBtnSide').onclick=installApp; $('installBtnTop').onclick=installApp; $('installFab').onclick=installApp;
+    if($('installBtnSide')) $('installBtnSide').onclick=installApp;
     $('mobileMenu').addEventListener('click',(e)=>{e.preventDefault();e.stopPropagation(); $('sidebar').classList.contains('open')?closeMobileMenu():openMobileMenu();});
     $('drawerBackdrop').addEventListener('click',closeMobileMenu);
     document.addEventListener('keydown',(e)=>{if(e.key==='Escape') closeMobileMenu();});
@@ -592,7 +717,7 @@
     $('langBtn').onclick=()=>{state.lang=state.lang==='ar'?'en':'ar';render();}; $('refreshBtn').onclick=async()=>{await loadData();render();toast(t('refresh'));}; $('requestAccessBtn').onclick=requestAccess; $('logoutBtn').onclick=logout; $('modalClose').onclick=closeModal; $('modalBackdrop').addEventListener('click',(e)=>{if(e.target.id==='modalBackdrop')closeModal();});
     (async function boot(){
       updateInstallButtons();
-      if('serviceWorker' in navigator){ try{ await navigator.serviceWorker.register('sw.js?v=4003'); }catch(e){console.warn(e)} }
+      if('serviceWorker' in navigator){ try{ await navigator.serviceWorker.register('sw.js?v=4004'); }catch(e){console.warn(e)} }
       await initSupabase(); await loadData(); render();
     })();
   </script>
