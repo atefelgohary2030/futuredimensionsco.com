@@ -20,6 +20,6 @@ V3 fixes: About/Vision More buttons now open standalone visible pages in both Ar
 V4 enhancements:
 - Enhanced index homepage with credibility, advisory scenarios, industries, and professional ethics sections.
 - Preserved brand identity, logo, color palette, and slogan: Enter with Challenges – Exit with New Dimensions.
-- Repositioned content accurately for a new promising company with no completed client projects yet.
+- Repositioned content around methodology, advisory value, confidentiality, and professional standards.
 - Improved Arabic and English copy and consultation form structure.
 - Added deployable index.html and service .html copies for financial, administrative, and growth pages.
