@@ -827,6 +827,21 @@ body[data-page="insights"] .pageView[data-page="insights"]{display:block;}
 /* v3 fix: force routed internal pages visible if opened via ?page=about or ?page=vision */
 body[data-page="about"] main > section.pageView[data-page="about"],
 body[data-page="vision"] main > section.pageView[data-page="vision"]{display:block !important;}
+
+/* === Professional consulting upgrade - added by ChatGPT === */
+html[lang="en"] .ar-only{display:none!important}
+html[lang="ar"] .en-only{display:none!important}
+.fd-upgrade-section{padding:72px 0;border-top:1px solid rgba(212,175,55,.16);position:relative;z-index:1}
+.fd-upgrade-title{max-width:860px;margin:0 0 28px}
+.fd-upgrade-title h2{margin:0 0 10px;font-size:clamp(26px,3vw,42px);letter-spacing:-.03em;color:var(--gold,#D4AF37)}
+.fd-upgrade-title p{margin:0;color:rgba(255,255,255,.78);line-height:1.9;font-size:16px}
+.fd-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.fd-grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.fd-card{background:linear-gradient(180deg,rgba(255,255,255,.095),rgba(255,255,255,.045));border:1px solid rgba(212,175,55,.22);border-radius:18px;padding:22px;box-shadow:0 18px 45px rgba(0,0,0,.18)}
+.fd-card h3{margin:0 0 10px;color:#fff;font-size:18px}.fd-card p,.fd-card li{color:rgba(255,255,255,.78);line-height:1.85}.fd-card ul{margin:8px 0 0;padding-inline-start:20px}.fd-kpi{font-size:28px;font-weight:1000;color:var(--gold,#D4AF37);display:block;margin-bottom:6px}.fd-label{display:inline-block;margin-bottom:10px;color:#111;background:linear-gradient(135deg,#F1D77A,#D4AF37);font-weight:900;border-radius:999px;padding:5px 10px;font-size:12px}.fd-trust-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.fd-trust-strip span{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:8px 12px;color:rgba(255,255,255,.82);background:rgba(255,255,255,.06);font-weight:800;font-size:13px}.fd-note{padding:20px;border-radius:18px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.24);color:rgba(255,255,255,.83);line-height:1.9}.fd-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}.fd-link{display:inline-flex;border-radius:14px;padding:11px 15px;font-weight:950;background:linear-gradient(135deg,#F1D77A,#D4AF37);color:#000}.fd-link.secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.25)}
+@media(max-width:900px){.fd-grid-3,.fd-grid-4{grid-template-columns:1fr}.fd-upgrade-section{padding:48px 0}}
+
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 <meta content="https://www.futuredimensionsco.com/logo.png" property="og:image"/><meta content="Future Dimensions logo" property="og:image:alt"/><meta content="https://www.futuredimensionsco.com/logo.png" name="twitter:image"/><script id="ld-org" type="application/ld+json">{
   "@context": "https://schema.org",
@@ -839,7 +854,47 @@ body[data-page="vision"] main > section.pageView[data-page="vision"]{display:blo
   "@type": "WebSite",
   "name": "Future Dimensions",
   "url": "https://www.futuredimensionsco.com/"
-}</script></head>
+}</script><script id="fd-professional-service-schema" type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Future Dimensions for Consulting & Business Solutions",
+  "alternateName": [
+    "Future Dimensions",
+    "شركة أبعاد المستقبل للاستشارات وحلول الأعمال"
+  ],
+  "url": "https://www.futuredimensionsco.com/",
+  "logo": "https://www.futuredimensionsco.com/logo.png",
+  "email": "info@futuredimensionsco.com",
+  "telephone": "+20 100 193 8264",
+  "identifier": {
+    "@type": "PropertyValue",
+    "name": "Commercial Registration Number",
+    "value": "286328"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/future-dimensions-for-consulting-business-solutions"
+  ],
+  "areaServed": [
+    "Egypt",
+    "GCC",
+    "Middle East",
+    "Arab Region",
+    "Global"
+  ],
+  "serviceType": [
+    "Financial Consulting",
+    "Management Consulting",
+    "Operational Excellence",
+    "Governance Advisory",
+    "Growth Strategy",
+    "Business Transformation"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "EG"
+  }
+}</script>
+</head>
 <body>
 <header>
 <div class="wrap nav">
@@ -944,7 +999,7 @@ body[data-page="vision"] main > section.pageView[data-page="vision"]{display:blo
 <div class="proofItem"><b id="proof1Title">Built on Executive Expertise</b><span id="proof1Text">A senior advisory platform combining financial discipline, governance thinking, operational excellence, and growth strategy.</span></div>
 <div class="proofItem"><b id="proof2Title">Professional Standards & Confidentiality</b><span id="proof2Text">Future Dimensions is built around professional quality, confidentiality, structured documentation, and measurable advisory outputs that support executive decision-making.</span></div>
 <div class="proofItem"><b id="proof3Title">Practical Deliverables</b><span id="proof3Text">Every engagement is structured around diagnostic reports, roadmaps, policies, dashboards, and implementation-ready documentation.</span></div>
-<div class="proofItem"><b id="proof4Title">Egypt & Regional Outlook</b><span id="proof4Text">Our model is designed for organizations in Egypt and the wider Middle East seeking stronger control, better decisions, and sustainable growth readiness.</span></div>
+<div class="proofItem"><b id="proof4Title">Egypt & Regional Outlook</b><span id="proof4Text">Our model is designed for organizations in Egypt, the GCC, the wider Arab region, and international markets seeking stronger control, better decisions, and sustainable growth readiness.</span></div>
 </div>
 </section>
 
@@ -1111,8 +1166,37 @@ body[data-page="vision"] main > section.pageView[data-page="vision"]{display:blo
 <section id="global-standard">
 <div class="wrap grid2">
 <div class="trustNote"><b id="standardTitle">Advisory presence built on clarity, governance, and professional standards.</b><br/><span id="standardText">Future Dimensions presents its advisory capabilities through clear methodology, leadership expertise, confidentiality, disciplined execution, and management-ready outputs that support confident decision-making.</span></div>
-<div class="trustNote"><b id="confTitle">Confidentiality & Professional Ethics</b><br/><span id="confText">Consulting engagements depend on sensitive financial and operational information. Future Dimensions should present confidentiality, independence, documentation quality, and management-ready reporting as core commitments from the first client conversation.</span></div>
+<div class="trustNote"><b id="confTitle">Confidentiality & Professional Ethics</b><br/><span id="confText">Consulting engagements depend on sensitive financial and operational information. Future Dimensions treats confidentiality, independence, documentation quality, and management-ready reporting as core commitments from the first client conversation.</span></div>
 </div>
+</section>
+
+
+<section class="fd-upgrade-section" id="proof-of-capability">
+  <div class="wrap">
+    <div class="fd-upgrade-title">
+      <h2><span class="en-only">Proof of Capability</span><span class="ar-only">إثبات القدرة المهنية</span></h2>
+      <p><span class="en-only">Future Dimensions is a newly established consulting firm, so we present capability through leadership experience, disciplined methodology, documented outputs, confidentiality, and a clear engagement model.</span><span class="ar-only">أبعاد المستقبل شركة استشارية حديثة، لذلك نُظهر القدرة المهنية من خلال خبرات القيادة، والمنهجية المنظمة، والمخرجات الموثقة، والسرية، ونموذج تعامل واضح مع العميل.</span></p>
+    </div>
+    <div class="fd-grid-4">
+      <article class="fd-card"><span class="fd-kpi">01</span><h3><span class="en-only">Senior Expertise</span><span class="ar-only">خبرة قيادية</span></h3><p><span class="en-only">Advisory work led by professionals with finance, governance, operations, restructuring, and executive management exposure.</span><span class="ar-only">عمل استشاري تقوده خبرات في المالية والحوكمة والتشغيل وإعادة الهيكلة والإدارة التنفيذية.</span></p></article>
+      <article class="fd-card"><span class="fd-kpi">02</span><h3><span class="en-only">Audit-ready Documentation</span><span class="ar-only">توثيق جاهز للمراجعة</span></h3><p><span class="en-only">Engagements are structured around clear reports, policies, dashboards, roadmaps, and decision-ready documentation.</span><span class="ar-only">كل مهمة تُبنى حول تقارير وسياسات ولوحات مؤشرات وخرائط طريق ووثائق جاهزة لدعم القرار.</span></p></article>
+      <article class="fd-card"><span class="fd-kpi">03</span><h3><span class="en-only">Confidentiality by Design</span><span class="ar-only">سرية مهنية من البداية</span></h3><p><span class="en-only">Financial and operational information is treated as sensitive, protected, and shared only within the agreed engagement scope.</span><span class="ar-only">نتعامل مع المعلومات المالية والتشغيلية باعتبارها معلومات حساسة تُحمى ولا تُستخدم إلا ضمن نطاق المهمة المتفق عليه.</span></p></article>
+      <article class="fd-card"><span class="fd-kpi">04</span><h3><span class="en-only">Regional & Global Reach</span><span class="ar-only">نطاق إقليمي وعالمي</span></h3><p><span class="en-only">Based in Egypt and positioned to serve Egypt, GCC countries, the wider Arab region, and international clients remotely or onsite.</span><span class="ar-only">انطلاقاً من مصر، نقدم خدماتنا داخل مصر ودول الخليج والمنطقة العربية والعملاء الدوليين عن بُعد أو حضورياً.</span></p></article>
+    </div>
+  </div>
+</section>
+<section class="fd-upgrade-section" id="deliverables">
+  <div class="wrap">
+    <div class="fd-upgrade-title">
+      <h2><span class="en-only">What Clients Receive</span><span class="ar-only">ماذا يستلم العميل؟</span></h2>
+      <p><span class="en-only">Our promise is not limited to advice. Each engagement is designed to produce practical, management-ready deliverables that can be implemented, reviewed, and measured.</span><span class="ar-only">وعدنا لا يقتصر على النصيحة. كل مهمة مصممة لتقديم مخرجات عملية جاهزة للإدارة والتنفيذ والمراجعة والقياس.</span></p>
+    </div>
+    <div class="fd-grid-3">
+      <article class="fd-card"><span class="fd-label">Diagnostic</span><h3><span class="en-only">Diagnostic Reports</span><span class="ar-only">تقارير تشخيصية</span></h3><ul><li><span class="en-only">Current-state assessment</span><span class="ar-only">تقييم الوضع الحالي</span></li><li><span class="en-only">Gap and root-cause analysis</span><span class="ar-only">تحليل الفجوات والأسباب الجذرية</span></li><li><span class="en-only">Risk and opportunity map</span><span class="ar-only">خريطة المخاطر والفرص</span></li></ul></article>
+      <article class="fd-card"><span class="fd-label">Design</span><h3><span class="en-only">Policies, Models & Roadmaps</span><span class="ar-only">سياسات ونماذج وخرائط طريق</span></h3><ul><li><span class="en-only">Financial and governance policies</span><span class="ar-only">سياسات مالية وحوكمة</span></li><li><span class="en-only">Delegation of authority matrices</span><span class="ar-only">مصفوفات صلاحيات</span></li><li><span class="en-only">90-day and 12-month action plans</span><span class="ar-only">خطط عمل 90 يوم و12 شهر</span></li></ul></article>
+      <article class="fd-card"><span class="fd-label">Execution</span><h3><span class="en-only">Dashboards & Implementation Support</span><span class="ar-only">لوحات مؤشرات ودعم تنفيذ</span></h3><ul><li><span class="en-only">KPI dashboards</span><span class="ar-only">لوحات مؤشرات أداء</span></li><li><span class="en-only">Management reporting packs</span><span class="ar-only">حزم تقارير إدارية</span></li><li><span class="en-only">Follow-up sessions and knowledge transfer</span><span class="ar-only">متابعة ونقل معرفة</span></li></ul></article>
+    </div>
+  </div>
 </section>
 
 <section id="methodology">
@@ -1435,7 +1519,7 @@ body[data-page="vision"] main > section.pageView[data-page="vision"]{display:blo
 <small id="footSub">FOR CONSULTING &amp; BUSINESS SOLUTIONS</small>
 </div>
 </div>
-<div class="copy" id="copyText">© Future Dimensions — All rights reserved.</div>
+<div class="copy" id="copyText">© 2026 Future Dimensions — All rights reserved.</div>
 </div>
 <div>
 <div aria-label="Quick links" class="footerLinks">
@@ -1448,6 +1532,7 @@ body[data-page="vision"] main > section.pageView[data-page="vision"]{display:blo
 <a href="index.html#contact" id="fContact">Contact</a>
 </div>
 </div>
+<div class="fd-trust-strip" style="margin-top:14px"><span class="en-only">Commercial Registration No. 286328</span><span class="ar-only">رقم السجل التجاري: 286328</span><a href="https://www.linkedin.com/company/future-dimensions-for-consulting-business-solutions" rel="noopener" target="_blank">LinkedIn</a></div>
 </div>
 </div>
 </footer>
@@ -1732,7 +1817,7 @@ body[data-page="vision"] main > section.pageView[data-page="vision"]{display:blo
       mGr:"Growth Strategy",
       mTeam:"Team",
       mCareers:"Careers",
-      mInsights:"الرؤى",
+      mInsights:"Insights",
 
       mApproach:"Approach",
       mContact:"Contact",
@@ -1930,7 +2015,7 @@ body[data-page="vision"] main > section.pageView[data-page="vision"]{display:blo
 
       footName:"FUTURE DIMENSIONS",
       footSub:"FOR CONSULTING & BUSINESS SOLUTIONS",
-      copyText:"© Future Dimensions — All rights reserved.",
+      copyText:"© 2026 Future Dimensions — All rights reserved.",
       fHome:"Home", fAbout:"About", fServices:"Services", fTeam:"Team", fCareers:"Careers", fContact:"Contact", waFloatText:"WhatsApp"
     }
     ,
@@ -1963,7 +2048,7 @@ body[data-page="vision"] main > section.pageView[data-page="vision"]{display:blo
       mGr:"استراتيجية النمو",
       mTeam:"فريق العمل",
       mCareers:"التوظيف",
-      mInsights:"الرؤى",
+      mInsights:"Insights",
 
       mApproach:"منهجيتنا",
       mContact:"تواصل معنا",
@@ -2200,7 +2285,7 @@ body[data-page="vision"] main > section.pageView[data-page="vision"]{display:blo
     proof1Title:"Built on Executive Expertise", proof1Text:"A senior advisory platform combining financial discipline, governance thinking, operational excellence, and growth strategy.",
     proof2Title:"Professional Standards & Confidentiality", proof2Text:"Future Dimensions is built around professional quality, confidentiality, structured documentation, and measurable advisory outputs that support executive decision-making.",
     proof3Title:"Practical Deliverables", proof3Text:"Every engagement is structured around diagnostic reports, roadmaps, policies, dashboards, and implementation-ready documentation.",
-    proof4Title:"Egypt & Regional Outlook", proof4Text:"Our model is designed for organizations in Egypt and the wider Middle East seeking stronger control, better decisions, and sustainable growth readiness.",
+    proof4Title:"Egypt & Regional Outlook", proof4Text:"Our model is designed for organizations in Egypt, the GCC, the wider Arab region, and international markets seeking stronger control, better decisions, and sustainable growth readiness.",
     scenariosTitle:"Advisory Scenarios", scenariosHint:"How Future Dimensions can support your next decision", scenariosLead:"These advisory scenarios demonstrate how Future Dimensions translates complex business challenges into structured diagnostics, practical solutions, and measurable management outputs.",
     scenario1Label:"Financial Clarity", scenario1Title:"Profitability & Cost Visibility", scenario1Text:"For organizations that need a clearer view of margins, cost drivers, budgeting discipline, and performance gaps before making strategic decisions.", scenarioOutcome1:"Typical outputs", scenario1Output:"Diagnostic report, cost map, KPI dashboard, and improvement roadmap.",
     scenario2Label:"Operating Discipline", scenario2Title:"Governance, SOPs & Decision Rights", scenario2Text:"For companies that are growing faster than their internal systems and need clearer authority, documented processes, and control mechanisms.", scenarioOutcome2:"Typical outputs", scenario2Output:"Governance framework, delegation matrix, SOP pack, and compliance checklist.",
@@ -2211,7 +2296,7 @@ body[data-page="vision"] main > section.pageView[data-page="vision"]{display:blo
     ind3Title:"Healthcare & Services", ind3Text:"Operating models, quality systems, cost-to-serve analysis, and practical performance improvement.",
     ind4Title:"Family Businesses & SMEs", ind4Text:"Governance maturity, succession-ready structures, financial policies, and controlled growth planning.",
     standardTitle:"Advisory presence built on clarity, governance, and professional standards.", standardText:"Future Dimensions presents its advisory capabilities through clear methodology, leadership expertise, confidentiality, disciplined execution, and management-ready outputs that support confident decision-making.",
-    confTitle:"Confidentiality & Professional Ethics", confText:"Consulting engagements depend on sensitive financial and operational information. Future Dimensions should present confidentiality, independence, documentation quality, and management-ready reporting as core commitments from the first client conversation.",
+    confTitle:"Confidentiality & Professional Ethics", confText:"Consulting engagements depend on sensitive financial and operational information. Future Dimensions treats confidentiality, independence, documentation quality, and management-ready reporting as core commitments from the first client conversation.",
     trust1Title:"Executive Advisory", trust1Text:"Board-level thinking with implementation discipline.",
     trust2Title:"Financial Clarity", trust2Text:"Diagnostics, reporting, profitability and cash-flow focus.",
     trust3Title:"Operational Control", trust3Text:"Governance, SOPs, KPIs and execution cadence.",

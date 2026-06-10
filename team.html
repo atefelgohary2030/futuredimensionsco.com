@@ -333,9 +333,64 @@ header{
 .profileCard .role{color:#071224 !important;font-weight:1000 !important;}
 .footer a[href^="tel:"]{direction:ltr;unicode-bidi:isolate;display:inline-block;}
 .brandName b[data-ar], .footerBrandName[data-ar]{font-weight:1000;}
+
+/* === Professional consulting upgrade - added by ChatGPT === */
+html[lang="en"] .ar-only{display:none!important}
+html[lang="ar"] .en-only{display:none!important}
+.fd-upgrade-section{padding:72px 0;border-top:1px solid rgba(212,175,55,.16);position:relative;z-index:1}
+.fd-upgrade-title{max-width:860px;margin:0 0 28px}
+.fd-upgrade-title h2{margin:0 0 10px;font-size:clamp(26px,3vw,42px);letter-spacing:-.03em;color:var(--gold,#D4AF37)}
+.fd-upgrade-title p{margin:0;color:rgba(255,255,255,.78);line-height:1.9;font-size:16px}
+.fd-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.fd-grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.fd-card{background:linear-gradient(180deg,rgba(255,255,255,.095),rgba(255,255,255,.045));border:1px solid rgba(212,175,55,.22);border-radius:18px;padding:22px;box-shadow:0 18px 45px rgba(0,0,0,.18)}
+.fd-card h3{margin:0 0 10px;color:#fff;font-size:18px}.fd-card p,.fd-card li{color:rgba(255,255,255,.78);line-height:1.85}.fd-card ul{margin:8px 0 0;padding-inline-start:20px}.fd-kpi{font-size:28px;font-weight:1000;color:var(--gold,#D4AF37);display:block;margin-bottom:6px}.fd-label{display:inline-block;margin-bottom:10px;color:#111;background:linear-gradient(135deg,#F1D77A,#D4AF37);font-weight:900;border-radius:999px;padding:5px 10px;font-size:12px}.fd-trust-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.fd-trust-strip span{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:8px 12px;color:rgba(255,255,255,.82);background:rgba(255,255,255,.06);font-weight:800;font-size:13px}.fd-note{padding:20px;border-radius:18px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.24);color:rgba(255,255,255,.83);line-height:1.9}.fd-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}.fd-link{display:inline-flex;border-radius:14px;padding:11px 15px;font-weight:950;background:linear-gradient(135deg,#F1D77A,#D4AF37);color:#000}.fd-link.secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.25)}
+@media(max-width:900px){.fd-grid-3,.fd-grid-4{grid-template-columns:1fr}.fd-upgrade-section{padding:48px 0}}
+
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Future Dimensions for Consulting & Business Solutions", "alternateName": "Future Dimensions", "url": "https://www.futuredimensionsco.com", "logo": "https://www.futuredimensionsco.com/logo.png", "email": "info@futuredimensionsco.com", "telephone": "+20 100 193 8264", "address": {"@type": "PostalAddress", "streetAddress": "Building No. 6, Mostafa Anani St., Heliopolis", "addressLocality": "Cairo", "addressCountry": "EG"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "AboutPage", "name": "Future Dimensions Team", "url": "https://www.futuredimensionsco.com/team.html", "mainEntity": {"@type": "Organization", "name": "Future Dimensions", "employee": [{"@type": "Person", "name": "Dr. Atef Elgohary", "jobTitle": "Chairman of the Board & Managing Director"}, {"@type": "Person", "name": "Hany Teleb", "jobTitle": "Strategic & Business Development Manager"}, {"@type": "Person", "name": "Wael Naeem", "jobTitle": "Consulting Lead"}]}}</script>
+<script id="fd-professional-service-schema" type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Future Dimensions for Consulting & Business Solutions",
+  "alternateName": [
+    "Future Dimensions",
+    "شركة أبعاد المستقبل للاستشارات وحلول الأعمال"
+  ],
+  "url": "https://www.futuredimensionsco.com/",
+  "logo": "https://www.futuredimensionsco.com/logo.png",
+  "email": "info@futuredimensionsco.com",
+  "telephone": "+20 100 193 8264",
+  "identifier": {
+    "@type": "PropertyValue",
+    "name": "Commercial Registration Number",
+    "value": "286328"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/future-dimensions-for-consulting-business-solutions"
+  ],
+  "areaServed": [
+    "Egypt",
+    "GCC",
+    "Middle East",
+    "Arab Region",
+    "Global"
+  ],
+  "serviceType": [
+    "Financial Consulting",
+    "Management Consulting",
+    "Operational Excellence",
+    "Governance Advisory",
+    "Growth Strategy",
+    "Business Transformation"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "EG"
+  }
+}</script>
 </head><body><header><div class="container nav"><a aria-label="Future Dimensions Home" class="brand" href="index.html"><img alt="Future Dimensions logo" src="logo.png"/><div class="brandName"><b data-en="Future Dimensions" data-ar="شركة أبعاد المستقبل">Future Dimensions</b><span data-en="Consulting &amp; Business Solutions" data-ar="للاستشارات وحلول الأعمال">Consulting &amp; Business Solutions</span></div></a><nav aria-label="Primary" class="navLinks"><a href="index.html" class="" data-en="Home" data-ar="الرئيسية">Home</a><a href="about.html" class="" data-en="About" data-ar="من نحن">About</a><a href="financial.html" class="" data-en="Financial" data-ar="الاستشارات المالية">Financial</a><a href="administrative.html" class="" data-en="Administrative" data-ar="الإداري والتشغيلي">Administrative</a><a href="growth.html" class="" data-en="Growth" data-ar="استراتيجيات النمو">Growth</a><a href="insights.html" class="" data-en="Insights" data-ar="مقالات ورؤى">Insights</a><a href="team.html" class="active" data-en="Team" data-ar="فريق العمل">Team</a><a href="careers.html" class="" data-en="Careers" data-ar="التوظيف">Careers</a><a href="index.html#methodology" class="" data-en="Methodology" data-ar="منهجيتنا">Methodology</a><a href="index.html#contact" class="" data-en="Contact" data-ar="تواصل معنا">Contact</a></nav><div class="navRight"><button class="btn btnGhost" id="langToggle" type="button">العربية</button><a class="btn" href="index.html#contact" data-en="Request Consultation" data-ar="اطلب استشارة">Request Consultation</a></div></div></header>
 <main>
 <section class="hero"><div class="container heroGrid"><div class="heroCard"><div class="kicker" data-en="Leadership & Experts" data-ar="القيادة والخبراء">Leadership & Experts</div><h1 class="heroTitle"><span data-en="A Team Built for" data-ar="فريق مصمم لتحقيق">A Team Built for</span> <span class="gold" data-en="Measurable Transformation" data-ar="تحول قابل للقياس">Measurable Transformation</span></h1><p class="heroText" data-en="Future Dimensions brings together executive leadership, financial discipline, operational excellence, governance expertise, and growth strategy to help organizations move from complex challenges to practical, sustainable results." data-ar="تجمع شركة أبعاد المستقبل بين خبرات الإدارة التنفيذية، والانضباط المالي، والتميز التشغيلي، وحوكمة الشركات، واستراتيجيات النمو لمساعدة المؤسسات على الانتقال من التحديات المعقدة إلى نتائج عملية ومستدامة.">Future Dimensions brings together executive leadership, financial discipline, operational excellence, governance expertise, and growth strategy to help organizations move from complex challenges to practical, sustainable results.</p><div class="heroActions"><a class="btn" href="index.html#contact" data-en="Book a Consultation" data-ar="احجز استشارة">Book a Consultation</a><a class="btn btnGhost" href="insights.html" data-en="Read Insights" data-ar="اقرأ المقالات">Read Insights</a></div></div><aside class="sideCard"><h3 data-en="Why this team matters" data-ar="لماذا هذا الفريق مهم؟">Why this team matters</h3><p data-en="We combine board-level thinking with hands-on execution, so clients receive clear diagnostics, practical deliverables, and measurable implementation support." data-ar="نحن نجمع بين تفكير الإدارة العليا والتنفيذ العملي، لذلك يحصل العملاء على تشخيص واضح ومخرجات قابلة للتطبيق ودعم تنفيذي قابل للقياس.">We combine board-level thinking with hands-on execution, so clients receive clear diagnostics, practical deliverables, and measurable implementation support.</p></aside></div></section>
@@ -350,6 +405,14 @@ header{
 <article class="card profileCard"><span class="tag" data-en="Risk & Reporting" data-ar="المخاطر والتقارير">Risk & Reporting</span><h3 data-en="Risk & Actuarial Reporting Expert" data-ar="خبير مخاطر وتقارير اكتوارية">Risk & Actuarial Reporting Expert</h3><div class="role" data-en="IFRS 9, IAS 19 & Technical Valuation Support" data-ar="دعم فني في IFRS 9 وIAS 19 والتقييمات الفنية">IFRS 9, IAS 19 & Technical Valuation Support</div><p data-en="Provides technical support in risk measurement, actuarial inputs, financial reporting assumptions, impairment models, and management-ready technical summaries." data-ar="يقدم دعماً فنياً في قياس المخاطر، والمدخلات الاكتوارية، وافتراضات التقارير المالية، ونماذج الهبوط، والملخصات الفنية الجاهزة للإدارة.">Provides technical support in risk measurement, actuarial inputs, financial reporting assumptions, impairment models, and management-ready technical summaries.</p></article>
 <article class="card profileCard"><span class="tag" data-en="Digital Enablement" data-ar="التمكين الرقمي">Digital Enablement</span><h3 data-en="Digital Transformation Advisor" data-ar="مستشار تحول رقمي">Digital Transformation Advisor</h3><div class="role" data-en="MBA | Systems Assessment, Automation & PMO" data-ar="ماجستير إدارة الأعمال | تقييم الأنظمة والأتمتة وإدارة المشروعات">MBA | Systems Assessment, Automation & PMO</div><p data-en="Assesses technology readiness, ERP/process gaps, automation opportunities, and transformation roadmaps that connect systems with real operating needs." data-ar="يقيّم جاهزية التكنولوجيا، وفجوات أنظمة ERP والعمليات، وفرص الأتمتة، وخرائط التحول التي تربط الأنظمة بالاحتياجات التشغيلية الفعلية.">Assesses technology readiness, ERP/process gaps, automation opportunities, and transformation roadmaps that connect systems with real operating needs.</p></article>
 </div></div></section>
+
+<section class="fd-upgrade-section" id="leadership-capability">
+  <div class="container">
+    <div class="fd-upgrade-title"><h2 data-en="Leadership Capability" data-ar="القدرة القيادية للفريق">Leadership Capability</h2><p data-en="Future Dimensions presents a leadership-led advisory model. Client work is guided by senior professionals who combine financial, governance, operational, commercial, and transformation perspectives." data-ar="تقدم أبعاد المستقبل نموذجاً استشارياً تقوده خبرات قيادية تجمع بين المنظور المالي والحوكمة والتشغيل والنمو والتحول.">Future Dimensions presents a leadership-led advisory model. Client work is guided by senior professionals who combine financial, governance, operational, commercial, and transformation perspectives.</p></div>
+    <div class="fd-grid-3"><article class="fd-card"><h3 data-en="Financial & Governance Depth" data-ar="عمق مالي وحوكمي">Financial & Governance Depth</h3><p data-en="Financial diagnostics, internal control, reporting discipline, risk awareness, and management decision support." data-ar="تشخيص مالي ورقابة داخلية وانضباط تقارير ووعي بالمخاطر ودعم للقرار الإداري.">Financial diagnostics, internal control, reporting discipline, risk awareness, and management decision support.</p></article><article class="fd-card"><h3 data-en="Operational Execution" data-ar="تنفيذ تشغيلي">Operational Execution</h3><p data-en="Operating models, process redesign, SOPs, delegation of authority, KPI follow-up, and management routines." data-ar="نماذج تشغيل وإعادة تصميم عمليات وإجراءات عمل ومصفوفات صلاحيات ومتابعة مؤشرات وروتين إدارة.">Operating models, process redesign, SOPs, delegation of authority, KPI follow-up, and management routines.</p></article><article class="fd-card"><h3 data-en="Growth & Transformation" data-ar="نمو وتحول">Growth & Transformation</h3><p data-en="Expansion readiness, market-entry logic, digital transformation roadmaps, and practical growth sequencing." data-ar="جاهزية توسع ومنطق دخول أسواق وخرائط تحول رقمي وتسلسل نمو عملي.">Expansion readiness, market-entry logic, digital transformation roadmaps, and practical growth sequencing.</p></article></div>
+  </div>
+</section>
+
 </main><footer class="footer"><div class="container footerGrid"><div><b style="display:block; font-size:14px; margin-bottom:8px" data-en="Future Dimensions" data-ar="شركة أبعاد المستقبل">Future Dimensions</b><div style="max-width:520px; line-height:1.85" data-en="A consulting partner blending financial expertise, operational excellence, and growth strategy to build resilient organizations and sustainable results." data-ar="شريك استشاري يجمع بين الخبرة المالية والتميز التشغيلي واستراتيجيات النمو لبناء منظمات مرنة ونتائج مستدامة.">A consulting partner blending financial expertise, operational excellence, and growth strategy to build resilient organizations and sustainable results.</div><div style="margin-top:10px"><small data-en="© 2026 Future Dimensions. All rights reserved." data-ar="© 2026 شركة أبعاد المستقبل. جميع الحقوق محفوظة.">© 2026 Future Dimensions. All rights reserved.</small></div></div><div><b style="display:block; font-size:14px; margin-bottom:8px" data-en="Contact" data-ar="التواصل">Contact</b><div style="line-height:1.9"><div><a href="mailto:info@futuredimensionsco.com">info@futuredimensionsco.com</a></div><div><a href="tel:+201001938264" dir="ltr" style="direction:ltr;unicode-bidi:isolate;">+20 100 193 8264</a></div><div><a href="https://www.futuredimensionsco.com" rel="noopener" target="_blank">www.futuredimensionsco.com</a></div></div></div></div></footer><script>
 (function(){
   function setLang(lang){
