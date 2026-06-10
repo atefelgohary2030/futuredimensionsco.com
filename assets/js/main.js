@@ -1,0 +1,3 @@
+
+function toggleMenu(){document.querySelector('.menu').classList.toggle('open')}
+function submitConsultation(e){e.preventDefault();const f=e.target;const data=new FormData(f);const lines=[`Name: ${data.get('name')}`,`Company: ${data.get('company')}`,`Email: ${data.get('email')}`,`Phone/WhatsApp: ${data.get('phone')}`,`Country: ${data.get('country')}`,`Sector: ${data.get('sector')}`,`Service: ${data.get('service')}`,`Challenge: ${data.get('message')}`];const subject=encodeURIComponent('Consultation Request - Future Dimensions Website');const body=encodeURIComponent(lines.join('\n'));window.location.href=`mailto:info@futuredimensionsco.com?subject=${subject}&body=${body}`}
