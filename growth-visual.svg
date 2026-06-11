@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+<title id="title">Growth strategy consulting visual</title>
+<desc id="desc">Market expansion roadmap, transformation milestones, and strategic growth.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#06101f"/><stop offset=".52" stop-color="#10213d"/><stop offset="1" stop-color="#0b1322"/></linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff2bf"/><stop offset=".52" stop-color="#D4AF37"/><stop offset="1" stop-color="#A77B1E"/></linearGradient>
+  <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2EC4B6"/><stop offset="1" stop-color="#0E7670"/></linearGradient>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000" flood-opacity=".38"/></filter>
+  <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="30"/></filter>
+</defs>
+<rect width="1200" height="520" rx="36" fill="url(#bg)"/>
+<circle cx="1050" cy="95" r="230" fill="#D4AF37" opacity=".08" filter="url(#soft)"/>
+<circle cx="130" cy="430" r="250" fill="#2EC4B6" opacity=".10" filter="url(#soft)"/>
+<g opacity=".09" stroke="#fff" fill="none"><path d="M70 85h520M70 435h410M760 440h350"/><path d="M75 120h310M875 90h220M875 126h165"/></g>
+
+<g filter="url(#shadow)">
+  <path d="M140 390 H1020" stroke="#fff" opacity=".12" stroke-width="3"/>
+  <circle cx="190" cy="390" r="18" fill="url(#teal)"/><circle cx="420" cy="310" r="18" fill="url(#gold)"/><circle cx="650" cy="235" r="18" fill="url(#teal)"/><circle cx="890" cy="140" r="18" fill="url(#gold)"/>
+  <path d="M190 390 C300 340, 335 330, 420 310 C535 282, 555 246, 650 235 C765 220, 780 165, 890 140" fill="none" stroke="url(#gold)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M890 140 l-14 50 M890 140 l-48 8" fill="none" stroke="url(#gold)" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g filter="url(#shadow)"><rect x="185" y="110" width="250" height="170" rx="28" fill="rgba(255,255,255,.07)" stroke="rgba(46,196,182,.28)"/><rect x="225" y="150" width="120" height="18" rx="9" fill="url(#teal)"/><rect x="225" y="195" width="165" height="14" rx="7" fill="#fff" opacity=".20"/></g>
+<g filter="url(#shadow)"><rect x="760" y="260" width="260" height="150" rx="28" fill="rgba(255,255,255,.07)" stroke="rgba(241,215,122,.28)"/><rect x="800" y="300" width="125" height="18" rx="9" fill="url(#gold)"/><rect x="800" y="345" width="170" height="14" rx="7" fill="#fff" opacity=".20"/></g>
+
+</svg>

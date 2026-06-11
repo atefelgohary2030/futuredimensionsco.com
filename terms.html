@@ -18,12 +18,43 @@
 .pageVisual img{display:block;width:100%;height:auto;min-height:220px;object-fit:cover}
 [dir="rtl"] .homeReturnWrap{justify-content:flex-start}
 
-html[lang="en"] .ar-only{display:none!important}html[lang="ar"] .en-only{display:none!important}</style>
+html[lang="en"] .ar-only{display:none!important}html[lang="ar"] .en-only{display:none!important}
+
+/* FD refinement v2: internal page return buttons, visuals and bilingual rendering */
+html[lang="en"] .ar-only{display:none!important}
+html[lang="ar"] .en-only{display:none!important}
+html[lang="en"] .arBlock{display:none!important}
+html[lang="ar"] .enDefault{display:none!important}
+.globalHomeReturn{padding-top:18px;margin-bottom:-8px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.homeReturnWrap{margin:16px 0 0;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.homeReturnBtn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:950!important}
+.btnGhost,.homeReturnBtn{border:1px solid rgba(212,175,55,.32)!important;background:rgba(255,255,255,.07)!important;color:#fff!important;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.btnGhost:hover,.homeReturnBtn:hover{background:rgba(212,175,55,.14)!important;transform:translateY(-1px)}
+.pageVisual{margin-top:22px;border-radius:24px;overflow:hidden;border:1px solid rgba(212,175,55,.28);box-shadow:0 28px 70px rgba(0,0,0,.35);background:rgba(255,255,255,.04)}
+.pageVisual img{display:block;width:100%;height:auto;min-height:240px;object-fit:cover}
+.visualSection{padding:0 0 28px}.visualSection .container,.visualSection .wrap{max-width:1180px;margin:auto;padding:0 18px}
+[dir="rtl"] .globalHomeReturn,[dir="rtl"] .homeReturnWrap{justify-content:flex-start}
+@media(max-width:760px){.globalHomeReturn{padding-top:12px}.pageVisual img{min-height:190px}}
+
+</style>
+
+<script>
+(function(){
+  try{
+    var lang = localStorage.getItem('fd_lang') || document.documentElement.lang || 'en';
+    lang = (lang === 'ar') ? 'ar' : 'en';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+  }catch(e){}
+})();
+</script>
 </head>
 <body>
 <header><div class="container nav"><a class="brand" href="index.html"><img src="logo.png" alt="Future Dimensions logo"/><div class="brandName"><b>Future Dimensions</b><span>Consulting &amp; Business Solutions</span></div></a><nav class="navLinks" aria-label="Primary"><a href="index.html">Home</a><a href="index.html#services">Services</a><a href="deliverables.html">Deliverables</a><a href="insights.html">Insights</a><a href="team.html">Team</a><a href="careers.html">Careers</a><a href="index.html#contact">Contact</a></nav><a class="btn" href="index.html#contact">Request Consultation</a></div></header>
 <main>
-<section class="hero"><div class="container"><div class="kicker">Future Dimensions</div><h1>Terms of Use <span class="gold">/ شروط الاستخدام</span></h1><p>These terms govern the use of the Future Dimensions website and its informational content.</p><p class="arBlock">تنظم هذه الشروط استخدام موقع أبعاد المستقبل والمحتوى المعلوماتي المنشور عليه.</p></div></section>
+<div class="container globalHomeReturn"><a class="btn btnGhost homeReturnBtn" href="index.html#home"><span class="en-only">← Back to Home</span><span class="ar-only">العودة للرئيسية</span></a></div>
+
+<section class="hero"><div class="container"><div class="kicker">Future Dimensions</div><h1><span class="en-only">Terms of Use</span><span class="ar-only">شروط الاستخدام</span></h1><p class="en-only">These terms govern the use of the Future Dimensions website and its informational content.</p><p class="ar-only arBlock">تنظم هذه الشروط استخدام موقع أبعاد المستقبل والمحتوى المعلوماتي المنشور عليه.</p></div></section>
 <section class="section"><div class="container"><div class="card"><h2>Terms of Use</h2><p>By using this website, visitors agree that the content is provided for general informational purposes and does not create a consulting engagement unless a separate written agreement is signed.</p><ul><li>Website content may be updated without prior notice.</li><li>Service descriptions are indicative and may be tailored according to client needs.</li><li>No user may copy, republish, or misuse the website content without written permission.</li><li>Formal engagements are governed by separately agreed proposals, scope documents, and engagement terms.</li></ul><div class="arBlock"><h2>شروط الاستخدام</h2><p>باستخدام هذا الموقع، يوافق الزائر على أن المحتوى مقدم لأغراض معلوماتية عامة، ولا ينشئ ارتباطًا استشاريًا إلا بموجب اتفاق مكتوب مستقل.</p><ul><li>قد يتم تحديث محتوى الموقع دون إشعار مسبق.</li><li>وصف الخدمات إرشادي وقد يتم تخصيصه وفق احتياجات العميل.</li><li>لا يجوز نسخ أو إعادة نشر أو إساءة استخدام محتوى الموقع دون إذن مكتوب.</li><li>تخضع الارتباطات الرسمية لعروض ونطاقات عمل وشروط اتفاق مستقلة.</li></ul></div></div></div></section>
 </main>
 <footer class="footer"><div class="container"><div class="footerLinks"><a href="index.html#home">Home</a><a href="deliverables.html">Deliverables</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="professional-disclaimer.html">Professional Disclaimer</a><a href="confidentiality.html">Confidentiality</a></div><p style="color:rgba(238,243,255,.65);font-size:13px">© 2026 Future Dimensions. All rights reserved.</p></div></footer>

@@ -18,13 +18,48 @@
 .pageVisual img{display:block;width:100%;height:auto;min-height:220px;object-fit:cover}
 [dir="rtl"] .homeReturnWrap{justify-content:flex-start}
 
-html[lang="en"] .ar-only{display:none!important}html[lang="ar"] .en-only{display:none!important}</style>
+html[lang="en"] .ar-only{display:none!important}html[lang="ar"] .en-only{display:none!important}
+
+/* FD refinement v2: internal page return buttons, visuals and bilingual rendering */
+html[lang="en"] .ar-only{display:none!important}
+html[lang="ar"] .en-only{display:none!important}
+html[lang="en"] .arBlock{display:none!important}
+html[lang="ar"] .enDefault{display:none!important}
+.globalHomeReturn{padding-top:18px;margin-bottom:-8px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.homeReturnWrap{margin:16px 0 0;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.homeReturnBtn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:950!important}
+.btnGhost,.homeReturnBtn{border:1px solid rgba(212,175,55,.32)!important;background:rgba(255,255,255,.07)!important;color:#fff!important;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.btnGhost:hover,.homeReturnBtn:hover{background:rgba(212,175,55,.14)!important;transform:translateY(-1px)}
+.pageVisual{margin-top:22px;border-radius:24px;overflow:hidden;border:1px solid rgba(212,175,55,.28);box-shadow:0 28px 70px rgba(0,0,0,.35);background:rgba(255,255,255,.04)}
+.pageVisual img{display:block;width:100%;height:auto;min-height:240px;object-fit:cover}
+.visualSection{padding:0 0 28px}.visualSection .container,.visualSection .wrap{max-width:1180px;margin:auto;padding:0 18px}
+[dir="rtl"] .globalHomeReturn,[dir="rtl"] .homeReturnWrap{justify-content:flex-start}
+@media(max-width:760px){.globalHomeReturn{padding-top:12px}.pageVisual img{min-height:190px}}
+
+
+.grid3 .card h3{font-size:clamp(19px,1.7vw,23px);line-height:1.45}.grid3 .card p{font-size:15.5px}
+
+</style>
+
+<script>
+(function(){
+  try{
+    var lang = localStorage.getItem('fd_lang') || document.documentElement.lang || 'en';
+    lang = (lang === 'ar') ? 'ar' : 'en';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+  }catch(e){}
+})();
+</script>
 </head>
 <body>
 <header><div class="container nav"><a class="brand" href="index.html"><img src="logo.png" alt="Future Dimensions logo"/><div class="brandName"><b>Future Dimensions</b><span>Consulting &amp; Business Solutions</span></div></a><nav class="navLinks" aria-label="Primary"><a href="index.html">Home</a><a href="index.html#services">Services</a><a href="deliverables.html">Deliverables</a><a href="insights.html">Insights</a><a href="team.html">Team</a><a href="careers.html">Careers</a><a href="index.html#contact">Contact</a></nav><a class="btn" href="index.html#contact">Request Consultation</a></div></header>
 <main>
-<section class="hero"><div class="container"><div class="kicker">Future Dimensions</div><h1>Deliverables <span class="gold">/ المخرجات</span></h1><p>Practical consulting deliverables designed for executive decisions and implementation.</p><p class="arBlock">مخرجات استشارية عملية مصممة لدعم قرارات الإدارة والتنفيذ.</p></div></section>
-<section class="section"><div class="container"><div class="card"><h2><span class="en-only">What Clients Receive</span><span class="ar-only">ماذا يستلم العميل؟</span></h2><p><span class="en-only">Future Dimensions structures every engagement around practical outputs that help leadership teams move from diagnosis to decision, implementation, and follow-up.</span><span class="ar-only">تُبنى كل مهمة في أبعاد المستقبل حول مخرجات عملية تساعد الإدارة على الانتقال من التشخيص إلى القرار ثم التنفيذ والمتابعة.</span></p><div class="grid3"><div class="card"><h3><span class="en-only">Executive Diagnostic Reports</span><span class="ar-only">تقارير تشخيص تنفيذية</span></h3><p><span class="en-only">Current-state assessment, gap and root-cause analysis, risk and opportunity mapping, and prioritized recommendations for leadership review.</span><span class="ar-only">تقييم الوضع الحالي، وتحليل الفجوات والأسباب الجذرية، وخريطة المخاطر والفرص، وتوصيات مرتبة حسب الأولوية للإدارة.</span></p></div><div class="card"><h3><span class="en-only">Governance & Decision Tools</span><span class="ar-only">أدوات حوكمة ودعم قرار</span></h3><p><span class="en-only">Delegation of authority matrices, policies, SOP packs, control checklists, and decision frameworks ready for management use.</span><span class="ar-only">مصفوفات صلاحيات، وسياسات، وحزم إجراءات تشغيل، وقوائم رقابة، وأطر قرار جاهزة للاستخدام الإداري.</span></p></div><div class="card"><h3><span class="en-only">Dashboards & Roadmaps</span><span class="ar-only">لوحات مؤشرات وخرائط طريق</span></h3><p><span class="en-only">KPI dashboards, reporting packs, 90-day action plans, 12-month roadmaps, owners, timelines, and follow-up mechanisms.</span><span class="ar-only">لوحات مؤشرات أداء، وحزم تقارير، وخطط 90 يوم، وخرائط طريق 12 شهر، ومسؤوليات وجداول زمنية وآليات متابعة.</span></p></div></div></div></div></section>
+<div class="container globalHomeReturn"><a class="btn btnGhost homeReturnBtn" href="index.html#home"><span class="en-only">← Back to Home</span><span class="ar-only">العودة للرئيسية</span></a></div>
+
+<section class="hero"><div class="container"><div class="kicker">Future Dimensions</div><h1><span class="en-only">Deliverables</span><span class="ar-only">المخرجات</span></h1><p class="en-only">Practical consulting deliverables designed for executive decisions and implementation.</p><p class="ar-only arBlock">مخرجات استشارية عملية مصممة لدعم قرارات الإدارة والتنفيذ.</p></div></section>
+<section class="section"><div class="container"><div class="card"><h2><span class="en-only">What Clients Receive</span><span class="ar-only">ماذا يستلم العميل؟</span></h2><p><span class="en-only">Future Dimensions structures every engagement around practical outputs that help leadership teams move from diagnosis to decision, implementation, and follow-up.</span><span class="ar-only">تُبنى كل مهمة في أبعاد المستقبل حول مخرجات عملية تساعد الإدارة على الانتقال من التشخيص إلى القرار ثم التنفيذ والمتابعة.</span></p><div class="grid3"><div class="card"><h3><span class="en-only">Executive Diagnostic Reports</span><span class="ar-only">تقارير تشخيص تنفيذية</span></h3><p><span class="en-only">Focused current-state assessment, root-cause analysis, risk and opportunity mapping, and prioritized recommendations suitable for leadership review.</span><span class="ar-only">تقييم مركز للوضع الحالي، وتحليل الأسباب الجذرية، وخريطة المخاطر والفرص، وتوصيات مرتبة حسب الأولوية قابلة للعرض على الإدارة.</span></p></div><div class="card"><h3><span class="en-only">Governance & Decision Tools</span><span class="ar-only">أدوات حوكمة ودعم قرار</span></h3><p><span class="en-only">Delegation matrices, policies, SOP packs, control checklists, and decision frameworks prepared for practical management use.</span><span class="ar-only">مصفوفات صلاحيات، وسياسات، وحزم إجراءات تشغيل، وقوائم رقابة، وأطر قرار جاهزة للاستخدام الإداري العملي.</span></p></div><div class="card"><h3><span class="en-only">Dashboards & Roadmaps</span><span class="ar-only">لوحات مؤشرات وخرائط طريق</span></h3><p><span class="en-only">KPI dashboards, reporting packs, 90-day action plans, 12-month roadmaps, owners, timelines, and follow-up mechanisms.</span><span class="ar-only">لوحات مؤشرات أداء، وحزم تقارير، وخطط 90 يوم، وخرائط طريق 12 شهر، ومسؤوليات وجداول زمنية وآليات متابعة.</span></p></div></div></div></div></section>
+<section class="visualSection"><div class="container"><div class="pageVisual"><img src="deliverables-visual.svg" alt="Consulting deliverables reports dashboards roadmaps visual / رسم توضيحي للمخرجات الاستشارية والتقارير ولوحات المؤشرات" loading="lazy"/></div></div></section>
 </main>
 <footer class="footer"><div class="container"><div class="footerLinks"><a href="index.html#home">Home</a><a href="deliverables.html">Deliverables</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="professional-disclaimer.html">Professional Disclaimer</a><a href="confidentiality.html">Confidentiality</a></div><p style="color:rgba(238,243,255,.65);font-size:13px">© 2026 Future Dimensions. All rights reserved.</p></div></footer>
 </body></html>

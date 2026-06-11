@@ -18,12 +18,43 @@
 .pageVisual img{display:block;width:100%;height:auto;min-height:220px;object-fit:cover}
 [dir="rtl"] .homeReturnWrap{justify-content:flex-start}
 
-html[lang="en"] .ar-only{display:none!important}html[lang="ar"] .en-only{display:none!important}</style>
+html[lang="en"] .ar-only{display:none!important}html[lang="ar"] .en-only{display:none!important}
+
+/* FD refinement v2: internal page return buttons, visuals and bilingual rendering */
+html[lang="en"] .ar-only{display:none!important}
+html[lang="ar"] .en-only{display:none!important}
+html[lang="en"] .arBlock{display:none!important}
+html[lang="ar"] .enDefault{display:none!important}
+.globalHomeReturn{padding-top:18px;margin-bottom:-8px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.homeReturnWrap{margin:16px 0 0;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.homeReturnBtn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:950!important}
+.btnGhost,.homeReturnBtn{border:1px solid rgba(212,175,55,.32)!important;background:rgba(255,255,255,.07)!important;color:#fff!important;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.btnGhost:hover,.homeReturnBtn:hover{background:rgba(212,175,55,.14)!important;transform:translateY(-1px)}
+.pageVisual{margin-top:22px;border-radius:24px;overflow:hidden;border:1px solid rgba(212,175,55,.28);box-shadow:0 28px 70px rgba(0,0,0,.35);background:rgba(255,255,255,.04)}
+.pageVisual img{display:block;width:100%;height:auto;min-height:240px;object-fit:cover}
+.visualSection{padding:0 0 28px}.visualSection .container,.visualSection .wrap{max-width:1180px;margin:auto;padding:0 18px}
+[dir="rtl"] .globalHomeReturn,[dir="rtl"] .homeReturnWrap{justify-content:flex-start}
+@media(max-width:760px){.globalHomeReturn{padding-top:12px}.pageVisual img{min-height:190px}}
+
+</style>
+
+<script>
+(function(){
+  try{
+    var lang = localStorage.getItem('fd_lang') || document.documentElement.lang || 'en';
+    lang = (lang === 'ar') ? 'ar' : 'en';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+  }catch(e){}
+})();
+</script>
 </head>
 <body>
 <header><div class="container nav"><a class="brand" href="index.html"><img src="logo.png" alt="Future Dimensions logo"/><div class="brandName"><b>Future Dimensions</b><span>Consulting &amp; Business Solutions</span></div></a><nav class="navLinks" aria-label="Primary"><a href="index.html">Home</a><a href="index.html#services">Services</a><a href="deliverables.html">Deliverables</a><a href="insights.html">Insights</a><a href="team.html">Team</a><a href="careers.html">Careers</a><a href="index.html#contact">Contact</a></nav><a class="btn" href="index.html#contact">Request Consultation</a></div></header>
 <main>
-<section class="hero"><div class="container"><div class="kicker">Future Dimensions</div><h1>Confidentiality Commitment <span class="gold">/ التزام السرية</span></h1><p>Future Dimensions treats financial, operational, and strategic information as sensitive professional information.</p><p class="arBlock">تتعامل أبعاد المستقبل مع المعلومات المالية والتشغيلية والاستراتيجية باعتبارها معلومات مهنية حساسة.</p></div></section>
+<div class="container globalHomeReturn"><a class="btn btnGhost homeReturnBtn" href="index.html#home"><span class="en-only">← Back to Home</span><span class="ar-only">العودة للرئيسية</span></a></div>
+
+<section class="hero"><div class="container"><div class="kicker">Future Dimensions</div><h1><span class="en-only">Confidentiality Commitment</span><span class="ar-only">التزام السرية</span></h1><p class="en-only">Future Dimensions treats financial, operational, and strategic information as sensitive professional information.</p><p class="ar-only arBlock">تتعامل أبعاد المستقبل مع المعلومات المالية والتشغيلية والاستراتيجية باعتبارها معلومات مهنية حساسة.</p></div></section>
 <section class="section"><div class="container"><div class="card"><h2>Confidentiality Commitment</h2><p>Consulting engagements often involve sensitive financial, operational, strategic, and governance information. Future Dimensions is committed to handling such information with confidentiality, professional care, and access control according to the agreed engagement scope.</p><ul><li>Information is used only for the purpose of the agreed discussion or engagement.</li><li>Client information is not disclosed to third parties unless authorized or legally required.</li><li>Deliverables are prepared and shared through professional channels agreed with the client.</li><li>Additional non-disclosure agreements may be signed where required.</li></ul><div class="arBlock"><h2>التزام السرية</h2><p>غالبًا ما تتضمن المهام الاستشارية معلومات مالية وتشغيلية واستراتيجية وحوكمية حساسة. تلتزم أبعاد المستقبل بالتعامل مع هذه المعلومات بسرية وعناية مهنية وضوابط وصول وفق نطاق المهمة المتفق عليه.</p><ul><li>تُستخدم المعلومات فقط لغرض النقاش أو الارتباط المتفق عليه.</li><li>لا يتم الإفصاح عن معلومات العميل لأطراف خارجية إلا بتصريح أو التزام قانوني.</li><li>يتم إعداد المخرجات ومشاركتها عبر قنوات مهنية متفق عليها مع العميل.</li><li>يمكن توقيع اتفاقيات سرية إضافية عند الحاجة.</li></ul></div></div></div></section>
 </main>
 <footer class="footer"><div class="container"><div class="footerLinks"><a href="index.html#home">Home</a><a href="deliverables.html">Deliverables</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="professional-disclaimer.html">Professional Disclaimer</a><a href="confidentiality.html">Confidentiality</a></div><p style="color:rgba(238,243,255,.65);font-size:13px">© 2026 Future Dimensions. All rights reserved.</p></div></footer>

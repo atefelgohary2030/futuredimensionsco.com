@@ -18,12 +18,43 @@
 .pageVisual img{display:block;width:100%;height:auto;min-height:220px;object-fit:cover}
 [dir="rtl"] .homeReturnWrap{justify-content:flex-start}
 
-html[lang="en"] .ar-only{display:none!important}html[lang="ar"] .en-only{display:none!important}</style>
+html[lang="en"] .ar-only{display:none!important}html[lang="ar"] .en-only{display:none!important}
+
+/* FD refinement v2: internal page return buttons, visuals and bilingual rendering */
+html[lang="en"] .ar-only{display:none!important}
+html[lang="ar"] .en-only{display:none!important}
+html[lang="en"] .arBlock{display:none!important}
+html[lang="ar"] .enDefault{display:none!important}
+.globalHomeReturn{padding-top:18px;margin-bottom:-8px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.homeReturnWrap{margin:16px 0 0;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.homeReturnBtn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:950!important}
+.btnGhost,.homeReturnBtn{border:1px solid rgba(212,175,55,.32)!important;background:rgba(255,255,255,.07)!important;color:#fff!important;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.btnGhost:hover,.homeReturnBtn:hover{background:rgba(212,175,55,.14)!important;transform:translateY(-1px)}
+.pageVisual{margin-top:22px;border-radius:24px;overflow:hidden;border:1px solid rgba(212,175,55,.28);box-shadow:0 28px 70px rgba(0,0,0,.35);background:rgba(255,255,255,.04)}
+.pageVisual img{display:block;width:100%;height:auto;min-height:240px;object-fit:cover}
+.visualSection{padding:0 0 28px}.visualSection .container,.visualSection .wrap{max-width:1180px;margin:auto;padding:0 18px}
+[dir="rtl"] .globalHomeReturn,[dir="rtl"] .homeReturnWrap{justify-content:flex-start}
+@media(max-width:760px){.globalHomeReturn{padding-top:12px}.pageVisual img{min-height:190px}}
+
+</style>
+
+<script>
+(function(){
+  try{
+    var lang = localStorage.getItem('fd_lang') || document.documentElement.lang || 'en';
+    lang = (lang === 'ar') ? 'ar' : 'en';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+  }catch(e){}
+})();
+</script>
 </head>
 <body>
 <header><div class="container nav"><a class="brand" href="index.html"><img src="logo.png" alt="Future Dimensions logo"/><div class="brandName"><b>Future Dimensions</b><span>Consulting &amp; Business Solutions</span></div></a><nav class="navLinks" aria-label="Primary"><a href="index.html">Home</a><a href="index.html#services">Services</a><a href="deliverables.html">Deliverables</a><a href="insights.html">Insights</a><a href="team.html">Team</a><a href="careers.html">Careers</a><a href="index.html#contact">Contact</a></nav><a class="btn" href="index.html#contact">Request Consultation</a></div></header>
 <main>
-<section class="hero"><div class="container"><div class="kicker">Future Dimensions</div><h1>Professional Disclaimer <span class="gold">/ التنويه المهني</span></h1><p>This disclaimer clarifies the professional nature and limitations of information published on the website.</p><p class="arBlock">يوضح هذا التنويه الطبيعة المهنية وحدود المعلومات المنشورة على الموقع.</p></div></section>
+<div class="container globalHomeReturn"><a class="btn btnGhost homeReturnBtn" href="index.html#home"><span class="en-only">← Back to Home</span><span class="ar-only">العودة للرئيسية</span></a></div>
+
+<section class="hero"><div class="container"><div class="kicker">Future Dimensions</div><h1><span class="en-only">Professional Disclaimer</span><span class="ar-only">التنويه المهني</span></h1><p class="en-only">This disclaimer clarifies the professional nature and limitations of information published on the website.</p><p class="ar-only arBlock">يوضح هذا التنويه الطبيعة المهنية وحدود المعلومات المنشورة على الموقع.</p></div></section>
 <section class="section"><div class="container"><div class="card"><h2>Professional Disclaimer</h2><p>The information on this website is general in nature and should not be treated as financial, accounting, tax, legal, investment, or management advice for a specific situation. Professional advice requires reviewing the client’s documents, objectives, risks, and operating context.</p><ul><li>No client-advisor relationship is created by visiting the website.</li><li>Any references to frameworks, standards, or deliverables are illustrative.</li><li>Recommendations are provided only after an agreed engagement scope and review of relevant information.</li></ul><div class="arBlock"><h2>التنويه المهني</h2><p>المعلومات المنشورة في هذا الموقع عامة بطبيعتها ولا تُعد نصيحة مالية أو محاسبية أو ضريبية أو قانونية أو استثمارية أو إدارية لحالة محددة. تقديم الاستشارة المهنية يتطلب مراجعة مستندات العميل وأهدافه ومخاطره وسياقه التشغيلي.</p><ul><li>زيارة الموقع لا تنشئ علاقة استشارية مع العميل.</li><li>أي إشارة إلى أطر أو معايير أو مخرجات هي لأغراض توضيحية.</li><li>تُقدم التوصيات بعد الاتفاق على نطاق العمل ومراجعة المعلومات ذات الصلة.</li></ul></div></div></div></section>
 </main>
 <footer class="footer"><div class="container"><div class="footerLinks"><a href="index.html#home">Home</a><a href="deliverables.html">Deliverables</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="professional-disclaimer.html">Professional Disclaimer</a><a href="confidentiality.html">Confidentiality</a></div><p style="color:rgba(238,243,255,.65);font-size:13px">© 2026 Future Dimensions. All rights reserved.</p></div></footer>

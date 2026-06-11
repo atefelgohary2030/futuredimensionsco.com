@@ -306,6 +306,24 @@ html[lang="ar"] .en-only{display:none!important}
 .pageVisual img{display:block;width:100%;height:auto;min-height:220px;object-fit:cover}
 [dir="rtl"] .homeReturnWrap{justify-content:flex-start}
 
+
+
+/* FD refinement v2: internal page return buttons, visuals and bilingual rendering */
+html[lang="en"] .ar-only{display:none!important}
+html[lang="ar"] .en-only{display:none!important}
+html[lang="en"] .arBlock{display:none!important}
+html[lang="ar"] .enDefault{display:none!important}
+.globalHomeReturn{padding-top:18px;margin-bottom:-8px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.homeReturnWrap{margin:16px 0 0;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.homeReturnBtn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:950!important}
+.btnGhost,.homeReturnBtn{border:1px solid rgba(212,175,55,.32)!important;background:rgba(255,255,255,.07)!important;color:#fff!important;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.btnGhost:hover,.homeReturnBtn:hover{background:rgba(212,175,55,.14)!important;transform:translateY(-1px)}
+.pageVisual{margin-top:22px;border-radius:24px;overflow:hidden;border:1px solid rgba(212,175,55,.28);box-shadow:0 28px 70px rgba(0,0,0,.35);background:rgba(255,255,255,.04)}
+.pageVisual img{display:block;width:100%;height:auto;min-height:240px;object-fit:cover}
+.visualSection{padding:0 0 28px}.visualSection .container,.visualSection .wrap{max-width:1180px;margin:auto;padding:0 18px}
+[dir="rtl"] .globalHomeReturn,[dir="rtl"] .homeReturnWrap{justify-content:flex-start}
+@media(max-width:760px){.globalHomeReturn{padding-top:12px}.pageVisual img{min-height:190px}}
+
 </style>
 <meta content="index, follow" name="robots"/><link href="https://www.futuredimensionsco.com/" hreflang="x-default" rel="alternate"/><meta content="Future Dimensions" property="og:site_name"/><meta content="https://www.futuredimensionsco.com/logo.png" property="og:image"/><meta content="Future Dimensions logo" property="og:image:alt"/><meta content="summary" name="twitter:card"/><meta content="Careers | Future Dimensions" name="twitter:title"/><meta content="Explore careers at Future Dimensions. Join a consulting team delivering measurable impact across finance, operations, and growth." name="twitter:description"/><meta content="https://www.futuredimensionsco.com/logo.png" name="twitter:image"/><script id="ld-org" type="application/ld+json">{
   "@context": "https://schema.org",
@@ -330,6 +348,14 @@ html[lang="ar"] .en-only{display:none!important}
   "logo": "https://www.futuredimensionsco.com/logo.png",
   "email": "info@futuredimensionsco.com",
   "telephone": "+20 100 193 8264",
+  "identifier": {
+    "@type": "PropertyValue",
+    "name": "Commercial Registration Number",
+    "value": "286328"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/future-dimensions-for-consulting-business-solutions"
+  ],
   "areaServed": [
     "Egypt",
     "GCC",
@@ -379,6 +405,8 @@ html[lang="ar"] .en-only{display:none!important}
 </div>
 </header>
 <main>
+<div class="container globalHomeReturn"><a class="btn btnGhost homeReturnBtn" href="index.html#home"><span class="en-only">← Back to Home</span><span class="ar-only">العودة للرئيسية</span></a></div>
+
 <section class="hero">
 <div class="container heroGrid">
 <div class="heroCard">
@@ -433,6 +461,7 @@ html[lang="ar"] .en-only{display:none!important}
 </div>
 </div>
 </section>
+<section class="visualSection"><div class="wrap"><div class="pageVisual"><img src="careers-visual.svg" alt="Consulting talent and professional collaboration visual / رسم توضيحي للمواهب المهنية والعمل الاستشاري" loading="lazy"/></div></div></section>
 </main>
 <footer class="footer">
 <div class="container footerGrid">
